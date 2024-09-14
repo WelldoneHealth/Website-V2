@@ -1,8 +1,13 @@
 import React from 'react'
 import { HOSPITAL_LOGO, RATING, REDGEO_LOCATION } from '../ImageConstants'
 import Image from 'next/image'
+//import clock from '../../asset/Images/clock.png'
+import clock from "@/asset/Images/clock.png"
+
 
 export default function DoctorsAssociatedCard() {
+console.log("--",clock)
+
   return (
     <div style={{ boxShadow: '0px 0px 4px 1px #00000040' }} className="w-[390px]  rounded-[20px] px-5 py-8">
     <div className="mb-8 w-full flex gap-x-4 ">
@@ -12,7 +17,7 @@ export default function DoctorsAssociatedCard() {
       <div className="space-y-2">
 <div className="text-xs font-medium bg-[#F5F5F5] px-3 py-1 inline-block rounded-[20px]">
 <span className="mr-2 relative w-[14px] h-[14px] inline-block">
-            <Image fill src={RATING} />
+            <img  src={clock?.src} />
           </span>4.8 (234 Review)
 </div>
        

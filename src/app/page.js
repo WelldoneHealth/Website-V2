@@ -20,6 +20,12 @@ export default function Home() {
       {/* <DoctorSpeciality /> */}
 
 
+
+
+
+
+
+
       {/* ----------doctors associated with us-------- */}
       <div className="w-full my-20">
         <div className="my-7 -">
