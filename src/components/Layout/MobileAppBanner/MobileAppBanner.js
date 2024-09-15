@@ -27,7 +27,7 @@ export default function MobileAppBanner() {
 </div>
 
 </div>
-<div className="w-[70%] sm:w-[70%] lg:w-[46%] order-1 lg:order-2 ">
+<div className="w-[70%] mx-auto sm:w-[70%] lg:w-[46%] order-1 lg:order-2 ">
     <img className='w-full' src={MOBILE_BANNER}/>
 </div>
    </div>

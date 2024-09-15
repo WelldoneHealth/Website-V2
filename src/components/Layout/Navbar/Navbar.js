@@ -5,7 +5,7 @@ import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg"
 
 export default function Navbar() {
   return (
-   <header  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className='w-full bg-blue-700  flexBetween p-2  md:p-3 md:px-5 mx-auto '>
+   <header  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className='w-screen   flexBetween p-2  md:p-3 md:px-5 mx-auto '>
     <div className="">
   <img src={wellDoneLogo?.src}
   width={100} 
@@ -13,9 +13,9 @@ export default function Navbar() {
   alt="load..." />
     </div>
 
-    <div className="flex gap-x-24">
+    <div className="lg:flex gap-x-24 hidden">
  
- <utton className='text-[#01549A] flexCenter font-medium text-lg'> <img src={hospitalIcon2?.src} className='w-[30px]  mx-3'  alt="load..." /> I have Clinic/ Hospital</utton>
+ <button className='hidden text-[#01549A] flexCenter font-medium text-lg'> <img src={hospitalIcon2?.src} className='w-[30px]  mx-3'  alt="load..." /> I have Clinic/ Hospital</button>
 
     <button className= "flexCenter gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white" >
       Login <div className="flexCenter rounded-full p-1 bg-white">
