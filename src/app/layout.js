@@ -1,7 +1,7 @@
 import localFont from "next/font/local";
 import "./globals.css";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
 
 const geistSans = localFont({
@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
       <Navbar/>
-      <main className="lg:container  mx-auto px-[6px] ">
+      <main className="lg:container  mx-auto px-1 ">
       {children}
       </main>
       </body>

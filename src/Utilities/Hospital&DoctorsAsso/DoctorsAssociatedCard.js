@@ -11,7 +11,7 @@ export default function DoctorsAssociatedCard() {
   return (
     <div style={{ boxShadow: '0px 0px 4px 1px #00000040' }} className="w-[390px]  rounded-[20px] px-5 py-8">
     <div className="mb-8 w-full flex gap-x-4 ">
-      <div className="w-[120px] h-[120px] relative rounded-full ">
+      <div className="w-[120px] h-[120px] relative rounded-full "> 
         <img src={doctorImage2?.src}  className='w-full' alt="load..."   />
       </div>
       <div className="space-y-2">

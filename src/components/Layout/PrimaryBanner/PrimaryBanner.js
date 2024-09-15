@@ -7,14 +7,13 @@ import primaryBg from "@/asset/Images/BG.png"
 //  import { CLOCK_LOGO, LOCATION_ICON } from "@/Utilities/ImageConstants";
 
 export default function PrimaryBanner() {
-  console.log("--", clockIcon);
 
   return (
-    <section  style={{ backgroundImage: `url(${primaryBg?.src})` }} className="w-full my-28  px-5 bg-cover bg-center bg-no-repeat relative ">
+    <section  style={{ backgroundImage: `url(${primaryBg?.src})` }} className="w-full bg-black  my-28  px-5 bg-cover bg-center bg-no-repeat relative max-h-max ">
       <h2 className="  px-1 text-[#01549A] text-[42px] font-medium my-14">
         Book Doctor Appointments in Seconds
         <img 
-          className="inline-block mx-5 w-[40px] h-[40px]"
+          className="inline-block mx-5 w-[40px] h-[40px]" 
           src={clockIcon?.src}
           //   width={30}
           //   height={30}
@@ -24,7 +23,7 @@ export default function PrimaryBanner() {
 
       <div className="w-[95%] mx-auto flex justify-between bg-[#01549A] rounded-3xl h-[390px] items-center ">
         {/* ---------first part--------- */}
-        <div className="w-[60%] mx-auto" >
+        <div className="w-[55%] mx-auto bg-red-800" >
           <p className="text-white w-full max-w-[680px] text-3xl">
             Find the best doctors near you and secure your appointment instantly
             – no waiting, no hassle.
@@ -46,10 +45,10 @@ export default function PrimaryBanner() {
         </div>
 
         {/* ---------second portion------ */}
-        <div className="w-[33%] flex items-baseline relative h-full -mr-7">
+        <div className="  xl:w-[37%]  border-red-800 border-2  flex items-baseline relative h-full -mr-7">
           <img
             src={doctorImage?.src}
-            className="w-full absolute bottom-0 object-cover h-[550px] "
+            className="xl:w-full absolute bottom-0 object-cover h-[550px] "
             alt="load..."
           />
         </div>

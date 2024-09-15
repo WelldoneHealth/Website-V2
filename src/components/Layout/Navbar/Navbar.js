@@ -5,7 +5,7 @@ import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg"
 
 export default function Navbar() {
   return (
-   <header  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className='w-full  flexBetween p-2  md:p-3 md:px-5 mx-auto '>
+   <header  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className='w-full bg-blue-700  flexBetween p-2  md:p-3 md:px-5 mx-auto '>
     <div className="">
   <img src={wellDoneLogo?.src}
   width={100} 

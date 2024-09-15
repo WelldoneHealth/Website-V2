@@ -1,6 +1,6 @@
 
 import React from "react";
-// import Slider from "react-slick";
+import Slider from "react-slick";
 import DoctorSpeciality from "@/components/DoctorSpeciality/DoctorSpeciality";
 import MobileAppBanner from "@/components/Layout/MobileAppBanner/MobileAppBanner";
 import PrimaryBanner from "@/components/Layout/PrimaryBanner/PrimaryBanner";
@@ -17,45 +17,48 @@ export default function Home() {
     slidesToScroll: 1
   };
   return (
-    <div className="w-full  min-h-screen">
+    <div className=" w-full  min-h-screen">
 
 
 
-      <PrimaryBanner/>
+      {/* <PrimaryBanner/> */}
 
 
 
-      <DoctorSpeciality />
+      {/* <DoctorSpeciality /> */}
 
 
       {/* ----------doctors associated with us-------- */}
-      <div className="w-full my-20">
+       <div className="w-full my-20">
         <div className="my-7 -">
           <p className="text-3xl font-medium">Doctors associated with us </p>
         </div>
         <div className=" flex gap-x-6 ">
-        {/* <Slider {...settings}> */}
+        <Slider {...settings}>
           <DoctorsAssociatedCard />
           <DoctorsAssociatedCard />
           <DoctorsAssociatedCard />
-          {/* </Slider> */}
+           </Slider>
         </div>
-      </div>
+      </div> 
+
+         
+
 
 
       {/* ----------hospital associated with us-------- */}
-      <div className="w-full my-20">
+      {/* <div className="w-full my-20">
         <div className="my-7 -">
           <p className="text-3xl font-medium">
-            Clinic/ Hospitals associated with us{" "}
+            Clinic/ Hospitals associated with us
           </p>
         </div>
-        <div className=" flex gap-x-6 ">
+        <div className="w-full overflow-x-auto flex  gap-x-6 ">
           <HospitalAssociatedCard />
-          <HospitalAssociatedCard />
-          <HospitalAssociatedCard />
+           <HospitalAssociatedCard />
+         
         </div>
-      </div>
+      </div> */}
 
 
       <MobileAppBanner />
