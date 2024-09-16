@@ -21,7 +21,7 @@ export default function HospitalAssociatedSlider() {
         // prevArrow: <LeftArrow to="prev" />,
         responsive: [
           {
-            breakpoint: 900,
+            breakpoint: 1000,
             settings: {
             //   slidesToShow: hospitalData?.length > 1 ? 2 : 1,
             slidesToShow:2,
@@ -31,7 +31,7 @@ export default function HospitalAssociatedSlider() {
             },
           },
           {
-            breakpoint: 535,
+            breakpoint:650,
             settings: {
               slidesToShow: 1,
               slidesToScroll: 1,
@@ -42,7 +42,8 @@ export default function HospitalAssociatedSlider() {
           },
         ],
       };
-  return (
+  
+    return (
     <div className="w-full my-20">
         <div className="my-7 -">
           <p className="text-base ssm:text-xl sm:text-2xl lg:text-3xl font-medium">
@@ -56,7 +57,7 @@ export default function HospitalAssociatedSlider() {
            <HospitalAssociatedCard />
            <HospitalAssociatedCard />
            <HospitalAssociatedCard />
-         </Slider>
+      </Slider>
         {/* </div> */}
       </div> 
   )
