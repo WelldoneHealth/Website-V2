@@ -17,7 +17,7 @@ export default function Navbar() {
     <>
       <header
         style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-        className="w-screen   flexBetween p-2  md:p-3 md:px-5 mx-auto "
+        className="w-screen   flexBetween p-2  md:p-3 md:px-5 mx-auto  "
         // className="w-screen   flexBetween  h-screen fixed top-0"
       >
         <div className="">
@@ -52,12 +52,12 @@ export default function Navbar() {
           setNavOpen(!navOpen);
           e.stopPropagation();
         }}
-        // bg-[#F5F5F5] bg-opacity-75
-        className={`w-full  fixed transition-all duration-300 top-0 overflow-hidden   bg-[#F5F5F5] bg-opacity-75  h-screen ${
+        // bg-[#EFF8FF] 
+        className={`w-full  fixed transition-all duration-300 top-0 overflow-hidden   bg-[#F5F5F5] bg-opacity-10 z-50  h-screen ${
           navOpen ? "left-0" : "-left-full"
         } `}
       >
-        <div className="w-[85%] h-full bg-[#EFF8FF] flex flex-col justify-start items-center">
+        <div className="w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center ">
 
 <div className="w-28 h-28 rounded-lg   ">
   <img src={wellDoneLogo?.src} className="w-full mt-14"  />
