@@ -23,7 +23,7 @@ export default function Home() {
 
 
 
-      {/* <PrimaryBanner/> */}
+      <PrimaryBanner/>
 
       {/* <DoctorSpeciality /> */}
 
@@ -33,7 +33,7 @@ export default function Home() {
 {/* -----hopital slider------- */}
       <HospitalAssociatedSlider/>
 
-      {/* <MobileAppBanner /> */}
+      <MobileAppBanner />
 
 
 

@@ -20,8 +20,8 @@ export default function Navbar() {
         className="w-screen   flexBetween p-2  md:p-3 md:px-5 mx-auto  "
         // className="w-screen   flexBetween  h-screen fixed top-0"
       >
-        <div className="">
-          <img src={wellDoneLogo?.src} width={100} height={50} alt="load..." />
+        <div className="w-24">
+          <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
         </div>
 
         <div className="flex gap-x-24 ">
@@ -47,7 +47,7 @@ export default function Navbar() {
         </div>
       </header>
 
-      <div
+      {/* <div
         onClick={(e) => {
           setNavOpen(!navOpen);
           e.stopPropagation();
@@ -77,7 +77,7 @@ export default function Navbar() {
 
 
         </div>
-      </div>
+      </div> */}
     </>
   );
 }

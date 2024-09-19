@@ -3,6 +3,7 @@ import "./globals.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
+import Head from "next/head";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,11 +24,15 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+   
+   {/* <Head>
+   <script src="https://kit.fontawesome.com/65eba670e4.js" crossorigin="anonymous" onLoad={()=>console.log("the scrpt has vbeen loaded")} ></script>
+      </Head> */}
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      <Navbar/>
-      <main className="lg:container mx-auto px-1  ">
+      {/* <Navbar/> */}
+      <main className="lg:container mx-auto   ">
       {children}
       </main>
       </body>
