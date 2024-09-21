@@ -58,9 +58,9 @@ export default function Navbar() {
         } `}
       >
         <div onClick={(e)=>e.stopPropagation()} className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center ">
-        {/* <button type="button" onClick={toggleNavBar} className="w-8  right-0  block md:hidden">
+        <button type="button" onClick={toggleNavBar} className="w-8  right-0  block md:hidden">
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
-          </button> */}
+          </button>
 
 <div className="w-28 h-28 rounded-lg   ">
   <img src={wellDoneLogo?.src} className="w-full mt-14"  />
