@@ -25,7 +25,7 @@ export default function Home() {
 
       <PrimaryBanner/>
 
-      {/* <DoctorSpeciality /> */}
+      <DoctorSpeciality />
 
 {/* -----------doctor slider----------- */}
       <DoctoAssociateSlider/>   

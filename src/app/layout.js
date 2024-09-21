@@ -31,7 +31,7 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-      {/* <Navbar/> */}
+      <Navbar/>
       <main className="lg:container mx-auto   ">
       {children}
       </main>
