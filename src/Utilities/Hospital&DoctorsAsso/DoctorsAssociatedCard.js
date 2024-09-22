@@ -50,6 +50,8 @@ export default function DoctorsAssociatedCard() {
             </span>
             Kolkata, West Bangal
           </p>
+
+          
         </div>
 
       </div>
