@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
 import Head from "next/head";
+// import 'leaflet/dist/leaflet.css'; 
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",

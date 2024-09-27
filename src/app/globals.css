@@ -51,3 +51,7 @@
 
 
 
+/* -----------changing popup------- */
+.leaflet-popup-content-wrapper{
+background: transparent;
+}
