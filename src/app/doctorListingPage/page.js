@@ -361,15 +361,20 @@ console.log("hello")
 
 {/* ----------------lists of doctors----------------- */}
  {/* <div className="w-full absolute bottom-16 z-40 flexCenter gap-x-3 whitespace-nowrap overflow-x-auto ">
-  {[1,2,3,45].map((item,index)=><div key={index}   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="w-[42%] p-3 bg-[#FFFFFF] text-black rounded-[20px] flex flex-col items-start  gap-y-[2px] flex-shrink-0">
+
+
+{[1,2,3,45].map((item,index)=><div key={index}   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="w-[42%] p-3 bg-[#FFFFFF] text-black rounded-[20px] flex flex-col items-start  gap-y-[2px] flex-shrink-0">
   <img src={doctorImage2?.src} className="w-20 rounded-full" alt="load..." />
   <p className="font-medium text-sm">Dr. Nilesh Bhamare</p>
   <p className="text-xs text-[#646464]" >MBBS</p>
   <p className="text-xs text-[#646464]">Ophthalmic Doctor</p>
   <p className="text-xs text-[#646464]">Shivaji Nagar, pune​</p>
-</div>)} 
+</div>)}  
 
 
+
+
+ ---------------------new doctor popup list on map------------- 
 <div  style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="p-3 z-40 w-[300px] space-y-3  max-h-[500px] rounded-[20px]  border-[1px] border-gray-500 overflow-y-auto whitespace-nowrap">
 {[1,2,3].map((item,index)=><div key={index}  style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className="p-4 rounded-[20px] w-full space-y-2">
   <div className="w-full flex items-center gap-x-3">

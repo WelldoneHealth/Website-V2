@@ -85,8 +85,10 @@ export default function page() {
   return (
     <>
       <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0  mt-8 flex  flex-col lg:flex-row lg:justify-between justify-center  lg:items-start  gap-x-7">
+       
+       
         <div className="w-full lg:w-[68%]  ">
-          {/* -----doctor detail scetion---------- */}
+          {/* ----- //todo doctor detail scetion---------- */}
           <div className="my-7 w-full flex flex-col max-md:items-center md:flex-row   gap-x-6 gap-y-8 ">
             <div className="w-[60%] asm:w-[50%] sm:w-[42%] md:w-[38%] lg:w-[35%]  overflow-hidden">
               <img
@@ -147,7 +149,7 @@ export default function page() {
 
           {/* <hr className="my-7  w-[95%]" /> */}
 
-          {/* ------------extra things about doctor------------ */}
+          {/* ------------//todo  extra things about doctor------------ */}
           <div className="my-7 w-full flex gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
             {extraDoctorDetails.length > 0 &&
               extraDoctorDetails.map((item, index) => (
@@ -170,7 +172,7 @@ export default function page() {
             </div>
           </div>
 
-          {/* --------------------extra safety precautions------------ */}
+          {/* -------------------- //todo  extra safety precautions------------ */}
           <div className="my-7 w-full flex gap-x-2 bg-[#F4F4F4] rounded-[20px] px-4 py-3  ">
             {/* <div className=""> 
 </div> */}
@@ -190,7 +192,7 @@ export default function page() {
             </div>
           </div>
 
-          {/* -------------map portion with timings--------------- */}
+          {/* ------------- //todo  map portion with timings--------------- */}
           <div style={{boxShadow:" 0px 0px 4px 0px #00000040"}} className="w-full my-7   rounded-[20px]  px-4  py-2 ">
             <h3 className=" my-3 text-2xl text-[#01549A] font-semibold">
               Clinic/ Hospital details
@@ -303,7 +305,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
             </div>
           </div> */}
 
-          {/* ----------- training and experience ------------- */}
+          {/* ----------- //todo training and experience ------------- */}
           {/* <div className="w-full my-7 ">
             <h3 className=" my-3 text-2xl text-[#01549A] font-semibold">
               Training and Experience with Field
@@ -367,7 +369,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
             </div>
           </div> */}
 
-          {/* ------about section------------- */}
+          {/* ------//todo about section------------- */}
          {/* <div className="w-full my-7">
             <h3 className=" my-3 text-2xl text-[#01549A] font-semibold">
               About Me
@@ -396,7 +398,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
             </div>
           </div>  */}
 
-          {/* -------specialities------------ */}
+          {/* -------//todo specialities------------ */}
           {/* <div className="w-full my-5">
     <h3 className=' my-3 text-2xl text-[#01549A] font-semibold'>Specialities</h3>
     <div className=" ">
@@ -440,9 +442,9 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
 </div> */}
         </div>
 
-        {/* -------------appointement section --------*/}
+        {/* -------------//todo appointement section --------*/}
         <div className="flex-1   lg:w-[90%]">
-          {/* -----appointemnet part-------- */}
+          {/* -----//todo appointemnet part-------- */}
           <div className="w-full  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
             {/* <p className="text-[26px] font-medium text-[#01549A]">
               Doctor Visit <span className="text-[#59D3C2]">$20</span>
