@@ -17,52 +17,65 @@ import filterDropdownButtonIcon from "@/asset/Icons/filterDropdownButton.svg";
 import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
-import { MapContainer, TileLayer, Marker, Popup, ImageOverlay,useMap, Circle, Rectangle } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  ImageOverlay,
+  useMap,
+  Circle,
+  Rectangle,
+} from "react-leaflet";
 // import 'leaflet/dist/leaflet.css'
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import { LatLngBounds } from "leaflet";
 
-
 // ---------------------reset button-------------------
 const MapResetButton = ({ currentLocation }) => {
-  const map = useMap();   
-  return (       
-//   <div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
-// <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
-//  <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
-//     </button>
-      <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 rounded-[10px] flex items-center text-sm font-semibold " onClick={()=> map.setView(currentLocation, 13)} >
-   <img src={rotatingArrowIcon?.src} className="mr-2" alt="load..."  /> Reset View
+  const map = useMap();
+  return (
+    //   <div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
+    // <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
+    //  <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
+    //     </button>
+    <button
+      className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 rounded-[10px] flex items-center text-sm font-semibold "
+      onClick={() => map.setView(currentLocation, 13)}
+    >
+      <img src={rotatingArrowIcon?.src} className="mr-2" alt="load..." /> Reset
+      View
     </button>
-  // </div>
-  )
-}
+    // </div>
+  );
+};
 
 export default function page() {
-
-const [isMapExpanded,setIsMapExpanded]=useState(false)
-
+  const [isMapExpanded, setIsMapExpanded] = useState(false);
 
   const [placeLocation, setPlaceLocation] = useState([
     27.574243738524796, 77.64168862650207,
   ]);
 
-  const handleMarkerClick=(e)=>{
-console.log("hello")
-  }
+  const handleMarkerClick = (e) => {
+    console.log("hello");
+  };
 
   // useEffect(()=>console.log(isMapExpanded),[])
 
   // useEffect(()=>{setPlaceLocation([27.574243738524796, 77.64168862650207])},[])
-  const bounds = new LatLngBounds([40.712216, -74.22655], [40.773941, -74.12544])
+  const bounds = new LatLngBounds(
+    [40.712216, -74.22655],
+    [40.773941, -74.12544]
+  );
   useEffect(() => {
     console.log("the new location is", placeLocation);
   }, [placeLocation]);
   const rectangleBounds = [
-    [20.993177213245744, 74.31037414942334],  // Southwest corner
-    [20.993653817710108, 74.31422237720786]    // Northeast corner
+    [20.993177213245744, 74.31037414942334], // Southwest corner
+    [20.993653817710108, 74.31422237720786], // Northeast corner
   ];
   return (
     <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0   ">
@@ -133,8 +146,16 @@ console.log("hello")
       </div>
 
       {/* -------------listing page card portions---------- */}
-      <div className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${!isMapExpanded && "  flex-wrap"} bg-red-800 relative overflow-hidden`}>
-        <div className={  ` w-full  lg:w-[65%] min-h-screen bg-orange-600  transition-all duration-700 ease-linear  ${isMapExpanded  && " absolute   "}  `}>
+      <div
+        className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${
+          !isMapExpanded && "  flex-wrap"
+        } bg-red-800 relative overflow-hidden`}
+      >
+        <div
+          className={`${
+            isMapExpanded ? "w-0" : "lg:w-[65%]"
+          } min-h-screen bg-orange-600  transition-all duration-700 ease-linear`}
+        >
           {/* ----------------doctor card------------- */}
           <div
             onClick={() =>
@@ -309,112 +330,20 @@ console.log("hello")
             </div>
           </div>
         </div>
-
-
-
-        
-
-{/*london :         51.562861336440584, -0.2900755252434501               */}
-{/* mumbau taj:                      18.92182770820119, 72.83309207016369             */}
-{/* krishna hotel  :         27.57720624450594, 77.65281687140784           */}
-{/* sakri :                   20.993413468795033, 74.31671585316849              */}
-
-
-
-
-
-        {/* ----------------map portions---------- */}
-        
-        {/* ------------------ //todo ----------------- */}
-        <div   style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className={` w-full bg-blue-800 h-[650px] right-0 ${!isMapExpanded?" flex-1 lg:w-[90%] ":" absolute top-0 left-0  "} p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}>
-          <button type="button" onClick={()=>setIsMapExpanded(!isMapExpanded)} className="text-white m-7 rounded-[20px] bg-black font-semibold border-2 border-red-700 p-4" >{!isMapExpanded?"expand":"contract"}</button>
-          {/* <MapContainer
-             key={placeLocation.join(",")}
-            style={{ height: "700px", width: "100%",position:"relative" ,zIndex:"5", borderRadius:"20px" }}
-            center={placeLocation}
-            zoom={13}
-            scrollWheelZoom={false}
+        <div
+          style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
+          className={`${
+            isMapExpanded ? "w-full" : " lg:w-[35%]  "
+          }  bg-blue-800 h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
+          // className={` w-full right-0 `}
+        >
+          <button
+            type="button"
+            onClick={() => setIsMapExpanded(!isMapExpanded)}
+            className="text-white m-7 rounded-[20px] bg-black font-semibold border-2 border-red-700 p-4"
           >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <Marker className="relative" position={placeLocation} eventHandlers={{
-          click: handleMarkerClick,  // Using eventHandlers
-        }} >
-              <Popup className="bg-red-800 " style={{width:"%"}}>
-           <div className=" m-0 w-[500px]  h-[200px] bg-green-600">sd</div> 
-              </Popup>   
-            </Marker>
-
-         
-
-<div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
-<button onClick={()=>setIsMapExpanded(!isMapExpanded)} className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
- <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
-    </button>
-<MapResetButton currentLocation={placeLocation} />
-  </div>
-
-     </MapContainer> */}
-
-
- 
-
-
-{/* ----------------lists of doctors----------------- */}
- {/* <div className="w-full absolute bottom-16 z-40 flexCenter gap-x-3 whitespace-nowrap overflow-x-auto ">
-
-
-{[1,2,3,45].map((item,index)=><div key={index}   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="w-[42%] p-3 bg-[#FFFFFF] text-black rounded-[20px] flex flex-col items-start  gap-y-[2px] flex-shrink-0">
-  <img src={doctorImage2?.src} className="w-20 rounded-full" alt="load..." />
-  <p className="font-medium text-sm">Dr. Nilesh Bhamare</p>
-  <p className="text-xs text-[#646464]" >MBBS</p>
-  <p className="text-xs text-[#646464]">Ophthalmic Doctor</p>
-  <p className="text-xs text-[#646464]">Shivaji Nagar, pune​</p>
-</div>)}  
-
-
-
-
- ---------------------new doctor popup list on map------------- 
-<div  style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="p-3 z-40 w-[300px] space-y-3  max-h-[500px] rounded-[20px]  border-[1px] border-gray-500 overflow-y-auto whitespace-nowrap">
-{[1,2,3].map((item,index)=><div key={index}  style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className="p-4 rounded-[20px] w-full space-y-2">
-  <div className="w-full flex items-center gap-x-3">
-    <img src={doctorImage2?.src} className="w-14" alt="load..."  />
-    <div className="">
-    <p className="font-medium text-base">Dr. Nilesh Bhamare</p>
-    <p className="text-xs font-medium text-[#646464]" >MBBS</p>
-    <p className="text-xs font-medium text-[#646464]" >Orthopaedic</p>
-    </div>
-    </div>
-    <p className="text-xs font-medium  w-full text-wrap ">
-                    <img
-                      src={redGeoLocationIcon?.src}
-                      className="w-3 mr-2  inline"
-                      alt="load..."
-                    />
-                   352 7th Ave, Ste 601, New York, 700028
-                  </p>
-                  
-                  <button
-                type="button"
-                className=" mt-6 w-full cursor-pointer py-[6px] flex items-center justify-center bg-[#01549A] text-sm text-white font-medium rounded-[10px] "
-              >
-                Book Appointment
-              </button>
-              <button
-                type="button"
-                className=" mt-6 w-full cursor-pointer py-[6px] flex items-center justify-center  text-sm text-[#01549A] border-[1px] border-[#01549A] font-medium rounded-[10px] "
-              >
-              View Details
-              </button>
-
-</div>)}
-</div>
-
-</div>  */}
-
+            {!isMapExpanded ? "expand" : "contract"}
+          </button>
         </div>
       </div>
     </div>
