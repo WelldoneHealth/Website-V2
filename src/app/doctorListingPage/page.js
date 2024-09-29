@@ -16,7 +16,7 @@ import mapImage from "@/asset/Icons/mapImage.svg";
 import filterDropdownButtonIcon from "@/asset/Icons/filterDropdownButton.svg";
 import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
-
+import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { MapContainer, TileLayer, Marker, Popup, ImageOverlay,useMap, Circle, Rectangle } from "react-leaflet";
 // import 'leaflet/dist/leaflet.css'
 import "leaflet/dist/leaflet.css";
@@ -28,14 +28,23 @@ import { LatLngBounds } from "leaflet";
 // ---------------------reset button-------------------
 const MapResetButton = ({ currentLocation }) => {
   const map = useMap();   
-  return (
-    <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA] absolute right-1 top-2 z-[700]  p-2 rounded-[10px] flex items-center text-sm font-semibold " onClick={()=> map.setView(currentLocation, 13)} >
+  return (       
+//   <div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
+// <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
+//  <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
+//     </button>
+      <button className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 rounded-[10px] flex items-center text-sm font-semibold " onClick={()=> map.setView(currentLocation, 13)} >
    <img src={rotatingArrowIcon?.src} className="mr-2" alt="load..."  /> Reset View
     </button>
+  // </div>
   )
 }
 
 export default function page() {
+
+const [isMapExpanded,setIsMapExpanded]=useState(false)
+
+
   const [placeLocation, setPlaceLocation] = useState([
     27.574243738524796, 77.64168862650207,
   ]);
@@ -44,8 +53,7 @@ export default function page() {
 console.log("hello")
   }
 
-
-
+  // useEffect(()=>console.log(isMapExpanded),[])
 
   // useEffect(()=>{setPlaceLocation([27.574243738524796, 77.64168862650207])},[])
   const bounds = new LatLngBounds([40.712216, -74.22655], [40.773941, -74.12544])
@@ -125,8 +133,8 @@ console.log("hello")
       </div>
 
       {/* -------------listing page card portions---------- */}
-      <div className="w-full flex my-6 flex-wrap ">
-        <div className="w-full min-h-screen  lg:w-[65%] ">
+      <div className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${!isMapExpanded && "  flex-wrap"} bg-red-800 relative overflow-hidden`}>
+        <div className={  ` w-full  lg:w-[65%] min-h-screen bg-orange-600  transition-all duration-700 ease-linear  ${isMapExpanded  && " absolute   "}  `}>
           {/* ----------------doctor card------------- */}
           <div
             onClick={() =>
@@ -303,19 +311,29 @@ console.log("hello")
         </div>
 
 
+
+        
+
 {/*london :         51.562861336440584, -0.2900755252434501               */}
 {/* mumbau taj:                      18.92182770820119, 72.83309207016369             */}
 {/* krishna hotel  :         27.57720624450594, 77.65281687140784           */}
 {/* sakri :                   20.993413468795033, 74.31671585316849              */}
 
+
+
+
+
         {/* ----------------map portions---------- */}
-        <div   style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className="flex-1 w-full lg:w-[90%] p-1 h-[650px]  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden">
-          <MapContainer
+        
+        {/* ------------------ //todo ----------------- */}
+        <div   style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className={` w-full bg-blue-800 h-[650px] right-0 ${!isMapExpanded?" flex-1 lg:w-[90%] ":" absolute top-0 left-0  "} p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}>
+          <button type="button" onClick={()=>setIsMapExpanded(!isMapExpanded)} className="text-white m-7 rounded-[20px] bg-black font-semibold border-2 border-red-700 p-4" >{!isMapExpanded?"expand":"contract"}</button>
+          {/* <MapContainer
              key={placeLocation.join(",")}
             style={{ height: "700px", width: "100%",position:"relative" ,zIndex:"5", borderRadius:"20px" }}
             center={placeLocation}
             zoom={13}
-            scrollWheelZoom={true}
+            scrollWheelZoom={false}
           >
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -329,33 +347,18 @@ console.log("hello")
               </Popup>   
             </Marker>
 
-            {/* <div className="w-full absolute top-11 left-0 z-[700]  bg-red-800">hello</div> */}
+         
 
+<div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
+<button onClick={()=>setIsMapExpanded(!isMapExpanded)} className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
+ <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
+    </button>
 <MapResetButton currentLocation={placeLocation} />
+  </div>
 
-{/* <Circle
-          center={placeLocation} // Center of the circle (latitude, longitude)
-          radius={500}  // Radius in meters
-          pathOptions={{ color: 'blue', fillColor: 'blue', fillOpacity: 0.4 }} // Styling for the circle
-        /> */}
-<Rectangle
-          bounds={rectangleBounds} // Southwest and northeast corners
-          pathOptions={{ color: 'red', weight: 2, fillOpacity: 0.2 }} // Style options for the rectangle
-        />
+     </MapContainer> */}
 
 
-            {/* <Marker  position={[20.99334482113811, 74.31618323053482]} >  </Marker>
-            <Marker  position={[20.993177213245744, 74.31037414942334]} >  </Marker>
-            <Marker  position={[20.993653817710108, 74.31422237720786]} >  </Marker>
-            <Marker  position={[20.993683253602775, 74.31728176560895]} >  </Marker> */}
-
-
-            </MapContainer>
-            {/* <ImageOverlay
-  url="https://media.istockphoto.com/id/1370772148/photo/track-and-mountains-in-valle-del-lago-somiedo-nature-park-asturias-spain.jpg?s=612x612&w=0&k=20&c=QJn62amhOddkJSbihcjWKHXShMAfcKM0hPN65aCloco="
-  bounds={bounds}
-/> */}
-        
  
 
 

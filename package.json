@@ -10,8 +10,9 @@
   },
   "dependencies": {
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "leaflet": "^1.9.4",
     "leaflet-defaulticon-compatibility": "^0.1.2",
+    "leaflet-fullscreen": "^1.0.2",
+    "leaflet.fullscreen": "^3.0.2",
     "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
