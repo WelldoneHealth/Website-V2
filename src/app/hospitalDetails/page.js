@@ -17,7 +17,7 @@ import pinedIcon from "@/asset/Icons/pined.svg";
 import callingIcon from "@/asset/Icons/calling.svg";
 import  nursingHomeIcon from "@/asset/Icons/nursingHome.svg";
 import  pathologyIcon from "@/asset/Icons/pathology.svg";
-import  polyClinicIcon from "@/asset/Icons/polyClinic.svg";
+import  polyClinicIcon from "@/asset/Icons/polyclinic.svg";
 import  singlePractionerIcon from "@/asset/Icons/singlePractioner.svg";
 import  usgIcon from "@/asset/Icons/usg.svg";
 import  xRayIcon from "@/asset/Icons/xRay.svg";

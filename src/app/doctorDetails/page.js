@@ -368,7 +368,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
       <p className="text-[13px]">Plot No, 00 Ram Nagar, Near Mahadeo Temple,satpur, Nashik-422008</p>
     </div>
     <div className="w-[60px] flexCenter bg-[#F5F5F5] border-l-2 border-black">
-      <img src={sliderArrowIcon?.src} className="rotate-90 h-8 " alt="load..."  />
+      <img src={sliderArrowIcon?.src} className="rotate-90 h-4 " alt="load..."  />
     </div>
   </div>
 
