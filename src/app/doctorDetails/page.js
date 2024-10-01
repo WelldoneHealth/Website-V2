@@ -158,7 +158,7 @@ export default function page() {
           {/* <hr className="my-7  w-[95%]" /> */}
 
           {/* ------------//todo  extra things about doctor------------ */}
-          {/* <div className="my-7 w-full bg-red-900 flex max-lg:overflow-x-auto max-lg:whitespace-nowrap gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
+          <div className="my-7 w-full  flex max-lg:overflow-x-auto max-lg:whitespace-nowrap gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
             {extraDoctorDetails.length > 0 &&
               extraDoctorDetails.map((item, index) => (
                 <div className="flex-1 flex flex-col justify-center items-center  gap-y-2   ">
@@ -178,10 +178,10 @@ export default function page() {
               <div className=""></div>
               <p></p>
             </div>
-          </div> */}
+          </div>
 
           {/* -------------------- //todo  extra safety precautions------------ */}
-         {/* <OfficeSafetyPrecautions  /> */}
+         <OfficeSafetyPrecautions  />
 
 
           {/* ------------- //todo  map portion with timings--------------- */}
