@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import searchIcon from "@/asset/Icons/search.svg";
 import ratingIcon from "@/asset/Icons/rating.svg";
 import doctorImageBig from "@/asset/Images/doctorImageBig.png";
@@ -23,6 +23,8 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import { LatLngBounds } from "leaflet";
+import DoctorCard from "@/Utilities/listingPageCards/DoctorCard";
+import HospitalCard from "@/Utilities/listingPageCards/HospitalCard";
 
 
 // ---------------------reset button-------------------
@@ -42,7 +44,7 @@ const MapResetButton = ({ currentLocation }) => {
 
 export default function page() {
 
-const [isMapExpanded,setIsMapExpanded]=useState(false)
+  const [isMapExpanded,setIsMapExpanded]=useState(false)
 
 
   const [placeLocation, setPlaceLocation] = useState([
@@ -52,6 +54,18 @@ const [isMapExpanded,setIsMapExpanded]=useState(false)
   const handleMarkerClick=(e)=>{
 console.log("hello")
   }
+
+  const mapRef = useRef(null);
+
+  
+  useEffect(() => {
+    if (mapRef.current) {
+      const map = mapRef.current; 
+      map.invalidateSize(); // Update the map size when the view changes
+    }
+  }, [isMapExpanded]); 
+
+
 
   // useEffect(()=>console.log(isMapExpanded),[])
 
@@ -66,6 +80,7 @@ console.log("hello")
   ];
   return (
     <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0   ">
+
       {/* --------------navbars--------------- */}
       <div
         style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
@@ -133,186 +148,20 @@ console.log("hello")
       </div>
 
       {/* -------------listing page card portions---------- */}
-      <div className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${!isMapExpanded && "  flex-wrap"} bg-red-800 relative overflow-hidden`}>
-        <div className={  ` w-full  lg:w-[65%] min-h-screen bg-orange-600  transition-all duration-700 ease-linear  ${isMapExpanded  && " absolute   "}  `}>
-          {/* ----------------doctor card------------- */}
-          <div
-            onClick={() =>
-              setPlaceLocation([20.993413468795033, 74.31671585316849])
-            }
-            style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
-            className="w-[96%] px-6 py-4 mx-auto my-8 border-[1px] border-gray-500 rounded-[20px] flex items-center gap-x-16 "
-          >
-            {/* -----------left part------ */}
-            <div className=" flex gap-x-8">
-              {/* ----------image----------- */}
-              <div className="rounded-full w-40 flexCenter ">
-                <img
-                  src={doctorImageBig?.src}
-                  className="w-full "
-                  alt="load...."
-                />
-              </div>
-              {/* ------details portion beside image---- */}
-              <div className="flex flex-col gap-y-1">
-                {/* -------------rating ------- */}
-                <div className=" mt-5 ssm:mt-0  text-xs font-medium bg-[#F5F5F5]   px-2 asm:px-3 py-[5px]  rounded-[20px] flex items-center max-w-max ">
-                  <img
-                    src={ratingIcon?.src}
-                    className="w-[14px] mr-2"
-                    alt="load..."
-                  />
-                  4.8 (234 Review)
-                </div>
+      <div className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${ !isMapExpanded && "  flex-wrap"  }  relative overflow-hidden`}>
 
-                <p className="font-medium text-xl ssm:text-base asm:text-xl leading-tight text-center ssm:text-left">
-                  Dr. Nilesh Bhamare
-                </p>
-
-                <p className="flex flex-wrap gap-y-2 justify-start  items-center ssm:flex-col asm:flex-row  gap-x-3 asm:gap-x-0 text-sm font-semibold ">
-                  Gynecologist
-                </p>
-
-                <p className="text-sm mt-1 font-medium flex items-center ">
-                  <img
-                    src={smallHatIcon?.src}
-                    className="h-[18px] mr-2"
-                    alt="load..."
-                  />
-                  M.B.B.S., M.D
-                </p>
-
-                <p className="text-sm mt-1 font-medium flex items-center">
-                  <img
-                    src={doctorBagV2Icon?.src}
-                    className="w-[18px] mr-2"
-                    alt="load..."
-                  />
-                  7 + Years experience
-                </p>
-
-                <p className="text-sm mt-1 font-medium flex items-center">
-                  <img
-                    src={hospitalIcon?.src}
-                    className="w-[18px] mr-2"
-                    alt="load..."
-                  />
-                  Bhamare Hospital
-                </p>
-
-                <p className="text-sm font-medium flex items-center">
-                  <img
-                    src={redGeoLocationIcon?.src}
-                    className="w-[12px] mr-2"
-                    alt="load..."
-                  />
-                  Kolkata, West Bangal
-                </p>
-              </div>
-            </div>
-            {/* ------------------right part------ */}
-            <div className=" flexCenter  flex-col gap-y-2">
-              <p className="text-[#01A400] font-medium text-xs">
-                {" "}
-                Available now book in Seconds
-              </p>
-              <button
-                type="button"
-                className="w-[190px] cursor-pointer py-[6px] flex items-center justify-center bg-[#01549A] text-base text-white font-medium rounded-[20px] "
-              >
-                Book Appointment
-              </button>
-              <button
-                type="button"
-                className="w-[190px] cursor-pointer  py-[6px] flex items-center justify-center font-medium bg-[#EFF8FF] text-base rounded-[20px]"
-              >
-                <img
-                  src={redGeoLocationIcon?.src}
-                  className="w-[12px] mr-2"
-                  alt="load..."
-                />{" "}
-                View in map
-              </button>
-            </div>
-          </div>
-
-          {/* ----------------hospital card--------------- */}
-          <div
-            onClick={() =>
-              setPlaceLocation([51.562861336440584, -0.2900755252434501])
-            }
-            style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
-            className="w-[96%]  px-6 pt-6 py-9  mx-auto my-8 border-[1px] border-gray-500 rounded-[20px] flex items-center gap-x-16 "
-          >
-            {/* -----------left part------ */}
-            <div className=" flex gap-x-8">
-              {/* ----------image----------- */}
-              <div className="rounded-full w-[180px]  flexCenter">
-                <img
-                  src={hospitalImageBig?.src}
-                  className="w-full "
-                  alt="load...."
-                />
-              </div>
-              {/* ------details portion beside image---- */}
-              <div className="flex flex-col gap-y-0">
-                <p className="font-medium text-xl ssm:text-base asm:text-xl leading-tight text-center ssm:text-left">
-                  Purva Maternity Hospital
-                </p>
-
-                <p className="flex flex-wrap gap-y-2 justify-start  items-center ssm:flex-col asm:flex-row  gap-x-3 asm:gap-x-0 text-lg font-medium ">
-                  Kala nagar
-                </p>
-                <p className="flex my-1 flex-wrap gap-y-2 justify-start   items-center ssm:flex-col asm:flex-row  gap-x-3 asm:gap-x-0 text-xs leading-snug font-medium ">
-                  Ear-Nose-Throat (ENT) Specialist, Dentist practitioner ,
-                  General practitioner
-                </p>
-
-                <p className="my-2 text-sm  flex items-center">
-                  <img
-                    src={redGeoLocationIcon?.src}
-                    className="w-[12px] mr-2"
-                    alt="load..."
-                  />
-                  Kolkata, West Bangal
-                </p>
-
-                <p className="text-sm   flex items-center">
-                  <img
-                    src={doctorIcon?.src}
-                    className="w-[18px] mr-2"
-                    alt="load..."
-                  />
-                  1+ Doctors associated
-                </p>
-              </div>
-            </div>
-            {/* ------------------right part------ */}
-            <div className=" flexCenter  flex-col gap-y-2">
-              <button
-                type="button"
-                className="w-[190px] cursor-pointer py-[6px] flex items-center justify-center bg-[#01549A] text-base text-white font-medium rounded-[20px] "
-              >
-                Book Appointment
-              </button>
-              <button
-                type="button"
-                className="w-[190px] cursor-pointer  py-[6px] flex items-center justify-center font-medium bg-[#EFF8FF] text-base rounded-[20px]"
-              >
-                <img
-                  src={redGeoLocationIcon?.src}
-                  className="w-[12px] mr-2"
-                  alt="load..."
-                />{" "}
-                View in map
-              </button>
-            </div>
-          </div>
+{/* -----------lists sections-------------- */}
+        <div className={`${
+            isMapExpanded ? "w-0" : "lg:w-[65%]"
+          } min-h-screen  transition-all duration-700 ease-linear`}>
+          {/* ----------------doctor card------------- */}     
+<DoctorCard  />
+   {/* ----------------hospital card--------------- */}
+<HospitalCard  />        
         </div>
 
 
 
-        
 
 {/*london :         51.562861336440584, -0.2900755252434501               */}
 {/* mumbau taj:                      18.92182770820119, 72.83309207016369             */}
@@ -325,14 +174,16 @@ console.log("hello")
 
         {/* ----------------map portions---------- */}
         
-        {/* ------------------ //todo ----------------- */}
-        <div   style={{ boxShadow: "0px 0px 4px 1px #00000040" }} className={` w-full bg-blue-800 h-[650px] right-0 ${!isMapExpanded?" flex-1 lg:w-[90%] ":" absolute top-0 left-0  "} p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}>
-          <button type="button" onClick={()=>setIsMapExpanded(!isMapExpanded)} className="text-white m-7 rounded-[20px] bg-black font-semibold border-2 border-red-700 p-4" >{!isMapExpanded?"expand":"contract"}</button>
-          {/* <MapContainer
+        <div   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className={`${
+            isMapExpanded ? "w-full" : " lg:w-[35%]  "
+          }  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}>
+          {/* <button type="button" onClick={()=>setIsMapExpanded(!isMapExpanded)} className="text-white m-7 rounded-[20px] bg-black font-semibold border-2 border-red-700 p-4" >{!isMapExpanded?"expand":"contract"}</button> */}
+          <MapContainer
              key={placeLocation.join(",")}
             style={{ height: "700px", width: "100%",position:"relative" ,zIndex:"5", borderRadius:"20px" }}
             center={placeLocation}
             zoom={13}
+            ref={mapRef}
             scrollWheelZoom={false}
           >
             <TileLayer
@@ -350,13 +201,15 @@ console.log("hello")
          
 
 <div className="flex gap-x-7 items-center absolute right-1 top-2 z-[700]">
-<button onClick={()=>setIsMapExpanded(!isMapExpanded)} className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
+<button onClick={()=>{
+  setIsMapExpanded(!isMapExpanded) 
+}} className="bg-[#F4F4F4] border-2 border-[#C2BFBA]   p-2 py-[10px] rounded-[10px] flex items-center text-sm font-semibold " >
  <img src={sliderArrowIcon?.src} className="mr-2 w-2 rotate-180" alt="load..."  /> Expand Map
     </button>
 <MapResetButton currentLocation={placeLocation} />
   </div>
 
-     </MapContainer> */}
+     </MapContainer>
 
 
  
@@ -416,6 +269,8 @@ console.log("hello")
 </div>  */}
 
         </div>
+
+
       </div>
     </div>
   );
