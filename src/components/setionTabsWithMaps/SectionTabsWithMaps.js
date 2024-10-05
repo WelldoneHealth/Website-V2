@@ -42,7 +42,7 @@ export default function SectionTabsWithMaps({ tab }) {
           </div>
         </div>
         <div className="">
-          <div className="w-10 h-10 text-2xl flexCenter rounded-full bg-[#01549A] text-white font-medium">
+          <div className="w-10 h-10 text-2xl flexCenter rounded-full bg-primary text-white font-medium">
             {/* <img src={phoneCallIcon?.src} className=""  alt="load..." /> */}
             {tab}
           </div>

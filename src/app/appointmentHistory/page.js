@@ -16,7 +16,7 @@ export default function page() {
     <div className= " w-[300px]  px-2 py-3 space-y-2 ">
 <p className='text-lg font-medium text-[#01549A] text-center'>All My Family Member's</p>
 <div className="flex p-2 rounded-[10px]  gap-x-3 border-[1px] border-[#01549A]">
-    <div className="text-white size-12 flexCenter bg-[#01549A] rounded-full">RN</div>
+    <div className="text-white size-12 flexCenter bg-primary rounded-full">RN</div>
     <div className="text-sm flex flex-col justify-center">
         <p>Rakesh Nandre <span className='font-medium'>(Me)</span> </p>
         <p>Mumbai​</p>
@@ -155,7 +155,7 @@ export default function page() {
     </div>
 
 <div className="mt-4 w-full space-y-2">
-<button type="button" className=' w-[230px] text-sm font-semibold bg-[#01549A] rounded-[20px] text-white py-[6px] text-center'  >Book Follow-Up</button>
+<button type="button" className=' w-[230px] text-sm font-semibold bg-primary rounded-[20px] text-white py-[6px] text-center'  >Book Follow-Up</button>
         <p className='flex items-center text-sm'><img src={infoIcon?.src} className='mr-2 ' alt="load..."  /> Follow before – 12/03/2022, 20 days remaining​</p>
         <div className='max-w-max py-1 px-5 bg-[#F0F8FF] text-sm text-[#01549A] italic rounded-[15px]'>Share by Welldone Health Doctor/Clinic/Hospital this appointment with you.</div> 
 </div>
@@ -213,7 +213,7 @@ export default function page() {
         <p className='text-sm'>Shidhivinayak Hospital - Dhule</p>
        </div>
  <div className=" space-y-3">
-<button type="button" className='px-5 py-[6px] w-[250px] justify-center flex items-center gap-x-2 text-sm font-medium border-[1px] border-[#01549A]  rounded-[20px] text-white bg-[#01549A]  '>  Book Again </button>
+<button type="button" className='px-5 py-[6px] w-[250px] justify-center flex items-center gap-x-2 text-sm font-medium border-[1px] border-[#01549A]  rounded-[20px] text-white bg-primary  '>  Book Again </button>
 </div>
     </div>
 
@@ -274,7 +274,7 @@ export default function page() {
         <p className='text-sm'>Shidhivinayak Hospital - Dhule</p>
        </div>
  <div className=" space-y-3">
-<button type="button" className='px-5 py-[6px] w-[250px] justify-center flex items-center gap-x-2 text-sm font-medium border-[1px] border-[#01549A]  rounded-[20px] text-white bg-[#01549A]  '>  Book Again </button>
+<button type="button" className='px-5 py-[6px] w-[250px] justify-center flex items-center gap-x-2 text-sm font-medium border-[1px] border-[#01549A]  rounded-[20px] text-white bg-primary  '>  Book Again </button>
 </div>
     </div>
     <div className="mt-4 w-full space-y-2">

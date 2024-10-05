@@ -3,9 +3,14 @@ import ratingIcon from "@/asset/Icons/rating.svg";
 import hospitalIcon from "@/asset/Icons/hospital_icon.svg";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 import doctorImage2 from "@/asset/Images/doctorImage2.png";
+import Link from "next/link";
+
+
+
 
 export default function DoctorsAssociatedCard() {
   return (
+   
     <div
       style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
       className="mx-[6px] sm:mx-2  flex-none  rounded-[20px] px-2 asm:px-4 py-6  "
@@ -32,7 +37,7 @@ export default function DoctorsAssociatedCard() {
 
           <p className="flex flex-wrap gap-y-2 justify-start  items-center ssm:flex-col asm:flex-row  gap-x-3 asm:gap-x-0 text-sm font-semibold ">
             Gynecologist{" "}
-            <span className="  hidden asm:block  asm:mx-2 rounded-[20px] text-white px-2 py-[2px] bg-[#01549A] text-xs ">
+            <span className="  hidden asm:block  asm:mx-2 rounded-[20px] text-white px-2 py-[2px] bg-primary text-xs ">
               7 + Years Exp
             </span>
           </p>
@@ -56,10 +61,12 @@ export default function DoctorsAssociatedCard() {
 
       </div>
 
-
+      <Link href="/doctorDetails" >
       <div className=" py-2 text-base rounded-[20px] text-center bg-[#EFF8FF]">
         <span className="text-[#01549A] font-medium">View Details</span>
       </div>
+      </Link>
     </div>
+   
   );
 }

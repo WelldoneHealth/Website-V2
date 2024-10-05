@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #01549A;
+  --color-secondary: #EFF8FF;
+  
+  /* --color-accent: #34a853; */
+}
+
+
+
+
 .flexCenter{
   @apply flex justify-center items-center
 }

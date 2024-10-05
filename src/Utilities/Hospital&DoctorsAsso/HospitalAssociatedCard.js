@@ -2,10 +2,12 @@ import React from "react";
 import { HOSPITAL_IMAGE1 } from "../ImageConstants";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 import doctorIcon from "@/asset/Icons/doctor.svg";
+import Link from "next/link";
 //import hospiatalImage from "@/asset/Images/hospital_Image1.png.png"
 
 export default function HospitalAssociatedCard() {
   return (
+  
     <div
       style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
       className="mx-[6px] sm:mx-2  flex-none  rounded-[20px] px-2 asm:px-4 py-6  "
@@ -36,10 +38,12 @@ export default function HospitalAssociatedCard() {
         </div>
 
       </div>
-
+      <Link href="/hospitalDetails" >
       <div className="mt-2 ssm:mt-5 py-2 text-base rounded-[20px] text-center bg-[#EFF8FF]">
         <span className="text-[#01549A] font-medium">View Details</span>
       </div>
+      </Link>
     </div>
+   
   );
 }

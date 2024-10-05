@@ -72,7 +72,7 @@ export default function HospitalCard() {
             <div className=" flexCenter  flex-col gap-y-2">
               <button
                 type="button"
-                className="w-[190px] cursor-pointer py-[6px] flex items-center justify-center bg-[#01549A] text-base text-white font-medium rounded-[20px] "
+                className="w-[190px] cursor-pointer py-[6px] flex items-center justify-center bg-primary text-base text-white font-medium rounded-[20px] "
               >
                 Book Appointment
               </button>

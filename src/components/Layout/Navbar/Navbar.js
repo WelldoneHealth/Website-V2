@@ -4,6 +4,7 @@ import wellDoneLogo from "@/asset/Icons/wellDoneLogo.svg";
 import loginIcon from "@/asset/Icons/login_icon.svg";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import hamburgerIcon from "@/asset/Icons/hamburger.svg";
+import Link from "next/link";
 
 export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
@@ -17,12 +18,14 @@ export default function Navbar() {
     <>
       <header
         style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-        className="w-full   flexBetween p-2  md:p-3 md:px-5 mx-auto  "
+        className="w-full  fixed top-0 left-0 z-[1000] bg-white  flexBetween p-2  md:p-3 md:px-5 mx-auto  "
         // className="w-screen   flexBetween  h-screen fixed top-0"
       >
-        <div className="w-24">
+         <Link href="/" >
+        <div className="w-24 ">
           <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
         </div>
+        </Link>
 
         <div className="flex gap-x-24 ">
           <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
@@ -34,7 +37,7 @@ export default function Navbar() {
             />{" "}
             I have Clinic/ Hospital
           </button>
-          <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
+          <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-primary font-normal text-white">
             Login{" "}
             <div className="flexCenter rounded-full p-1 bg-white">
               <img src={loginIcon?.src} width={16} height={11} alt="load..." />

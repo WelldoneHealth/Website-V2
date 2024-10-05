@@ -29,6 +29,7 @@ import calendarIcon from "@/asset/Icons/calendar.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import SectionTabsWithMaps from "@/components/setionTabsWithMaps/SectionTabsWithMaps";
 import OfficeSafetyPrecautions from "@/Utilities/smallComponents/OfficeSafetyPrecautions";
+import Link from "next/link";
 
 export default function page() {
   const [newTabData, setNewTabData] = useState(1);
@@ -106,10 +107,10 @@ export default function page() {
             {/* -----------details part------------ */}
             <div className=" flex-1 ">
               <div className="flex gap-x-3">
-                <button className="border-2 flexCenter rounded-md cursor-pointer  text-sm asm:text-base font-medium px-2 py-[2px] border-[#E8E8E8] hover:bg-[#01549A] hover:text-white hover:border-transparent  text-[#01549A]">
+                <button className="border-2 flexCenter rounded-md cursor-pointer  text-sm asm:text-base font-medium px-2 py-[2px] border-[#E8E8E8] hover:bg-primary hover:text-white hover:border-transparent  text-[#01549A]">
                   Obstetrics and Gynaecology
                 </button>
-                <button className="bg-[#01549A] rounded-md text-sm asm:text-base  font-medium  sm:flex hidden justify-center items-center min-w-[100px] text-white cursor-pointer hover:text-[#01549A] hover:bg-white border-2 border-[#01549A]">
+                <button className="bg-primary rounded-md text-sm asm:text-base  font-medium  sm:flex hidden justify-center items-center min-w-[100px] text-white cursor-pointer hover:text-[#01549A] hover:bg-white border-2 border-[#01549A]">
                   (124)
                 </button>
               </div>
@@ -148,7 +149,7 @@ export default function page() {
     </div>
     <div className="mx-2 flex gap-x-2">
       icons section
-        <div className="w-8 h-8 rounded-full cursor-pointer hover:bg-[#01549A] bg-[#EFF8FF]"></div>
+        <div className="w-8 h-8 rounded-full cursor-pointer hover:bg-primary bg-[#EFF8FF]"></div>
     </div>
 </div> 
 </div> */}
@@ -333,7 +334,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
             </div>
           </div> */}
 
-<button onClick={()=>setAppointmentView(!appointmentView)}  type="button" className="w-full sm:w-[90%] lg:hidden sm:max-w-[300px] my-2 cursor-pointer mx-auto py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Appointment Booking</button>
+<button onClick={()=>setAppointmentView(!appointmentView)}  type="button" className="w-full sm:w-[90%] lg:hidden sm:max-w-[300px] my-2 cursor-pointer mx-auto py-3 text-center bg-primary text-white font-semibold rounded-[10px]">Appointment Booking</button>
         
         </div>
 
@@ -421,8 +422,12 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
 
 <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
 <button type="button" className="w-[95%] border-[1px] border-[#01549A] py-2 text-center text-[#01549A] rounded-[10px] font-medium">Add to family doctor</button>
-<button type="button" className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Appointment Booking</button>
-<button  type="button" className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Checkout</button>
+<Link href="/checkout">
+<button type="button" className="w-[95%] max-lg:hidden py-3 text-center bg-primary text-white font-semibold rounded-[10px]">Appointment Booking</button>
+</Link>
+<Link href="/checkout">
+<button  type="button" className="w-[95%] lg:hidden py-3 text-center bg-primary text-white font-semibold rounded-[10px]">Checkout</button>
+</Link>
 <p className="text-xs text-center font-normal">No charges for appointment booking.</p>
 </div>
 
@@ -457,7 +462,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
               </div>
               <button
                 type="button"
-                className="w-full flexCenter  rounded-md bg-[#01549A] font-normal hover:bg-opacity-90 text-white px-7 py-5 cursor-pointer"
+                className="w-full flexCenter  rounded-md bg-primary font-normal hover:bg-opacity-90 text-white px-7 py-5 cursor-pointer"
               >
                 Book Appointement
               </button>
@@ -468,7 +473,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
                 {[1, 2, 3].map((item, index) => (
                   <span
                     key={index}
-                    className="  px-2 py-1 rounded-md  hover:bg-[#01549A] hover:text-white cursor-pointer transitiona-all linear duration-300   text-[13px]   border-[1px] hover:border-transparent border-[#898989]"
+                    className="  px-2 py-1 rounded-md  hover:bg-primary hover:text-white cursor-pointer transitiona-all linear duration-300   text-[13px]   border-[1px] hover:border-transparent border-[#898989]"
                   >
                     Consult
                   </span>
@@ -487,7 +492,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
               Social Icon
             </p>
             <div className="my-2 flex flex-wrap gap-x-4 gap-y-2 ">
-              <div className="w-10 h-10 rounded-full cursor-pointer hover:bg-[#01549A] bg-[#EFF8FF]"></div>
+              <div className="w-10 h-10 rounded-full cursor-pointer hover:bg-primary bg-[#EFF8FF]"></div>
             </div>
           </div> */}
         </div>

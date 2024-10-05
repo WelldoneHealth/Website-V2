@@ -21,7 +21,7 @@ export default function PrimaryBanner() {
         />
       </h2>
 
-      <div className="w-[98%]  relative mx-auto flex flex-col justify-end md:flex-row  md:justify-between items-center bg-[#01549A] rounded-3xl py-4 h-[470px] ssm:h-[560px] asm:h-[550px] sm:h-[470px] md:h-[280px] lg:h-[310px] xl:h-[390px]  ">
+      <div className="w-[98%]  relative mx-auto flex flex-col justify-end md:flex-row  md:justify-between items-center bg-primary rounded-3xl py-4 h-[470px] ssm:h-[560px] asm:h-[550px] sm:h-[470px] md:h-[280px] lg:h-[310px] xl:h-[390px]  ">
     
       <div className="w-[76%] asm:w-[285px] sm:w-[38%]   border-2 flex md:hidden items-baseline relative ">
           <img

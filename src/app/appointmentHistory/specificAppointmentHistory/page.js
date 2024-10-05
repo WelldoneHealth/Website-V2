@@ -59,7 +59,7 @@ export default function page() {
     </div>
 
 <div className="mt-4 w-full space-y-2">
-<button type="button" className=' w-[230px] text-sm font-semibold bg-[#01549A] rounded-[20px] text-white py-[6px] text-center'  >Book Follow-Up</button>
+<button type="button" className=' w-[230px] text-sm font-semibold bg-primary rounded-[20px] text-white py-[6px] text-center'  >Book Follow-Up</button>
         <p className='flex items-center text-sm'><img src={infoIcon?.src} className='mr-2 ' alt="load..."  /> Follow before – 12/03/2022, 20 days remaining​</p>
         <div className='max-w-max py-1 px-5 bg-[#F0F8FF] text-sm text-[#01549A] italic rounded-[15px]'>Share by Welldone Health Doctor/Clinic/Hospital this appointment with you.</div> 
 </div>

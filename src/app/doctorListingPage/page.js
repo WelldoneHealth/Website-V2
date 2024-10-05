@@ -138,7 +138,7 @@ export const DoctorListingPage = () => {
         </div>
 
         <div className="flex justify-center items-center gap-x-3">
-          <div className="px-3 py-[6px] rounded-[20px] border-[1px] text-white font-semibold bg-[#01549A]">
+          <div className="px-3 py-[6px] rounded-[20px] border-[1px] text-white font-semibold bg-primary">
             Today, 24 Sept
           </div>
 

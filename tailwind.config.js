@@ -9,8 +9,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
       },
       container: {
         center: true,
@@ -22,7 +22,8 @@ module.exports = {
       screens:{
         "ssm":"300px",
         // "msm":"350px",
-        "asm":"400px"
+        "asm":"400px",
+        "msm":"500px"
       },
     },
   },
