@@ -7,6 +7,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
 import Head from "next/head";
+import { Toaster } from "react-hot-toast";
 // import 'leaflet/dist/leaflet.css';
 
 const geistSans = localFont({
@@ -35,6 +36,7 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Navbar />
+        <Toaster />
         <main className="lg:container mx-auto mt-[68px]    ">{children}</main>
       </body>
     </html>

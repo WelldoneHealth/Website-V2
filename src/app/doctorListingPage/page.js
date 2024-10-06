@@ -157,13 +157,22 @@ export const DoctorListingPage = () => {
         {/* -----------lists sections-------------- */}
         <div
           className={`${
-            isMapExpanded ? "w-0" : "lg:w-[65%]"
-          } min-h-screen  transition-all duration-700 ease-linear`}
+            isMapExpanded ? "w-0 h-[200px] " : "lg:w-[65%]"
+          }  space-y-5 transition-all duration-700 ease-linear`}
         >
           {/* ----------------doctor card------------- */}
           <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          <DoctorCard />
+          
           {/* ----------------hospital card--------------- */}
-          <HospitalCard />
+          {/* <HospitalCard /> */}
         </div>
 
         {/* ----------------map portions---------- */}
