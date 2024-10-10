@@ -11,6 +11,7 @@ module.exports = {
       colors: {
         primary: 'var(--color-primary)',
         secondary: 'var(--color-secondary)',
+        borderPrimary:'var(--color-borderPrimary)',
       },
       container: {
         center: true,

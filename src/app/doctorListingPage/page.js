@@ -181,7 +181,7 @@ export const DoctorListingPage = () => {
           style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
           className={`${
             isMapExpanded ? "w-full" : " lg:w-[35%]  "
-          }  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
+          }  h-[650px] p-1  sticky top-[100px] rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
         >
           <MapContainer
             key={placeLocation.join(",")}

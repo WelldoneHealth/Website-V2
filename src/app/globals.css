@@ -5,6 +5,7 @@
 :root {
   --color-primary: #01549A;
   --color-secondary: #EFF8FF;
+  --color-borderPrimary: #DADADA;
   
   /* --color-accent: #34a853; */
 }
