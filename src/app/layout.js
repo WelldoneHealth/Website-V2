@@ -37,7 +37,7 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         <Toaster />
-        <main className="lg:container mx-auto mt-[68px]    ">{children}</main>
+        <main className="lg:container mx-auto mt-[70px]    ">{children}</main>
       </body>
     </html>
   );

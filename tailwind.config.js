@@ -24,7 +24,8 @@ module.exports = {
         "ssm":"300px",
         // "msm":"350px",
         "asm":"400px",
-        "msm":"500px"
+        "msm":"500px",
+        "lsm":"900px",
       },
     },
   },

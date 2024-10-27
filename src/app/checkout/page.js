@@ -61,7 +61,7 @@ const [viewSliderType,setViewSliderType]=useState({
   
 
   {/* ---------------appointment process-------------- */}
-<div className=" w-full lg:w-[68%] space-y-5  ">
+<div className=" w-full  lg:w-[68%] space-y-5  ">
 
 {/* -----------first card ( doctor selection)---------------- */}
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]  border-[1px] border-[#EFEFEF]">
@@ -76,7 +76,7 @@ const [viewSliderType,setViewSliderType]=useState({
     <img src={doctorImage2?.src} className="w-[70px] hidden"  />
   <div className="w-full space-y-1">
     <div className="w-full flex  justify-between items-center text-sm font-medium">
-      <p>Dr. Subhash V. Gupta</p>
+      <p className='text-sm'>Dr. Subhash V. Gupta</p>
       <button onClick={()=>{setView(true);setViewSliderType({...viewSliderType,doctor:true})}} className="text-primary">Change</button>
     </div>
   <p className="text-sm font-medium">MBBS. MD</p>
@@ -105,33 +105,22 @@ const [viewSliderType,setViewSliderType]=useState({
 </div> </> }
 
 {/* ----------------------on button click new card updated ui------------------------ */}
-{ dataVisibilityToggle.doctorsToggle && <div className="w-full  flex justify-center items-center  gap-x-5 p-5">
+{ dataVisibilityToggle.doctorsToggle && <div className="w-full  flex flex-col sm:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
 {/* -------------------doctor card------------- */}
-<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full flex-1 max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
+{[1,2].map((item)=><div key={item} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full flex-1 max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
   {/* ------doctor image------------ */}
 
-    <img src={doctorImage2?.src} className="w-[70px] "  />
+    <img src={doctorImage2?.src} className="w-[60px] sm:w-[70px] "  />
   <div className="w-full space-y-1">
     <div className="w-full flex  justify-between items-center text-sm font-medium">
-      <p >Dr. Subhash V. Gupta</p>
+      <p className='max-sm:text-sm'>Dr. Subhash V. Gupta</p>
     </div>
-  <p className="text-sm font-medium">MBBS. MD</p>
-  <p className="text-sm">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
+  <p className="text-xs sm:text-sm font-medium">MBBS. MD</p>
+  <p className="text-sm max-md:hidden">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
+  <p className="text-xs sm:text-sm md:hidden">Surgical Oncologist</p>
   </div>
-</div>
-{/* ----------------hospital card------------- */}
-<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full flex-1  max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
-  {/* ------hospital image------------ */}
+</div>)}
 
-    <img src={doctorImage2?.src} className="w-[70px] "  />
-  <div className="w-full space-y-1">
-    <div className="w-full flex  justify-between items-center text-sm font-medium">
-      <p>Dr. Subhash V. Gupta</p>
-    </div>
-  <p className="text-sm font-medium">MBBS. MD</p>
-  <p className="text-sm">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
-  </div>
-</div>
 
 </div>}
 
@@ -139,7 +128,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 {/* -----------second card ( patiennt selection) -------------- */}
-{ statusChange.patientStatus &&  <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]  border-[1px] border-[#EFEFEF]">
+{ statusChange.patientStatus &&  <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full   rounded-[10px]  border-[1px] border-[#EFEFEF]">
 
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "><p>2. Select a patient</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.patientToggle && "hidden"} `} >Change</button> </div>
 {/* 2 cards portion----------- */}
@@ -149,21 +138,23 @@ const [viewSliderType,setViewSliderType]=useState({
   <input type="radio" onChange={getInputDetails} name="patientSelection" value={index}  className="w-[20px] h-[20px]" checked={statusData.patientSelection==index} />
 
   <div className="w-full space-y-2">
-<div className="w-full flex items-start gap-x-2">
-  <div className="bg-[#D9D9D9] w-12  h-12 flexCenter rounded-full font-medium  ">RN</div>
-  <div className="w-full space-y-[2px]">
-    <div className="w-full space-y-1 flex items-center justify-between">
+<div className="w-full flex  items-start gap-x-2">
+  <div className="bg-[#D9D9D9] size-[50px] flex justify-center items-center rounded-full font-medium  ">RN</div>
+  <div className="w-full  space-y-[2px] ">
+    <div className="w-full my-auto space-y-1 flex items-center justify-between">
     <div className="flex items-center gap-x-3">
-      <p className="text-lg font-medium">Rakesh Nadre {index} </p>     
+      <p className="text-base sm:text-lg font-medium">Rakesh Nadre {index} </p>     
       <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">Me</p>
-      <p className="flex items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md"><img src={outlineGeoLocationIcon?.src} className="" alt="load..." />8806010415</p>
+      <p className="flex max-sm:hidden items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md"><img src={outlineGeoLocationIcon?.src} className="" alt="load..." />8806010415</p>
     </div>
     <p className="text-primary font-medium">Edit</p>
     </div>
+
    <p className="text-sm">26 Years, 4 Month Old</p>
+   <p className='text-sm text-[#5A5D62] sm:hidden '>+91-9876543210 </p>
   </div>
 </div>
-<div className=" px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
+<div className=" max-sm:hidden px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
   <img src={outlineGeoLocationIcon?.src} className="" alt="load..."  />
   House, street, city, landmark, state, Country, Pin Code</div>
   </div>
@@ -186,14 +177,16 @@ const [viewSliderType,setViewSliderType]=useState({
     <div className="flex items-center gap-x-3">
       <p className="text-lg font-medium">Rakesh Nadre {statusData.patientSelection} </p>
       <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">Me</p>
-      <p className="flex items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md"><img src={outlineGeoLocationIcon?.src} className="" alt="load..." />8806010415</p>
+      <p className="max-sm:hidden  flex items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md "><img src={outlineGeoLocationIcon?.src} className="" alt="load..." />8806010415</p>
     </div>
  
     </div>
+
    <p className="text-sm">26 Years, 4 Month Old</p>
+   <p className='text-sm text-[#5A5D62] sm:hidden '>+91-9876543210 </p>
   </div>
 </div>
-<div className=" px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
+<div className=" max-sm:hidden  px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
   <img src={outlineGeoLocationIcon?.src} className="" alt="load..."  />
   House, street, city, landmark, state, Country, Pin Code</div>
   </div>
@@ -203,7 +196,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 {/* -----------third card (payment option)------------------- */}
-{ statusChange.paymentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]  border-[1px] border-[#EFEFEF]">
+{ statusChange.paymentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full hidden rounded-[10px]  border-[1px] border-[#EFEFEF]">
 
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4 flex items-center justify-between bg-[1px] border-[#EFEFEF]"><p>3. Payment options</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,paymentToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.paymentToggle && "hidden"} `}  >Change</button></div>
  {/*----------- 2 checkbox portion-----------  */}
@@ -214,11 +207,11 @@ const [viewSliderType,setViewSliderType]=useState({
   <input type="radio" onChange={getInputDetails}  name="paymentSelection" value={index}   className="w-[20px] h-[20px]" checked={statusData.paymentSelection==index} />
 
   <div className="w-full space-y-1">
-  <p className="text-base font-medium">Pay online {index}</p>
-  <p classNametext="text-sm">Allows patients to pay for services through a secure platform, integrated with your EMR.</p>
+  <p className="text-base font-medium ">Pay online {index}</p>
+  <p classNametext="text-[4px] sm:text-sm bg-red-900 ">Allows patients to pay for services through a secure platform, integrated with your EMR.</p>
   </div>
 </div>)}
-
+ 
 
 </div>
 
@@ -236,7 +229,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 {/* ----------fourth card( appointment summary)------------------- */}
-{statusChange.appointmentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full rounded-[10px]   border-[1px] border-[#EFEFEF]">
+{statusChange.appointmentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full hidden rounded-[10px]   border-[1px] border-[#EFEFEF]">
 
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4 flex items-center justify-between bg-[1px] border-[#EFEFEF]"><p>4. Appointment summary</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,appointmentToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.appointmentToggle && "hidden"} `}  >Change</button></div>
 {/* 2 checkbox portion----------- */}
@@ -286,19 +279,24 @@ const [viewSliderType,setViewSliderType]=useState({
 
 </div>
 
-{!dataVisibilityToggle.appointmentToggle && <div className="p-5 py-3 flex justify-between items-center bg-[#EFEFEF]">
+{!dataVisibilityToggle.appointmentToggle && <div className="w-full gap-y-3 p-5 py-3 max-sm:text-xs flex flex-col sm:flex-row justify-between items-center bg-[#EFEFEF]">
   <p>Appointment confirmation WhatsApp Massage will be sent to <span className="font-medium">+91 9876543210</span> </p>
-  <button type="button" onClick={()=>(statusData.appointmentSelection &&  setDataVisibilityToggle({...dataVisibilityToggle,appointmentToggle:true}) )} className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.appointmentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `} disabled={!statusData.appointmentSelection}  >Confirm</button>
+  <button type="button" onClick={()=>(statusData.appointmentSelection &&  setDataVisibilityToggle({...dataVisibilityToggle,appointmentToggle:true}) )} className={`px-8 py-3 max-sm:w-full  font-semibold text-sm rounded-[10px]  ${!statusData.appointmentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `} disabled={!statusData.appointmentSelection}  >Confirm</button>
 </div>}
 
 </div>}
 
+
+
+<div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex justify-center items-center border-t-[2px] border-[#DADADA] ">
+<button type="button" onClick={success} className="w-[80%] my-8 px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Book Appointment</button>
+</div>
 
 
 {/* ---------------------steps to show in each process----------------- */}
-{ !statusChange.patientStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}}  className="w-full px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold"> 2. Select a patient</div>}
-{ !statusChange.paymentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold">3. Payment options </div> }
-{ !statusChange.appointmentStatus &&  <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold">4. Appointment summary </div> }
+{ !statusChange.patientStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}}  className="w-full max-sm:hidden px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold"> 2. Select a patient</div>}
+{ !statusChange.paymentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full max-sm:hidden px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold">3. Payment options </div> }
+{ !statusChange.appointmentStatus &&  <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full max-sm:hidden px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA] font-semibold">4. Appointment summary </div> }
 
 
 
@@ -312,7 +310,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 {/* -----------------appointment details-------------------- */}
-<div className="w-full flex-1  lg:w-[90%] max-lg:absolute    transition-all duration-150 ease-linear">
+<div className="w-full flex-1  lg:w-[90%] max-lg:absolute  hidden   transition-all duration-150 ease-linear">
   
 {/* --------------just for development purpose to show or hide the slider one----------------  */}
    {/* <button type="button" onClick={()=>setView(!view)} className="text-white px-6 py-3 bg-primary  "  >view / hide </button> */}
@@ -358,7 +356,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 
-    { view &&  <div onClick={()=>{setView(false)}} className={`  max-w-[1600px]  h-[200%] w-full left-1/2  absolute  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000]  bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}>
+    { view &&  <div onClick={()=>{setView(false)}} className={`  max-w-[1600px] h-full  2xl:h-[200%] w-full left-1/2  absolute  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] bg-yellow-800  2xl:bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}>
 
  <div  onClick={(e)=>e.stopPropagation()}  className={` w-[450px] h-auto absolute top-0 right-0  bg-white`}>   
  
@@ -388,7 +386,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 {/* --------------------add appointment form------------------ */}
-{viewSliderType.appointment && <div onClick={(e)=>e.stopPropagation()} className="w-full px-5 space-y-2">
+{viewSliderType.appointment && <div onClick={(e)=>e.stopPropagation()} className="w-full bg-red-800 px-5 space-y-2">
   {/* ----patient name------ */}
 <div >
   <label class="block text-sm font-medium mb-1">
@@ -537,7 +535,7 @@ const [viewSliderType,setViewSliderType]=useState({
 <div className="w-full">
 <button type="button" className="my-7 rounded-[10px] w-full bg-primary text-white font-medium p-3 "  >Submit</button>
 </div>
-</div>}
+</div>} 
 
 
 

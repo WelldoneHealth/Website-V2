@@ -9,8 +9,8 @@ import rxNoteIcon from "@/asset/Icons/rxNote.svg"
 
 export default function page() {
   return (
-   <div className="w-full max-w-[940px] mx-auto px-1  space-y-3 asm:px-3 lg:px-0">
-<div style={{boxShadow:" 1px 1px 4px 2px #8383834D"}} className="mt-6 w-full  space-y-3  px-5 py-4 rounded-[15px] border-[0.5px] border-[#DADADA]">
+   <div className="w-full lg:max-w-[940px] mx-auto px-1  space-y-3 asm:px-3 lg:px-0">
+<div style={{boxShadow:" 1px 1px 4px 2px #8383834D"}} className="hidden mt-6 w-full  space-y-3  px-5 py-4 rounded-[15px] border-[0.5px] border-[#DADADA]">
   {/* --------------cards text---------- */}
      <div className="w-full flex  items-start gap-x-24 text-sm">
             {/* -------writing 1 st part------- */}
@@ -75,20 +75,20 @@ export default function page() {
 
 
 {/* ----------payment information----------- */}
-<div className="w-full  py-6  rounded-[15px] flex border-[1px]    border-[#DADADA]">
-    <div className="w-1/2 px-11   ">
-<p className='text-base  mb-3 font-medium '>Payment information</p>
-<div className="w-[90%] text-sm font-normal space-y-2">
+<div className="w-full   py-6  rounded-[15px] flex flex-col sm:flex-row gap-y-6 border-[1px]    border-[#DADADA]">
+    <div className="w-full sm:w-1/2 px-11   ">
+<p className='text-lg sm:text-base  mb-3 font-medium '>Payment information</p>
+<div className="w-full sm:w-[90%] text-base sm:text-sm font-normal space-y-2">
     <div className="flex justify-between items-start">   <p>Consultation :</p>  <p>₹ 500</p> </div>
     <div className="flex justify-between items-start">   <p>Consultation :</p>  <p>₹ 500</p> </div>
     <div className="flex justify-between items-start">   <p>Consultation :</p>  <p>₹ 500</p> </div>
     <div className="flex justify-between items-start font-medium">   <p className=''>Consultation :</p>  <p>₹ 500</p> </div>
 </div>
     </div>
-    <div className="w-1/2  px-11 border-l-[1px]    border-[#DADADA]">
-<p className='text-base mb-3 font-medium'>More actions</p>
+    <div className="w-full sm:w-1/2  px-11 sm:border-l-[1px]    border-[#DADADA]">
+<p className='text-lg sm:text-base mb-3 font-medium'>More actions</p>
 <div className="w-full">
-    <div className="flex justify-between items-center">   <p className='tex-base'>Download Invoice :</p>  <button  type="button"  className='w-[105px] py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]' >View Invoice</button> </div>
+    <div className="flex justify-between items-center">   <p className='max-md:hidden tex-base'>Download Invoice :</p>  <button  type="button"  className='w-[105px] py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]' >View Invoice</button> </div>
 </div>
     </div>
 
@@ -97,7 +97,7 @@ export default function page() {
 
 
 {/* ---------------tracking status-------------- */}
-<div className="border-[1px] border-[#DADADA] px-8 py-5 rounded-[15px]">
+<div className="border-[1px] hidden  border-[#DADADA] px-8 py-5 rounded-[15px]">
 <p className='text-base  mb-6 font-medium '>Track appointment</p>
 <div className="w-full space-y-3">
     <div className="w-full flex gap-x-28 text-sm text-wrap text-center items-start leading-tight">

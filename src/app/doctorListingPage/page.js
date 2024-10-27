@@ -173,7 +173,7 @@ export const DoctorListingPage = () => {
           
           {/* ----------------hospital card--------------- */}
           {/* <HospitalCard /> */}
-        </div>
+        </div> 
 
         {/* ----------------map portions---------- */}
 
