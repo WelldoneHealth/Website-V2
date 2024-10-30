@@ -1,3 +1,5 @@
+"use client"
+
 import React from 'react'
 import paymentImageIcon from "@/asset/Icons/payment.svg";
 import appointmentImageIcon from "@/asset/Icons/appointment.svg";
@@ -20,14 +22,33 @@ import handIcon from "@/asset/Icons/hand.svg";
 import chartIcon from "@/asset/Icons/chart.svg";
 import supportIcon from "@/asset/Icons/support.svg";
 
+
 import doctorImage4 from "@/asset/Images/doctor4.png"
 import doctorImage5 from "@/asset/Images/doctor5.png"
 import doctorBannerImage2 from "@/asset/Images/doctorBanner2.png"
+import backgroundImage from "@/asset/Images/background.png"
+import times5Image from "@/asset/Images/times5.png"
+
+import { journeyData, platformDetails, toolsDetails } from '@/Utilities/extraDetails/page1Details';
+
+import Slider from 'react-slick'
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 
 
 export default function page() {
 
+    const settings = {
+        slidesToShow:1,
+        slidesToScroll: 1,
+        autoplay: false,
+        autoplaySpeed: 3000,
+        dots: false,
+        infinite: true,
+        arrows: false,
+      
+      };
 
     const cardsInfo1=[
         {
@@ -52,21 +73,26 @@ export default function page() {
         }
     ]
 
+ 
+
+
   return (
 
-         <div className="w-full relative space-y-8 max-w-[1600px] mx-auto  mt-20 pt-[1px]     ">
+         <div className="w-full relative space-y-8 max-w-[1600px] mx-auto   mt-20 pt-[1px]     ">
 
 
-
-<div className="w-full h-[520px] relative flex ">
-    <div className="pl-10 mt-16 flex flex-col items-start gap-y-0  text-primary">
+{/* -------------flex------  520px  ------ */}   
+<div className="w-full max-h-max lsm:h-[550px]  relative hidden flex-col lsm:flex-row bg-red-900 ">
+    <div className="pl-10 mt-[570px] relative z-20  lsm:mt-16 flex flex-col items-start gap-y-0  text-primary">
         <p className='text-[30px] font-bold leading-0'>Become a</p>
-        <p className='text-[45px] font-bold'>Welldone Health practitioner</p>
-        <p className='text-[34px] '>and treat 1+ lakh patients</p>
+        <p className='text-[42px] xl:text-[45px] font-bold'>Welldone Health practitioner</p>
+        <p className=' text-[34px] '>and treat 1+ lakh patients</p>
 <button type="button"  className='mt-6 px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white '  >Get started for free</button>
     </div>
-    <img src={doctorBannerImage2?.src} className='absolute w-full max-w-[800px] right-0' alt="load..."  />
+    <img src={backgroundImage?.src} className='absolute order-1 hidden z-10 w-screen max-w-[1600px] -top-[80px] -left-[49px]   ' alt="load..."  />
+    <img src={doctorBannerImage2?.src} className='absolute z-20 w-full lsm:max-w-[630px] lg:max-w-[700px] xl:max-w-[800px] right-0' alt="load..."  />
 </div>
+
 
 
 
@@ -74,21 +100,33 @@ export default function page() {
 <div className=" px-1 asm:px-3 lg:px-0 space-y-8">
 
 
-<div className="w-full px-10 py-6 space-y-1  border-[1px] border-[#DADADA] rounded-3xl flex justify-between gap-x-7">
-<div className="w-[65%] flex flex-col gap-y-4">
-    <p className='text-[34px] font-bold text-primary leading-tight'>Doctors Love Practicing with Welldone Health</p>
-    <p className='text-sm'>Trusted by over 45 Lakh patients, Welldone Health helps doctors make their services available 24x7, providing seamless healthcare access across India.</p>
-    <div className="w-full flex  gap-5 flex-wrap">
-    {cardsInfo1.map((item,index)=><div key={index} className='w-[380px] p-5 space-y-1 bg-secondary rounded-[30px]' >  
+
+
+
+{/* --------------flex😀-------------- */}
+<div className="w-full  px-2 asm:px-4 sm:px-10 py-6  border-[1px] border-[#DADADA] rounded-3xl flex justify-between sm:gap-x-7">
+<div className="w-full lg:w-[65%] flex flex-col gap-y-4">
+    <p className='text-[26px] sm:text-[34px] leading-[35px] font-bold text-primary '>Doctors Love Practicing with Welldone Health</p>
+
+    <div className="mt-5 mb-2 flex-1 flex lg:hidden flex-col   space-y-4  ">
+    {/* <img src={rotatingArrowIcon1?.src} className=' w-[110px]' alt="load..."  /> */}
+    <img src={doctorImage5?.src} className='rounded-[20px] w-[450px]' alt="load..."  />
+    {/* <img src={rotatingArrowIcon2?.src} className='w-[110px]' alt="load..."  /> */}
+</div>
+
+    <p className='mb-3 text-sm xl:text-base w-full max-w-[850px]'>Trusted by over 45 Lakh patients, Welldone Health helps doctors make their services available 24x7, providing seamless healthcare access across India.</p>
+    
+    <div className="w-full flex flex-col sm:flex-row gap-5 flex-wrap  ">
+    {cardsInfo1.map((item,index)=><div key={index} className=' w-full sm:w-[48%] max-w-[400px] p-5 space-y-1 bg-secondary rounded-[30px]' >  
     <img src={item.image?.src} className='' alt="load..."  />
-    <p className='text-lg font-medium'>{item?.primaryText}</p>
-    <p className='text-sm leading-snug'>{item?.subText}</p>
+    <p className='text-base lg:text-lg font-medium'>{item?.primaryText}</p>
+    <p className='text-xs lg:text-sm leading-snug'>{item?.subText}</p>
     
     </div>
 )}
     </div>
 </div>
-<div className="flex-1  space-y-4 pt-14 ">
+<div className="flex-1  hidden  lsm:flex max-lg:flex justify-center flex-col space-y-4 pt-14 ">
     <img src={rotatingArrowIcon1?.src} className='w-[110px]' alt="load..."  />
     <img src={doctorImage5?.src} className='rounded-[20px] w-[450px]' alt="load..."  />
     <img src={rotatingArrowIcon2?.src} className='w-[110px]' alt="load..."  />
@@ -97,35 +135,44 @@ export default function page() {
 
 
 
-<div className="w-full px-10 py-6 space-y-1  border-[1px] border-[#DADADA] rounded-3xl">
-<p className='text-[38px] font-bold text-primary'>Your Journey  <span className='text-black'>on Welldone</span></p>
-<p className='text-sm'>Starting your Treatment practices with Welldone is easy. 14 lakh+ doctors trust Welldone with their practice</p>
-<div className="w-full flex items-center  gap-x-5 py-5 ">
-   {[hospitalListImageIcon,doctorListImageIcon,appointmentImageIcon,consultImageIcon,paymentImageIcon].map((item,index)=> <div key={index} className="space-y-1">
-    <img src={item?.src} className='w-[200px]  ' alt="load..."  />
-    <p className='font-medium text-lg'>Create Clinic/Hospital</p>
-    <p className='text-xs leading-snug'>Register in just 15 mins with valid Registration, address, & bank details</p>
+
+
+
+{/* -------------------#DADADA😀--------------------- */}
+<div className="w-full px-5   xl:px-10 py-6   border-[1px] border-[#DADADA]   rounded-3xl">
+<p className='text-[34px] sm:text-[38px] leading-[35px] font-bold text-primary'>Your Journey  <span className='text-black'>on Welldone</span></p>
+<p className='mt-5 mb-2 text-sm xl:text-base'>Starting your Treatment practices with Welldone is easy. 14 lakh+ doctors trust Welldone with their practice</p>
+<div className="w-full flex  sm:justify-center max-lg:flex-wrap  gap-5 py-5 ">
+   {journeyData.map((item,index)=> <div key={index} className=" w-full msm:w-[90%] sm:w-[47%] md:w-[200px] esm:w-[230px] space-y-1 max-md:flex gap-x-3">
+    <img src={item?.image?.src} className=' max-md:w-[70px]  esm:w-[200px]  ' alt="load..."  />
+    <div className="space-y-1">
+    <p className='font-medium text-base asm:text-[20px] sm:text-lg esm:text-[20px]'>{item.primaryText}</p>
+    <p className='text-xs ssm:text-sm asm:text-base sm:text-sm leading-snug  esm:w-[200px] '>{item.subText}</p>
+    </div>
     </div>)}
+</div> 
+<div className="mt-5 w-full flexCenter">
+<button type="button"  className='text-lg px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
 </div>
-<div className="w-full flexCenter">
-<button type="button"  className=' px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
-</div>
 </div>
 
 
 
-
-<div className=" w-full px-10 py-6 space-y-1  border-[1px] border-[#DADADA] rounded-3xl">
-<p className='text-[38px] font-bold text-primary text-center'>Access our tools to grow faster <span className='text-black'>on Welldone</span></p>
-<p className='text-center text-sm'>Your Welldone account provides essential tools and support to help grow your clinic or hospital when needed.</p>
-<div className="w-full py-5">
-    <div className="w-full flex  gap-5 flex-wrap">
-{[1,2,3,4,5,6].map((item,index)=><div key={index} className='w-[380px] p-5 space-y-1 bg-secondary rounded-[30px]' >  
-    <img src={bookIcon?.src} className='' alt="load..."  />
-    <p className='text-lg font-medium'>Completion by Welldone</p>
-    <p className='text-sm leading-snug'>Struggling with patient flow, appointments, queues, prescriptions, or follow-ups? Let Welldone take care of everything!</p>
-    <div className="w-full   flex justify-between items-center">
-        <p className='text-sm font-medium text-primary'>Learn more</p>
+{/* ----------------------😀---------------------  */}
+<div className=" w-full max-w-[1400px] mx-auto  px-2 asm:px-4  md:px-10 py-6  border-[1px] border-[#DADADA] rounded-3xl bg-blue-300">
+<p className='text-[30px] sm:text-[38px] leading-[35px] font-bold text-primary text-center'>Access our tools to grow faster <span className='text-black'>on Welldone</span></p>
+<p className='mt-5 mb-2 text-center text-sm xl:text-base'>Your Welldone account provides essential tools and support to help grow your clinic or hospital when needed.</p>
+<div className="w-full flex flex-col lg:flex-row  gap-5 py-5">
+    <div className="lg:flex-1 w-full sm:w-[80%] ">
+    <img src={times5Image?.src} className='w-full' alt="load..."  />
+    </div>
+    <div className="w-full lg:w-[60%]  flex flex-col sm:flex-row justify-center  gap-5 flex-wrap">
+{toolsDetails.map((item,index)=><div key={index} className='w-full relative sm:w-[48%] xl:h-[220px]  max-w-[400px]   p-5 space-y-1 bg-secondary rounded-[30px]' >  
+    <img src={item?.image?.src} className='' alt="load..."       />
+    <p className='text-base lg:text-lg font-medium'>{item?.maintext}</p>
+    <p className='text-xs lg:text-sm  leading-snug'>{item?.subText}</p>
+    <div className="w-full pt-2 flex justify-between items-center ">  
+        <p className=' text-sm font-medium text-primary'>Learn more</p>
         <button type="button" className='' ><img src={arrowIcon2?.src} className='rotate-180' alt="load..."  /></button>
     </div>
     </div>
@@ -139,61 +186,74 @@ export default function page() {
 
 
 
-
-<div className=" w-full bg-[#F2FAFF] px-10 py-6 space-y-5  border-[1px] border-[#DADADA] rounded-3xl">
-<p className='text-[36px]  font-bold text-primary'>Take a look 👀 at our  <span className='text-primary'>Advanced appointment booking platform! 🚀</span></p>
-<div style={{boxShadow:" 0px 0px 4px 0px #00000040"}} className="w-full px-10 py-6 bg-white border-[1px] border-[#DADADA] rounded-3xl flex ">
-<div className="w-full py-4 flex-1 ">
+{/* -------------------------😀-------lllllllllllll--------------- */}
+<div className=" w-full    bg-[#F2FAFF] px-3 msm:px-6 md:px-10 py-6 space-y-5  border-[1px] border-[#DADADA] rounded-3xl">
+<p className= 'text-[26px] asm:text-[30px] md:text-[36px] leading-tight font-bold text-primary'>Take a look 👀 at our  <span className='text-primary'>Advanced appointment booking platform! 🚀</span></p>
+<Slider  {...settings} className="flex gap-x-4" >
+{platformDetails.map((item,index)=><div key={index} style={{boxShadow:" 0px 0px 4px 0px #00000040"}} className=" w-[98%] px-4 msm:px-6 lg:px-10 py-4 lg:py-6 bg-white border-[1px] border-[#DADADA] rounded-3xl  ">
+<div className="w-full flex">
+<div className="w-full md:w-[65%] lg:w-full py-4 flex-1 ">
     <div className=" space-y-4">
-        <p className='text-[28px] text-primary leading-tight'>Empower Your Practice with Our <br/> <span className='font-semibold text-nowrap'>EMR Dashboard!</span></p>
-        <p className='w-[80%] text-sm leading-tight'>Access real-time patient insights and streamline workflows effortlessly. Transform data into actionable care solutions for better health outcomes!</p>
+        <p className='text-[20px] asm:text-[22px] lsm:[28px]  text-primary leading-tight'>Empower Your Practice with Our <br/> <span className='font-semibold text-nowrap'>EMR Dashboard!</span></p>
+        <p className='w-full md:w-[80%] text-sm leading-tight'>{item?.subText}</p>
     </div>    
-<button type="button"  className='mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
+    <div className="mt-6 md:hidden w-full">
+    <img src={item?.image?.src} className='w-full' alt="load..."  />
 </div>
-<div className="">
-    <img src={dashboardIcon?.src} className='w-[400px]' alt="load..."  />
+<button type="button"  className='mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
+</div>
+<div className=" max-md:hidden max-lg:w-[45%] ">
+    <img src={item?.image?.src} className='max-lg:w-full lg:w-[400px] 2xl:w-[500px]' alt="load..."  />
 </div>
 </div>
-<div className="w-full flexCenter">
+</div>)}
+</Slider>
+{/* <div className="w-full flexCenter">
     <img src={dotsIcon?.src} className=' ' alt="load..."  />
+</div> */}
 </div>
-</div>
+ 
 
 
-
-
-<div className=" mx-auto w-[900px] p-3 border-[1px] border-[#007185] rounded-[30px] flex gap-x-14">
-<img src={doctorImage4?.src} className='w-[300px] rounded-[30px]' alt="load..."  />
+{/* --------------flex😀--llllllllllll----------- */}
+<div className=" mx-auto w-full max-w-[900px] p-3 border-[1px] border-[#007185] rounded-[30px] flex max-md:items-center md:gap-x-14">
+<img src={doctorImage4?.src} className='max-md:hidden md:w-[290px] lsm:w-[300px] rounded-[30px]' alt="load..."  />
 <div className="text-center text-primary  ">
-    <p className='text-[28px] leading-tight' >Open an account in <br/> just <span className='font-semibold' >10 minutes.</span></p>
+    <p className='text-[25px] asm:text-[28px] leading-tight' >Open an account in <br className='max-md:hidden'/> just <span className='font-semibold' >10 minutes.</span></p>
     <p className='my-3 text-sm leading-snug'>Streamline your practice with our cutting-edge tools and insights, designed to optimize patient care and management.</p>
     {/* <div className="w-full flexCenter"> */}
-<button type="button"  className='mt-4 px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Open an Account free</button>
+<button type="button"  className='mt-2 md:mt-4 px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Open an Account free</button>
 {/* </div> */}
 </div>
 </div>
 
 
 
-
-<div className="w-full   px-10 py-7 space-y-1  border-[1px] border-[#DADADA] rounded-3xl flex">
-<div className="w-1/2 ">
-<p className='w-[90%] mt-3 text-primary text-[28px] leading-tight font-bold'>Experience Welldone on any device like iPad, Laptop, tablet, Mobile etc</p>
-<div className="space-y-2 mt-8 w-[80%]">
-    <p>Stay connected to your practice anytime, anywhere with the Welldone Health your trusted companion for seamless patient management.</p>
+{/* ----flex😀-----llllllll-- */}
+<div className="w-full  px-3 msm:px-6 sm:px-10 py-7 space-y-1  border-[1px] border-[#DADADA] rounded-3xl flex flex-col lg:flex-row">
+<div className="order-2 lg:order-1 w-full lg:w-[40%] xl:w-1/2 ">
+<p className=' lg:w-[90%] mt-3 text-primary text-[20px] asm:text-[25px] sm:text-[30px] leading-tight font-bold'>Experience Welldone on any device like iPad, Laptop, tablet, Mobile etc</p>
+<div className="space-y-2 mt-8 lg:w-[80%]">
+    <p> Stay connected to your practice anytime, anywhere with the Welldone Health your trusted companion for seamless patient management.</p>
     <p>The Welldone Health lets you effortlessly:</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Manage patient records</p>
-    <p>Stay in control and connected with your clinic/hospital through the Welldone Health!</p>
-<button type="button"  className=' px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
+   <div className="pl-2">
+   <li>Manage patient records</li>
+    <li>Schedule appointments</li>
+    <li>Track prescriptions</li>
+    <li>Handle billing and payments</li>
+    <li>Access health insights</li>
+    <li>Receive patient feedback</li>
+    <li>Get support when needed</li>
+   </div>
+    <p className=''>Stay in control and connected with your clinic/hospital through the Welldone Health!</p>
+
 </div>
+<button type="button"  className='mt-6 text-base ssm:text-lg px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
+
 </div>
+<div className="order-1 lg:order-2 lg:w-[60%] xl:w-1/2">
 <img src={mobileIcon2?.src} className='' alt="load..."  />
+</div>
 </div>
 
 

@@ -25,7 +25,10 @@ module.exports = {
         // "msm":"350px",
         "asm":"400px",
         "msm":"500px",
+
         "lsm":"900px",
+        
+        "esm":"1200px",  
       },
     },
   },
