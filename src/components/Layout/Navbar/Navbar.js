@@ -17,10 +17,8 @@ export default function Navbar() {
   return (
     <>
       <header
-        style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-        className="w-full  fixed top-0 left-0 z-[1000] bg-white  flexBetween p-2  md:p-3 md:px-5 mx-auto  "
-        // className="w-screen   flexBetween  h-screen fixed top-0"
-      >
+        className="  w-full   fixed top-0 left-0 z-[1000] bg-transparent     "  >
+          <div style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className="w-full max-w-[1600px] flexBetween p-2  md:p-3 md:px-5 mx-auto ">
          <Link href="/" >
         <div className="w-24 ">
           <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
@@ -47,6 +45,7 @@ export default function Navbar() {
           <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden">
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
           </button>
+        </div>
         </div>
       </header>
 

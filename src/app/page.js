@@ -19,7 +19,7 @@ export default function Home() {
   //   slidesToScroll: 1
   // };
   return (
-    <div className=" w-full  min-h-screen ">
+    <div className=" w-full lg:container  min-h-screen ">
 
 
 

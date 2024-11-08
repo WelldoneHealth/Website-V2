@@ -45,38 +45,45 @@ export const journeyData=[
 ]
 
 
-export const toolsDetails=[
+export const toolsDetails = [
     {
-        image:checkListIcon ,
-        maintext: "Completion by Welldone " ,
-        subText: " Struggling with patient flow, appointments, queues, prescriptions, or follow-ups? Let Welldone take care of everything!"
+      bgColor: "bg-[#FEF7F7]",
+      image: checkListIcon,
+      maintext: "Completion by Welldone",
+      subText: "Struggling with patient flow, appointments, queues, prescriptions, or follow-ups? Let Welldone take care of everything!",
     },
     {
-        image:adsIcon ,
-        maintext: " Welldone Ads" ,
-        subText: " Want your clinic or hospital to outshine competitors and boost OPD? Let Welldone Ads drive your visibility to the max!"
+      bgColor: "bg-[#F6F8FF]",
+      image: adsIcon,
+      maintext: "Welldone Ads",
+      subText: "Want your clinic or hospital to outshine competitors and boost OPD? Let Welldone Ads drive your visibility to the max!",
     },
     {
-        image:bookIcon ,
-        maintext: " Learning Center" ,
-        subText: " Unlock personalized learning, exclusive webinars, tutorials, and more—designed to boost your OPD efficiency!"
+      bgColor: "bg-[#F6F6F8]",
+      image: bookIcon,
+      maintext: "Learning Center",
+      subText: "Unlock personalized learning, exclusive webinars, tutorials, and more—designed to boost your OPD efficiency!",
     },
     {
-        image:accountIcon ,
-        maintext: "Account Management " ,
-        subText: " Optimize doctor selection, consultation fees, and clinic insights with the help of our expert in-house account managers!"
+      bgColor: "bg-[#F3FDFB]",
+      image: accountIcon,
+      maintext: "Account Management",
+      subText: "Optimize doctor selection, consultation fees, and clinic insights with the help of our expert in-house account managers!",
     },
     {
-        image:calendar2Icon ,
-        maintext: " Well Being Weeks" ,
-        subText: "Join India's largest health events: Strong Teeth Week, Well Vision Day, Well Health Camp, and more. Your gateway to wellness! "
+      bgColor: "bg-[#F3FAFF]",
+      image: calendar2Icon,
+      maintext: "Well Being Weeks",
+      subText: "Join India's largest health events: Strong Teeth Week, Well Vision Day, Well Health Camp, and more. Your gateway to wellness!",
     },
     {
-        image:mobileDeviceIcon ,
-        maintext: " Mobile App" ,
-        subText: "Manage your clinic or hospital anytime, anywhere with the Welldone Health app—available on Android and web! "
-    }
-]
+      bgColor: "bg-[#FFFBF4]",
+      image: mobileDeviceIcon,
+      maintext: "Mobile App",
+      subText: "Manage your clinic or hospital anytime, anywhere with the Welldone Health app—available on Android and web!",
+    },
+  ];
+  
 
 
 export const platformDetails=[

@@ -34,6 +34,7 @@ import { journeyData, platformDetails, toolsDetails } from '@/Utilities/extraDet
 import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import Responsivness from '@/components/Responsivness';
 
 
 
@@ -52,21 +53,25 @@ export default function page() {
 
     const cardsInfo1=[
         {
+            bgColor:"bg-[#F6F8FF]",
             image:aimIcon ,
             primaryText: 'Opportunity '  ,
             subText: 'Reach 45 crore+ patients across 19,000+ pincodes and leverage special treatment drives like Get Well Soon offer days! '
         },
         {
+            bgColor:"bg-[#F3FDFB]",
             image: handIcon,
             primaryText: 'Ease of Doing Treatment'  ,
             subText: 'Set up your Welldone Practice account in under 10 minutes—just 1 doctor and a valid registration number needed! '
         },
         {
+            bgColor:"bg-[#F3FAFF]",
             image: chartIcon,
             primaryText: ' Growth of OPD'  ,
             subText: ' Clinics and hospitals experience 2.8X OPD growth, 2.3X more visibility, and up to 5X boosts during Well Being Weeks!'
         },
         {
+            bgColor:"bg-[#FEF7F7]",
             image:supportIcon ,
             primaryText: ' Additional Support'  ,
             subText: ' Enhance your clinics efficiency with dedicated account management, specialized training, OPD insights, and comprehensive facility support services!'
@@ -78,7 +83,7 @@ export default function page() {
 
   return (
 
-         <div className="w-full relative space-y-8 max-w-[1600px] mx-auto   mt-20 pt-[1px]     ">
+         <div className="w-full relative space-y-16 max-w-[1600px] mx-auto   mt-20 pt-[1px]  lg:px-0     ">
 
 
 {/* -------------flex------  520px  ------ */}   
@@ -97,7 +102,7 @@ export default function page() {
 
 
 
-<div className=" px-1 asm:px-3 lg:px-0 space-y-8">
+<div className=" px-1 asm:px-3 lg:px-[2rem]   space-y-16">
 
 
 
@@ -117,7 +122,7 @@ export default function page() {
     <p className='mb-3 text-sm xl:text-base w-full max-w-[850px]'>Trusted by over 45 Lakh patients, Welldone Health helps doctors make their services available 24x7, providing seamless healthcare access across India.</p>
     
     <div className="w-full flex flex-col sm:flex-row gap-5 flex-wrap  ">
-    {cardsInfo1.map((item,index)=><div key={index} className=' w-full sm:w-[48%] max-w-[400px] p-5 space-y-1 bg-secondary rounded-[30px]' >  
+    {cardsInfo1.map((item,index)=><div key={index} className={`w-full ${item?.bgColor} sm:w-[48%] max-w-[400px] p-5 space-y-1 bg-secondary rounded-[30px]`} >  
     <img src={item.image?.src} className='' alt="load..."  />
     <p className='text-base lg:text-lg font-medium'>{item?.primaryText}</p>
     <p className='text-xs lg:text-sm leading-snug'>{item?.subText}</p>
@@ -167,7 +172,7 @@ export default function page() {
     <img src={times5Image?.src} className='w-full' alt="load..."  />
     </div>
     <div className="w-full lg:w-[60%]  flex flex-col sm:flex-row justify-center  gap-5 flex-wrap">
-{toolsDetails.map((item,index)=><div key={index} className='w-full relative sm:w-[48%] xl:h-[220px]  max-w-[400px]   p-5 space-y-1 bg-secondary rounded-[30px]' >  
+{toolsDetails.map((item,index)=><div key={index} className={`w-full  ${item.bgColor} relative sm:w-[48%] xl:h-[220px]  max-w-[400px]   p-5 space-y-1  rounded-[30px]`} >  
     <img src={item?.image?.src} className='' alt="load..."       />
     <p className='text-base lg:text-lg font-medium'>{item?.maintext}</p>
     <p className='text-xs lg:text-sm  leading-snug'>{item?.subText}</p>
@@ -229,33 +234,8 @@ export default function page() {
 
 
 
-{/* ----flex😀-----llllllll-- */}
-<div className="w-full  px-3 msm:px-6 sm:px-10 py-7 space-y-1  border-[1px] border-[#DADADA] rounded-3xl flex flex-col lg:flex-row">
-<div className="order-2 lg:order-1 w-full lg:w-[40%] xl:w-1/2 ">
-<p className=' lg:w-[90%] mt-3 text-primary text-[20px] asm:text-[25px] sm:text-[30px] leading-tight font-bold'>Experience Welldone on any device like iPad, Laptop, tablet, Mobile etc</p>
-<div className="space-y-2 mt-8 lg:w-[80%]">
-    <p> Stay connected to your practice anytime, anywhere with the Welldone Health your trusted companion for seamless patient management.</p>
-    <p>The Welldone Health lets you effortlessly:</p>
-   <div className="pl-2">
-   <li>Manage patient records</li>
-    <li>Schedule appointments</li>
-    <li>Track prescriptions</li>
-    <li>Handle billing and payments</li>
-    <li>Access health insights</li>
-    <li>Receive patient feedback</li>
-    <li>Get support when needed</li>
-   </div>
-    <p className=''>Stay in control and connected with your clinic/hospital through the Welldone Health!</p>
 
-</div>
-<button type="button"  className='mt-6 text-base ssm:text-lg px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
-
-</div>
-<div className="order-1 lg:order-2 lg:w-[60%] xl:w-1/2">
-<img src={mobileIcon2?.src} className='' alt="load..."  />
-</div>
-</div>
-
+<Responsivness />
 
 </div>
 
