@@ -1,14 +1,12 @@
-
 import React from "react";
 // import Slider from "react-slick";
 import DoctorSpeciality from "@/components/DoctorSpeciality/DoctorSpeciality";
 import MobileAppBanner from "@/components/Layout/MobileAppBanner/MobileAppBanner";
 import PrimaryBanner from "@/components/Layout/PrimaryBanner/PrimaryBanner";
-import DoctorsAssociatedCard from "@/Utilities/Hospital&DoctorsAsso/DoctorsAssociatedCard";
-import HospitalAssociatedCard from "@/Utilities/Hospital&DoctorsAsso/HospitalAssociatedCard";
+import DoctorsAssociatedCard from "@/utils/Hospital&DoctorsAsso/DoctorsAssociatedCard";
+import HospitalAssociatedCard from "@/utils/Hospital&DoctorsAsso/HospitalAssociatedCard";
 import DoctoAssociateSlider from "@/components/DoctorAssociatedSlider/DoctorAssociatedSlider";
 import HospitalAssociatedSlider from "@/components/HospitalAssociatedSlider/HospitalAssociatedSlider";
-
 
 export default function Home() {
   // const settings = {
@@ -20,23 +18,17 @@ export default function Home() {
   // };
   return (
     <div className=" w-full  min-h-screen ">
-
-
-
-      <PrimaryBanner/>
+      <PrimaryBanner />
 
       <DoctorSpeciality />
 
-{/* -----------doctor slider----------- */}
-      <DoctoAssociateSlider/>   
+      {/* -----------doctor slider----------- */}
+      <DoctoAssociateSlider />
 
-{/* -----hopital slider------- */}
-      <HospitalAssociatedSlider/>
+      {/* -----hopital slider------- */}
+      <HospitalAssociatedSlider />
 
       <MobileAppBanner />
-
-
-
     </div>
   );
 }

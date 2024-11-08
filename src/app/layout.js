@@ -7,6 +7,7 @@ import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
 import Head from "next/head";
+import Providers from "./providers";
 // import 'leaflet/dist/leaflet.css';
 
 const geistSans = localFont({
@@ -34,8 +35,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Navbar />
-        <main className="lg:container mx-auto   ">{children}</main>
+        <Providers>
+          <Navbar />
+          <main className="lg:container mx-auto   ">{children}</main>
+        </Providers>
       </body>
     </html>
   );
