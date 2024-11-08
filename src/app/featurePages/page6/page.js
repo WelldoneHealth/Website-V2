@@ -99,11 +99,11 @@ export default function page() {
   ] 
 
   return (
-    <div className="w-full  relative  max-w-[1600px] mx-auto space-y-8 md:space-y-14   mt-20  pt-[1px]  ">
+    <div className="w-full  relative  max-w-[1600px] mx-auto space-y-8 md:space-y-14    pt-[1px]  ">
 
 
 {/* ------------------main header---------------- */}
-<div style={{ background: "linear-gradient(180deg, #4CA9F6 0%, #E2F2FF 100%)" }} className=" mx-auto w-full xl:w-[98%]  pt-5 lg:pt-10  lg:rounded-3xl flex flex-col md:flex-row  md:justify-between items-center md:items-end">
+<div style={{ background: "linear-gradient(180deg, #4CA9F6 0%, #E2F2FF 100%)" }} className="mt-4 mx-auto w-full xl:w-[98%]  pt-5 lg:pt-10  lg:rounded-3xl flex flex-col md:flex-row  md:justify-between items-center md:items-end">
 <div className="space-y-10 sm:space-y-16 max-md:order-2 lsm:space-y-20   max-md:px-5 md:pl-10 lg:pl-[70px] xl:pl-24 pt-2  md:pt-5 lsm:pt-10 xl:pt-16 pb-6 sm:pb-10  flex flex-col justify-center  w-full   md:w-1/2 xl:w-auto h-full">
 <div className="text-white space-y-5 md:space-y-8">
   <p className='text-[32px] asm:text-[36px] sm:text-[38px] lsm:text-[42px] xl:text-[50px]  font-bold   leading-[30px] xl:max-w-[720px]  asm:leading-[38px] md:leading-[47px] max-md:text-center'>We take care of the most valuable</p>
@@ -126,6 +126,8 @@ export default function page() {
 
 
 
+
+{/* --------------------other parts------------------ */}
 <div className="w-full space-y-16 ">
 
 

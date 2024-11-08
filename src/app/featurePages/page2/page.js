@@ -47,7 +47,7 @@ export default function page() {
 
 
   return (
-    <div className="w-full relative space-y-16 max-w-[1600px]  mx-auto  mt-20 pt-[1px]  lg:px-0 " >
+    <div className="w-full relative space-y-16 max-w-[1600px]  mx-auto   pt-[1px]  lg:px-0 " >
 
 
 {/* ------------------------main header--------------- */}

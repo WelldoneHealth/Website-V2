@@ -12,6 +12,8 @@ import prescription6 from "@/asset/Icons/prescription6.svg";
 import receptionist from "@/asset/Images/receptionist.png"
 import language2 from "@/asset/Images/language2.png"
 import w1 from "@/asset/Images/w1.png"
+import header8 from "@/asset/Images/header8.png"
+import mobileHeader from "@/asset/Images/mobileHeader.png"
 
 import Banner2 from '@/components/Banner2';
 
@@ -55,20 +57,20 @@ const SmallBox =({image,heading,subText})=>(
 )     
 
   return (
-    <div className="w-full relative  max-w-[1600px] mx-auto space-y-16 sm:space-y-10   mt-20  pt-[1px]   lg:px-0">
+    <div className="w-full relative  max-w-[1600px] mx-auto space-y-16 sm:space-y-10     pt-[1px]   lg:px-0">
 
 
 
 {/* -----------------------main banner header-------------------- */}
-<div className="w-full flex  overflow-hidden">
+<div className="w-full relative">
 
-
-<div className=" w-full flex justify-center overflow-hidden ">
-
-<img src={w1?.src} className='max-asm:w-[600px] block mx-auto' alt="load..."  />
-
+<div className="w-full px-4 space-y-0 xl:space-y-1 absolute top-3 ssm:top-5 asm:top-6 sm:top-10 md:top-12  lg:top-[70px] 2xl:top-28 left-1/2 transform -translate-x-1/2  text-center ">
+    <p className=' text-base sm:text-lg lsm:text-[20px] 2xl:text-2xl max-msm:leading-tight max-asm:hidden'>Join 20,000+ doctors who have transformed their practice with Welldone Health.</p>
+    <p className='text-primary font-bold text-[20px] asm:text-[25px]  sm:text-[32px]  lsm:text-[40px] 2xl:text-[43px] max-asm:leading-tight'> Easy to use, User friendly interface</p>
 </div>
 
+<img src={header8?.src} className='w-full max-md:hidden' alt="load..."  />
+<img src={mobileHeader?.src} className='w-full md:hidden' alt="load..."  />
 
 
 </div>

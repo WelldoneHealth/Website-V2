@@ -140,7 +140,7 @@ export default function page() {
  
   return (
     
-    <div className="w-full  relative  mx-auto  max-w-[1600px]  space-y-16   mt-20  pt-[1px]   lg:px-0  "> 
+    <div className="w-full  relative  mx-auto  max-w-[1600px]  space-y-16     pt-[1px]   lg:px-0  "> 
 
 
 <div 

@@ -76,26 +76,33 @@ export default function page() {
             primaryText: ' Additional Support'  ,
             subText: ' Enhance your clinics efficiency with dedicated account management, specialized training, OPD insights, and comprehensive facility support services!'
         }
-    ]
+    ]        
 
  
 
 
   return (
 
-         <div className="w-full relative space-y-16 max-w-[1600px] mx-auto   mt-20 pt-[1px]  lg:px-0     ">
+    //todo ------- mt-20  ------initial margin top 
+    
+         <div className="w-full relative space-y-16 max-w-[1600px] mx-auto    pt-[1px]  lg:px-0     ">
+
 
 
 {/* -------------flex------  520px  ------ */}   
-<div className="w-full max-h-max lsm:h-[550px]  relative hidden flex-col lsm:flex-row bg-red-900 ">
-    <div className="pl-10 mt-[570px] relative z-20  lsm:mt-16 flex flex-col items-start gap-y-0  text-primary">
-        <p className='text-[30px] font-bold leading-0'>Become a</p>
-        <p className='text-[42px] xl:text-[45px] font-bold'>Welldone Health practitioner</p>
-        <p className=' text-[34px] '>and treat 1+ lakh patients</p>
-<button type="button"  className='mt-6 px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white '  >Get started for free</button>
-    </div>
-    <img src={backgroundImage?.src} className='absolute order-1 hidden z-10 w-screen max-w-[1600px] -top-[80px] -left-[49px]   ' alt="load..."  />
-    <img src={doctorBannerImage2?.src} className='absolute z-20 w-full lsm:max-w-[630px] lg:max-w-[700px] xl:max-w-[800px] right-0' alt="load..."  />
+<div 
+// style={{ background: 'linear-gradient(270deg, rgba(150, 207, 255, 0.5) 36%, rgba(150, 207, 255, 0.1) 92%)' }}
+ className=" mb-8 lg:mb-20 xl:mb-40  2xl:mb-44 w-full max-h-max lsm:h-[550px]  relative flex flex-col lsm:flex-row  max-lsm:pb-10">
+<img src={doctorBannerImage2?.src} className=' lsm:hidden  w-[98%] sm:w-[85%]  z-20  ml-auto block' alt="load..."  />
+
+    <div className="pl-3 sm:pl-6 lsm:pl-10  xl:pl-20 relative z-30 msm:-mt-[30px]  lsm:mt-16 flex flex-col items-start gap-y-0  text-primary">
+        <p className='text-[20px] sm:text-[28px] font-bold leading-0'>Become a</p>
+        <p className=' text-[30px]  msm:text-[32px] sm:text-[40px] lsm:text-[38px] lg:text-[42px] xl:text-[48px] 2xl:text-[52px] font-bold max-asm:leading-tight'>Welldone Health practitioner</p>
+        <p className='max-asm:mt-4  text-[26px] msm:text-[34px] sm:text-[36px] 2xl:text-[42px] '>and treat 1+ lakh patients</p>
+        <button type="button"  className='mt-8 text-[15px]  sm:text-lg px-6 md:px-10  py-3 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>  
+          </div>
+    <img src={backgroundImage?.src} className='w-full  absolute   xl:-top-16  left-0  z-10   ' alt="load..."  />
+    <img src={doctorBannerImage2?.src} className='max-lsm:hidden w-[80%] lg:w-[75%] xl:w-[980px] 2xl:w-[1050px] absolute  right-0   z-20  ' alt="load..."  />
 </div>
 
 

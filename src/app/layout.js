@@ -37,7 +37,8 @@ export default function RootLayout({ children }) {
       >
         <Navbar />
         <Toaster />
-        <main className=" mx-auto mt-[70px]    ">{children}</main>
+        {/* <main className=" mx-auto mt-[70px]    ">{children}</main> */}
+        <main className=" mx-auto mt-[60px]  md:mt-[68px]     ">{children}</main>
       </body>
     </html>
   );

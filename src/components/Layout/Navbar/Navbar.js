@@ -17,15 +17,23 @@ export default function Navbar() {
   return (
     <>
       <header
-        className="  w-full   fixed top-0 left-0 z-[1000] bg-transparent     "  >
+        className="  w-full bg-white   fixed top-0 left-0 z-[1000] bg-transparent     "  >
           <div style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className="w-full max-w-[1600px] flexBetween p-2  md:p-3 md:px-5 mx-auto ">
-         <Link href="/" >
+         <Link href="/featurePages/page1" >
         <div className="w-24 ">
           <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
         </div>
         </Link>
 
-        <div className="flex gap-x-24 ">
+<div className="flex items-center text-lg font-medium text-primary gap-x-10">
+<Link href="/featurePages/page3" >Start</Link>
+<Link href="/featurePages/page2" >Grow</Link>
+<Link href="/featurePages/page5" >Fees and Commission</Link>
+<Link href="/featurePages/page4" >How it works</Link>
+<Link href="/featurePages/page6" >Features & Resources</Link>
+</div>
+
+        <div className="flex gap-x-10 ">
           <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
             {" "}
             <img
