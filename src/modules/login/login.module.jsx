@@ -33,10 +33,10 @@ const LoginModule = () => {
 
   return (
     <UnauthenticatedLayout>
-      <div className="flex h-screen w-full items-center justify-center px-4">
-        <Card className="mx-auto min-w-[400px]">
+      <div className="flex h-screen w-full items-center    justify-center px-4">
+        <Card style={{ boxShadow: "0px 0px 4px 1px #00000040" }}  className="-mt-[75px] mx-auto  w-[98%]  asm:w-[90%] msm:min-w-[400px] max-w-[500px]">
           <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
+            <CardTitle className="text-2xl text-[#01549A]">Login</CardTitle>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="grid gap-4">
@@ -72,7 +72,7 @@ const LoginModule = () => {
                   required
                 />
               </div>
-              <Button type="submit" className="w-full">
+              <Button type="submit" className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white  border-[1px] hover:border-[#01549A]">
                 {loading ? "Logging in..." : "Login"}
               </Button>
 
