@@ -5,8 +5,11 @@ import loginIcon from "@/asset/Icons/login_icon.svg";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import hamburgerIcon from "@/asset/Icons/hamburger.svg";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
+  const router = useRouter();
+
   const [navOpen, setNavOpen] = useState(false);
 
   const toggleNavBar = () => {
@@ -14,18 +17,73 @@ export default function Navbar() {
     setNavOpen(!navOpen);
   };
 
+
+
+  const navMenu=[
+    {
+      title:"Start ",
+      toPage:"/featurePages/page3 "
+    },
+    {
+      title:" Grow",
+      toPage:"/featurePages/page2 "
+    },
+    {
+      title:" Fees and Commission",
+      toPage:" /featurePages/page5"
+    },
+    {
+      title:" How it works",
+      toPage:"/featurePages/page4 "
+    },
+    {
+      title:"Features & Resources ",
+      toPage:"/featurePages/page6 "
+    }
+  ]
+
+
+
+
+  const handleNavigation = (toPage) => {
+    router.push(toPage);
+    setNavOpen(!navOpen);
+  };
+
+
   return (
     <>
       <header
-        className="  w-full bg-white   fixed top-0 left-0 z-[1000] bg-transparent     "  >
-          <div style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className="w-full max-w-[1600px] flexBetween p-2  md:p-3 md:px-5 mx-auto ">
-         <Link href="/featurePages/page1" >
-        <div className="w-24 ">
-          <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
-        </div>
-        </Link>
+        className="  w-full    fixed top-0 left-0 z-[1000] bg-white    "  >
+          <div style={{ boxShadow: "0px 0px 4px 2px #01549A40" }} className="w-full max-w-[1600px]  flexBetween  p-2 px-3  md:p-3 md:px-5 mx-auto ">
+         
 
-<div className="flex items-center text-lg font-medium text-primary gap-x-10">
+
+         <div className="flex items-center gap-x-4">
+
+         <div className="md:hidden ">
+<input onClick={()=>setNavOpen(!navOpen)} id="checkbox2" type="checkbox" />
+<label class="toggle toggle2" for="checkbox2">
+  <div id="bar4" class="bars"></div>
+  <div id="bar5" class="bars"></div>
+  <div id="bar6" class="bars"></div>
+</label>
+</div>
+
+        <div className="w-[76px] md:w-24 ">
+        <Link href="/featurePages/page1" >
+          <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
+        </Link>
+        </div>
+
+
+        </div>
+      
+
+
+
+{/* ----------------flex------------------ */}
+<div className="hidden items-center text-lg font-medium text-primary gap-x-10  " >
 <Link href="/featurePages/page3" >Start</Link>
 <Link href="/featurePages/page2" >Grow</Link>
 <Link href="/featurePages/page5" >Fees and Commission</Link>
@@ -33,7 +91,7 @@ export default function Navbar() {
 <Link href="/featurePages/page6" >Features & Resources</Link>
 </div>
 
-        <div className="flex gap-x-10 ">
+        <div className="flex gap-x-10  ">
           <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
             {" "}
             <img
@@ -51,9 +109,12 @@ export default function Navbar() {
           </button>
 
           <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden">
-            <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
+{!navOpen &&             <img src={hamburgerIcon?.src} className="w-full" alt="load..." /> }       
+      {navOpen && <p className="text-4xl font-medium text-primary">X</p>}
+
           </button>
         </div>
+
         </div>
       </header>
 
@@ -67,23 +128,18 @@ export default function Navbar() {
           navOpen ? "left-0" : "-left-full"
         } `}
       >
-        <div onClick={(e)=>e.stopPropagation()} className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center ">
+        <div onClick={(e)=>e.stopPropagation()} className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-white flex flex-col justify-start items-center ">
         <button type="button" onClick={toggleNavBar} className="w-8  right-0  block md:hidden">
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
+            {/* {navOpen && <p className="text-2xl">X</p>} */}
           </button>
 
-<div className="w-28 h-28 rounded-lg   ">
+<div className="w-28 h-28 hidden rounded-lg   ">
   <img src={wellDoneLogo?.src} className="w-full mt-14"  />
 </div>
-<div className="my-10 w-full flex flex-col justify-center items-center  text-2xl font-medium space-y-6">
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
+<div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
+{navMenu.map((item)=>(  <div key={item.title}   onClick={() => handleNavigation(item.toPage)}    style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+ className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center ">{item.title}</div> ))}
 </div>
 
 
