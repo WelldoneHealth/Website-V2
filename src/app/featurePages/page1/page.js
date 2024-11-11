@@ -35,10 +35,13 @@ import Slider from 'react-slick'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Responsivness from '@/components/Responsivness';
+import { useRouter } from 'next/navigation';
 
 
 
 export default function page() {
+    const router = useRouter();
+
 
     const settings = {
         slidesToShow:1,
@@ -212,7 +215,7 @@ export default function page() {
     <div className="mt-6 md:hidden w-full">
     <img src={item?.image?.src} className='w-full' alt="load..."  />
 </div>
-<button type="button"  className='mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
+<button onClick={()=>router.push('/featurePages/page2')} type="button"  className='mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
 </div>
 <div className=" max-md:hidden max-lg:w-[45%] ">
     <img src={item?.image?.src} className='max-lg:w-full lg:w-[400px] 2xl:w-[500px]' alt="load..."  />

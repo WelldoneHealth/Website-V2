@@ -70,7 +70,7 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
 
 
 {/* -----flex-------- */}
-    <div className="font-bold rounded-tl-[3px]  rounded-bl-[25px] flex border-transparent overflow-hidden bg-primary items-center ">
+    <div className="font-bold rounded-tl-[3px]  rounded-bl-[25px] hidden border-transparent overflow-hidden bg-primary items-center ">
       <div style={{ boxShadow: '0px 0px 4px 0px #00000040' }} className="text-primary bg-secondary p-3 rounded-tr-[25px]  border-transparent">15 <br /> DAYS</div>
       <div className="text-white text-center leading-tight bg-primary px-5 py-3 overflow-hidden rounded-tr-[25px]  rounded-br-[3px] border-transparent ">Money Back <br/> Guarantee*</div>
     </div>

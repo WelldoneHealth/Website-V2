@@ -82,7 +82,7 @@ const SmallBox =({image,heading,subText})=>(
 
 
 {/* -----------------1st part------------flex------ */}
-<div className="w-full px-2 sm:px-6 py-2 md:py-4 border-[1px] border-[#DADADA] rounded-3xl flex  flex-col lg:flex-row justify-between items-center gap-y-2">
+<div className="w-full px-2 sm:px-6 py-2 md:py-4 border-[1px] border-[#DADADA] rounded-3xl hidden lg:flex  flex-col lg:flex-row justify-between items-center gap-y-2">
     <p className=' text-sm asm:text-base sm:text-lg lg:text-xl  xl:text-2xl font-bold text-nowrap '>Doctors Practice Guide Steps</p>
     <div className="flex items-center max-lg:justify-center flex-wrap  gap-3 ">
         {[["Reception","#F1F9FE"],["Consult","#F2F6E1"],["Multi-languages","#FDF4D8"],["Dashboard","#FAEBF5"]].map((item,index)=><div key={index} style={{ backgroundColor: item[1] }} className={`px-6 py-2 text-xs  asm:text-sm md:text-base lg:text-lg xl:text-[20px]  font-medium rounded-[10px] `}> 
