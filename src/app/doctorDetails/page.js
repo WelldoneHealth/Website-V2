@@ -97,10 +97,10 @@ export default function page() {
           {/* ----- //todo doctor detail scetion---------- */}
           <div className="my-7 w-full flex flex-col  max-md:items-center md:flex-row   gap-x-6 gap-y-8 ">
             {/* -----------image portion- */}
-            <div className="w-[60%] asm:w-[50%] sm:w-[42%] md:w-[38%] lg:w-[35%]   overflow-hidden">
+            <div className="">
               <img
                 src={doctorDetailsImage?.src}
-                className="w-full rounded-md"
+                className="h-[250px] rounded-md"
                 alt="load..."
               />
             </div>
@@ -132,31 +132,8 @@ export default function page() {
                   Pune, Maharashtra
                 </p>
               </div>
-
-              {/* --------//todo  initial ui things--------- */}
-              {/* <div className="">
-              <hr className='my-7  w-[95%]' /> 
-               <p className='w-full lg:w-[95%] text-[#A7A7A7] font-normal text-base leading-relaxed ' >Nullam.</p> 
-              <div className="my-2 flex justify-between items-center flex-wrap gap-y-3 ">
-    <div className="">
-            <div className="">
-             image
-                </div>
-                <div className="">
-                    <p className='text-[#A7A7A7] font-normal text-base'><i className="fas fa-camera"></i>Our Call Service!</p>
-                    <p className='text-[#01549A] text-lg asm:text-[22px] font-semibold'>+99 00 555 222 33</p>
-                </div>
-    </div>
-    <div className="mx-2 flex gap-x-2">
-      icons section
-        <div className="w-8 h-8 rounded-full cursor-pointer hover:bg-[#01549A] bg-[#EFF8FF]"></div>
-    </div>
-</div> 
-</div> */}
             </div>
           </div>
-
-          {/* <hr className="my-7  w-[95%]" /> */}
 
           {/* ------------//todo  extra things about doctor------------ */}
           <div className="my-7 w-full  flex max-lg:overflow-x-auto max-lg:whitespace-nowrap gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
@@ -220,15 +197,14 @@ export default function page() {
           </div>
 
           {/* -----------//todo new eductaion------------- */}
-          {/* <div className="w-full my-7 ">
+          <div className="w-full my-7 ">
             <h3 className=" my-3 max-asm:hidden text-[22px] sm:text-2xl text-[#01549A] font-semibold">
               Education and background
             </h3>
             <h3 className=" my-3 text-[22px] asm:hidden  text-[#01549A] font-semibold">
-              Education 
+              Education
             </h3>
             <div className="w-full flex flex-col sm:flex-row gap-x-7 gap-y-5  my-7 ">
-        --------educationl cards----------- 
               {[1, 2].map((item, index) => (
                 <div
                   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
@@ -243,7 +219,9 @@ export default function page() {
                       />
                     </div>
                     <div className="">
-                      <p className="font-medium text-base ssm:text-lg">M.B.B.S.</p>
+                      <p className="font-medium text-base ssm:text-lg">
+                        M.B.B.S.
+                      </p>
                       <p className="text-sm ssm:text-xs ">General practice</p>
                     </div>
                   </div>
@@ -274,15 +252,14 @@ export default function page() {
                 </div>
               ))}
             </div>
-          </div> */}
+          </div>
 
           {/* ----------- //todo training and experience ------------- */}
-          {/* <div className="w-full my-7 ">
+          <div className="w-full my-7 ">
             <h3 className=" my-3 text-2xl text-[#01549A] font-semibold">
-              Training and Experience 
+              Training and Experience
             </h3>
             <div className="w-full flex flex-col sm:flex-row gap-x-7 gap-y-5  my-7 ">
-          --------educationl cards----------
               {[1, 2].map((item, index) => (
                 <div
                   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
@@ -338,7 +315,7 @@ export default function page() {
                 </div>
               ))}
             </div>
-          </div> */}
+          </div>
 
           <button
             onClick={() => setAppointmentView(!appointmentView)}

@@ -1,5 +1,3 @@
-import { HEART_ICON } from "@/utils/ImageConstants";
-import Image from "next/image";
 import React from "react";
 import pediatricsIcon from "@/asset/Icons/pediatrics.svg";
 import cardiologyIcon from "@/asset/Icons/cardiologyIcon.svg";
