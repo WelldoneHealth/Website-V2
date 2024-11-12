@@ -1,4 +1,6 @@
-import React from "react";
+"use client"
+
+import React, { useRef } from "react";
 import clinic3Icon from "@/asset/Icons/clinic3.svg";
 import profile3 from "@/asset/Icons/profile3.svg";
 import medicine from "@/asset/Icons/medicine.svg";
@@ -19,6 +21,7 @@ import InfoDetails from "@/components/InfoDetails";
 import SuccessStorySlider from "@/components/SuccessStorySlider";
 import Responsivness from "@/components/Responsivness";
 import Banner2 from "@/components/Banner2";
+import Link from "next/link";
 
 
 
@@ -51,7 +54,7 @@ export default function page() {
     },
     {
       mainText: "Consult & create Prescription ",
-      boldText: "  with print, send digitally.",
+      boldText: "  with print, send digitally.", 
       image: medicine,
       para: (
         <p className="text-sm w-full sm:w-[90%]">
@@ -137,6 +140,18 @@ export default function page() {
     }
   ]
  
+
+  const buttonRefs = Array.from({ length: 5 }, () => useRef(null));
+
+  const scrollToViewArea=(index)=>{
+    console.log(index)
+    buttonRefs[index].current.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+    // if (buttonRefs[index]?.current?.scrollIntoView){console.log("ok available")}
+    // else{console.log("it is not applicalble")}
+  }
  
   return (
     
@@ -149,7 +164,9 @@ style={{ background: "linear-gradient(258.83deg, #FFFFFF 39.07%, #EBF6FF 99.2%)"
 
 <div className="space-y-12 asm:space-y-16 md:space-y-10 max-md:order-2 pt-2 md:pt-16 max-md:pb-10">
   <p className="text-primary font-semibold text-[21px] asm:text-[25px]  msm:text-[35px] md:text-[32px] lsm:text-[36px] lg:text-[40px] 2xl:text-[42px] leading-tight">Start your Clinical practice journey at Welldonehealth.in</p>
+  <Link href="https://clinic.welldonehealth.in/login" passHref  target="_blank"  >
   <button type="button"  className='mt-6 px-7 text-sm asm:text-base msm:text-lg xl:text-xl  py-2 lsm:py-3 rounded-[30px]  font-semibold  bg-primary text-white '  >Get started for free</button>
+</Link>
 </div>
 
 <div className="max-md:order-1 max-md:w-[70%] ">
@@ -175,12 +192,12 @@ style={{ background: "linear-gradient(258.83deg, #FFFFFF 39.07%, #EBF6FF 99.2%)"
         {/* -----sticky part------------- */}
         <div className="flex-1 max-lg:hidden     ">
 <div className=" w-full sticky top-[70px]  space-y-2 ">
-<button type="button"  className='max-xl:w-[95%] text-base xl:text-lg  xl:px-10    py-2 rounded-lg  font-semibold border-[2px] border-primary text-primary' >Requirements to Practice</button>
-<button type="button"  className='max-xl:w-[95%] text-base   xl:px-10  py-2'  >Create Professional Profile</button>
-<button type="button"  className='max-xl:w-[95%] text-base text-nowrap px-10  py-2'  >Consultation & Prescription</button>
-<button type="button"  className='max-xl:w-[95%] text-base px-10  py-2'  >Receive fee & payments</button>
-<button type="button"  className='max-xl:w-[95%] text-base px-10  py-2'  >Tools to grow</button>
-<button type="button"  className='max-xl:w-[95%] text-base px-10  py-2'  >Help & support</button>
+<button type="button"     className='max-xl:w-[95%] text-base xl:text-lg  xl:px-10    py-2 rounded-lg  font-semibold border-[2px] border-primary text-primary' >Requirements to Practice</button>
+<button type="button" onClick={()=>scrollToViewArea(0)}   className='max-xl:w-[95%] text-base   xl:px-10  py-2'  >Create Professional Profile</button>
+<button type="button" onClick={()=>scrollToViewArea(1)}   className='max-xl:w-[95%] text-base text-nowrap px-10  py-2'  >Consultation & Prescription</button>
+<button type="button"  onClick={()=>scrollToViewArea(2)}  className='max-xl:w-[95%] text-base px-10  py-2'  >Receive fee & payments</button>
+<button type="button"  onClick={()=>scrollToViewArea(3)}  className='max-xl:w-[95%] text-base px-10  py-2'  >Tools to grow</button>
+<button type="button"  onClick={()=>scrollToViewArea(4)}  className='max-xl:w-[95%] text-base px-10  py-2'  >Help & support</button>
 </div>
         </div>
         <div className="w-full lg:w-[75%]  md:px-8  xl:px-14 space-y-10 md:space-y-10 border-1 border-red-800">
@@ -215,14 +232,14 @@ style={{ background: "linear-gradient(258.83deg, #FFFFFF 39.07%, #EBF6FF 99.2%)"
             <p className="text-center text-sm font-medium mt-8">
               Have all ? Start your registration:
             </p>
-            <div className="mt-5 w-full flexCenter">
+            <Link  href="https://clinic.welldonehealth.in/login" passHref  target="_blank"  className="mt-5 w-full flexCenter">
               <button
                 type="button"
                 className="text-lg px-10  py-2 rounded-[30px]  font-semibold  bg-primary text-white"
               >
                 Register Here
               </button>
-            </div>
+            </Link>
           </div>
 
  
@@ -230,6 +247,7 @@ style={{ background: "linear-gradient(258.83deg, #FFFFFF 39.07%, #EBF6FF 99.2%)"
           {data1.map((item, index) => (
             <div
               key={index}
+              ref={buttonRefs[index]} 
               className=" w-full px-4 sm:px-10 pt-3 sm:pt-6 pb-8 border-[1px] border-[#DADADA] rounded-[20px]"
             >
               <p className="text-lg asm:text-[22px] sm:text-2xl text-primary font-bold leading-snug">

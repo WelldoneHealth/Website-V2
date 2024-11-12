@@ -10,7 +10,11 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const router = useRouter();
 
+
+
   const [navOpen, setNavOpen] = useState(false);
+
+  
 
   const toggleNavBar = () => {
     console.log("clcicked");

@@ -36,6 +36,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Responsivness from '@/components/Responsivness';
 import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 
 
@@ -102,8 +103,10 @@ export default function page() {
         <p className='text-[20px] sm:text-[28px] font-bold leading-0'>Become a</p>
         <p className=' text-[30px]  msm:text-[32px] sm:text-[40px] lsm:text-[38px] lg:text-[42px] xl:text-[48px] 2xl:text-[52px] font-bold max-asm:leading-tight'>Welldone Health practitioner</p>
         <p className='max-asm:mt-4  text-[26px] msm:text-[34px] sm:text-[36px] 2xl:text-[42px] '>and treat 1+ lakh patients</p>
+        <Link href="https://clinic.welldonehealth.in/login" passHref  target='_blank'  >
         <button type="button"  className='mt-8 text-[15px]  sm:text-lg px-6 md:px-10  py-3 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>  
-          </div>
+        </Link>
+          </div> 
     <img src={backgroundImage?.src} className='w-full  absolute   xl:-top-16  left-0  z-10   ' alt="load..."  />
     <img src={doctorBannerImage2?.src} className='max-lsm:hidden w-[80%] lg:w-[75%] xl:w-[980px] 2xl:w-[1050px] absolute  right-0   z-20  ' alt="load..."  />
 </div>
@@ -166,9 +169,9 @@ export default function page() {
     </div>
     </div>)}
 </div> 
-<div className="mt-5 w-full flexCenter">
+<Link  href="https://clinic.welldonehealth.in/login" passHref  target='_blank' className="mt-5 w-full flexCenter">    
 <button type="button"  className='text-lg px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
-</div>
+</Link>
 </div>
 
 
@@ -215,7 +218,10 @@ export default function page() {
     <div className="mt-6 md:hidden w-full">
     <img src={item?.image?.src} className='w-full' alt="load..."  />
 </div>
-<button onClick={()=>router.push('/featurePages/page2')} type="button"  className='mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
+<Link href="https://clinic.welldonehealth.in/login" passHref    >
+<button  type="button"  className='mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary'  >Explore All Features</button>
+</Link>
+
 </div>
 <div className=" max-md:hidden max-lg:w-[45%] ">
     <img src={item?.image?.src} className='max-lg:w-full lg:w-[400px] 2xl:w-[500px]' alt="load..."  />
@@ -236,8 +242,10 @@ export default function page() {
 <div className="text-center text-primary  ">
     <p className='text-[25px] asm:text-[28px] leading-tight' >Open an account in <br className='max-md:hidden'/> just <span className='font-semibold' >10 minutes.</span></p>
     <p className='my-3 text-sm leading-snug'>Streamline your practice with our cutting-edge tools and insights, designed to optimize patient care and management.</p>
-    {/* <div className="w-full flexCenter"> */}
+    {/* <div className="w-full flexCenter bg-red-900"> */}
+    <Link href="https://clinic.welldonehealth.in/login" passHref  target='_blank'   >
 <button type="button"  className='mt-2 md:mt-4 px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Open an Account free</button>
+</Link>
 {/* </div> */}
 </div>
 </div>
@@ -246,6 +254,9 @@ export default function page() {
 
 
 <Responsivness />
+
+
+
 
 </div>
 

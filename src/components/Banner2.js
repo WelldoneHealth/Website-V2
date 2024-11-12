@@ -1,5 +1,6 @@
 import React from 'react'
 import doctorImage3 from "@/asset/Images/doctor3.png"
+import Link from 'next/link';
 
 
 
@@ -22,7 +23,9 @@ export default function Banner2() {
       <p className="  font-medium max-w-[600px] xl:max-w-[800px] text-wrap text-sm ssm:text-lg asm:text-xl">Build your practice with millions of patients every day on Welldone Health.</p>
     </div>
     <div className="space-y-5">
+      <Link  href="https://clinic.welldonehealth.in/login" passHref  target="_blank">
     <button  type="button" className=" tet-sm ssm:text-base msm:text-xl xl:text-2xl px-6 asm:px-8  py-2 rounded-[30px]  font-semibold  bg-white text-primary"   > Start getting patients </button>
+    </Link>
       <p>It takes only 15 minutes to setup your account</p>
     </div>
   </div>

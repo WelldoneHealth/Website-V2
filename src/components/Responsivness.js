@@ -1,5 +1,6 @@
 import React from 'react'
 import mobileIcon2 from "@/asset/Icons/mobile2.svg";
+import Link from 'next/link';
 
 
 
@@ -26,7 +27,9 @@ export default function Responsivness() {
     <p className=''>Stay in control and connected with your clinic/hospital through the Welldone Health!</p>
 
 </div>
+<Link href="https://clinic.welldonehealth.in/login" passHref  target='_blank'   >
 <button type="button"  className='mt-6 text-base ssm:text-lg px-7  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Get started for free</button>
+</Link>
 
 </div>
 <div className="order-1 lg:order-2 lg:w-[60%] xl:w-1/2">
@@ -35,4 +38,4 @@ export default function Responsivness() {
 </div>
 </>
   )
-}
+} 
