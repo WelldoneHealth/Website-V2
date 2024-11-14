@@ -10,11 +10,7 @@ import { useRouter } from "next/navigation";
 export default function Navbar() {
   const router = useRouter();
 
-
-
   const [navOpen, setNavOpen] = useState(false);
-
-  
 
   const toggleNavBar = () => {
     console.log("clcicked");
@@ -24,23 +20,23 @@ export default function Navbar() {
   const navMenu = [
     {
       title: "Start ",
-      toPage: "/featurePages/page3 ",
+      toPage: "/start ",
     },
     {
       title: " Grow",
-      toPage: "/featurePages/page2 ",
+      toPage: "/grow ",
     },
     {
       title: " Fees and Commission",
-      toPage: " /featurePages/page5",
+      toPage: " /fees-and-commisions",
     },
     {
       title: " How it works",
-      toPage: "/featurePages/page4 ",
+      toPage: "/how-it-works ",
     },
     {
       title: "Features & Resources ",
-      toPage: "/featurePages/page6 ",
+      toPage: "/features-and-resources ",
     },
   ];
 
@@ -71,8 +67,12 @@ export default function Navbar() {
               </label>
             </div>
 
-{/* ----------------------non animated menu-------------------- */}
-            <button type="button" onClick={toggleNavBar} className="w-7 lg:hidden">
+            {/* ----------------------non animated menu-------------------- */}
+            <button
+              type="button"
+              onClick={toggleNavBar}
+              className="w-7 lg:hidden"
+            >
               {/* <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden"> */}
               {!navOpen && (
                 <img
@@ -85,24 +85,20 @@ export default function Navbar() {
                 <p className="text-4xl font-medium text-primary">X</p>
               )}
             </button>
-{/* -------------icon--------------- */}
+            {/* -------------icon--------------- */}
             <div className="w-[78px] md:w-24 ">
-              <Link href="/featurePages/page1">
+              <Link href="/">
                 <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
               </Link>
             </div>
           </div>
 
-
           {/* ----------------flex------------------ */}
           <div className=" hidden lg:flex items-center text-base xl:text-lg font-medium text-primary gap-x-10   ">
-            <Link href="/featurePages/page3">Start</Link>
-            <Link href="/featurePages/page2">Grow</Link>
-            <Link href="/featurePages/page5">Fees and Commission</Link>
-            <Link href="/featurePages/page4">How it works</Link>
-            <Link href="/featurePages/page6">Features & Resources</Link>
+            {navMenu?.map(({ title, toPage }) => (
+              <Link href={toPage}>{title}</Link>
+            ))}
           </div>
-
 
           <div className="flex gap-x-6  ">
             {/* <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
@@ -121,9 +117,7 @@ export default function Navbar() {
             </div>
           </button> */}
 
-
             {/* <Link href="https://clinic.welldonehealth.in/" passHref target="_blank" > <button  type="button"  className='px-4 asm:px-7  text-xs asm:text-base msm:text-base xl:text-xl  py-[6px] lsm:py-3 rounded-[30px]  font-semibold  bg-primary text-white  '  >Start get Patients</button> </Link> */}
-
 
             {/* <button type="button" onClick={toggleNavBar} className="w-8 ">
               {!navOpen && (
@@ -138,18 +132,32 @@ export default function Navbar() {
               )}
             </button> */}
 
-<Link href="https://clinic.welldonehealth.in/" passHref target="_blank" className="hidden sm:block lg:hidden xl:block" >
-<button type="button" className="min-w-[140px]   px-7 py-2  rounded-[10px] border-[1px] border-primary font-semibold text-primary">
-Login
-</button> </Link>
+            <Link
+              href="https://clinic.welldonehealth.in/"
+              passHref
+              target="_blank"
+              className="hidden sm:block lg:hidden xl:block"
+            >
+              <button
+                type="button"
+                className="min-w-[140px]   px-7 py-2  rounded-[10px] border-[1px] border-primary font-semibold text-primary"
+              >
+                Login
+              </button>{" "}
+            </Link>
 
-<Link href="https://clinic.welldonehealth.in/" passHref target="_blank" >
-<button type="button" className="min-w-[120px]  text-sm asm:text-base  block  px-4 asm:px-7 py-2  rounded-[10px] bg-primary font-semibold text-white">
-Start get Patients
-</button> </Link>
-
-
-            
+            <Link
+              href="https://clinic.welldonehealth.in/"
+              passHref
+              target="_blank"
+            >
+              <button
+                type="button"
+                className="min-w-[120px]  text-sm asm:text-base  block  px-4 asm:px-7 py-2  rounded-[10px] bg-primary font-semibold text-white"
+              >
+                Start get Patients
+              </button>{" "}
+            </Link>
           </div>
         </div>
       </header>
@@ -182,17 +190,17 @@ Start get Patients
           </div>
           <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
             {navMenu.map((item) => (
-                <div
-                  key={item.title}
-                  onClick={() => handleNavigation(item.toPage)}
-                  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-                  className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
-                >
-              <Link className="w-full" href={item.toPage}>
-                {" "}
+              <div
+                key={item.title}
+                onClick={() => handleNavigation(item.toPage)}
+                style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+                className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+              >
+                <Link className="w-full" href={item.toPage}>
+                  {" "}
                   {item.title}
-              </Link>
-                </div>
+                </Link>
+              </div>
             ))}
           </div>
         </div>
