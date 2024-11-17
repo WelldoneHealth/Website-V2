@@ -2,7 +2,7 @@ import React from "react";
 import doctorDetailsImage from "@/asset/Images/doctorDetailsImage.png";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 
-const BasicDetails = () => {
+const BasicDetails = ({basicInfo}) => {
   return (
     <div className="my-7 w-full flex flex-col md:flex-row gap-x-6 gap-y-8">
       {/* Image */}
@@ -24,8 +24,7 @@ const BasicDetails = () => {
           </button>
         </div>
         <h3 className="my-3 text-[#01549A] font-semibold text-[18px] ssm:text-[20px] asm:text-[26px]">
-          Dr. Vijaya Jaywant Ahirrao
-        </h3>
+          {basicInfo?.suffix} {basicInfo?.first_name} {basicInfo?.middle_name}  {basicInfo?.last_name}   </h3>
         <div className="w-full flex flex-col gap-y-1 text-sm">
           <p className="text-[#A7A7A7] font-normal text-sm asm:text-base">
             M.B.B.S, DGO

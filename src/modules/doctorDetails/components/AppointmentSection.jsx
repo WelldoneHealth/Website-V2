@@ -3,17 +3,44 @@ import React, { useState } from "react";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import calendarIcon from "@/asset/Icons/calendar.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
-const AppointmentSection = () => {
+import { useQuery } from "@tanstack/react-query";
+import { Loader } from "lucide-react";
+import moment from "moment";
+const AppointmentSection = ({doctor,branch,getting_Equeue}) => {
+
+ const [selectedEqueue,setSelectedEqueue]=useState(null)
+ const [focusableIndex,setFocusableIndex]=useState(0)
+
+
+  const { data: equeueDataList, isLoading:isEqueueLoading } = useQuery({
+    queryKey: ["equeDetails"], 
+    queryFn: ()=>getting_Equeue("rakesh","sakri"), 
+    enabled: true, 
+    onSuccess: (data) => {
+      // console.group("hello you are getting the data")
+      // console.log("Fetched equeue data:", data); // Logs the data to the console once it's fetched
+    },
+    staleTime: 3000,    
+  });  
+
+
+
+
+if(isEqueueLoading) return <Loader/>
+
   return (
     <div
       className={`w-full flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white   transition-all duration-150 ease-linear`}
     >
+      {/* {setTimeout(() => {
+        console.log("the equeye data list is",equeueDataList)
+      }, 5000)} */}
       <div className="w-full max-lg:mt-16  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
         <p className="text-lg font-medium  text-center">
           Book Your Appointment{" "}
         </p>
         <hr className="my-3" />
-
+ 
         <div className="px-2 sm:px-4 ">
           <p className="mb-2 font-medium ">Select office</p>
           <div className="w-full border-[1px] border-[#919196] rounded-xl flex ">
@@ -57,11 +84,11 @@ const AppointmentSection = () => {
             </button>
           </div>
 
-          <div className="w-full flex flex-col items-center gap-y-5 ">
+          <div className="w-full h-[500px] overflow-y-scroll flex flex-col items-center gap-y-5 ">
             {/* --------calendar cards------- */}
-            <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#01A400] ">
+            {/* <div className="w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ">
               <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#01A400] font-medium ">
-                Today
+              hello
               </p>
               <hr />
               <div className="w-full flexCenter gap-x-5 py-4">
@@ -81,11 +108,11 @@ const AppointmentSection = () => {
               <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
                 Given Time is approximate can vary by +/-60 Min
               </p>
-            </div>
+            </div> */}
 
-            <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#919196] ">
+            {isEqueueLoading ? <Loader/> : ( equeueDataList?.map((item,index)=> <div key={index}   onClick={()=>{setFocusableIndex(index);console.log("the item is",item)}}  className={` w-[95%]  cursor-pointer  rounded-[10px] border-[1px] border-l-[5px]  ${focusableIndex !== index ? " bg-[#F7FFF6] border-[#919196]" : "bg-[#F7FFF6] border-[#01A400]  "} `}>
               <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#919196] font-medium ">
-                Today
+                { moment().format("YYYY-MM-DD") === item?.date  ?  "Today"  : moment(item?.date).format("DD MMM") }
               </p>
               <hr />
               <div className="w-full flexCenter gap-x-5 py-4">
@@ -93,24 +120,48 @@ const AppointmentSection = () => {
                   style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
                   className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
                 >
-                  2
+                  {item?.current_equeue + 1}
                 </div>
                 <div className="space-y-1">
                   <p className=" text-xs text-[#5A5D62]">Waiting Number</p>
                   <p className="text-[#01549A] font-semibold text-lg">
-                    01:15 PM
+             
+
+                  {
+  moment().format("YYYY-MM-DD") === item?.date ? (
+    moment().isBefore(moment(item?.expected_time, "HH:mm:ss")) ? (
+      moment(item?.expected_time, "HH:mm:ss")
+        .add(item?.average_time, "minutes")
+        .format("hh:mm A")
+    ) : (
+      moment()
+        .add(item?.average_time, "minutes")
+        .format("hh:mm A")
+    )
+  ) : (
+    moment(item?.expected_time, "HH:mm:ss")
+      .add(item?.average_time, "minutes")
+      .format("hh:mm A")
+  )
+}
+
+ 
+ 
+
                   </p>
                 </div>
               </div>
               <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
                 Given Time is approximate can vary by +/-60 Min
               </p>
-            </div>
+            </div>))  }
 
             <div className=" w-[95%] flex justify-between items-center py-1 px-3  rounded-[10px] border-[1px] border-l-[5px] border-[#919196]">
               <p className=" font-medium text-lg text-[#5A5D62] ">Future</p>
               <img src={calendarIcon?.src} className="w-[22px]" alt="load..." />
             </div>
+
+
           </div>
 
           <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
@@ -136,6 +187,7 @@ const AppointmentSection = () => {
               No charges for appointment booking.
             </p>
           </div>
+
         </div>
 
         {/* <div className="my-5 space-y-6 w-full">

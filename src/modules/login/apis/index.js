@@ -13,3 +13,4 @@ export const getCurrentUser = async (authToken) => {
   });
   return response.data;
 };
+ 
