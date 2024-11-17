@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import doctorImage2 from "@/asset/Images/doctorImage2.png";
 import smallHospital3 from "@/asset/Images/smallHospital3.png";
@@ -11,7 +11,8 @@ import aroowIcon2 from "@/asset/Icons/arrow2.svg";
 import {
   appointmentOptions,
   paymentOptions,
-} from "@/Utilities/extraDetails/checkoutDEtails";
+} from "@/Utilities/extraDetails/checkoutDetails";
+import axiosInstance from "@/shared/apis/axiosInstance";
 
 export default function page() {
   // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
@@ -60,6 +61,25 @@ export default function page() {
     hospital: false,
     appointment: false,
   });
+
+
+const [patientList,setPatientList]=useState([])
+ const getPatients = async () => {
+  // console.log("ok hello")
+    try {
+      const response = await axiosInstance.get("apiV1/patient/");
+      console.log("the data returned from respone is",response.data)
+      setPatientList(response.data)
+      return response.data;
+    } catch (error) {
+      console.log("error fetching equeue list in  doctor profile page");
+    }
+  };
+
+
+  useEffect(()=>getPatients(),[])
+  
+
 
   return (
     <>
@@ -258,6 +278,16 @@ export default function page() {
             )}
           </div>
 
+
+
+          {/* <button onClick={getPatients}
+                        type="button"
+                        className="px-8 py-3  font-semibold text-sm rounded-[10px]  bg-primary text-white"  >
+                        Appointment for this Patient
+                      </button> */}
+
+
+
           {/* -----------second card ( patient selection) -------------- */}
           {statusChange.patientStatus && (
             <div
@@ -291,7 +321,7 @@ export default function page() {
                 <>
                   {" "}
                   <div className={`w-full space-y-5 p-5 `}>
-                    {[1, 2].map((item, index) => (
+                    {patientList.length>0 && patientList.map((item, index) => (
                       <div
                         style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
                         key={index}
@@ -315,7 +345,7 @@ export default function page() {
                               <div className="w-full my-auto space-y-1 flex items-center justify-between">
                                 <div className="flex items-center gap-x-3">
                                   <p className="text-base sm:text-lg font-medium">
-                                    Rakesh Nadre {index}{" "}
+                                   {item?.first_name}&nbsp;{item?.middle_name}&nbsp;{item?.last_name}
                                   </p>
                                   <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">
                                     Me
@@ -326,15 +356,15 @@ export default function page() {
                                       className=""
                                       alt="load..."
                                     />
-                                    8806010415
+                                    {item?.contact}
                                   </p>
                                 </div>
                                 <p className="text-primary font-medium">Edit</p>
                               </div>
 
-                              <p className="text-sm">26 Years, 4 Month Old</p>
+                              <p className="text-sm">{item?.age}</p>
                               <p className="text-sm text-[#5A5D62] sm:hidden ">
-                                +91-9876543210{" "}
+                              {item?.contact}
                               </p>
                             </div>
                           </div>
@@ -1083,15 +1113,7 @@ export default function page() {
         </div>
       )}
 
-      {/* { view &&  <div className={`  max-w-[1600px] w-full left-1/2  absolute  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] h-screen bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}>
-    <button type="button" onClick={()=>setView(!view)} className="text-white px-6 py-3 bg-primary  "  >click me </button>
- <div className={` w-[400px] absolute top-0 right-0  h-full border-blue-800 border-2 bg-red-900`}>         xz    </div>
-</div>} */}
-
-      {/* <div className={`  max-w-[1600px]  absolute  top-0   ${!view? "w-full left-1/2" :" -right-[200%] w-0"}  mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] h-screen bg-green-900 transition-all duration-150 ease-linear`}>
-    <button type="button" onClick={()=>setView(!view)} className="text-white px-6 py-3 bg-primary  "  >click me </button>
- <div className={` w-[30%] absolute top-0 right-0  h-full border-blue-800 border-2 bg-red-900`}>         xz    </div>
-</div> */}
+     
     </>
   );
 }
