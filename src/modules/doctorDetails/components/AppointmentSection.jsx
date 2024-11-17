@@ -8,7 +8,9 @@ import { Loader } from "lucide-react";
 
 import moment from "moment";
 import { getEqueue } from "../apis";
+import { useRouter } from "next/navigation";
 const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
+  const router = useRouter();
   const [selectedEqueue, setSelectedEqueue] = useState(null);
   const [focusableIndex, setFocusableIndex] = useState(0);
 
@@ -178,6 +180,9 @@ const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
             <button
               type="button"
               className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
+              onClick={() => {
+                router.push(`/checkout`);
+              }}
             >
               Appointment Booking
             </button>
