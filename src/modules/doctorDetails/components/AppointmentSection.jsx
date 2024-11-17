@@ -72,7 +72,7 @@ const AppointmentSection = ({
             </div>
           </div>
 
-          <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
+          {/* <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
             <button
               type="button"
               className="bg-white p-1  cursor-pointer flex items-center rounded-md text-[#01549A]  text-sm font-medium"
@@ -95,34 +95,10 @@ const AppointmentSection = ({
                 alt="load..."
               />
             </button>
-          </div>
+          </div> */}
 
-          <div className="w-full h-[500px] overflow-y-scroll flex flex-col items-center gap-y-5 ">
-            {/* --------calendar cards------- */}
-            {/* <div className="w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ">
-              <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#01A400] font-medium ">
-              hello
-              </p>
-              <hr />
-              <div className="w-full flexCenter gap-x-5 py-4">
-                <div
-                  style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
-                  className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
-                >
-                  2
-                </div>
-                <div className="space-y-1">
-                  <p className=" text-xs">Waiting Number</p>
-                  <p className="text-[#01549A] font-semibold text-lg">
-                    01:15 PM
-                  </p>
-                </div>
-              </div>
-              <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
-                Given Time is approximate can vary by +/-60 Min
-              </p>
-            </div> */}
-
+          <div className={` mt-5 w-full ${equeueDataList.length>0? "h-[500px]":"h-auto"} overflow-y-scroll flex flex-col items-center gap-y-5 `}>
+            
             {isEqueueLoading ? (
               <Loader />
             ) : (
@@ -186,12 +162,12 @@ const AppointmentSection = ({
           </div>
 
           <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
-            <button
+            {/* <button
               type="button"
               className="w-[95%] border-[1px] border-[#01549A] py-2 text-center text-[#01549A] rounded-[10px] font-medium"
             >
               Add to family doctor
-            </button>
+            </button> */}
             <button
               type="button"
               className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
@@ -207,6 +183,13 @@ const AppointmentSection = ({
             </button>
             <button
               type="button"
+              onClick={() => {
+                router.push(`/checkout`);
+                setAppointmentData({
+                  equeueData: selectedEqueue,
+                  doctorData: doctorInfo,
+                });
+              }}
               className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
             >
               Checkout
