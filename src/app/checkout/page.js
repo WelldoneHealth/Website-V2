@@ -14,9 +14,108 @@ import {
 } from "@/Utilities/extraDetails/checkoutDetails";
 import axiosInstance from "@/shared/apis/axiosInstance";
 import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
+import moment from "moment";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
+//   const appointmentData = {
+//     "equeueData": {
+//         "id": 1169,
+//         "user": "9c278b86-4b81-436c-9d35-1f5fdf26bbc6",
+//         "branch": 212,
+//         "doctor": 196,
+//         "limit": 100,
+//         "is_active": true,
+//         "current_equeue": 4,
+//         "on_going_equeue": 0,
+//         "date": "2024-11-17",
+//         "expected_time": "12:36:08.410974",
+//         "doctor_visiting_time": "10:00:00",
+//         "average_time": 10,
+//         "reason": null,
+//         "doctor_closing_time": "22:00:00",
+//         "doctor_name": "Dr. Vishal Deore",
+//         "new_expected_time": "21:24:33.843113"
+//     },
+//     "doctorData": {
+//         "id": 195,
+//         "suffix": "dr.",
+//         "first_name": "Rakesh",
+//         "middle_name": "Nimba",
+//         "last_name": "Nandre",
+//         "first_time_charge": 100,
+//         "returning_charge": 50,
+//         "total_experience": 5,
+//         "specialty_treatment": "",
+//         "other_specialty_treatment": "",
+//         "video_consultation": false,
+//         "biography": "",
+//         "activity": "",
+//         "establishment": [],
+//         "achievements": [],
+//         "accomplishments": [],
+//         "experience": [
+//             {
+//                 "id": 75,
+//                 "registration_id": 195,
+//                 "job_title": "Resident",
+//                 "practice_type": "Intern",
+//                 "practice_speciality": "Genral",
+//                 "hospital_name": "Test Hospital",
+//                 "city": "Pune",
+//                 "from_date": "2024-10-03",
+//                 "to_date": "2024-10-12",
+//                 "is_completed": true
+//             }
+//         ],
+//         "skills": [],
+//         "education_and_background": [
+//             {
+//                 "id": 114,
+//                 "registration_id": 195,
+//                 "qualification": "MBBS",
+//                 "faculty": "Genral",
+//                 "institute": "MUHS",
+//                 "city": "Nashik, Maharashtra",
+//                 "passing_year": "2021",
+//                 "is_completed": true
+//             },
+//             {
+//                 "id": 117,
+//                 "registration_id": 195,
+//                 "qualification": "DNYS",
+//                 "faculty": "Naturopathy",
+//                 "institute": "MGBIRS",
+//                 "city": "Shrinagar,jk",
+//                 "passing_year": "2024",
+//                 "is_completed": true
+//             }
+//         ],
+//         "image_gallery": [],
+//         "clinic_contact": [
+//             {
+//                 "phone": "8823828323"
+//             }
+//         ],
+//         "address": [],
+//         "service_charge": [
+//             {
+//                 "id": 153,
+//                 "service": "ECG",
+//                 "charge": 300
+//             },
+//             {
+//                 "id": 154,
+//                 "service": "AGT",
+//                 "charge": 200
+//             }
+//         ],
+//         "language": []
+//     }
+// }
+
+
+  console.log("------>",appointmentData)
   // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -29,7 +128,7 @@ export default function page() {
 
   // -----------------------for storing the input values of the processed data------------------
   const [statusData, setStatusData] = useState({
-    doctorSelection: 1,
+    doctorSelection:appointmentData.doctorData ,
     patientSelection: 1,
     paymentSelection: paymentOptions[0],
     appointmentSelection: appointmentOptions[0],
@@ -70,6 +169,7 @@ export default function page() {
     try {
       const response = await axiosInstance.get("apiV1/patient/");
       console.log("the data returned from respone is", response.data);
+      setStatusData({...statusData,patientSelection:response.data[0]})
       setPatientList(response.data);
       return response.data;
     } catch (error) {
@@ -136,7 +236,9 @@ export default function page() {
                       />
                       <div className="w-full space-y-1">
                         <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="text-sm">Dr. Subhash V. Gupta</p>
+                          <p className="text-sm">{appointmentData?.doctorData?.first_name}&nbsp;{appointmentData?.doctorData?.middle_name}&nbsp;
+                          {appointmentData?.doctorData?.last_name}
+                          </p>
                           <button
                             onClick={() => {
                               setView(true);
@@ -150,10 +252,10 @@ export default function page() {
                             Change
                           </button>
                         </div>
-                        <p className="text-sm font-medium">MBBS. MD</p>
+                        <p className="text-sm font-medium">{appointmentData?.doctorData?.education_and_background?.map((item) => item.qualification).join(' / ')} </p>
                         <p classNametext="text-xs">
                           Surgical Oncologist | Advanced Laparoscopic Surgeon |
-                          Nodules | Stomach Disorders Specialist
+                          Nodules | Stomach Disorders Specialist  ------
                         </p>
                       </div>
                     </div>
@@ -257,10 +359,11 @@ export default function page() {
                       />
                       <div className="w-full space-y-1">
                         <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="max-sm:text-sm">Dr. Subhash V. Gupta</p>
+                          <p className="max-sm:text-sm">{statusData.doctorSelection?.first_name}&nbsp;{statusData.doctorSelection?.middle_name}&nbsp;
+                          {statusData.doctorSelection?.last_name}</p>
                         </div>
                         <p className="text-xs sm:text-sm font-medium">
-                          MBBS. MD
+                        {statusData.doctorSelection?.education_and_background?.map((item) => item.qualification).join(' / ')}
                         </p>
                         <p className="text-sm max-md:hidden leading-tight">
                           {" "}
@@ -278,13 +381,6 @@ export default function page() {
             )}
           </div>
 
-          <button
-            onClick={getPatients}
-            type="button"
-            className="px-8 py-3  font-semibold text-sm rounded-[10px]  bg-primary text-white"
-          >
-            Appointment for this Patient
-          </button>
 
           {/* -----------second card ( patient selection) -------------- */}
           {statusChange.patientStatus && (
@@ -331,11 +427,16 @@ export default function page() {
                           {/* ------checkout------------ */}
                           <input
                             type="radio"
-                            onChange={getInputDetails}
+                            onChange={() =>
+                              setStatusData((prev) => ({
+                                ...prev,
+                                patientSelection: item,
+                              }))
+                            }
                             name="patientSelection"
-                            value={index}
+                            value={item}
                             className="w-[20px] h-[20px]"
-                            checked={statusData.patientSelection == index}
+                            checked={statusData.patientSelection.id == item.id}
                           />
                           <div className="w-full space-y-2">
                             <div className="w-full flex  items-start gap-x-2">
@@ -366,7 +467,7 @@ export default function page() {
                                   </p>
                                 </div>
 
-                                <p className="text-sm">{item?.age}</p>
+                                <p className="text-sm">{item?.age} years</p>
                                 <p className="text-sm text-[#5A5D62] sm:hidden ">
                                   {item?.contact}
                                 </p>
@@ -378,8 +479,7 @@ export default function page() {
                                 className=""
                                 alt="load..."
                               />
-                              House, street, city, landmark, state, Country, Pin
-                              Code
+                             {item?.address}
                             </div>
                           </div>
                         </div>
@@ -463,7 +563,8 @@ export default function page() {
                         <div className="w-full space-y-1 flex items-center justify-between">
                           <div className="flex items-center gap-x-3">
                             <p className="text-lg font-medium">
-                              Rakesh Nadre {statusData.patientSelection}{" "}
+                          {statusData.patientSelection?.first_name}&nbsp;
+                                      {statusData.patientSelection?.middle_name}&nbsp;{statusData.patientSelection?.last_name}
                             </p>
                             <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">
                               Me
@@ -474,14 +575,14 @@ export default function page() {
                                 className=""
                                 alt="load..."
                               />
-                              8806010415
+                          {statusData.patientSelection?.contact}
                             </p>
                           </div>
                         </div>
 
-                        <p className="text-sm">26 Years, 4 Month Old</p>
+                        <p className="text-sm">{statusData.patientSelection?.age} years</p>
                         <p className="text-sm text-[#5A5D62] sm:hidden ">
-                          +91-9876543210{" "}
+                          {statusData.patientSelection?.contact}
                         </p>
                       </div>
                     </div>
@@ -491,7 +592,7 @@ export default function page() {
                         className=""
                         alt="load..."
                       />
-                      House, street, city, landmark, state, Country, Pin Code
+                     {statusData.patientSelection?.address}
                     </div>
                   </div>
                 </div>
@@ -660,7 +761,9 @@ export default function page() {
                   <p>Book by e-Queue</p>
                   <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-primary ">
                     <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-primary font-medium ">
-                      Today
+                    {moment().format("YYYY-MM-DD") === appointmentData?.equeueData?.date
+                      ? "Today"
+                      : moment(appointmentData?.equeueData?.date).format("DD MMM")}                
                     </p>
                     <hr />
                     <div className="w-full flexCenter gap-x-5 py-4">
@@ -668,12 +771,24 @@ export default function page() {
                         style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
                         className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
                       >
-                        2
+                        {appointmentData?.equeueData?.current_equeue + 1}
                       </div>
                       <div className="space-y-1">
                         <p className=" text-xs">Waiting Number</p>
                         <p className="text-[#01549A] font-semibold text-lg">
-                          01:15 PM
+                        {moment().format("YYYY-MM-DD") === appointmentData?.equeueData?.date
+                          ? moment().isBefore(
+                              moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
+                            )
+                            ? moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
+                                .add(appointmentData?.equeueData?.average_time, "minutes")
+                                .format("hh:mm A")
+                            : moment()
+                                .add(appointmentData?.equeueData?.average_time, "minutes")
+                                .format("hh:mm A")
+                          : moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
+                              .add(appointmentData?.equeueData?.average_time, "minutes")
+                              .format("hh:mm A")}
                         </p>
                       </div>
                     </div>
