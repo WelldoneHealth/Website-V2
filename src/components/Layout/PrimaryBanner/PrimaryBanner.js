@@ -7,16 +7,12 @@ import greyGeoLocationIcon from "@/asset/Icons/greyGeoLocation.svg";
 import primaryBg from "@/asset/Images/BG.png";
 import { AutoComplete } from "@/utils/components/Autocomplete";
 import { doctorHospitalSearch } from "@/modules/home/apis";
+import { Routes } from "@/shared/Routes";
+import { useRouter } from "next/navigation";
 
 export default function PrimaryBanner() {
   const [selectedDoctor, setSelectedDoctor] = useState(null);
-
-  const doctorOptions = [
-    { label: "Dr. John Doe", value: "john_doe" },
-    { label: "Dr. Jane Smith", value: "jane_smith" },
-    { label: "Dr. Alan Brown", value: "alan_brown" },
-  ];
-
+  const router = useRouter();
   return (
     <section
       style={{ backgroundImage: `url(${primaryBg?.src})` }}
@@ -60,11 +56,21 @@ export default function PrimaryBanner() {
             </div>
 
             <AutoComplete
-              options={doctorOptions}
+              // options={doctorOptions}
               value={selectedDoctor}
               fetchData={doctorHospitalSearch}
               onValueChange={(e) => {
                 console.log(e);
+              }}
+              onOptionClick={(combinedSlug) => {
+                const splittedSlug = combinedSlug?.split("_");
+                const doctorSlug = splittedSlug[0];
+                const branchSlug = splittedSlug[1];
+                const pathname = Routes.doctorDetailsPage.replace(
+                  "/[doctorSlug]/[branchSlug]",
+                  `/${doctorSlug}/${branchSlug}`
+                );
+                router.push(pathname);
               }}
               placeholder="Search doctor, clinic, hospital near by you"
               emptyMessage="No doctors found"

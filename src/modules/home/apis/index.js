@@ -11,7 +11,8 @@ export const doctorHospitalSearch = async (searchText = "") => {
             `${each?.suffix} ${each?.first_name ?? ""} ${
               each?.middle_name ?? ""
             } ${each?.last_name ?? ""}`,
-          value: each?.establishment_name || `${each?.first_name ?? ""}`,
+          value:
+            each?.establishment_name || `${each?.slug}_${each?.branch__slug}`,
         }));
       });
   }

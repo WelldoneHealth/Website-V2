@@ -19,6 +19,7 @@ export const AutoComplete = ({
   onValueChange = () => {},
   disabled = false,
   placeholder = "Select an option",
+  onOptionClick = () => {}, // New prop for handling onClick
 }) => {
   const inputRef = useRef(null);
   const [isOpen, setOpen] = useState(false);
@@ -74,9 +75,10 @@ export const AutoComplete = ({
       setInputValue(selectedOption.label);
       setSelected(selectedOption);
       onValueChange(selectedOption);
+      onOptionClick(selectedOption.value); // Trigger the onClick handler
       setTimeout(() => inputRef.current?.blur(), 0);
     },
-    [onValueChange]
+    [onValueChange, onOptionClick]
   );
 
   return (

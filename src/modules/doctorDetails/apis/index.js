@@ -1,12 +1,14 @@
 import axiosInstance from "@/shared/apis/axiosInstance";
 
-export const getDoctorDetails = async (doctorName, branchName) => {
+export const getDoctorDetails = async (
+  params = {
+    slug: null,
+    branch: null,
+  }
+) => {
   try {
     const response = await axiosInstance.get(`apiV1/doctors-profile/`, {
-      params: {
-        slug: doctorName,
-        branch: branchName,
-      },
+      params: { ...params },
     });
     return response;
   } catch (error) {
@@ -15,21 +17,20 @@ export const getDoctorDetails = async (doctorName, branchName) => {
   }
 };
 
-
-
-export const getEqueue=async (doctorName,branchName)=>{
-    try {
-        const response=await axiosInstance.get('apiV1/e-queue/',{
-            params:{
-                doctor_slug:doctorName, 
-                branch_slug:branchName
-            }
-        })
-        // console.log("the data is",response.data)
-        // console.log("the fetch done properly")
-        // console.log(response.data)
-        return response.data;
-    } catch (error) {
-        console.log("error fetching equeue list in  doctor profile page")       
-    }
-}
+export const getEqueue = async (
+  params = {
+    slug: null,
+    branch: null,
+  }
+) => {
+  try {
+    const response = await axiosInstance.get("apiV1/e-queue/", {
+      params: {
+        ...params,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.log("error fetching equeue list in  doctor profile page");
+  }
+};
