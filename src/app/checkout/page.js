@@ -1,17 +1,23 @@
 "use client"
 
-import React, {useState } from 'react'
+import React, {useRef, useState } from 'react'
+
 import doctorImage2 from "@/asset/Images/doctorImage2.png"
+import smallHospital3 from "@/asset/Images/smallHospital3.png"
+import smallDoc7 from "@/asset/Images/smallDoc7.png"
+
 import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
 import aroowIcon2 from "@/asset/Icons/arrow2.svg";
 import toast from 'react-hot-toast';
+import { appointmentOptions, paymentOptions } from '@/Utilities/extraDetails/checkoutDEtails'
 
 
 
 export default function page() {
 
+  
 
-  // -------------------------for viewing the diffrent parts of the process when one is completed--------------
+  // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
   const [statusChange,setStatusChange] = useState({
     doctorStatus:true,
     patientStatus:false,
@@ -25,8 +31,8 @@ export default function page() {
 const [statusData,setStatusData]=useState({
  doctorSelection:1,
  patientSelection:1, 
- paymentSelection:1,
- appointmentSelection:1
+ paymentSelection:paymentOptions[0],
+ appointmentSelection:appointmentOptions[0]
 })
 
 // --------------------- hide or view the 
@@ -39,17 +45,22 @@ const [dataVisibilityToggle,setDataVisibilityToggle]=useState({
 
 
 
+
 const getInputDetails=(e)=>{setStatusData({...statusData,[e.target.name]:e.target.value})}
 
+// ---------------------referncing the  steps for scrolloing intothe view port----------------------
+const stepRef = Array.from({ length: 3 }, () => useRef(null));
+const handleScrollToBox = (index) => {
+  stepRef[index].current?.scrollIntoView({ behavior: "smooth", block: "center" }); 
+};
 
 
 const [view,setView]=useState(false)
-
+const [sliderHeading,setSliderHeading]=useState("Select Doctor")
 const [viewSliderType,setViewSliderType]=useState({
   doctor:false,
   hospital:false,
-  appointment:false,
-  
+  appointment:false,  
 })
 
 
@@ -57,7 +68,7 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
     <>
-        <div className="w-full relative max-w-[1600px] mx-auto px-1   asm:px-3 lg:px-0 xl:px-8  py-8 flex  flex-col  lg:flex-row lg:justify-between justify-center  lg:items-start  gap-x-7 ">
+        <div className={`w-full relative max-w-[1600px] ${view?"h-[calc(100vh-60px)]  md:h-[calc(100vh-70px)] overflow-hidden":" "}   mx-auto px-1   asm:px-3 lg:px-0 xl:px-8  py-8 flex  flex-col  lg:flex-row lg:justify-between justify-center  lg:items-start  gap-x-7 `}>
   
 
   {/* ---------------appointment process-------------- */}
@@ -66,14 +77,15 @@ const [viewSliderType,setViewSliderType]=useState({
 {/* -----------first card ( doctor selection)---------------- */}
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]  border-[1px] border-[#EFEFEF]">
 
-<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "><p>1. Consult doctor and Clinic/Hospital</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,doctorsToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.doctorsToggle && "hidden"} `} >Change</button> </div>
+<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "><p>1. Office details</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,doctorsToggle:false})}  className={`text-primary  px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.doctorsToggle && "hidden"}  `} >Change</button> </div>
 {/* ----------------2 cards portion----------- */}
-{ !dataVisibilityToggle.doctorsToggle &&  <> <div className="w-full   space-y-5 p-5">
+{ !dataVisibilityToggle.doctorsToggle &&  <> <div className="w-full   space-y-4 p-5">
 {/* -------------------doctor card------------- */}
+<div className="space-y-1">
+  <p className='font-semibold '>Doctor</p>
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
   {/* ------doctor image------------ */}
-
-    <img src={doctorImage2?.src} className="w-[70px] hidden"  />
+    <img src={doctorImage2?.src} className="w-[100px] hidden"  />
   <div className="w-full space-y-1">
     <div className="w-full flex  justify-between items-center text-sm font-medium">
       <p className='text-sm'>Dr. Subhash V. Gupta</p>
@@ -82,44 +94,54 @@ const [viewSliderType,setViewSliderType]=useState({
   <p className="text-sm font-medium">MBBS. MD</p>
   <p classNametext="text-xs">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
   </div>
-</div>
-{/* ----------------hospital card------------- */}
-<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
-  {/* ------hospital image------------ */}
-
-    <img src={doctorImage2?.src} className="w-[70px] hidden"  />
-  <div className="w-full space-y-1">
-    <div className="w-full flex  justify-between items-center text-sm font-medium">
-      <p>Dr. Subhash V. Gupta</p>
-      <button type="button" onClick={()=>{setView(true);setViewSliderType({...viewSliderType,doctor:true})}} className="text-primary">Change</button>
-    </div>
-  <p className="text-sm font-medium">MBBS. MD</p>
-  <p classNametext="text-xs">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
   </div>
 </div>
-
+{/* ----------------hospital card------------- */}
+<div className="space-y-1">
+  <p className='font-semibold '>Clinic/Hospital</p>
+<div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
+  {/* ------doctor image------------ */}
+<div className="size-[100px] rounded-xl overflow-hidden hidden">
+    <img src={smallHospital3?.src} className="w-full "  />
 </div>
 
+  <div className="flex-1 space-y-1">
+    <div className="w-full flex  justify-between items-center text-sm font-medium">
+      <p className='text-sm'>Office-1</p>
+      <button onClick={()=>{setView(true);setViewSliderType({...viewSliderType,doctor:true})}} className="text-primary">Change</button>
+    </div>
+  <p className="text-sm font-medium">Hospital Name</p>
+  <p classNametext="text-xs">00 Ram Nagar, Near Mahadev Temple, Satpur, Nashik-422008</p>
+  </div>
+  </div>
+</div>
+</div>
+
+
 <div className="p-5 py-3 bg-[#EFEFEF]">
-  <button type="button" onClick={()=>(statusData.doctorSelection  &&  (setStatusChange({...statusChange,patientStatus:true}),setDataVisibilityToggle({...dataVisibilityToggle,doctorsToggle:true})))} className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Continue Appointment</button>
+  { !statusChange.patientStatus &&   <button type="button" onClick={()=>(statusData.doctorSelection  &&  (setStatusChange({...statusChange,patientStatus:true}),setDataVisibilityToggle({...dataVisibilityToggle,doctorsToggle:true}),handleScrollToBox(0)))} className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Continue Appointment1</button> }
+  { statusChange.patientStatus &&  <button type="button" onClick={()=>(statusData.doctorSelection  &&  (setDataVisibilityToggle({...dataVisibilityToggle,doctorsToggle:true,patientToggle:false}),handleScrollToBox(0)))} className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Continue Appointment2</button> }
 </div> </> }
 
-{/* ----------------------on button click new card updated ui------------------------ */}
+{/* ----------------------on button click new updated card ui------------------------ */}
 { dataVisibilityToggle.doctorsToggle && <div className="w-full  flex flex-col sm:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
 {/* -------------------doctor card------------- */}
-{[1,2].map((item)=><div key={item} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full flex-1 max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
+{[1,2].map((item)=> <div className="space-y-1">
+  <p className='font-semibold '>Clinic/Hospital</p>
+  <div key={item} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
   {/* ------doctor image------------ */}
 
-    <img src={doctorImage2?.src} className="w-[60px] sm:w-[70px] "  />
+    <img src={doctorImage2?.src} className="w-[60px] sm:w-[70px] md:w-[100px] "  />
   <div className="w-full space-y-1">
     <div className="w-full flex  justify-between items-center text-sm font-medium">
       <p className='max-sm:text-sm'>Dr. Subhash V. Gupta</p>
     </div>
   <p className="text-xs sm:text-sm font-medium">MBBS. MD</p>
-  <p className="text-sm max-md:hidden">Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules | Stomach Disorders Specialist</p>
+  <p className="text-sm max-md:hidden leading-tight">    Surgical Oncologist | Advanced Laparoscopic Surgeon | Nodules  </p>
   <p className="text-xs sm:text-sm md:hidden">Surgical Oncologist</p>
   </div>
-</div>)}
+</div> 
+</div>  )}
 
 
 </div>}
@@ -127,16 +149,19 @@ const [viewSliderType,setViewSliderType]=useState({
 </div>
 
 
-{/* -----------second card ( patiennt selection) -------------- */}
-{ statusChange.patientStatus &&  <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full   rounded-[10px]  border-[1px] border-[#EFEFEF]">
+
+{/* -----------second card ( patient selection) -------------- */}
+{  statusChange.patientStatus &&  <div ref={stepRef[0]} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full   rounded-[10px]  border-[1px] border-[#EFEFEF]" >
 
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "><p>2. Select a patient</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.patientToggle && "hidden"} `} >Change</button> </div>
-{/* 2 cards portion----------- */}
-{!dataVisibilityToggle.patientToggle  && <> <div className={`w-full space-y-5 p-5 ` }>
-{[1,2].map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-start gap-4 border-[1px] border-primary rounded-[10px]">
-  {/* ------checkout------------ */}
-  <input type="radio" onChange={getInputDetails} name="patientSelection" value={index}  className="w-[20px] h-[20px]" checked={statusData.patientSelection==index} />
 
+
+{/* 2 cards portion----------- */}
+{ !dataVisibilityToggle.patientToggle  && <> <div className={`w-full space-y-5 p-5 ` } >
+
+{[1,2].map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-start gap-4 border-[1px] border-primary rounded-[10px]">
+  {/* ------checkout------------ */} 
+  <input type="radio" onChange={getInputDetails} name="patientSelection" value={index}  className="w-[20px] h-[20px]" checked={statusData.patientSelection==index} />
   <div className="w-full space-y-2">
 <div className="w-full flex  items-start gap-x-2">
   <div className="bg-[#D9D9D9] size-[50px] flex justify-center items-center rounded-full font-medium  ">RN</div>
@@ -158,13 +183,19 @@ const [viewSliderType,setViewSliderType]=useState({
   <img src={outlineGeoLocationIcon?.src} className="" alt="load..."  />
   House, street, city, landmark, state, Country, Pin Code</div>
   </div>
-</div>)}
+
+</div>)} 
+
+
+{/* --------------------add patient button---------------------- */}
 <button type="button" onClick={()=>{setView(true);setViewSliderType({...viewSliderType,appointment:true})}} className="rounded-[20px] px-7 py-2 text-sm border-[1px] border-primary  text-primary font-medium  "  >+ Add a New Patient</button>
+
 </div>
 
  <div className="p-5 py-3 bg-[#EFEFEF]">
-  {/* <button type="button"   onClick={()=>(statusData.patientSelection  && (setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:true}),setStatusChange({...statusChange,paymentStatus:true})))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.patientSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}    disabled={!statusData.patientSelection} >Appointment for this Patient</button> */}
-  <button type="button"   onClick={()=>(statusData.patientSelection  && (setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:true}),setStatusChange({...statusChange,paymentStatus:true})))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.patientSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}    disabled={!statusData.patientSelection} >Appointment for this Patient</button>
+
+ { !statusChange.paymentStatus && <button type="button"   onClick={()=>(statusData.patientSelection  && (setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:true}),setStatusChange({...statusChange,paymentStatus:true}),handleScrollToBox(1)))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.patientSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}    disabled={!statusData.patientSelection} >Appointment for this Patient</button> }
+ { statusChange.paymentStatus && <button type="button"   onClick={()=>(statusData.patientSelection  && (setDataVisibilityToggle({...dataVisibilityToggle,patientToggle:true,paymentToggle:false}),handleScrollToBox(1)))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.patientSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}    disabled={!statusData.patientSelection} >Appointment for this Patient</button> }
 </div>
 </>}
 
@@ -192,44 +223,50 @@ const [viewSliderType,setViewSliderType]=useState({
   </div>
 </div> }
 
-</div>}
+
+
+</div>  }  
 
 
 {/* -----------third card (payment option)------------------- */}
-{ statusChange.paymentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full hidden rounded-[10px]  border-[1px] border-[#EFEFEF]">
-
+{ statusChange.paymentStatus && <div ref={stepRef[1]} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]  border-[1px] border-[#EFEFEF]">
+{console.log("---",paymentOptions)}
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4 flex items-center justify-between bg-[1px] border-[#EFEFEF]"><p>3. Payment options</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,paymentToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.paymentToggle && "hidden"} `}  >Change</button></div>
+
  {/*----------- 2 checkbox portion-----------  */}
-{ !dataVisibilityToggle.paymentToggle  &&   <>
-  <div className="space-y-5 p-5">
-{[1,2].map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
+{ !dataVisibilityToggle.paymentToggle  &&   <> 
+ <div className="space-y-5 p-5">
+
+{paymentOptions.map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
  {/* ------checkout------------  */}
-  <input type="radio" onChange={getInputDetails}  name="paymentSelection" value={index}   className="w-[20px] h-[20px]" checked={statusData.paymentSelection==index} />
+  <input type="radio" 
+ onChange={() => setStatusData((prev) => ({ ...prev, paymentSelection: item }))  }
+    name="paymentSelection" value={item.id}   className="w-[20px] h-[20px]" checked={statusData.paymentSelection?.id === item.id} />
 
   <div className="w-full space-y-1">
-  <p className="text-base font-medium ">Pay online {index}</p>
-  <p classNametext="text-[4px] sm:text-sm bg-red-900 ">Allows patients to pay for services through a secure platform, integrated with your EMR.</p>
+  <p className="text-base font-medium ">{item?.primaryText}</p>
+  <p classNametext="text-[4px] sm:text-sm bg-red-900 ">{item?.subText}</p>
   </div>
 </div>)}
  
-
 </div>
 
 <div className="p-5 py-3 bg-[#EFEFEF]">
-  <button type="button"  onClick={()=>(statusData.paymentSelection && (setDataVisibilityToggle({...dataVisibilityToggle,paymentToggle:true}),setStatusChange({...statusChange,appointmentStatus:true})))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.paymentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}   disabled={!statusData.paymentSelection} >Continue </button>
+ { !statusChange.appointmentStatus && <button type="button"  onClick={()=>(statusData.paymentSelection && (setDataVisibilityToggle({...dataVisibilityToggle,paymentToggle:true}),setStatusChange({...statusChange,appointmentStatus:true})))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.paymentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}   disabled={!statusData.paymentSelection} >Continue </button>}
+ { statusChange.appointmentStatus && <button type="button"  onClick={()=>(statusData.paymentSelection && (setDataVisibilityToggle({...dataVisibilityToggle,paymentToggle:true,appointmentToggle:false})))}  className={`px-8 py-3  font-semibold text-sm rounded-[10px]  ${!statusData.paymentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `}   disabled={!statusData.paymentSelection} >Continue </button> }
 </div>
 </>}
 
 {dataVisibilityToggle.paymentToggle && <div className="w-full p-5  font-medium ">
-<p className="px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA]">Pay online {statusData.paymentSelection}</p>
+<p className="px-7 py-3 rounded-[10px] border-[1px]  border-[#DADADA]" > {statusData.paymentSelection.primaryText}</p>
 </div> }
 
-</div>}
+</div> }
 
 
 
 {/* ----------fourth card( appointment summary)------------------- */}
-{statusChange.appointmentStatus && <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full hidden rounded-[10px]   border-[1px] border-[#EFEFEF]">
+{ statusChange.appointmentStatus && <div ref={stepRef[2]} style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full  rounded-[10px]   border-[1px] border-[#EFEFEF]">
 
 <div style={{boxShadow: "0px 0px 4px 0px #00000040"}} className="w-full font-medium p-4 flex items-center justify-between bg-[1px] border-[#EFEFEF]"><p>4. Appointment summary</p> <button type="button" onClick={()=>setDataVisibilityToggle({...dataVisibilityToggle,appointmentToggle:false})}  className={`text-primary px-4 font-semibold py-1 rounded-[10px] border-[1px] border-primary  ${!dataVisibilityToggle.appointmentToggle && "hidden"} `}  >Change</button></div>
 {/* 2 checkbox portion----------- */}
@@ -256,22 +293,22 @@ const [viewSliderType,setViewSliderType]=useState({
 </div>
 
 {/* ----------------checkout input----------- */}
-{!dataVisibilityToggle.appointmentToggle && <div className="space-y-5 px-5">
+{ !dataVisibilityToggle.appointmentToggle && <div className="space-y-5 px-5">
 <div className="space-y-3 text-sm">
   <p>What’s The Reson for Your Visit</p>
   <p className="border-[1px] border-[#919196] px-2 py-2 text-[#191A1B] rounded-[10px]">General Consultation</p>
 </div>
  <div className="space-y-3">
   <p>Have the patient seen these Doctors?</p>
-  {[1,2].map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
+  { appointmentOptions.map((item,index)=><div style={{boxShadow: "0px 0px 4px 0px #00000040"}} key={index} className="w-full max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]">
   {/* ------checkout------------ */}
-  <input type="radio" onChange={getInputDetails}  name="appointmentSelection" value={index}  className="w-[20px] h-[20px]" checked={statusData.appointmentSelection==index} />
+  <input type="radio" onChange={()=>setStatusData({...statusData,appointmentSelection:item})}  name="appointmentSelection" value={item.id}  className="w-[20px] h-[20px]" checked={statusData.appointmentSelection.id==item.id} />
 
   <div className="w-full space-y-1">
-  <p className="text-base font-medium">First Consult {index} </p> 
-  <p classNametext="text-sm">₹100</p>
+  <p className="text-base font-medium">{item?.mainInfo} </p> 
+  <p classNametext="text-sm">₹{item?.amount}</p>
   </div>
-</div>)}
+</div> ) }
 </div>
 </div> }
 
@@ -284,10 +321,13 @@ const [viewSliderType,setViewSliderType]=useState({
   <button type="button" onClick={()=>(statusData.appointmentSelection &&  setDataVisibilityToggle({...dataVisibilityToggle,appointmentToggle:true}) )} className={`px-8 py-3 max-sm:w-full  font-semibold text-sm rounded-[10px]  ${!statusData.appointmentSelection?" text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]":"bg-primary text-white"} `} disabled={!statusData.appointmentSelection}  >Confirm</button>
 </div>}
 
-</div>}
+</div> }
 
 
 
+
+
+{/* --------------------------mobile view button for moving to next processes-------------- */}
 <div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex justify-center items-center border-t-[2px] border-[#DADADA] ">
 <button type="button" onClick={success} className="w-[80%] my-8 px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Book Appointment</button>
 </div>
@@ -300,11 +340,12 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 
-{/* -------------confirmation buton----------------------- */}
+{/* -------------confirmation buton for final appointment subission----------------------- */}
 { dataVisibilityToggle.appointmentToggle && dataVisibilityToggle.patientToggle && dataVisibilityToggle.paymentToggle && dataVisibilityToggle.doctorsToggle &&  <button type="button" onClick={success} className="my-8 px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white ">Book Appointment</button>}
 
 
 </div>
+
 
 
 
@@ -356,19 +397,22 @@ const [viewSliderType,setViewSliderType]=useState({
 
 
 
-    { view &&  <div onClick={()=>{setView(false)}} className={`  max-w-[1600px] h-full  2xl:h-[200%] w-full left-1/2  absolute  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] bg-yellow-800  2xl:bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}>
 
+
+
+    { view &&  <div onClick={()=>{setView(false),setViewSliderType({doctor: false, hospital: false, appointment: false})}} className={`inset-0      max-w-[1600px] h-full overflow-y-scroll  2xl:h-[200%] w-full left-1/2  fixed  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] bg-yellow-800  2xl:bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}>
  <div  onClick={(e)=>e.stopPropagation()}  className={` w-[450px] h-auto absolute top-0 right-0  bg-white`}>   
  
 
+{/* ----------------heading of the slider which cmae out------------------- */}
   <div className="w-full mb-3 px-5 py-4 flex items-center gap-x-5 border-borderPrimary border-b-[1px] ">
 <img onClick={()=>{setView(false);setViewSliderType({ doctor:false, hospital:false, appointment:false})}}  src={aroowIcon2.src} className="w-4 cursor-pointer "  alt="load..." />
-<p className="text-base font-medium">Select Doctor</p>
+<p className="text-base font-medium">{sliderHeading}</p>
   </div>
 
 
- {/* ------------------------------doctors change---------------- */}
- {viewSliderType.doctor && <div onClick={(e)=>e.stopPropagation()} className=" min-h-screen px-5 space-y-4 w-full "> 
+ {/* ------------------------------doctors change slider---------------- */}
+ {viewSliderType.doctor && <div onClick={(e)=>e.stopPropagation()} className=" min-h-screen px-5 space-y-4 w-full bg-green-900"> 
   {[1,2,3].map((item,index)=><div key={index} style={{boxShadow: "0px 0px 4px 0px #00000040"}}  className="w-full px-3 py-2 flex justify-start items-center gap-3  rounded-[10px]">
   {/* ------doctor image------------ */}
   <input type="radio"  className="size-[25px]" />
@@ -385,7 +429,7 @@ const [viewSliderType,setViewSliderType]=useState({
   </div> }
 
 
-{/* --------------------add appointment form------------------ */}
+{/* --------------------add patient form  slider------------------- */}
 {viewSliderType.appointment && <div onClick={(e)=>e.stopPropagation()} className="w-full bg-red-800 px-5 space-y-2">
   {/* ----patient name------ */}
 <div >
