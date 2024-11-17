@@ -307,18 +307,17 @@ export default function page() {
                   {!statusChange.patientStatus && (
                     <button
                       type="button"
-                      onClick={() =>
-                        statusData.doctorSelection &&
-                        (setStatusChange({
+                      onClick={() => {
+                        setStatusChange({
                           ...statusChange,
                           patientStatus: true,
                         }),
-                        setDataVisibilityToggle({
-                          ...dataVisibilityToggle,
-                          doctorsToggle: true,
-                        }),
-                        handleScrollToBox(0))
-                      }
+                          setDataVisibilityToggle({
+                            ...dataVisibilityToggle,
+                            doctorsToggle: true,
+                          }),
+                          handleScrollToBox(0);
+                      }}
                       className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white "
                     >
                       Continue Appointment1
@@ -980,7 +979,12 @@ export default function page() {
               <div className="">
                 <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#01A400] ">
                   <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#01A400] font-medium ">
-                    Today
+                    {moment().format("YYYY-MM-DD") ===
+                    appointmentData?.equeueData?.date
+                      ? "Today"
+                      : moment(appointmentData?.equeueData?.date).format(
+                          "DD MMM"
+                        )}
                   </p>
                   <hr />
                   <div className="w-full flexCenter gap-x-5 py-4">
@@ -988,16 +992,47 @@ export default function page() {
                       style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
                       className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
                     >
-                      2
+                      {appointmentData?.equeueData?.current_equeue + 1}
                     </div>
                     <div className="space-y-1">
                       <p className=" text-xs">Waiting Number</p>
                       <p className="text-[#01549A] font-semibold text-lg">
-                        01:15 PM
+                        {moment().format("YYYY-MM-DD") ===
+                        appointmentData?.equeueData?.date
+                          ? moment().isBefore(
+                              moment(
+                                appointmentData?.equeueData?.expected_time,
+                                "HH:mm:ss"
+                              )
+                            )
+                            ? moment(
+                                appointmentData?.equeueData?.expected_time,
+                                "HH:mm:ss"
+                              )
+                                .add(
+                                  appointmentData?.equeueData?.average_time,
+                                  "minutes"
+                                )
+                                .format("hh:mm A")
+                            : moment()
+                                .add(
+                                  appointmentData?.equeueData?.average_time,
+                                  "minutes"
+                                )
+                                .format("hh:mm A")
+                          : moment(
+                              appointmentData?.equeueData?.expected_time,
+                              "HH:mm:ss"
+                            )
+                              .add(
+                                appointmentData?.equeueData?.average_time,
+                                "minutes"
+                              )
+                              .format("hh:mm A")}
                       </p>
                     </div>
                   </div>
-                  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px] mt-3 ">
+                  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
                     Given Time is approximate can vary by +/-60 Min
                   </p>
                 </div>
