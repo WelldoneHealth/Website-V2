@@ -12,6 +12,8 @@ import {
 } from "@/components/ui/drawer"; // Custom Drawer components
 import { useMutation } from "@tanstack/react-query";
 import { addPatient } from "../apis";
+import { Spinner } from "@/shared/components/Spinner";
+
 
 const AddPatientDrawer = ({ isOpen, onClose, setSelectedPatient }) => {
   const [formData, setFormData] = useState({
@@ -300,9 +302,9 @@ const AddPatientDrawer = ({ isOpen, onClose, setSelectedPatient }) => {
             <button
               type="button"
               onClick={handleSubmit}
-              className="my-7 rounded-[10px] w-full bg-primary text-white font-medium p-3"
+              className="my-7 rounded-[10px] w-full bg-primary text-white font-medium p-3 flex items-center justify-center"
             >
-              Submit
+            {addPatientMutation.isLoading?<Spinner /> :"Submit"}
             </button>
           </DrawerFooter>
         </DrawerContent>
