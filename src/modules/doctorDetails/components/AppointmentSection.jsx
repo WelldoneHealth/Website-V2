@@ -10,6 +10,15 @@ import moment from "moment";
 import { getEqueue } from "../apis";
 import { useRouter } from "next/navigation";
 import { useAppointmentStore } from "../data/appointmentStore";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 const AppointmentSection = ({
   doctorSlug = "",
   branchSlug = "",
@@ -21,6 +30,9 @@ const AppointmentSection = ({
   );
   const [selectedEqueue, setSelectedEqueue] = useState(null);
   const [focusableIndex, setFocusableIndex] = useState(0);
+  const [selectedBranch, setSelectedBranch] = useState(
+    doctorInfo?.establishment[0]?.id ?? null
+  );
 
   const { data: equeueDataList, isLoading: isEqueueLoading } = useQuery({
     queryKey: ["equeDetails"],
@@ -54,23 +66,27 @@ const AppointmentSection = ({
         </p>
         <hr className="my-3" />
 
-        <div className="px-2 sm:px-4 ">
+        <div className="px-2 sm:px-4 w-full">
           <p className="mb-2 font-medium ">Select office</p>
-          <div className="w-full border-[1px] border-[#919196] rounded-xl flex ">
-            <div className="flex-1 text-center space-y-1  py-2  ">
-              <p className="font-medium ">Hospital Name, Branch</p>
-              <p className="text-[13px]">
-                Plot No, 00 Ram Nagar, Near Mahadeo Temple,satpur, Nashik-422008
-              </p>
-            </div>
-            <div className="w-[60px] flexCenter bg-[#F5F5F5] border-l-2 border-black">
-              <img
-                src={sliderArrowIcon?.src}
-                className="rotate-90 h-4 "
-                alt="load..."
-              />
-            </div>
-          </div>
+          <Select
+            className="w-full"
+            onValueChange={setSelectedBranch}
+            value={selectedBranch}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Select a branch" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                <SelectLabel>Branches</SelectLabel>
+                {doctorInfo?.establishment?.map((branch) => (
+                  <SelectItem key={branch?.id} value={branch?.id}>
+                    {branch?.clinic_name}
+                  </SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
 
           {/* <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
             <button
@@ -97,8 +113,11 @@ const AppointmentSection = ({
             </button>
           </div> */}
 
-          <div className={` mt-5 w-full ${equeueDataList.length>0? "h-[500px]":"h-auto"} overflow-y-scroll flex flex-col items-center gap-y-5 `}>
-            
+          <div
+            className={` mt-5 w-full ${
+              equeueDataList.length > 0 ? "h-[500px]" : "h-auto"
+            } overflow-y-scroll flex flex-col items-center gap-y-5 `}
+          >
             {isEqueueLoading ? (
               <Loader />
             ) : (
@@ -170,12 +189,17 @@ const AppointmentSection = ({
             </button> */}
             <button
               type="button"
+              disabled={!selectedBranch}
               className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
               onClick={() => {
                 router.push(`/checkout`);
                 setAppointmentData({
                   equeueData: selectedEqueue,
                   doctorData: doctorInfo,
+                  branchData:
+                    doctorInfo?.establishment?.filter(
+                      (e) => e?.id === selectedBranch
+                    )[0] ?? null,
                 });
               }}
             >
@@ -199,63 +223,7 @@ const AppointmentSection = ({
             </p>
           </div>
         </div>
-
-        {/* <div className="my-5 space-y-6 w-full">
-              <div className="w-full rounded-md bg-white flex gap-x-3 px-7 py-5">
-                <img src={clockIcon?.src} className="w-4" />
-                <input
-                  type="date"
-                  className="text-[#B6B6B6] outline-none"
-                  placeholder="dd-mm-yyyy"
-                />
-              </div>
-              <div className="w-full rounded-md bg-white flex gap-x-3 px-7 py-5">
-                <img src={clockIcon?.src} className="w-4" />
-                <input
-                  type="text"
-                  className="text-[#B6B6B6] outline-none"
-                  placeholder="08:00 AM"
-                />
-              </div>
-              <div className="w-full rounded-md bg-white flex gap-x-3 px-7 py-5">
-                <img src={clockIcon?.src} className="w-4" />
-                <input
-                  type="text"
-                  className="text-[#B6B6B6] outline-none"
-                  placeholder="Patient Name"
-                />
-              </div>
-              <button
-                type="button"
-                className="w-full flexCenter  rounded-md bg-[#01549A] font-normal hover:bg-opacity-90 text-white px-7 py-5 cursor-pointer"
-              >
-                Book Appointement
-              </button>
-            </div>
-            <div className="">
-              <h6 className="text-[#023C77] font-medium">Select Service</h6>
-              <div className="flex my-3 gap-x-5 ">
-                {[1, 2, 3].map((item, index) => (
-                  <span
-                    key={index}
-                    className="  px-2 py-1 rounded-md  hover:bg-[#01549A] hover:text-white cursor-pointer transitiona-all linear duration-300   text-[13px]   border-[1px] hover:border-transparent border-[#898989]"
-                  >
-                    Consult
-                  </span>
-                ))}
-              </div>
-            </div> */}
       </div>
-
-      {/* -----------------social icons-------- */}
-      {/* <div className="my-5 w-full  border-[1px] border-[#A7A7A7] rounded-md px-4 sm:px-7 py-5 ">
-            <p className="text-[26px]  font-medium text-[#023C77]">
-              Social Icon
-            </p>
-            <div className="my-2 flex flex-wrap gap-x-4 gap-y-2 ">
-              <div className="w-10 h-10 rounded-full cursor-pointer hover:bg-[#01549A] bg-[#EFF8FF]"></div>
-            </div>
-          </div> */}
     </div>
   );
 };

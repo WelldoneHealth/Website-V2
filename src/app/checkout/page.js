@@ -19,6 +19,7 @@ import AddPatientDrawer from "@/modules/checkout/components/addPatientDrawer";
 import { addAppointment } from "@/modules/checkout/apis";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
@@ -88,7 +89,7 @@ export default function page() {
 
   const appointmentMutation = useMutation({
     mutationFn: addAppointment,
-    onSuccess: (data) => {
+    onSuccess: () => {
       router.push(`/checkout/appointmentConfirmation`);
     },
     onError: (error) => {
@@ -98,11 +99,11 @@ export default function page() {
   });
 
   const handleBookAppointment = () => {
-    console.log("sds");
     let formData = {
       ...{
         doctor: appointmentData?.doctorData?.id,
         slot: null,
+        branch: appointmentData?.branchData?.id,
         is_first_visit: statusData.appointmentSelection?.isFirstVisit,
         is_equeue: true,
         amount: statusData.appointmentSelection?.charge ?? 0,
@@ -178,11 +179,7 @@ export default function page() {
                           </p>
                           <button
                             onClick={() => {
-                              setView(true);
-                              setViewSliderType({
-                                ...viewSliderType,
-                                doctor: true,
-                              });
+                              router.back();
                             }}
                             className="text-primary"
                           >
@@ -214,26 +211,24 @@ export default function page() {
                       </div>
 
                       <div className="flex-1 space-y-1">
-                        <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="text-sm">Office-1</p>
+                        <div className="w-full flex  justify-between items-start text-sm font-medium">
+                          <div className="">
+                            <p className="text-sm font-medium">
+                              {appointmentData?.branchData?.clinic_name}
+                            </p>
+                            <p classNametext="text-xs">
+                              {appointmentData?.branchData?.clinic_address}
+                            </p>
+                          </div>
                           <button
                             onClick={() => {
-                              setView(true);
-                              setViewSliderType({
-                                ...viewSliderType,
-                                doctor: true,
-                              });
+                              router.back();
                             }}
                             className="text-primary"
                           >
                             Change
                           </button>
                         </div>
-                        <p className="text-sm font-medium">Hospital Name</p>
-                        <p classNametext="text-xs">
-                          00 Ram Nagar, Near Mahadev Temple, Satpur,
-                          Nashik-422008
-                        </p>
                       </div>
                     </div>
                   </div>

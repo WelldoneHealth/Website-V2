@@ -16,16 +16,14 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
     isLoading,
     error,
   } = useQuery({
-    queryKey: ["doctorDetails"],
+    queryKey: ["doctorDetails", doctorSlug, branchSlug],
     queryFn: async () => {
       const response = await getDoctorDetails({
         slug: doctorSlug,
         branch: branchSlug,
       });
-      console.log({ response });
       return response.data; // Return doctor details directly
     },
-    staleTime: 3000,
   });
 
   if (isLoading) return <div>Loading...</div>;

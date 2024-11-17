@@ -24,7 +24,7 @@ export const getEqueue = async (
   }
 ) => {
   try {
-    const response = await axiosInstance.get("apiV1/e-queue/", {
+    const response = await axiosInstance.get("apiV1/welldone-equeue/", {
       params: {
         ...params,
       },
