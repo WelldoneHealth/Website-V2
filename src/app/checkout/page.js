@@ -77,7 +77,7 @@ const [patientList,setPatientList]=useState([])
   };
 
 
-  useEffect(()=>getPatients(),[])
+  // useEffect(()=>getPatients(),[])
   
 
 
@@ -280,11 +280,11 @@ const [patientList,setPatientList]=useState([])
 
 
 
-          {/* <button onClick={getPatients}
+          <button onClick={getPatients}
                         type="button"
                         className="px-8 py-3  font-semibold text-sm rounded-[10px]  bg-primary text-white"  >
                         Appointment for this Patient
-                      </button> */}
+                      </button>
 
 
 
