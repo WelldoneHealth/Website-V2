@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import calendarIcon from "@/asset/Icons/calendar.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
@@ -9,8 +9,16 @@ import { Loader } from "lucide-react";
 import moment from "moment";
 import { getEqueue } from "../apis";
 import { useRouter } from "next/navigation";
-const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
+import { useAppointmentStore } from "../data/appointmentStore";
+const AppointmentSection = ({
+  doctorSlug = "",
+  branchSlug = "",
+  doctorInfo = null,
+}) => {
   const router = useRouter();
+  const setAppointmentData = useAppointmentStore(
+    (state) => state.setAppointmentData
+  );
   const [selectedEqueue, setSelectedEqueue] = useState(null);
   const [focusableIndex, setFocusableIndex] = useState(0);
 
@@ -24,6 +32,12 @@ const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
     enabled: true,
     staleTime: 3000,
   });
+
+  useEffect(() => {
+    if (equeueDataList?.length > 0) {
+      setSelectedEqueue(equeueDataList[0]);
+    }
+  }, [equeueDataList]);
 
   if (isEqueueLoading) return <Loader />;
 
@@ -117,6 +131,7 @@ const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
                   key={index}
                   onClick={() => {
                     setFocusableIndex(index);
+                    setSelectedEqueue(item);
                     console.log("the item is", item);
                   }}
                   className={` w-[95%]  cursor-pointer  rounded-[10px] border-[1px] border-l-[5px]  ${
@@ -182,6 +197,10 @@ const AppointmentSection = ({ doctorSlug = "", branchSlug = "" }) => {
               className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
               onClick={() => {
                 router.push(`/checkout`);
+                setAppointmentData({
+                  equeueData: selectedEqueue,
+                  doctorData: doctorInfo,
+                });
               }}
             >
               Appointment Booking

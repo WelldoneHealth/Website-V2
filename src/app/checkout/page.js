@@ -13,8 +13,10 @@ import {
   paymentOptions,
 } from "@/Utilities/extraDetails/checkoutDetails";
 import axiosInstance from "@/shared/apis/axiosInstance";
+import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
 
 export default function page() {
+  const appointmentData = useAppointmentStore((state) => state.appointmentData);
   // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -62,24 +64,22 @@ export default function page() {
     appointment: false,
   });
 
-
-const [patientList,setPatientList]=useState([])
- const getPatients = async () => {
-  // console.log("ok hello")
+  const [patientList, setPatientList] = useState([]);
+  const getPatients = async () => {
+    // console.log("ok hello")
     try {
       const response = await axiosInstance.get("apiV1/patient/");
-      console.log("the data returned from respone is",response.data)
-      setPatientList(response.data)
+      console.log("the data returned from respone is", response.data);
+      setPatientList(response.data);
       return response.data;
     } catch (error) {
       console.log("error fetching equeue list in  doctor profile page");
     }
   };
 
-
-  // useEffect(()=>getPatients(),[])
-  
-
+  useEffect(() => {
+    getPatients();
+  }, []);
 
   return (
     <>
@@ -278,15 +278,13 @@ const [patientList,setPatientList]=useState([])
             )}
           </div>
 
-
-
-          <button onClick={getPatients}
-                        type="button"
-                        className="px-8 py-3  font-semibold text-sm rounded-[10px]  bg-primary text-white"  >
-                        Appointment for this Patient
-                      </button>
-
-
+          <button
+            onClick={getPatients}
+            type="button"
+            className="px-8 py-3  font-semibold text-sm rounded-[10px]  bg-primary text-white"
+          >
+            Appointment for this Patient
+          </button>
 
           {/* -----------second card ( patient selection) -------------- */}
           {statusChange.patientStatus && (
@@ -320,66 +318,72 @@ const [patientList,setPatientList]=useState([])
               {!dataVisibilityToggle.patientToggle && (
                 <>
                   {" "}
-                  <div className={`w-full space-y-5 p-5 `}>
-                    {patientList.length>0 && patientList.map((item, index) => (
-                      <div
-                        style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-                        key={index}
-                        className="w-full max-w-[900px] p-4 flex justify-start items-start gap-4 border-[1px] border-primary rounded-[10px]"
-                      >
-                        {/* ------checkout------------ */}
-                        <input
-                          type="radio"
-                          onChange={getInputDetails}
-                          name="patientSelection"
-                          value={index}
-                          className="w-[20px] h-[20px]"
-                          checked={statusData.patientSelection == index}
-                        />
-                        <div className="w-full space-y-2">
-                          <div className="w-full flex  items-start gap-x-2">
-                            <div className="bg-[#D9D9D9] size-[50px] flex justify-center items-center rounded-full font-medium  ">
-                              RN
-                            </div>
-                            <div className="w-full  space-y-[2px] ">
-                              <div className="w-full my-auto space-y-1 flex items-center justify-between">
-                                <div className="flex items-center gap-x-3">
-                                  <p className="text-base sm:text-lg font-medium">
-                                   {item?.first_name}&nbsp;{item?.middle_name}&nbsp;{item?.last_name}
-                                  </p>
-                                  <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">
-                                    Me
-                                  </p>
-                                  <p className="flex max-sm:hidden items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md">
-                                    <img
-                                      src={outlineGeoLocationIcon?.src}
-                                      className=""
-                                      alt="load..."
-                                    />
-                                    {item?.contact}
+                  <div
+                    className={`w-full space-y-5 p-5 max-h-[400px] overflow-y-scroll`}
+                  >
+                    {patientList.length > 0 &&
+                      patientList.map((item, index) => (
+                        <div
+                          style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
+                          key={index}
+                          className="w-full max-w-[900px] p-4 flex justify-start items-start gap-4 border-[1px] border-primary rounded-[10px]"
+                        >
+                          {/* ------checkout------------ */}
+                          <input
+                            type="radio"
+                            onChange={getInputDetails}
+                            name="patientSelection"
+                            value={index}
+                            className="w-[20px] h-[20px]"
+                            checked={statusData.patientSelection == index}
+                          />
+                          <div className="w-full space-y-2">
+                            <div className="w-full flex  items-start gap-x-2">
+                              <div className="bg-[#D9D9D9] size-[50px] flex justify-center items-center rounded-full font-medium  ">
+                                RN
+                              </div>
+                              <div className="w-full  space-y-[2px] ">
+                                <div className="w-full my-auto space-y-1 flex items-center justify-between">
+                                  <div className="flex items-center gap-x-3">
+                                    <p className="text-base sm:text-lg font-medium">
+                                      {item?.first_name}&nbsp;
+                                      {item?.middle_name}&nbsp;{item?.last_name}
+                                    </p>
+                                    <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">
+                                      Me
+                                    </p>
+                                    <p className="flex max-sm:hidden items-center gap-x-1 px-3 py-[2px] bg-[#EFEFEF] rounded-md">
+                                      <img
+                                        src={outlineGeoLocationIcon?.src}
+                                        className=""
+                                        alt="load..."
+                                      />
+                                      {item?.contact}
+                                    </p>
+                                  </div>
+                                  <p className="text-primary font-medium">
+                                    Edit
                                   </p>
                                 </div>
-                                <p className="text-primary font-medium">Edit</p>
-                              </div>
 
-                              <p className="text-sm">{item?.age}</p>
-                              <p className="text-sm text-[#5A5D62] sm:hidden ">
-                              {item?.contact}
-                              </p>
+                                <p className="text-sm">{item?.age}</p>
+                                <p className="text-sm text-[#5A5D62] sm:hidden ">
+                                  {item?.contact}
+                                </p>
+                              </div>
+                            </div>
+                            <div className=" max-sm:hidden px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
+                              <img
+                                src={outlineGeoLocationIcon?.src}
+                                className=""
+                                alt="load..."
+                              />
+                              House, street, city, landmark, state, Country, Pin
+                              Code
                             </div>
                           </div>
-                          <div className=" max-sm:hidden px-4 py-[2px] max-w-max rounded-md flex  gap-x-2 bg-[#EFEFEF]">
-                            <img
-                              src={outlineGeoLocationIcon?.src}
-                              className=""
-                              alt="load..."
-                            />
-                            House, street, city, landmark, state, Country, Pin
-                            Code
-                          </div>
                         </div>
-                      </div>
-                    ))}
+                      ))}
 
                     {/* --------------------add patient button---------------------- */}
                     <button
@@ -1112,8 +1116,6 @@ const [patientList,setPatientList]=useState([])
           </div>
         </div>
       )}
-
-     
     </>
   );
 }

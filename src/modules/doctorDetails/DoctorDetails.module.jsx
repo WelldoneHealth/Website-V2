@@ -62,7 +62,11 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
           ))}
         </div>
       </div>
-      <AppointmentSection doctorSlug={doctorSlug} branchSlug={branchSlug} />
+      <AppointmentSection
+        doctorSlug={doctorSlug}
+        branchSlug={branchSlug}
+        doctorInfo={doctorInfo}
+      />
     </div>
   );
 };
