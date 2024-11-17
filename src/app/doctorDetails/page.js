@@ -28,7 +28,7 @@ import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import calendarIcon from "@/asset/Icons/calendar.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import SectionTabsWithMaps from "@/components/setionTabsWithMaps/SectionTabsWithMaps";
-import OfficeSafetyPrecautions from "@/Utilities/smallComponents/OfficeSafetyPrecautions";
+import OfficeSafetyPrecautions from "@/utils/smallComponents/OfficeSafetyPrecautions";
 
 export default function page() {
   const [newTabData, setNewTabData] = useState(1);
@@ -36,9 +36,7 @@ export default function page() {
     setNewTabData(tabNumber);
   };
 
-
-
-  const [appointmentView,setAppointmentView]=useState(false)
+  const [appointmentView, setAppointmentView] = useState(false);
 
   const educationalData = [
     {
@@ -90,16 +88,19 @@ export default function page() {
   return (
     <>
       <div className="w-full relative max-w-[1600px] mx-auto px-1   asm:px-3 lg:px-0  mt-8 flex  flex-col  lg:flex-row lg:justify-between justify-center  lg:items-start  gap-x-7">
-       
-       {/* --------------------details part-------------- */}
-        <div className={` w-full lg:w-[68%] max-h-max   ${appointmentView && "h-[200px] overflow-hidden"} `}>
+        {/* --------------------details part-------------- */}
+        <div
+          className={` w-full lg:w-[68%] max-h-max   ${
+            appointmentView && "h-[200px] overflow-hidden"
+          } `}
+        >
           {/* ----- //todo doctor detail scetion---------- */}
           <div className="my-7 w-full flex flex-col  max-md:items-center md:flex-row   gap-x-6 gap-y-8 ">
             {/* -----------image portion- */}
-            <div className="w-[60%] asm:w-[50%] sm:w-[42%] md:w-[38%] lg:w-[35%]   overflow-hidden">
+            <div className="">
               <img
                 src={doctorDetailsImage?.src}
-                className="w-full rounded-md"
+                className="h-[250px] rounded-md"
                 alt="load..."
               />
             </div>
@@ -131,31 +132,8 @@ export default function page() {
                   Pune, Maharashtra
                 </p>
               </div>
-
-              {/* --------//todo  initial ui things--------- */}
-              {/* <div className="">
-              <hr className='my-7  w-[95%]' /> 
-               <p className='w-full lg:w-[95%] text-[#A7A7A7] font-normal text-base leading-relaxed ' >Nullam.</p> 
-              <div className="my-2 flex justify-between items-center flex-wrap gap-y-3 ">
-    <div className="">
-            <div className="">
-             image
-                </div>
-                <div className="">
-                    <p className='text-[#A7A7A7] font-normal text-base'><i className="fas fa-camera"></i>Our Call Service!</p>
-                    <p className='text-[#01549A] text-lg asm:text-[22px] font-semibold'>+99 00 555 222 33</p>
-                </div>
-    </div>
-    <div className="mx-2 flex gap-x-2">
-      icons section
-        <div className="w-8 h-8 rounded-full cursor-pointer hover:bg-[#01549A] bg-[#EFF8FF]"></div>
-    </div>
-</div> 
-</div> */}
             </div>
           </div>
-
-          {/* <hr className="my-7  w-[95%]" /> */}
 
           {/* ------------//todo  extra things about doctor------------ */}
           <div className="my-7 w-full  flex max-lg:overflow-x-auto max-lg:whitespace-nowrap gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
@@ -181,24 +159,32 @@ export default function page() {
           </div>
 
           {/* -------------------- //todo  extra safety precautions------------ */}
-         <OfficeSafetyPrecautions  />
-
+          <OfficeSafetyPrecautions />
 
           {/* ------------- //todo  map portion with timings--------------- */}
-          <div style={{boxShadow:" 0px 0px 4px 0px #00000040"}} className="w-full my-7   rounded-[20px] px-2  sm:px-4  py-2 ">
+          <div
+            style={{ boxShadow: " 0px 0px 4px 0px #00000040" }}
+            className="w-full my-7   rounded-[20px] px-2  sm:px-4  py-2 "
+          >
             <h3 className=" my-3 text-[22px] sm:text-2xl  text-[#01549A] font-semibold">
               Clinic/ Hospital details
             </h3>
 
-            <div  className="w-full text-[15px] flex flex-wrap gap-y-5 justify-start gap-x-5 border-b-2 border-[#EFEFEF]">
-            {[1,2,3].map((item,index)=>  <button key={index}
-                onClick={() => changeTab(item)}
-                type="button"
-className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[#01549A]  ${newTabData===item?"bg-[#F3FAFF]   text-[#01549A]":"bg-[#F5F5F5] text-[#919196]"}`}
-              >
-                Office{item}
-              </button>)}
-            
+            <div className="w-full text-[15px] flex flex-wrap gap-y-5 justify-start gap-x-5 border-b-2 border-[#EFEFEF]">
+              {[1, 2, 3].map((item, index) => (
+                <button
+                  key={index}
+                  onClick={() => changeTab(item)}
+                  type="button"
+                  className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[#01549A]  ${
+                    newTabData === item
+                      ? "bg-[#F3FAFF]   text-[#01549A]"
+                      : "bg-[#F5F5F5] text-[#919196]"
+                  }`}
+                >
+                  Office{item}
+                </button>
+              ))}
             </div>
 
             {newTabData === 1 ? (
@@ -208,20 +194,17 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
             ) : newTabData === 3 ? (
               <SectionTabsWithMaps tab="3" />
             ) : null}
-
-           
           </div>
 
           {/* -----------//todo new eductaion------------- */}
-          {/* <div className="w-full my-7 ">
+          <div className="w-full my-7 ">
             <h3 className=" my-3 max-asm:hidden text-[22px] sm:text-2xl text-[#01549A] font-semibold">
               Education and background
             </h3>
             <h3 className=" my-3 text-[22px] asm:hidden  text-[#01549A] font-semibold">
-              Education 
+              Education
             </h3>
             <div className="w-full flex flex-col sm:flex-row gap-x-7 gap-y-5  my-7 ">
-        --------educationl cards----------- 
               {[1, 2].map((item, index) => (
                 <div
                   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
@@ -236,7 +219,9 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
                       />
                     </div>
                     <div className="">
-                      <p className="font-medium text-base ssm:text-lg">M.B.B.S.</p>
+                      <p className="font-medium text-base ssm:text-lg">
+                        M.B.B.S.
+                      </p>
                       <p className="text-sm ssm:text-xs ">General practice</p>
                     </div>
                   </div>
@@ -267,15 +252,14 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
                 </div>
               ))}
             </div>
-          </div> */}
+          </div>
 
           {/* ----------- //todo training and experience ------------- */}
-          {/* <div className="w-full my-7 ">
+          <div className="w-full my-7 ">
             <h3 className=" my-3 text-2xl text-[#01549A] font-semibold">
-              Training and Experience 
+              Training and Experience
             </h3>
             <div className="w-full flex flex-col sm:flex-row gap-x-7 gap-y-5  my-7 ">
-          --------educationl cards----------
               {[1, 2].map((item, index) => (
                 <div
                   style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
@@ -331,104 +315,172 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
                 </div>
               ))}
             </div>
-          </div> */}
+          </div>
 
-<button onClick={()=>setAppointmentView(!appointmentView)}  type="button" className="w-full sm:w-[90%] lg:hidden sm:max-w-[300px] my-2 cursor-pointer mx-auto py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Appointment Booking</button>
-        
+          <button
+            onClick={() => setAppointmentView(!appointmentView)}
+            type="button"
+            className="w-full sm:w-[90%] lg:hidden sm:max-w-[300px] my-2 cursor-pointer mx-auto py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
+          >
+            Appointment Booking
+          </button>
         </div>
-
-
 
         {/* <div className={` w-full  hidden    min-h-screen bg-black absolute  ${!appointmentView? " -top-[700%] " : " top-0 " }   lg:w-[90%]
            transition-all duration-150 ease-linear`}>
           <button onClick={()=>setAppointmentView(!appointmentView)} type="button" className="my-8 mx-auto rounded-[10px] px-6 py-3 bg-back text-white border-2 border-white font-medium"  >hello</button>
         </div> */}
 
-
-
-
-
-
-
         {/* -------------//todo appointement section --------*/}
-        <div className={`w-full flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white  ${!appointmentView? " -top-[700%] " : " top-0  " }   transition-all duration-150 ease-linear`}>
+        <div
+          className={`w-full flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white  ${
+            !appointmentView ? " -top-[700%] " : " top-0  "
+          }   transition-all duration-150 ease-linear`}
+        >
           {/* -----//todo appointemnet part-------- */}
 
-          <button type="button" onClick={()=>setAppointmentView(!appointmentView)} className="lg:hidden absolute right-6 text-3xl font-semibold text-[#01549A] " >X</button>
+          <button
+            type="button"
+            onClick={() => setAppointmentView(!appointmentView)}
+            className="lg:hidden absolute right-6 text-3xl font-semibold text-[#01549A] "
+          >
+            X
+          </button>
 
           <div className="w-full max-lg:mt-16  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
-<p className="text-lg font-medium  text-center">Book Your Appointment </p>
-<hr className="my-3" />
+            <p className="text-lg font-medium  text-center">
+              Book Your Appointment{" "}
+            </p>
+            <hr className="my-3" />
 
-<div className="px-2 sm:px-4 ">
-  <p className="mb-2 font-medium ">Select office</p>
-  <div className="w-full border-[1px] border-[#919196] rounded-xl flex ">
-    <div className="flex-1 text-center space-y-1  py-2  ">
-      <p className="font-medium ">Hospital Name, Branch</p>
-      <p className="text-[13px]">Plot No, 00 Ram Nagar, Near Mahadeo Temple,satpur, Nashik-422008</p>
-    </div>
-    <div className="w-[60px] flexCenter bg-[#F5F5F5] border-l-2 border-black">
-      <img src={sliderArrowIcon?.src} className="rotate-90 h-4 " alt="load..."  />
-    </div>
-  </div>
+            <div className="px-2 sm:px-4 ">
+              <p className="mb-2 font-medium ">Select office</p>
+              <div className="w-full border-[1px] border-[#919196] rounded-xl flex ">
+                <div className="flex-1 text-center space-y-1  py-2  ">
+                  <p className="font-medium ">Hospital Name, Branch</p>
+                  <p className="text-[13px]">
+                    Plot No, 00 Ram Nagar, Near Mahadeo Temple,satpur,
+                    Nashik-422008
+                  </p>
+                </div>
+                <div className="w-[60px] flexCenter bg-[#F5F5F5] border-l-2 border-black">
+                  <img
+                    src={sliderArrowIcon?.src}
+                    className="rotate-90 h-4 "
+                    alt="load..."
+                  />
+                </div>
+              </div>
 
-  <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
-    <button  type="button" className="bg-white p-1  cursor-pointer flex items-center rounded-md text-[#01549A]  text-sm font-medium" >Book by e-Queue <img src={rotatingArrowIcon?.src} className="ml-2" alt="load..." /></button>
-    <button type="button" className="bg-[#F0F0F0] p-1 flex items-center rounded-md text-[#919196] text-sm  font-medium" >Book by slot <img src={rotatingArrowIcon?.src} className="hidden ml-2" alt="load..." /></button>
-  </div>
+              <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
+                <button
+                  type="button"
+                  className="bg-white p-1  cursor-pointer flex items-center rounded-md text-[#01549A]  text-sm font-medium"
+                >
+                  Book by e-Queue{" "}
+                  <img
+                    src={rotatingArrowIcon?.src}
+                    className="ml-2"
+                    alt="load..."
+                  />
+                </button>
+                <button
+                  type="button"
+                  className="bg-[#F0F0F0] p-1 flex items-center rounded-md text-[#919196] text-sm  font-medium"
+                >
+                  Book by slot{" "}
+                  <img
+                    src={rotatingArrowIcon?.src}
+                    className="hidden ml-2"
+                    alt="load..."
+                  />
+                </button>
+              </div>
 
-<div className="w-full flex flex-col items-center gap-y-5 ">
+              <div className="w-full flex flex-col items-center gap-y-5 ">
+                {/* --------calendar cards------- */}
+                <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#01A400] ">
+                  <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#01A400] font-medium ">
+                    Today
+                  </p>
+                  <hr />
+                  <div className="w-full flexCenter gap-x-5 py-4">
+                    <div
+                      style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
+                      className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
+                    >
+                      2
+                    </div>
+                    <div className="space-y-1">
+                      <p className=" text-xs">Waiting Number</p>
+                      <p className="text-[#01549A] font-semibold text-lg">
+                        01:15 PM
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                    Given Time is approximate can vary by +/-60 Min
+                  </p>
+                </div>
 
-  {/* --------calendar cards------- */}
-  <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#01A400] " >
-    <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#01A400] font-medium ">Today</p>
-    <hr />
-    <div className="w-full flexCenter gap-x-5 py-4">
-      <div style={{boxShadow: "0px 0px 4px 2px #00000040"
-}} className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold ">
-        2
-      </div>
-      <div className="space-y-1">
-        <p className=" text-xs">Waiting Number</p>
-        <p className="text-[#01549A] font-semibold text-lg">01:15 PM</p>
-      </div>
-    </div>
-    <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">Given Time is approximate can vary by +/-60 Min</p>
-  </div>
+                <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#919196] ">
+                  <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#919196] font-medium ">
+                    Today
+                  </p>
+                  <hr />
+                  <div className="w-full flexCenter gap-x-5 py-4">
+                    <div
+                      style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
+                      className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
+                    >
+                      2
+                    </div>
+                    <div className="space-y-1">
+                      <p className=" text-xs text-[#5A5D62]">Waiting Number</p>
+                      <p className="text-[#01549A] font-semibold text-lg">
+                        01:15 PM
+                      </p>
+                    </div>
+                  </div>
+                  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                    Given Time is approximate can vary by +/-60 Min
+                  </p>
+                </div>
 
-  <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-[#919196] " >
-    <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#919196] font-medium ">Today</p>
-    <hr />
-    <div className="w-full flexCenter gap-x-5 py-4">
-      <div style={{boxShadow: "0px 0px 4px 2px #00000040"
-}} className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold ">
-        2
-      </div>
-      <div className="space-y-1">
-        <p className=" text-xs text-[#5A5D62]">Waiting Number</p>
-        <p className="text-[#01549A] font-semibold text-lg">01:15 PM</p>
-      </div>
-    </div>
-    <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">Given Time is approximate can vary by +/-60 Min</p>
-  </div>
+                <div className=" w-[95%] flex justify-between items-center py-1 px-3  rounded-[10px] border-[1px] border-l-[5px] border-[#919196]">
+                  <p className=" font-medium text-lg text-[#5A5D62] ">Future</p>
+                  <img
+                    src={calendarIcon?.src}
+                    className="w-[22px]"
+                    alt="load..."
+                  />
+                </div>
+              </div>
 
-  <div className=" w-[95%] flex justify-between items-center py-1 px-3  rounded-[10px] border-[1px] border-l-[5px] border-[#919196]">
-    <p className=" font-medium text-lg text-[#5A5D62] ">Future</p>
-    <img src={calendarIcon?.src} className="w-[22px]" alt="load..."  />
-  </div>
-
-</div>
-
-<div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
-<button type="button" className="w-[95%] border-[1px] border-[#01549A] py-2 text-center text-[#01549A] rounded-[10px] font-medium">Add to family doctor</button>
-<button type="button" className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Appointment Booking</button>
-<button  type="button" className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]">Checkout</button>
-<p className="text-xs text-center font-normal">No charges for appointment booking.</p>
-</div>
-
-</div>
-
-
+              <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
+                <button
+                  type="button"
+                  className="w-[95%] border-[1px] border-[#01549A] py-2 text-center text-[#01549A] rounded-[10px] font-medium"
+                >
+                  Add to family doctor
+                </button>
+                <button
+                  type="button"
+                  className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
+                >
+                  Appointment Booking
+                </button>
+                <button
+                  type="button"
+                  className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
+                >
+                  Checkout
+                </button>
+                <p className="text-xs text-center font-normal">
+                  No charges for appointment booking.
+                </p>
+              </div>
+            </div>
 
             {/* <div className="my-5 space-y-6 w-full">
               <div className="w-full rounded-md bg-white flex gap-x-3 px-7 py-5">
@@ -475,11 +527,7 @@ className={`  px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[
                 ))}
               </div>
             </div> */}
-
-
           </div>
-
-
 
           {/* -----------------social icons-------- */}
           {/* <div className="my-5 w-full  border-[1px] border-[#A7A7A7] rounded-md px-4 sm:px-7 py-5 ">

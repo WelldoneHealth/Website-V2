@@ -4,10 +4,13 @@ import wellDoneLogo from "@/asset/Icons/wellDoneLogo.svg";
 import loginIcon from "@/asset/Icons/login_icon.svg";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import hamburgerIcon from "@/asset/Icons/hamburger.svg";
+import Link from "next/link";
+import { logout } from "@/shared/utils/logoutHandler";
+import useAuthStore from "@/store/authStore";
 
 export default function Navbar() {
   const [navOpen, setNavOpen] = useState(false);
-
+  const token = useAuthStore((state) => state.token);
   const toggleNavBar = () => {
     console.log("clcicked");
     setNavOpen(!navOpen);
@@ -21,7 +24,9 @@ export default function Navbar() {
         // className="w-screen   flexBetween  h-screen fixed top-0"
       >
         <div className="w-24">
-          <img src={wellDoneLogo?.src} className="w-full"  alt="load..." />
+          <Link href={"/"}>
+            <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
+          </Link>
         </div>
 
         <div className="flex gap-x-24 ">
@@ -34,14 +39,34 @@ export default function Navbar() {
             />{" "}
             I have Clinic/ Hospital
           </button>
-          <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
-            Login{" "}
-            <div className="flexCenter rounded-full p-1 bg-white">
-              <img src={loginIcon?.src} width={16} height={11} alt="load..." />
-            </div>
-          </button>
+          {token ? (
+            <button
+              onClick={logout}
+              className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white"
+            >
+              Logout
+            </button>
+          ) : (
+            <Link href={"/login"}>
+              <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
+                Login{" "}
+                <div className="flexCenter rounded-full p-1 bg-white">
+                  <img
+                    src={loginIcon?.src}
+                    width={16}
+                    height={11}
+                    alt="load..."
+                  />
+                </div>
+              </button>
+            </Link>
+          )}
 
-          <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden">
+          <button
+            type="button"
+            onClick={toggleNavBar}
+            className="w-8 block md:hidden"
+          >
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
           </button>
         </div>
@@ -52,33 +77,52 @@ export default function Navbar() {
           setNavOpen(!navOpen);
           e.stopPropagation();
         }}
-        // bg-[#EFF8FF] 
+        // bg-[#EFF8FF]
         className={`w-full  fixed transition-all duration-300 top-0 overflow-hidden   bg-[#F5F5F5] bg-opacity-10 z-50  h-screen  ${
           navOpen ? "left-0" : "-left-full"
         } `}
       >
-        <div onClick={(e)=>e.stopPropagation()} className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center ">
-        <button type="button" onClick={toggleNavBar} className="w-8  right-0  block md:hidden">
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center "
+        >
+          <button
+            type="button"
+            onClick={toggleNavBar}
+            className="w-8  right-0  block md:hidden"
+          >
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
           </button>
 
-<div className="w-28 h-28 rounded-lg   ">
-  <img src={wellDoneLogo?.src} className="w-full mt-14"  />
-</div>
-<div className="my-10 w-full flex flex-col justify-center items-center  text-2xl font-medium space-y-6">
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
- <div       style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
- className=" w-[90%] flexCenter rounded-md py-2 ">Home</div>
-</div>
-
-
-
-
+          <div className="w-28 h-28 rounded-lg   ">
+            <img src={wellDoneLogo?.src} className="w-full mt-14" />
+          </div>
+          <div className="my-10 w-full flex flex-col justify-center items-center  text-2xl font-medium space-y-6">
+            <div
+              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+              className=" w-[90%] flexCenter rounded-md py-2 "
+            >
+              Home
+            </div>
+            <div
+              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+              className=" w-[90%] flexCenter rounded-md py-2 "
+            >
+              Home
+            </div>
+            <div
+              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+              className=" w-[90%] flexCenter rounded-md py-2 "
+            >
+              Home
+            </div>
+            <div
+              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+              className=" w-[90%] flexCenter rounded-md py-2 "
+            >
+              Home
+            </div>
+          </div>
         </div>
       </div>
     </>

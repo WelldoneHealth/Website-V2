@@ -5,8 +5,8 @@ import searchIcon from "@/asset/Icons/search.svg";
 import filterDropdownButtonIcon from "@/asset/Icons/filterDropdownButton.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
-import DoctorCard from "@/Utilities/listingPageCards/DoctorCard";
-import HospitalCard from "@/Utilities/listingPageCards/HospitalCard";
+import DoctorCard from "@/utils/listingPageCards/DoctorCard";
+import HospitalCard from "@/utils/listingPageCards/HospitalCard";
 import dynamic from "next/dynamic";
 
 // Dynamically import Leaflet components
