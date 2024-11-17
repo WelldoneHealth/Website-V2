@@ -15,107 +15,107 @@ import {
 import axiosInstance from "@/shared/apis/axiosInstance";
 import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
 import moment from "moment";
+import AddPatientDrawer from "@/modules/checkout/components/addPatientDrawer";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
-//   const appointmentData = {
-//     "equeueData": {
-//         "id": 1169,
-//         "user": "9c278b86-4b81-436c-9d35-1f5fdf26bbc6",
-//         "branch": 212,
-//         "doctor": 196,
-//         "limit": 100,
-//         "is_active": true,
-//         "current_equeue": 4,
-//         "on_going_equeue": 0,
-//         "date": "2024-11-17",
-//         "expected_time": "12:36:08.410974",
-//         "doctor_visiting_time": "10:00:00",
-//         "average_time": 10,
-//         "reason": null,
-//         "doctor_closing_time": "22:00:00",
-//         "doctor_name": "Dr. Vishal Deore",
-//         "new_expected_time": "21:24:33.843113"
-//     },
-//     "doctorData": {
-//         "id": 195,
-//         "suffix": "dr.",
-//         "first_name": "Rakesh",
-//         "middle_name": "Nimba",
-//         "last_name": "Nandre",
-//         "first_time_charge": 100,
-//         "returning_charge": 50,
-//         "total_experience": 5,
-//         "specialty_treatment": "",
-//         "other_specialty_treatment": "",
-//         "video_consultation": false,
-//         "biography": "",
-//         "activity": "",
-//         "establishment": [],
-//         "achievements": [],
-//         "accomplishments": [],
-//         "experience": [
-//             {
-//                 "id": 75,
-//                 "registration_id": 195,
-//                 "job_title": "Resident",
-//                 "practice_type": "Intern",
-//                 "practice_speciality": "Genral",
-//                 "hospital_name": "Test Hospital",
-//                 "city": "Pune",
-//                 "from_date": "2024-10-03",
-//                 "to_date": "2024-10-12",
-//                 "is_completed": true
-//             }
-//         ],
-//         "skills": [],
-//         "education_and_background": [
-//             {
-//                 "id": 114,
-//                 "registration_id": 195,
-//                 "qualification": "MBBS",
-//                 "faculty": "Genral",
-//                 "institute": "MUHS",
-//                 "city": "Nashik, Maharashtra",
-//                 "passing_year": "2021",
-//                 "is_completed": true
-//             },
-//             {
-//                 "id": 117,
-//                 "registration_id": 195,
-//                 "qualification": "DNYS",
-//                 "faculty": "Naturopathy",
-//                 "institute": "MGBIRS",
-//                 "city": "Shrinagar,jk",
-//                 "passing_year": "2024",
-//                 "is_completed": true
-//             }
-//         ],
-//         "image_gallery": [],
-//         "clinic_contact": [
-//             {
-//                 "phone": "8823828323"
-//             }
-//         ],
-//         "address": [],
-//         "service_charge": [
-//             {
-//                 "id": 153,
-//                 "service": "ECG",
-//                 "charge": 300
-//             },
-//             {
-//                 "id": 154,
-//                 "service": "AGT",
-//                 "charge": 200
-//             }
-//         ],
-//         "language": []
-//     }
-// }
+  //   const appointmentData = {
+  //     "equeueData": {
+  //         "id": 1169,
+  //         "user": "9c278b86-4b81-436c-9d35-1f5fdf26bbc6",
+  //         "branch": 212,
+  //         "doctor": 196,
+  //         "limit": 100,
+  //         "is_active": true,
+  //         "current_equeue": 4,
+  //         "on_going_equeue": 0,
+  //         "date": "2024-11-17",
+  //         "expected_time": "12:36:08.410974",
+  //         "doctor_visiting_time": "10:00:00",
+  //         "average_time": 10,
+  //         "reason": null,
+  //         "doctor_closing_time": "22:00:00",
+  //         "doctor_name": "Dr. Vishal Deore",
+  //         "new_expected_time": "21:24:33.843113"
+  //     },
+  //     "doctorData": {
+  //         "id": 195,
+  //         "suffix": "dr.",
+  //         "first_name": "Rakesh",
+  //         "middle_name": "Nimba",
+  //         "last_name": "Nandre",
+  //         "first_time_charge": 100,
+  //         "returning_charge": 50,
+  //         "total_experience": 5,
+  //         "specialty_treatment": "",
+  //         "other_specialty_treatment": "",
+  //         "video_consultation": false,
+  //         "biography": "",
+  //         "activity": "",
+  //         "establishment": [],
+  //         "achievements": [],
+  //         "accomplishments": [],
+  //         "experience": [
+  //             {
+  //                 "id": 75,
+  //                 "registration_id": 195,
+  //                 "job_title": "Resident",
+  //                 "practice_type": "Intern",
+  //                 "practice_speciality": "Genral",
+  //                 "hospital_name": "Test Hospital",
+  //                 "city": "Pune",
+  //                 "from_date": "2024-10-03",
+  //                 "to_date": "2024-10-12",
+  //                 "is_completed": true
+  //             }
+  //         ],
+  //         "skills": [],
+  //         "education_and_background": [
+  //             {
+  //                 "id": 114,
+  //                 "registration_id": 195,
+  //                 "qualification": "MBBS",
+  //                 "faculty": "Genral",
+  //                 "institute": "MUHS",
+  //                 "city": "Nashik, Maharashtra",
+  //                 "passing_year": "2021",
+  //                 "is_completed": true
+  //             },
+  //             {
+  //                 "id": 117,
+  //                 "registration_id": 195,
+  //                 "qualification": "DNYS",
+  //                 "faculty": "Naturopathy",
+  //                 "institute": "MGBIRS",
+  //                 "city": "Shrinagar,jk",
+  //                 "passing_year": "2024",
+  //                 "is_completed": true
+  //             }
+  //         ],
+  //         "image_gallery": [],
+  //         "clinic_contact": [
+  //             {
+  //                 "phone": "8823828323"
+  //             }
+  //         ],
+  //         "address": [],
+  //         "service_charge": [
+  //             {
+  //                 "id": 153,
+  //                 "service": "ECG",
+  //                 "charge": 300
+  //             },
+  //             {
+  //                 "id": 154,
+  //                 "service": "AGT",
+  //                 "charge": 200
+  //             }
+  //         ],
+  //         "language": []
+  //     }
+  // }
 
-
-  console.log("------>",appointmentData)
+  console.log("------>", appointmentData);
   // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -128,7 +128,7 @@ export default function page() {
 
   // -----------------------for storing the input values of the processed data------------------
   const [statusData, setStatusData] = useState({
-    doctorSelection:appointmentData.doctorData ,
+    doctorSelection: appointmentData.doctorData,
     patientSelection: 1,
     paymentSelection: paymentOptions[0],
     appointmentSelection: appointmentOptions[0],
@@ -169,7 +169,7 @@ export default function page() {
     try {
       const response = await axiosInstance.get("apiV1/patient/");
       console.log("the data returned from respone is", response.data);
-      setStatusData({...statusData,patientSelection:response.data[0]})
+      setStatusData({ ...statusData, patientSelection: response.data[0] });
       setPatientList(response.data);
       return response.data;
     } catch (error) {
@@ -236,8 +236,10 @@ export default function page() {
                       />
                       <div className="w-full space-y-1">
                         <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="text-sm">{appointmentData?.doctorData?.first_name}&nbsp;{appointmentData?.doctorData?.middle_name}&nbsp;
-                          {appointmentData?.doctorData?.last_name}
+                          <p className="text-sm">
+                            {appointmentData?.doctorData?.first_name}&nbsp;
+                            {appointmentData?.doctorData?.middle_name}&nbsp;
+                            {appointmentData?.doctorData?.last_name}
                           </p>
                           <button
                             onClick={() => {
@@ -252,10 +254,14 @@ export default function page() {
                             Change
                           </button>
                         </div>
-                        <p className="text-sm font-medium">{appointmentData?.doctorData?.education_and_background?.map((item) => item.qualification).join(' / ')} </p>
+                        <p className="text-sm font-medium">
+                          {appointmentData?.doctorData?.education_and_background
+                            ?.map((item) => item.qualification)
+                            .join(" / ")}{" "}
+                        </p>
                         <p classNametext="text-xs">
                           Surgical Oncologist | Advanced Laparoscopic Surgeon |
-                          Nodules | Stomach Disorders Specialist  ------
+                          Nodules | Stomach Disorders Specialist ------
                         </p>
                       </div>
                     </div>
@@ -359,11 +365,16 @@ export default function page() {
                       />
                       <div className="w-full space-y-1">
                         <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="max-sm:text-sm">{statusData.doctorSelection?.first_name}&nbsp;{statusData.doctorSelection?.middle_name}&nbsp;
-                          {statusData.doctorSelection?.last_name}</p>
+                          <p className="max-sm:text-sm">
+                            {statusData.doctorSelection?.first_name}&nbsp;
+                            {statusData.doctorSelection?.middle_name}&nbsp;
+                            {statusData.doctorSelection?.last_name}
+                          </p>
                         </div>
                         <p className="text-xs sm:text-sm font-medium">
-                        {statusData.doctorSelection?.education_and_background?.map((item) => item.qualification).join(' / ')}
+                          {statusData.doctorSelection?.education_and_background
+                            ?.map((item) => item.qualification)
+                            .join(" / ")}
                         </p>
                         <p className="text-sm max-md:hidden leading-tight">
                           {" "}
@@ -380,7 +391,6 @@ export default function page() {
               </div>
             )}
           </div>
-
 
           {/* -----------second card ( patient selection) -------------- */}
           {statusChange.patientStatus && (
@@ -479,7 +489,7 @@ export default function page() {
                                 className=""
                                 alt="load..."
                               />
-                             {item?.address}
+                              {item?.address}
                             </div>
                           </div>
                         </div>
@@ -563,8 +573,9 @@ export default function page() {
                         <div className="w-full space-y-1 flex items-center justify-between">
                           <div className="flex items-center gap-x-3">
                             <p className="text-lg font-medium">
-                          {statusData.patientSelection?.first_name}&nbsp;
-                                      {statusData.patientSelection?.middle_name}&nbsp;{statusData.patientSelection?.last_name}
+                              {statusData.patientSelection?.first_name}&nbsp;
+                              {statusData.patientSelection?.middle_name}&nbsp;
+                              {statusData.patientSelection?.last_name}
                             </p>
                             <p className="text-primary px-2 flexCenter border-[1px] border-primary rounded-[5px]">
                               Me
@@ -575,12 +586,14 @@ export default function page() {
                                 className=""
                                 alt="load..."
                               />
-                          {statusData.patientSelection?.contact}
+                              {statusData.patientSelection?.contact}
                             </p>
                           </div>
                         </div>
 
-                        <p className="text-sm">{statusData.patientSelection?.age} years</p>
+                        <p className="text-sm">
+                          {statusData.patientSelection?.age} years
+                        </p>
                         <p className="text-sm text-[#5A5D62] sm:hidden ">
                           {statusData.patientSelection?.contact}
                         </p>
@@ -592,7 +605,7 @@ export default function page() {
                         className=""
                         alt="load..."
                       />
-                     {statusData.patientSelection?.address}
+                      {statusData.patientSelection?.address}
                     </div>
                   </div>
                 </div>
@@ -761,9 +774,12 @@ export default function page() {
                   <p>Book by e-Queue</p>
                   <div className="w-[95%] bg-[#F7FFF6] rounded-[10px] border-[1px] border-l-[5px] border-primary ">
                     <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-primary font-medium ">
-                    {moment().format("YYYY-MM-DD") === appointmentData?.equeueData?.date
-                      ? "Today"
-                      : moment(appointmentData?.equeueData?.date).format("DD MMM")}                
+                      {moment().format("YYYY-MM-DD") ===
+                      appointmentData?.equeueData?.date
+                        ? "Today"
+                        : moment(appointmentData?.equeueData?.date).format(
+                            "DD MMM"
+                          )}
                     </p>
                     <hr />
                     <div className="w-full flexCenter gap-x-5 py-4">
@@ -776,19 +792,38 @@ export default function page() {
                       <div className="space-y-1">
                         <p className=" text-xs">Waiting Number</p>
                         <p className="text-[#01549A] font-semibold text-lg">
-                        {moment().format("YYYY-MM-DD") === appointmentData?.equeueData?.date
-                          ? moment().isBefore(
-                              moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
-                            )
-                            ? moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
-                                .add(appointmentData?.equeueData?.average_time, "minutes")
-                                .format("hh:mm A")
-                            : moment()
-                                .add(appointmentData?.equeueData?.average_time, "minutes")
-                                .format("hh:mm A")
-                          : moment(appointmentData?.equeueData?.expected_time, "HH:mm:ss")
-                              .add(appointmentData?.equeueData?.average_time, "minutes")
-                              .format("hh:mm A")}
+                          {moment().format("YYYY-MM-DD") ===
+                          appointmentData?.equeueData?.date
+                            ? moment().isBefore(
+                                moment(
+                                  appointmentData?.equeueData?.expected_time,
+                                  "HH:mm:ss"
+                                )
+                              )
+                              ? moment(
+                                  appointmentData?.equeueData?.expected_time,
+                                  "HH:mm:ss"
+                                )
+                                  .add(
+                                    appointmentData?.equeueData?.average_time,
+                                    "minutes"
+                                  )
+                                  .format("hh:mm A")
+                              : moment()
+                                  .add(
+                                    appointmentData?.equeueData?.average_time,
+                                    "minutes"
+                                  )
+                                  .format("hh:mm A")
+                            : moment(
+                                appointmentData?.equeueData?.expected_time,
+                                "HH:mm:ss"
+                              )
+                                .add(
+                                  appointmentData?.equeueData?.average_time,
+                                  "minutes"
+                                )
+                                .format("hh:mm A")}
                         </p>
                       </div>
                     </div>
@@ -977,260 +1012,27 @@ export default function page() {
         </div>
       </div>
 
-      {view && (
-        <div
-          onClick={() => {
-            setView(false),
-              setViewSliderType({
-                doctor: false,
-                hospital: false,
-                appointment: false,
-              });
-          }}
-          className={`inset-0      max-w-[1600px] h-full overflow-y-scroll  2xl:h-[200%] w-full left-1/2  fixed  top-0   mx-auto overflow-hidden  transform -translate-x-1/2  z-[100000] bg-yellow-800  2xl:bg-gray-400 bg-opacity-30 transition-all duration-150 ease-linear`}
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className={` w-[450px] h-auto absolute top-0 right-0  bg-white`}
-          >
-            {/* ----------------heading of the slider which cmae out------------------- */}
-            <div className="w-full mb-3 px-5 py-4 flex items-center gap-x-5 border-borderPrimary border-b-[1px] ">
-              <img
-                onClick={() => {
-                  setView(false);
-                  setViewSliderType({
-                    doctor: false,
-                    hospital: false,
-                    appointment: false,
-                  });
-                }}
-                src={aroowIcon2.src}
-                className="w-4 cursor-pointer "
-                alt="load..."
-              />
-              <p className="text-base font-medium">{sliderHeading}</p>
-            </div>
-
-            {/* ------------------------------doctors change slider---------------- */}
-            {viewSliderType.doctor && (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className=" min-h-screen px-5 space-y-4 w-full bg-green-900"
-              >
-                {[1, 2, 3].map((item, index) => (
-                  <div
-                    key={index}
-                    style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-                    className="w-full px-3 py-2 flex justify-start items-center gap-3  rounded-[10px]"
-                  >
-                    {/* ------doctor image------------ */}
-                    <input type="radio" className="size-[25px]" />
-
-                    <img src={doctorImage2?.src} className="w-[60px] " />
-                    <div className="w-full space-y-[2px]">
-                      <div className="w-full flex  justify-between items-center text-sm font-medium">
-                        <p className="text-[15px]">Dr. Subhash V. Gupta</p>
-                      </div>
-                      <p className="text-sm font-medium">MBBS. MD</p>
-                      <p className="text-[13px]">
-                        Surgical Oncologist | Advanced Laparoscopic Surgeon |
-                        Nodules | Stomach Disorders Specialist
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-
-            {/* --------------------add patient form  slider------------------- */}
-            {viewSliderType.appointment && (
-              <div
-                onClick={(e) => e.stopPropagation()}
-                className="w-full bg-red-800 px-5 space-y-2"
-              >
-                {/* ----patient name------ */}
-                <div>
-                  <label class="block text-sm font-medium mb-1">
-                    Patient Name<span class=" text-lg text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-                {/* --------last name------ */}
-                <div>
-                  <label class="block text-sm font-medium mb-1">
-                    Last Name<span class=" text-lg text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                {/* -----------------middle name------------ */}
-                <div className="  ">
-                  <label class="block text-sm font-medium mb-1">
-                    Middle Name{" "}
-                    <span class="  text-[#000000CC]">(Optional)</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* --------mobile number------------- */}
-
-                {/* --------------email-------------- */}
-                <div className="  ">
-                  <label class="block text-sm font-medium mb-1">
-                    Email Address
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* ----------------age--------------------- */}
-                <div>
-                  <label class="block text-sm font-medium mb-1">
-                    Age<span class=" text-lg text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                {/* ------------gender--------------- */}
-                <div>
-                  <label
-                    for="selection"
-                    className="block text-sm font-medium mb-1"
-                  >
-                    Gender<span className="text-lg text-red-600">*</span>
-                  </label>
-                  <select
-                    id="selection"
-                    className="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    required
-                  >
-                    <option value="">Select</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-                {/* ---------------blood group--------------- */}
-                <div>
-                  <label
-                    for="selection"
-                    className="block text-sm font-medium mb-1"
-                  >
-                    Blood Group
-                  </label>
-                  <select
-                    id="selection"
-                    className="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    required
-                  >
-                    <option value="">Select</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-                {/* --------------language-------------- */}
-                <div>
-                  <label
-                    for="selection"
-                    className="block text-sm font-medium mb-1"
-                  >
-                    Primry Language
-                  </label>
-                  <select
-                    id="selection"
-                    className="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    required
-                  >
-                    <option value="">English (Practice Default)</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-                {/* ------------------address-------------------- */}
-                <div className="  ">
-                  <label class="block text-sm font-medium mb-1">
-                    Address of Patient
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* --------------------------pincode---------------- */}
-                <div>
-                  <label class="block text-sm font-medium mb-1">
-                    Pincode<span class=" text-lg text-red-600">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    required
-                  />
-                </div>
-
-                {/* --------------city-------------- */}
-                <div className="  ">
-                  <label class="block text-sm font-medium mb-1">City</label>
-                  <input
-                    type="text"
-                    class="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
-                  />
-                </div>
-
-                {/* ---------------relationship-------------------- */}
-                <div>
-                  <label class="block text-sm font-medium mb-1">
-                    Your Relationship
-                    <span class=" text-lg text-red-600">*</span>
-                  </label>
-                  <select
-                    id="selection"
-                    className="w-full h-[45px]  border-[1px] border-[#C4C4C4] rounded-md  px-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary"
-                    required
-                  >
-                    <option value="">Select</option>
-                    <option value="option1">Option 1</option>
-                    <option value="option2">Option 2</option>
-                    <option value="option3">Option 3</option>
-                  </select>
-                </div>
-
-                <div className="w-full">
-                  <button
-                    type="button"
-                    className="my-7 rounded-[10px] w-full bg-primary text-white font-medium p-3 "
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
+      <AddPatientDrawer
+        isOpen={view}
+        onClose={() => {
+          setView(false);
+        }}
+        setSelectedPatient={(item) => {
+          setStatusData((prev) => ({
+            ...prev,
+            patientSelection: item,
+          }));
+          setDataVisibilityToggle((prev) => ({
+            ...prev,
+            patientToggle: true,
+          }));
+          setStatusChange({
+            ...statusChange,
+            paymentStatus: true,
+          }),
+            handleScrollToBox(1);
+        }}
+      />
     </>
   );
 }
