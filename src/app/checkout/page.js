@@ -16,115 +16,20 @@ import axiosInstance from "@/shared/apis/axiosInstance";
 import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
 import moment from "moment";
 import AddPatientDrawer from "@/modules/checkout/components/addPatientDrawer";
+import { addAppointment } from "@/modules/checkout/apis";
+import { useMutation } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
-  //   const appointmentData = {
-  //     "equeueData": {
-  //         "id": 1169,
-  //         "user": "9c278b86-4b81-436c-9d35-1f5fdf26bbc6",
-  //         "branch": 212,
-  //         "doctor": 196,
-  //         "limit": 100,
-  //         "is_active": true,
-  //         "current_equeue": 4,
-  //         "on_going_equeue": 0,
-  //         "date": "2024-11-17",
-  //         "expected_time": "12:36:08.410974",
-  //         "doctor_visiting_time": "10:00:00",
-  //         "average_time": 10,
-  //         "reason": null,
-  //         "doctor_closing_time": "22:00:00",
-  //         "doctor_name": "Dr. Vishal Deore",
-  //         "new_expected_time": "21:24:33.843113"
-  //     },
-  //     "doctorData": {
-  //         "id": 195,
-  //         "suffix": "dr.",
-  //         "first_name": "Rakesh",
-  //         "middle_name": "Nimba",
-  //         "last_name": "Nandre",
-  //         "first_time_charge": 100,
-  //         "returning_charge": 50,
-  //         "total_experience": 5,
-  //         "specialty_treatment": "",
-  //         "other_specialty_treatment": "",
-  //         "video_consultation": false,
-  //         "biography": "",
-  //         "activity": "",
-  //         "establishment": [],
-  //         "achievements": [],
-  //         "accomplishments": [],
-  //         "experience": [
-  //             {
-  //                 "id": 75,
-  //                 "registration_id": 195,
-  //                 "job_title": "Resident",
-  //                 "practice_type": "Intern",
-  //                 "practice_speciality": "Genral",
-  //                 "hospital_name": "Test Hospital",
-  //                 "city": "Pune",
-  //                 "from_date": "2024-10-03",
-  //                 "to_date": "2024-10-12",
-  //                 "is_completed": true
-  //             }
-  //         ],
-  //         "skills": [],
-  //         "education_and_background": [
-  //             {
-  //                 "id": 114,
-  //                 "registration_id": 195,
-  //                 "qualification": "MBBS",
-  //                 "faculty": "Genral",
-  //                 "institute": "MUHS",
-  //                 "city": "Nashik, Maharashtra",
-  //                 "passing_year": "2021",
-  //                 "is_completed": true
-  //             },
-  //             {
-  //                 "id": 117,
-  //                 "registration_id": 195,
-  //                 "qualification": "DNYS",
-  //                 "faculty": "Naturopathy",
-  //                 "institute": "MGBIRS",
-  //                 "city": "Shrinagar,jk",
-  //                 "passing_year": "2024",
-  //                 "is_completed": true
-  //             }
-  //         ],
-  //         "image_gallery": [],
-  //         "clinic_contact": [
-  //             {
-  //                 "phone": "8823828323"
-  //             }
-  //         ],
-  //         "address": [],
-  //         "service_charge": [
-  //             {
-  //                 "id": 153,
-  //                 "service": "ECG",
-  //                 "charge": 300
-  //             },
-  //             {
-  //                 "id": 154,
-  //                 "service": "AGT",
-  //                 "charge": 200
-  //             }
-  //         ],
-  //         "language": []
-  //     }
-  // }
+  const router = useRouter();
 
-  console.log("------>", appointmentData);
-  // -------------------------for viewing the diffrent parts of the process when one is completed or when the button is pressed to move next step--------------
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
     patientStatus: false,
     paymentStatus: false,
     appointmentStatus: false,
   });
-
-  const success = () => console.log("Appointment Booking Successful");
 
   // -----------------------for storing the input values of the processed data------------------
   const [statusData, setStatusData] = useState({
@@ -180,6 +85,36 @@ export default function page() {
   useEffect(() => {
     getPatients();
   }, []);
+
+  const appointmentMutation = useMutation({
+    mutationFn: addAppointment,
+    onSuccess: (data) => {
+      router.push(`/checkout/appointmentConfirmation`);
+    },
+    onError: (error) => {
+      console.error("Error adding appointment:", error);
+      // Handle error (e.g., show error notification)
+    },
+  });
+
+  const handleBookAppointment = () => {
+    console.log("sds");
+    let formData = {
+      ...{
+        doctor: appointmentData?.doctorData?.id,
+        slot: null,
+        is_first_visit: statusData.appointmentSelection?.isFirstVisit,
+        is_equeue: true,
+        amount: statusData.appointmentSelection?.charge ?? 0,
+        payment_method: "cash",
+        date: moment().format("YYYY-MM-DD"),
+        appointment_date: moment().format("YYYY-MM-DD"),
+        patient: statusData.patientSelection.id,
+      },
+      payment_method: "cash",
+    };
+    appointmentMutation.mutate(formData);
+  };
 
   return (
     <>
@@ -855,7 +790,11 @@ export default function page() {
                             onChange={() =>
                               setStatusData({
                                 ...statusData,
-                                appointmentSelection: item,
+                                appointmentSelection: {
+                                  ...item,
+                                  charge:
+                                    appointmentData?.doctorData[item?.key],
+                                },
                               })
                             }
                             name="appointmentSelection"
@@ -870,7 +809,9 @@ export default function page() {
                             <p className="text-base font-medium">
                               {item?.mainInfo}{" "}
                             </p>
-                            <p classNametext="text-sm">₹{item?.amount}</p>
+                            <p classNametext="text-sm">
+                              ₹{appointmentData?.doctorData[item?.key]}
+                            </p>
                           </div>
                         </div>
                       ))}
@@ -912,7 +853,7 @@ export default function page() {
           <div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex justify-center items-center border-t-[2px] border-[#DADADA] ">
             <button
               type="button"
-              onClick={success}
+              onClick={handleBookAppointment}
               className="w-[80%] my-8 px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white "
             >
               Book Appointment
@@ -953,7 +894,7 @@ export default function page() {
             dataVisibilityToggle.doctorsToggle && (
               <button
                 type="button"
-                onClick={success}
+                onClick={handleBookAppointment}
                 className="my-8 px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white "
               >
                 Book Appointment
