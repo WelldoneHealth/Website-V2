@@ -1,5 +1,6 @@
 import React from 'react'
 import dragonEye from "@/asset/Images/dragonEye.jpg"
+import smallImage from "@/asset/Images/smallImage.png"
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 
 export default function SuccessStorySlider() {
@@ -8,7 +9,7 @@ export default function SuccessStorySlider() {
     <p className=' text-[28px] md:text-[34px] font-bold text-primary leading-tight'>Doctors <span className='text-black'>Success Stories</span></p>
     <div className="w-full px-2 asm:px-6 lg:px-10 py-6 bg-secondary rounded-3xl flex flex-col max-asm:items-center sm:flex-row gap-y-3  gap-x-6">
       <div className="size-[140px] md:size-[160px] rounded-full  overflow-hidden bg-primary">
-        <img src={dragonEye?.src} className="w-full  h-full object-cover" alt="load..."  />
+        <img src={smallImage?.src} className="w-full  h-full object-cover" alt="load..."  />
       </div>
       <div className="space-y-2   flex-1 flex flex-col justify-center">
         <p className='text-lg md:text-2xl font-semibold leading-tight'>Dr. Priya Sharma (General Physician)</p>
