@@ -23,9 +23,12 @@ import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
+
+  // console.log("te appointment data is",appointmentData)
+
   const router = useRouter();
 
-  const [statusChange, setStatusChange] = useState({
+  const [statusChange, setStatusChange] = useState({ 
     doctorStatus: true,
     patientStatus: false,
     paymentStatus: false,
@@ -74,7 +77,7 @@ export default function page() {
     // console.log("ok hello")
     try {
       const response = await axiosInstance.get("apiV1/patient/");
-      console.log("the data returned from respone is", response.data);
+      // console.log("the data returned from respone is", response.data);
       setStatusData({ ...statusData, patientSelection: response.data[0] });
       setPatientList(response.data);
       return response.data;
@@ -167,8 +170,8 @@ export default function page() {
                     >
                       {/* ------doctor image------------ */}
                       <img
-                        src={doctorImage2?.src}
-                        className="w-[100px] hidden"
+                        src={appointmentData.doctorData?.profile_picture}
+                        className="w-[100px] "
                       />
                       <div className="w-full space-y-1">
                         <div className="w-full flex  justify-between items-center text-sm font-medium">
@@ -205,9 +208,9 @@ export default function page() {
                       style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
                       className="w-full  max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
                     >
-                      {/* ------doctor image------------ */}
-                      <div className="size-[100px] rounded-xl overflow-hidden hidden">
-                        <img src={smallHospital3?.src} className="w-full " />
+                      {/* ------hospital image------------ */}
+                      <div className="size-[100px] rounded-xl overflow-hidden ">
+                        <img src={appointmentData?.branchData?.clinic_logo} className="w-full " />
                       </div>
 
                       <div className="flex-1 space-y-1">
@@ -277,19 +280,18 @@ export default function page() {
             {/* ----------------------on button click new updated card ui------------------------ */}
             {dataVisibilityToggle.doctorsToggle && (
               <div className="w-full  flex flex-col sm:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
-                {/* -------------------doctor card------------- */}
-                {[1, 2].map((item) => (
-                  <div className="space-y-1">
-                    <p className="font-semibold ">Clinic/Hospital</p>
+               {/*------------------new doctor card---------------- */}
+               <div className="space-y-1 flex-1">
+                    <p className="font-semibold ">Doctor</p>
                     <div
-                      key={item}
+                     
                       style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
                       className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
                     >
                       {/* ------doctor image------------ */}
 
                       <img
-                        src={doctorImage2?.src}
+                        src={statusData.doctorSelection?.profile_picture}
                         className="w-[60px] sm:w-[70px] md:w-[100px] "
                       />
                       <div className="w-full space-y-1">
@@ -316,7 +318,38 @@ export default function page() {
                       </div>
                     </div>
                   </div>
-                ))}
+
+                  {/* ------------------------new hospital card-------------------- */}
+                  <div className="space-y-1 flex-1">
+                    <p className="font-semibold ">Clinic/Hospital</p>
+                    <div
+                      style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
+                      className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
+                    >
+                      {/* ------hospital image------------ */}
+
+                      <img
+                        src={appointmentData?.branchData?.clinic_logo}
+                        className="w-[60px] sm:w-[70px] md:w-[100px] "
+                      />
+                      <div className="w-full space-y-1">
+                        {/* <div className="w-full flex  justify-between items-center text-sm font-medium">
+                          <p className="max-sm:text-sm">
+                      {appointmentData?.branchData?.clinic_name}
+                          </p>
+                        </div>  */}
+                        <p className="text-xs sm:text-sm font-medium">
+                        {appointmentData?.branchData?.clinic_name}
+                        </p>
+                        <p className="text-sm max-md:hidden leading-tight">
+                        {appointmentData?.branchData?.clinic_address}
+                        </p>
+                        <p className="text-xs sm:text-sm md:hidden">
+                          Surgical Oncologist
+                        </p>
+                      </div>
+                    </div>
+                  </div>
               </div>
             )}
           </div>
