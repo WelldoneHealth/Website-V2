@@ -6,7 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.css";
 import Navbar from "@/components/Layout/Navbar/Navbar";
-import Head from "next/head";
+// import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 // import 'leaflet/dist/leaflet.css';
 
@@ -31,7 +31,7 @@ export const metadata = {
     apple: "/apple-touch-icon.png", // For Apple touch devices (optional)
   },
 };
-
+ 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
