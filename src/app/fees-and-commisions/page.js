@@ -65,7 +65,7 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
     <div className="text-primary leading-tight">
       <p className=" text-base  asm:text-xl 2xl:text-2xl font-bold">Become a</p>
       <p className=" text-[19px]  asm:text-[26px] msm:text-[28px] md:text-[26px]  lg:text-[36px] 2xl:text-[38px] font-bold">Welldone Health practitioner</p>
-      <p className=" mt-1 text-[20px] ssm:text-[22px]  asm:text-[28px]  msm:text-[32px] md::text-[28px]  lsm:text-[30px] lg:text-[36px] xl:text-[42px] 2xl:text-[44px]  sm:whitespace-nowrap">Get 6-month subscription at just ₹999*</p>
+      <p className=" mt-1 text-[20px] ssm:text-[22px]  asm:text-[28px]  msm:text-[32px] md::text-[28px]  lsm:text-[30px] lg:text-[36px] xl:text-[42px] 2xl:text-[44px]  sm:whitespace-nowrap">Get 6-month subscription at just ₹2999*</p>
     </div>
 
 
@@ -125,7 +125,7 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
  <div className="flex gap-x-3 text-lg font-bold "><img src={ratingIcon?.src} className='' alt="load..." />Standard Plan</div>
  <div className="text-[26px] msm:text-3xl lg:text-[34px] flex gap-x-5">
   <p className='text-[#AAD5FA] line-through '>₹6900.00</p>
-  <p className='font-bold'>₹999*</p>
+  <p className='font-bold'>₹2999*</p>
  </div>
  </div>
 
