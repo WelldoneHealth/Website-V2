@@ -24,7 +24,7 @@ import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
 
-  // console.log("te appointment data is",appointmentData)
+  console.log(appointmentData)
 
   const router = useRouter();
 
@@ -42,6 +42,8 @@ export default function page() {
     paymentSelection: paymentOptions[0],
     appointmentSelection: appointmentOptions[0],
   });
+
+  console.log("the doctor is",statusData.doctorSelection)
 
   // --------------------- hide or view the
   const [dataVisibilityToggle, setDataVisibilityToggle] = useState({
@@ -253,7 +255,7 @@ export default function page() {
                       }}
                       className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white "
                     >
-                      Continue Appointment1
+                      Continue Appointment
                     </button>
                   )}
                   {statusChange.patientStatus && (
@@ -270,7 +272,7 @@ export default function page() {
                       }
                       className="px-8 py-3 bg-primary font-semibold text-sm rounded-[10px] text-white "
                     >
-                      Continue Appointment2
+                      Continue Appointment
                     </button>
                   )}
                 </div>{" "}
@@ -299,7 +301,7 @@ export default function page() {
                           <p className="max-sm:text-sm">
                             {statusData.doctorSelection?.first_name}&nbsp;
                             {statusData.doctorSelection?.middle_name}&nbsp;
-                            {statusData.doctorSelection?.last_name}
+                            {statusData.doctorSelection?.last_name};
                           </p>
                         </div>
                         <p className="text-xs sm:text-sm font-medium">
@@ -936,7 +938,7 @@ export default function page() {
           {/* <button type="button" onClick={()=>setView(!view)} className="text-white px-6 py-3 bg-primary  "  >view / hide </button> */}
 
           {/* --------main appointemnt part------------- */}
-          <div className="w-full  max-lg:mt-16  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
+          <div className="w-full  hidden md:block  max-lg:mt-16  border-2 boreder-black rounded-[20px] py-4 overflow-hidden ">
             <p className="text-lg font-medium  text-center">
               Book Your Appointment{" "}
             </p>

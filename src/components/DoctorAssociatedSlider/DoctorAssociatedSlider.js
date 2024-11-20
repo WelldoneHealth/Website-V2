@@ -5,6 +5,9 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
+import { getDoctorList } from "@/shared/apis/doctorCard";
+import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 export default function () {
   const sliderRef = useRef(null);
@@ -19,7 +22,7 @@ export default function () {
     arrows: false,
     responsive: [
       {
-        breakpoint: 1000,
+        breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
@@ -28,7 +31,7 @@ export default function () {
         },
       },
       {
-        breakpoint: 650,
+        breakpoint: 635,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
@@ -40,61 +43,78 @@ export default function () {
     ],
   };
 
+
+  const {
+    data: doctorList,
+    isLoading,
+  } = useQuery({
+    queryKey: ["doctorList"],
+    queryFn: getDoctorList,
+    enabled: true,
+  });
+
+
   return (
     <div className="w-full my-20  ">
-      <div className="my-7 flex justify-between items-center  ">
-        <p className="text-base ssm:text-xl sm:text-2xl lg:text-3xl font-medium">
-          Doctors associated with us{" "}
+      <div className="my-5 lg:my-7 flex justify-between items-center  ">
+        <p className="text-base ssm:text-xl sm:text-2xl lg:text-2xl font-medium ">
+          Doctors associated with us
         </p>
-        <div className=" hidden md:flex justify-center items-center space-x-8">
+
+        <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" ><Link href="/doctorListingPage" > View All</Link></div>
+
+
+        <div className=" hidden md:flex justify-center items-center space-x-6">
           <button
             onClick={() => sliderRef.current.slickPrev()}
             style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
             type="button"
-            className="flexCenter rounded-full w-11 h-11 bg-white  -rotate-180 "
+            className="flex  items-center justify-center rounded-full w-10 h-10  bg-white -rotate-180 "
           >
-            <img src={sliderArrowIcon?.src} className="" alt="load..." />
+            <img src={sliderArrowIcon?.src} className="h-5" alt="load..." />
           </button>
           <button
             onClick={() => sliderRef.current.slickNext()}
             style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
             type="button"
-            className="flexCenter rounded-full w-11 h-11 bg-white"
+            className="flex  items-center justify-center rounded-full w-10 h-10  bg-white"
           >
-            <img src={sliderArrowIcon?.src} className="" alt="load..." />
+            <img src={sliderArrowIcon?.src} className="h-5" alt="load..." />
           </button>
         </div>
       </div>
-      {/* <div className="w-full overflow-x-auto flex gap-x-6 "> */}
-      <Slider ref={sliderRef} {...settings}>
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-        <DoctorsAssociatedCard />
-      </Slider>
+      {/* -------------------listing the doctor slider------------------ */}
+      {/* flex  items-stretch justify-center gap-x-4 */}
+      {doctorList?.length>0 ? <Slider ref={sliderRef} {...settings} className="   max-w-[850px] lg:max-w-[1280px] mx-auto  "  >
+       {doctorList.map((item)=> <DoctorsAssociatedCard key={item?.id}  cardDetails={item} /> )} 
+      </Slider> : <div>Loading...</div> }
 
-      <div className="my-10 w-full  flex justify-center items-center md:hidden space-x-8">
+      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" > <Link href="/doctorListingPage" >View All</Link> </div>
+
+
+      <div className="my-7 w-full  flex justify-center items-center md:hidden space-x-6">
         <button
           onClick={() => sliderRef.current.slickPrev()}
           style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
           type="button"
-          className="flexCenter rounded-full w-11 h-11 bg-white  -rotate-180 "
+          className="flex  items-center justify-center rounded-full w-10 h-10 bg-white  -rotate-180 "
         >
-          <img src={sliderArrowIcon?.src} className="" alt="load..." />
+          <img src={sliderArrowIcon?.src} className="h-5" alt="load..." />
         </button>
         <button
           onClick={() => sliderRef.current.slickNext()}
           style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
           type="button"
-          className="flexCenter rounded-full w-11 h-11 bg-white"
+          className="flex  items-center justify-center rounded-full w-10 h-10 bg-white"
         >
-          <img src={sliderArrowIcon?.src} className="" alt="load..." />
+          <img src={sliderArrowIcon?.src} className="h-5" alt="load..." />
         </button>
       </div>
+
+
+
+
+
     </div>
-    //   </div>
   );
 }

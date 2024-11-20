@@ -30,11 +30,11 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full relative max-w-[1600px] mx-auto px-1 asm:px-3 lg:px-0 mt-8 flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
+    <div className=" w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-0 mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
       <div className="w-full lg:w-[68%] max-h-max">
         <BasicDetails basicInfo={doctorInfo} />
-        <ExtraDetails />
-        <TabsWithMaps />
+        <ExtraDetails extraDocInfo={doctorInfo} />
+        <TabsWithMaps officeInfo={doctorInfo?.establishment} />
         <div className="w-full my-7">
           <h3 className="my-3 text-[22px] sm:text-2xl text-[#01549A] font-semibold">
             Education
@@ -53,6 +53,8 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
             <ExperienceCard
               key={index}
               title={item.job_title}
+              speciality={item.practice_speciality}
+              type={item.practice_type}
               institution={item.hospital_name}
               location={item.city}
               year={`${item.from_date} to ${item.to_date}`}
@@ -60,11 +62,14 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
           ))}
         </div>
       </div>
-      <AppointmentSection
+
+   
+    <AppointmentSection
         doctorSlug={doctorSlug}
         branchSlug={branchSlug}
         doctorInfo={doctorInfo}
       />
+   
     </div>
   );
 };

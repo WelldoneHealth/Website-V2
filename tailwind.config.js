@@ -8,6 +8,7 @@ module.exports = {
     "./src/Utilities/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/shared/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/utils/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
@@ -59,8 +60,14 @@ module.exports = {
         screens: {},
       },
       screens: {
-        ssm: "300px",
-        asm: "400px",
+        "ssm":"300px",
+        // "msm":"350px",
+        "asm":"400px",
+        "msm":"500px",
+
+        "lsm":"900px",
+        
+        "esm":"1200px", 
       },
       borderRadius: {
         lg: "var(--radius)",
