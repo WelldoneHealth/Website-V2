@@ -130,7 +130,7 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
  </div>
 
  <div className=" my-4 lg:my-6 space-y-3">
-  {[" 6-month subscription for only ₹999*!","15-day money-back promise! ","Zero setup fee","Zero hidden charges ","Unlimited access to Doctors and your staff "].map((item,index)=><div key={index} className="flex gap-x-3 items-center text-xs msm:text-sm  lsm:text-base"><img src={check3?.src} className='' alt="load..."  /> {item}  </div>)}
+  {[" 6-month subscription for only ₹2999*!","15-day money-back promise! ","Zero setup fee","Zero hidden charges ","Unlimited access to Doctors and your staff "].map((item,index)=><div key={index} className="flex gap-x-3 items-center text-xs msm:text-sm  lsm:text-base"><img src={check3?.src} className='' alt="load..."  /> {item}  </div>)}
  </div>
 
 <div className="mt-4 lg:mt-6 mb-3 space-y-2">
