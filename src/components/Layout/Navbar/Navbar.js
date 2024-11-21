@@ -18,57 +18,78 @@ export default function Navbar() {
 
   return (
     <>
-      <header
-        style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-        className="w-full   flexBetween p-2  md:p-3 md:px-5 mx-auto  "
-        // className="w-screen   flexBetween  h-screen fixed top-0"
-      >
-        <div className="w-24">
-          <Link href={"/"}>
-            <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
-          </Link>
-        </div>
-
-        <div className="flex gap-x-24 ">
-          <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
-            {" "}
-            <img
-              src={hospitalIcon2?.src}
-              className="w-[30px]  mx-3"
-              alt="load..."
-            />{" "}
-            I have Clinic/ Hospital
-          </button>
-          {token ? (
+      <header className="  w-full    fixed top-0 left-0 z-[1000] bg-white    ">
+        <div
+          style={{ boxShadow: "0px -2px 4px #01549A40, 0px 2px 4px #01549A40" }}
+          className="w-full max-w-[1620px] max-md:h-[62px]  flexBetween  p-2 px-3  md:p-3 md:px-5 mx-auto "
+        >
+          <div className="flex items-center gap-x-4">
+            {/* ----------------------non animated menu-------------------- */}
             <button
-              onClick={logout}
-              className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white"
+              type="button"
+              onClick={toggleNavBar}
+              className="w-7 lg:hidden"
             >
-              Logout
+              {/* <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden"> */}
+              {!navOpen && (
+                <img
+                  src={hamburgerIcon?.src}
+                  className="w-full"
+                  alt="load..."
+                />
+              )}
+              {navOpen && (
+                <p className="text-4xl font-medium text-primary">X</p>
+              )}
             </button>
-          ) : (
-            <Link href={"/login"}>
-              <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
-                Login{" "}
-                <div className="flexCenter rounded-full p-1 bg-white">
-                  <img
-                    src={loginIcon?.src}
-                    width={16}
-                    height={11}
-                    alt="load..."
-                  />
-                </div>
+            {/* -------------icon--------------- */}
+            <div className="w-[78px] md:w-24 ">
+              <Link href="/">
+                <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
+              </Link>
+            </div>
+          </div>
+
+          <div className="flex gap-x-8 md:gap-x-14 ">
+            <Link
+              href="https://practice.welldonehealth.in/"
+              passHref
+              target="_blank"
+              className="block "
+            >
+              <button className="  text-[#01549A] hidden sm:flex justify-center items-center font-medium text-lg">
+                {" "}
+                <img
+                  src={hospitalIcon2?.src}
+                  className="w-[30px]  mx-3"
+                  alt="load..."
+                />{" "}
+                I have Clinic/ Hospital
               </button>
             </Link>
-          )}
-
-          <button
-            type="button"
-            onClick={toggleNavBar}
-            className="w-8 block md:hidden"
-          >
-            <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
-          </button>
+            {token ? (
+              <button
+                onClick={logout}
+                className=" flex justify-center items-center gap-x-2 px-4 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link href={"/login"}>
+                <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
+                  Login{" "}
+                  <div className="flexCenter rounded-full p-1 bg-white">
+                    <img
+                      src={loginIcon?.src}
+                      width={16}
+                      height={11}
+                      alt="load..."
+                    />
+                  </div>
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
       </header>
 
@@ -84,7 +105,7 @@ export default function Navbar() {
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-[#EFF8FF] flex flex-col justify-start items-center "
+          className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-white flex flex-col justify-start items-center "
         >
           <button
             type="button"
@@ -92,36 +113,24 @@ export default function Navbar() {
             className="w-8  right-0  block md:hidden"
           >
             <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
+            {/* {navOpen && <p className="text-2xl">X</p>} */}
           </button>
 
-          <div className="w-28 h-28 rounded-lg   ">
+          <div className="w-28 h-28 hidden rounded-lg   ">
             <img src={wellDoneLogo?.src} className="w-full mt-14" />
           </div>
-          <div className="my-10 w-full flex flex-col justify-center items-center  text-2xl font-medium space-y-6">
-            <div
-              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-              className=" w-[90%] flexCenter rounded-md py-2 "
-            >
-              Home
-            </div>
-            <div
-              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-              className=" w-[90%] flexCenter rounded-md py-2 "
-            >
-              Home
-            </div>
-            <div
-              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-              className=" w-[90%] flexCenter rounded-md py-2 "
-            >
-              Home
-            </div>
-            <div
-              style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-              className=" w-[90%] flexCenter rounded-md py-2 "
-            >
-              Home
-            </div>
+          <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
+            {[1, 2, 3, 4, 5].map((item, index) => (
+              <div
+                key={index}
+                style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+                className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+              >
+                <Link className="w-full" href="/">
+                  home
+                </Link>
+              </div>
+            ))}
           </div>
         </div>
       </div>

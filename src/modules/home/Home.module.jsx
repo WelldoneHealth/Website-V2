@@ -6,21 +6,18 @@ import DoctoAssociateSlider from "@/components/DoctorAssociatedSlider/DoctorAsso
 import HospitalAssociatedSlider from "@/components/HospitalAssociatedSlider/HospitalAssociatedSlider";
 const HomeModule = () => {
   return (
-    <div>
-      {" "}
-      <div className=" w-full  min-h-screen ">
-        <PrimaryBanner />
+    <div className=" w-full mx-auto max-w-[1600px]  min-h-screen px-2  asm:px-3 lg:px-0 ">
+      <PrimaryBanner />
 
-        <DoctorSpeciality />
+      {/* <DoctorSpeciality /> */}
 
-        {/* -----------doctor slider----------- */}
-        <DoctoAssociateSlider />
+      {/* -----------doctor slider----------- */}
+      <DoctoAssociateSlider />
 
-        {/* -----hopital slider------- */}
-        <HospitalAssociatedSlider />
+      {/* -----hopital slider------- */}
+      {/* <HospitalAssociatedSlider /> */}
 
-        <MobileAppBanner />
-      </div>
+      <MobileAppBanner />
     </div>
   );
 };

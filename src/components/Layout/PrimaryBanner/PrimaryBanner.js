@@ -18,10 +18,10 @@ export default function PrimaryBanner() {
       style={{ backgroundImage: `url(${primaryBg?.src})` }}
       className="w-full my-36 px-1 md:px-5 bg-cover bg-center bg-no-repeat relative max-h-max"
     >
-      <h2 className="px-1 text-[#01549A] text-base ssm:text-xl asm:text-[26px] sm:text-[28px] lg:text-[32px] xl:text-[42px] font-medium my-8 asm:my-12 sm:my-14 leading-loose">
+      <h2 className="px-1 text-[#01549A] text-base ssm:text-lg asm:text-xl  msm:text-2xl sm:text-[28px] lg:text-[32px] xl:text-[36px] font-medium my-9 asm:my-12 sm:my-14 leading-loose">
         Book Doctor Appointments in Seconds
         <img
-          className="inline-block mx-2 sm:mx-5 w-[30px] sm:w-[40px] sm:h-[40px]"
+          className="inline-block mx-2 sm:mx-5 w-[30px] sm:w-[35px]"
           src={clockIcon?.src}
           alt="load..."
         />
@@ -37,7 +37,7 @@ export default function PrimaryBanner() {
         </div>
 
         <div className="w-[96%] sm:w-[92%] md:w-[60%] order-2 md:order-1 mx-auto">
-          <p className="text-white w-full xl:max-w-[680px] text-base ssm:text-lg asm:text-[22px] lg:text-2xl xl:text-3xl">
+          <p className="text-white w-full xl:max-w-[680px] text-sm ssm:text-base asm:text-lg  sm:text-xl  md:text-lg lg:text-xl  esm:text-2xl">
             Find the best doctors near you and secure your appointment instantly
             – no waiting, no hassle.
           </p>
