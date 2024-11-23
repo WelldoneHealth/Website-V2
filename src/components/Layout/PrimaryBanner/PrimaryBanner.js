@@ -62,15 +62,25 @@ export default function PrimaryBanner() {
               onValueChange={(e) => {
                 console.log(e);
               }}
-              onOptionClick={(combinedSlug) => {
-                const splittedSlug = combinedSlug?.split("_");
-                const doctorSlug = splittedSlug[0];
-                const branchSlug = splittedSlug[1];
-                const pathname = Routes.doctorDetailsPage.replace(
-                  "/[doctorSlug]/[branchSlug]",
-                  `/${doctorSlug}/${branchSlug}`
-                );
-                router.push(pathname);
+              onOptionClick={(option) => {
+                if (option?.is_hospital) {
+                  const slug = option?.value;
+                  const pathname = Routes.hospitalDetailsPage.replace(
+                    "/[slug]",
+                    `/${slug}`
+                  );
+                  router.push(pathname);
+                } else {
+                  const combinedSlug = option?.value;
+                  const splittedSlug = combinedSlug?.split("_");
+                  const doctorSlug = splittedSlug[0];
+                  const branchSlug = splittedSlug[1];
+                  const pathname = Routes.doctorDetailsPage.replace(
+                    "/[doctorSlug]/[branchSlug]",
+                    `/${doctorSlug}/${branchSlug}`
+                  );
+                  router.push(pathname);
+                }
               }}
               placeholder="Search doctor, clinic, hospital near by you"
               emptyMessage="No doctors found"
