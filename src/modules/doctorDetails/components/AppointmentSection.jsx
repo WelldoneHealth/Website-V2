@@ -45,6 +45,9 @@ const AppointmentSection = ({
     staleTime: 3000,
   });
 
+
+
+  
   useEffect(() => {
     if (equeueDataList?.length > 0) {
       setSelectedEqueue(equeueDataList[0]);
@@ -55,7 +58,7 @@ const AppointmentSection = ({
 
   return (
     <div
-      className={`w-full flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white   transition-all duration-150 ease-linear`}
+      className={`w-full max-lg:hidden flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white   transition-all duration-150 ease-linear`}
     >
       {/* {setTimeout(() => {
         console.log("the equeye data list is",equeueDataList)

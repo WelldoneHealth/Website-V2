@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
 export const useAppointmentStore = create(
   persist(
     (set) => ({
-      appointmentData: {
+      appointmentData: { 
         equeueData: null,
         doctorData: null,
       },

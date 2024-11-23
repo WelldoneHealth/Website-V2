@@ -8,6 +8,8 @@ import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import DoctorCard from "@/utils/listingPageCards/DoctorCard";
 import HospitalCard from "@/utils/listingPageCards/HospitalCard";
 import dynamic from "next/dynamic";
+import axiosInstance from "@/shared/apis/axiosInstance";
+import { useQuery } from "@tanstack/react-query";
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(
@@ -50,7 +52,12 @@ const MapResetButton = ({ currentLocation }) => {
   );
 };
 
-export const DoctorListingPage = () => {
+
+
+
+
+
+export const page = () => {
   const [isMapExpanded, setIsMapExpanded] = useState(false);
 
   const [placeLocation, setPlaceLocation] = useState([
@@ -81,12 +88,53 @@ export const DoctorListingPage = () => {
     [20.993177213245744, 74.31037414942334], // Southwest corner
     [20.993653817710108, 74.31422237720786], // Northeast corner
   ];
+
+
+
+  const getSerachList = async (
+    params = {
+      is_hospital: false,
+    }
+  ) => {
+    try {
+      const response = await axiosInstance.get(`apiV1/home-search/`, {
+        params: { ...params },
+      });
+      console.log("gello",response)
+      return response;
+    } catch (error) {
+      console.error("Error fetching search list:", error);
+      throw error;
+    }
+  };
+
+
+  const {
+    data: searchList,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["searchList"],
+    queryFn: async () => {
+      const response = await getSerachList({
+       is_hospital:false
+      });
+      return response.data; // Return doctor details directly
+    },
+  });
+
+
+  if (isLoading) return <div>Loading...</div>;
+  if (error) return <div>Error: {error.message}</div>;
+  
+
   return (
-    <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0   ">
+    <div className="w-full  max-w-[1500px] mx-auto px-1  asm:px-3 lg:px-0   ">
       {/* --------------navbars--------------- */}
-      <div
+      {/* -----------------later make it-----flex by removing hidden--------- */}
+      <div 
         style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
-        className="w-full my-6 px-4 py-2 bg-white  rounded-[20px] flex justify-between items-center "
+        className="w-full  my-6 px-4 py-2 bg-white  rounded-[20px] hidden justify-between items-center "
       >
         <div className="w-[360px] px-3 py-[6px] flex items-center justify-center rounded-[20px] gap-x-1 text-sm  bg-[#E5E5E5]">
           <input
@@ -150,20 +198,18 @@ export const DoctorListingPage = () => {
 
       {/* -------------listing page card portions---------- */}
       <div
-        className={`w-full my-6 flex justify-between transition-all duration-700 ease-linear ${
+        className={`w-full  my-6 flex justify-between  transition-all duration-700 ease-linear ${
           !isMapExpanded && "  flex-wrap"
-        }  relative overflow-hidden`}
+        }  relative overflow-hidden `}
       >
         {/* -----------lists sections-------------- */}
         <div
           className={`${
-            isMapExpanded ? "w-0" : "lg:w-[65%]"
-          } min-h-screen  transition-all duration-700 ease-linear`}
+            isMapExpanded ? "w-0" : "w-full  md:w-[90%] mx-auto lg:w-[65%] xl:max-w-[950px] "
+          } mt-12 min-h-screen space-y-3  transition-all duration-700 ease-linear`}
         >
-          {/* ----------------doctor card------------- */}
-          <DoctorCard />
-          {/* ----------------hospital card--------------- */}
-          <HospitalCard />
+         {searchList && searchList?.map((item,index)=>item?.is_hospital ? <HospitalCard key={item?.id} listInfo={item} /> : <DoctorCard key={item?.id} listInfo={item} /> ) 
+          }
         </div>
 
         {/* ----------------map portions---------- */}
@@ -171,8 +217,8 @@ export const DoctorListingPage = () => {
         <div
           style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
           className={`${
-            isMapExpanded ? "w-full" : " lg:w-[35%]  "
-          }  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
+            isMapExpanded ? "w-full" : " lg:w-[33%] xl:w-[34%] "
+          } max-lg:hidden  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
         >
           <MapContainer
             key={placeLocation.join(",")}
@@ -227,4 +273,4 @@ export const DoctorListingPage = () => {
   );
 };
 
-export default DoctorListingPage;
+export default page;
