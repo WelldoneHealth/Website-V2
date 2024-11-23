@@ -7,15 +7,12 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerTitle,
-  DrawerTrigger,
-  Button,
 } from "@/components/ui/drawer"; // Custom Drawer components
 import { useMutation } from "@tanstack/react-query";
-import { addPatient } from "../apis";
+import { addPatient } from "../../modules/checkout/apis";
 import { Spinner } from "@/shared/components/Spinner";
 
-
-const AddPatientDrawer = ({ isOpen, onClose, setSelectedPatient }) => {
+const AddPatientDrawer = ({ isOpen, onClose, successCallback }) => {
   const [formData, setFormData] = useState({
     patientName: "",
     lastName: "",
@@ -42,7 +39,7 @@ const AddPatientDrawer = ({ isOpen, onClose, setSelectedPatient }) => {
     mutationFn: addPatient,
     onSuccess: (data) => {
       console.log("Patient added successfully:", data);
-      setSelectedPatient(data);
+      successCallback(data);
       onClose(); // Close the drawer
     },
     onError: (error) => {
@@ -304,7 +301,7 @@ const AddPatientDrawer = ({ isOpen, onClose, setSelectedPatient }) => {
               onClick={handleSubmit}
               className="my-7 rounded-[10px] w-full bg-primary text-white font-medium p-3 flex items-center justify-center"
             >
-            {addPatientMutation.isLoading?<Spinner /> :"Submit"}
+              {addPatientMutation.isLoading ? <Spinner /> : "Submit"}
             </button>
           </DrawerFooter>
         </DrawerContent>

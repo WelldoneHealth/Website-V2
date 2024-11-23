@@ -15,7 +15,7 @@ import {
 import axiosInstance from "@/shared/apis/axiosInstance";
 import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
 import moment from "moment";
-import AddPatientDrawer from "@/modules/checkout/components/addPatientDrawer";
+import AddPatientDrawer from "@/shared/atoms/addPatientDrawer";
 import { addAppointment } from "@/modules/checkout/apis";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
@@ -1029,7 +1029,7 @@ export default function page() {
         onClose={() => {
           setView(false);
         }}
-        setSelectedPatient={(item) => {
+        successCallback={(item) => {
           setStatusData((prev) => ({
             ...prev,
             patientSelection: item,

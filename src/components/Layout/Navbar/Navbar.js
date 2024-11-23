@@ -18,7 +18,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="  w-full    fixed top-0 left-0 z-[1000] bg-white    ">
+      <header className="  w-full   fixed top-0 left-0 z-[10] bg-white    ">
         <div
           style={{ boxShadow: "0px -2px 4px #01549A40, 0px 2px 4px #01549A40" }}
           className="w-full max-w-[1620px] max-md:h-[62px]  flexBetween  p-2 px-3  md:p-3 md:px-5 mx-auto "

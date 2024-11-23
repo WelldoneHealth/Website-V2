@@ -39,7 +39,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Navbar />
-          <main className=" mx-auto lg:container mt-[60px]  md:mt-[68px]  ">
+          <main className=" mx-auto lg:container mt-[60px]  md:mt-[68px] min-h-[calc(100vh-100px)] ">
             <Toaster />
             {children}
           </main>
