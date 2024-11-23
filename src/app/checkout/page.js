@@ -20,6 +20,7 @@ import { addAppointment } from "@/modules/checkout/apis";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
+import { toast } from "sonner";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
@@ -76,10 +77,8 @@ export default function page() {
 
   const [patientList, setPatientList] = useState([]);
   const getPatients = async () => {
-    // console.log("ok hello")
     try {
       const response = await axiosInstance.get("apiV1/patient/");
-      // console.log("the data returned from respone is", response.data);
       setStatusData({ ...statusData, patientSelection: response.data[0] });
       setPatientList(response.data);
       return response.data;
@@ -96,10 +95,15 @@ export default function page() {
     mutationFn: addAppointment,
     onSuccess: () => {
       router.push(`/checkout/appointmentConfirmation`);
+      toast("Appointment has been created", {
+        description: "Sunday, December 03, 2023 at 9:00 AM",
+      });
     },
     onError: (error) => {
+      toast("Something went wrong!", {
+        description: "Try again later!",
+      });
       console.error("Error adding appointment:", error);
-      // Handle error (e.g., show error notification)
     },
   });
 
@@ -108,7 +112,7 @@ export default function page() {
       ...{
         doctor: appointmentData?.doctorData?.id,
         slot: null,
-        branch: appointmentData?.branchData?.id,
+        branch: appointmentData?.branchData?.branch_id,
         is_first_visit: statusData.appointmentSelection?.isFirstVisit,
         is_equeue: true,
         amount: statusData.appointmentSelection?.charge ?? 0,

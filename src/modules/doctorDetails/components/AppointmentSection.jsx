@@ -31,15 +31,17 @@ const AppointmentSection = ({
   const [selectedEqueue, setSelectedEqueue] = useState(null);
   const [focusableIndex, setFocusableIndex] = useState(0);
   const [selectedBranch, setSelectedBranch] = useState(
-    doctorInfo?.establishment[0]?.id ?? null
+    doctorInfo?.establishment[0]?.branch_slug ?? null
   );
+  const [showAll, setShowAll] = useState(false); // State to track expand/collapse
+  const maxVisibleCards = 2; // Number of cards to show initially
 
   const { data: equeueDataList, isLoading: isEqueueLoading } = useQuery({
-    queryKey: ["equeDetails"],
+    queryKey: ["equeDetails", selectedBranch],
     queryFn: () =>
       getEqueue({
         slug: doctorSlug,
-        branch: branchSlug,
+        branch: selectedBranch,
       }),
     enabled: true,
     staleTime: 3000,
@@ -57,9 +59,6 @@ const AppointmentSection = ({
     <div
       className={`w-full flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white   transition-all duration-150 ease-linear`}
     >
-      {/* {setTimeout(() => {
-        console.log("the equeye data list is",equeueDataList)
-      }, 5000)} */}
       <div className="w-full max-lg:mt-16  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
         <p className="text-lg font-medium  text-center">
           Book Your Appointment{" "}
@@ -69,7 +68,7 @@ const AppointmentSection = ({
         <div className="px-2 sm:px-4 w-full">
           <p className="mb-2 font-medium ">Select office</p>
           <Select
-            className="w-full"
+            className="w-full max-w-[100%]"
             onValueChange={setSelectedBranch}
             value={selectedBranch}
           >
@@ -80,38 +79,13 @@ const AppointmentSection = ({
               <SelectGroup>
                 <SelectLabel>Branches</SelectLabel>
                 {doctorInfo?.establishment?.map((branch) => (
-                  <SelectItem key={branch?.id} value={branch?.id}>
+                  <SelectItem key={branch?.id} value={branch?.branch_slug}>
                     {branch?.clinic_name}
                   </SelectItem>
                 ))}
               </SelectGroup>
             </SelectContent>
           </Select>
-
-          {/* <div className="w-full flex items-center gap-x-4 bg-[#F0F0F0] my-7 px-3 rounded-[10px] p-1">
-            <button
-              type="button"
-              className="bg-white p-1  cursor-pointer flex items-center rounded-md text-[#01549A]  text-sm font-medium"
-            >
-              Book by e-Queue{" "}
-              <img
-                src={rotatingArrowIcon?.src}
-                className="ml-2"
-                alt="load..."
-              />
-            </button>
-            <button
-              type="button"
-              className="bg-[#F0F0F0] p-1 flex items-center rounded-md text-[#919196] text-sm  font-medium"
-            >
-              Book by slot{" "}
-              <img
-                src={rotatingArrowIcon?.src}
-                className="hidden ml-2"
-                alt="load..."
-              />
-            </button>
-          </div> */}
 
           <div
             className={` mt-5 w-full ${
@@ -120,73 +94,80 @@ const AppointmentSection = ({
           >
             {isEqueueLoading ? (
               <Loader />
-            ) : (
-              equeueDataList?.map((item, index) => (
-                <div
-                  key={index}
-                  onClick={() => {
-                    setFocusableIndex(index);
-                    setSelectedEqueue(item);
-                    console.log("the item is", item);
-                  }}
-                  className={` w-[95%]  cursor-pointer  rounded-[10px] border-[1px] border-l-[5px]  ${
-                    focusableIndex !== index
-                      ? " bg-[#F7FFF6] border-[#919196]"
-                      : "bg-[#F7FFF6] border-[#01A400]  "
-                  } `}
-                >
-                  <p className="py-1 px-3 text-sm fonr-normal border-b-[1px]  border-[#919196] font-medium ">
-                    {moment().format("YYYY-MM-DD") === item?.date
-                      ? "Today"
-                      : moment(item?.date).format("DD MMM")}
-                  </p>
-                  <hr />
-                  <div className="w-full flexCenter gap-x-5 py-4">
+            ) : equeueDataList?.length > 0 ? (
+              <>
+                {equeueDataList
+                  ?.slice(0, showAll ? equeueDataList.length : maxVisibleCards) // Show limited or all cards
+                  .map((item, index) => (
                     <div
-                      style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
-                      className="text-red-700  rounded-[10px] px-4 py-[6px] text-[22px] font-bold "
+                      key={index}
+                      onClick={() => {
+                        setFocusableIndex(index);
+                        setSelectedEqueue(item);
+                        console.log("the item is", item);
+                      }}
+                      className={` w-[95%] cursor-pointer rounded-[10px] border-[1px] border-l-[5px] ${
+                        focusableIndex !== index
+                          ? "bg-[#F7FFF6] border-[#919196]"
+                          : "bg-[#F7FFF6] border-[#01A400]"
+                      } `}
                     >
-                      {item?.current_equeue + 1}
-                    </div>
-                    <div className="space-y-1">
-                      <p className=" text-xs text-[#5A5D62]">Waiting Number</p>
-                      <p className="text-[#01549A] font-semibold text-lg">
+                      <p className="py-1 px-3 text-sm font-normal border-b-[1px] border-[#919196] font-medium">
                         {moment().format("YYYY-MM-DD") === item?.date
-                          ? moment().isBefore(
-                              moment(item?.expected_time, "HH:mm:ss")
-                            )
-                            ? moment(item?.expected_time, "HH:mm:ss")
-                                .add(item?.average_time, "minutes")
-                                .format("hh:mm A")
-                            : moment()
-                                .add(item?.average_time, "minutes")
-                                .format("hh:mm A")
-                          : moment(item?.expected_time, "HH:mm:ss")
-                              .add(item?.average_time, "minutes")
-                              .format("hh:mm A")}
+                          ? "Today"
+                          : moment(item?.date).format("DD MMM")}
+                      </p>
+                      <hr />
+                      <div className="w-full flexCenter gap-x-5 py-4">
+                        <div
+                          style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
+                          className="text-red-700 rounded-[10px] px-4 py-[6px] text-[22px] font-bold"
+                        >
+                          {item?.current_equeue + 1}
+                        </div>
+                        <div className="space-y-1">
+                          <p className="text-xs text-[#5A5D62]">
+                            Waiting Number
+                          </p>
+                          <p className="text-[#01549A] font-semibold text-lg">
+                            {moment().format("YYYY-MM-DD") === item?.date
+                              ? moment().isBefore(
+                                  moment(item?.expected_time, "HH:mm:ss")
+                                )
+                                ? moment(item?.expected_time, "HH:mm:ss")
+                                    .add(item?.average_time, "minutes")
+                                    .format("hh:mm A")
+                                : moment()
+                                    .add(item?.average_time, "minutes")
+                                    .format("hh:mm A")
+                              : moment(item?.expected_time, "HH:mm:ss")
+                                  .add(item?.average_time, "minutes")
+                                  .format("hh:mm A")}
+                          </p>
+                        </div>
+                      </div>
+                      <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                        Given Time is approximate can vary by +/-60 Min
                       </p>
                     </div>
-                  </div>
-                  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
-                    Given Time is approximate can vary by +/-60 Min
-                  </p>
-                </div>
-              ))
-            )}
+                  ))}
 
-            <div className=" w-[95%] flex justify-between items-center py-1 px-3  rounded-[10px] border-[1px] border-l-[5px] border-[#919196]">
-              <p className=" font-medium text-lg text-[#5A5D62] ">Future</p>
-              <img src={calendarIcon?.src} className="w-[22px]" alt="load..." />
-            </div>
+                {/* Expand/Collapse Button */}
+                {equeueDataList.length > maxVisibleCards && (
+                  <button
+                    onClick={() => setShowAll(!showAll)}
+                    className="mt-1 px-4 underline"
+                  >
+                    {showAll ? "Show Less" : "Show More"}
+                  </button>
+                )}
+              </>
+            ) : (
+              <div>No Equeues</div>
+            )}
           </div>
 
           <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
-            {/* <button
-              type="button"
-              className="w-[95%] border-[1px] border-[#01549A] py-2 text-center text-[#01549A] rounded-[10px] font-medium"
-            >
-              Add to family doctor
-            </button> */}
             <button
               type="button"
               disabled={!selectedBranch}
@@ -198,7 +179,7 @@ const AppointmentSection = ({
                   doctorData: doctorInfo,
                   branchData:
                     doctorInfo?.establishment?.filter(
-                      (e) => e?.id === selectedBranch
+                      (e) => e?.branch_slug === selectedBranch
                     )[0] ?? null,
                 });
               }}
