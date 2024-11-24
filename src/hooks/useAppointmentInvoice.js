@@ -1,10 +1,10 @@
 import moment from "moment";
 import generateInvoiceNo from "@/shared/utils/generateInvoiceNo";
-import generateQR from "@/shared/utils/generateQr";
 import { toast } from "sonner";
 import axiosInstance from "@/shared/apis/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import generateInvoice from "@/shared/utils/generateInvoice";
+import generateQR from "@/shared/utils/generateQR";
 
 // Custom hook to fetch appointment data
 const useAppointmentInvoice = (appointmentId, appointmentData) => {
