@@ -56,9 +56,8 @@ export default function () {
           Doctors associated with us
         </p>
 
-        <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
-          <Link href="/doctorListingPage"> View All</Link>
-        </div>
+        <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" ><Link href="/search-listing" > View All</Link></div>
+
 
         <div className=" hidden md:flex justify-center items-center space-x-6">
           <button
@@ -81,19 +80,11 @@ export default function () {
       </div>
       {/* -------------------listing the doctor slider------------------ */}
       {/* flex  items-stretch justify-center gap-x-4 */}
-      {doctorList?.length > 0 ? (
-        <Slider
-          ref={sliderRef}
-          {...settings}
-          className="   max-w-[850px] lg:max-w-[1280px] mx-auto  "
-        >
-          {doctorList.map((item) => (
-            <DoctorsAssociatedCard key={item?.id} cardDetails={item} />
-          ))}
-        </Slider>
-      ) : (
-        <div>Loading...</div>
-      )}
+      {doctorList?.length>0 ? <Slider ref={sliderRef} {...settings} className="   max-w-[850px] lg:max-w-[1280px] mx-auto  "  >
+       {doctorList.map((item)=> <DoctorsAssociatedCard key={item?.id}  cardDetails={item} /> )} 
+      </Slider> : <div>Loading...</div> }
+
+      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" > <Link href="/search-listing" >View All</Link> </div>
 
       <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
         {" "}
