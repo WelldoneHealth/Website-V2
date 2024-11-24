@@ -127,7 +127,7 @@ export default function page() {
   };
 
   return (
-    <>
+    <AuthenticatedLayout>
       <div
         className={`w-full relative max-w-[1600px] ${
           view
@@ -217,7 +217,10 @@ export default function page() {
                       {/* ------hospital image------------ */}
                       <div className="size-[100px] rounded-xl overflow-hidden ">
                         <img
-                          src={appointmentData?.branchData?.clinic_logo}
+                          src={
+                            appointmentData?.branchData?.clinic_logo ??
+                            smallHospital3?.src
+                          }
                           className="w-full "
                         />
                       </div>
@@ -1045,6 +1048,6 @@ export default function page() {
             handleScrollToBox(1);
         }}
       />
-    </>
+    </AuthenticatedLayout>
   );
 }

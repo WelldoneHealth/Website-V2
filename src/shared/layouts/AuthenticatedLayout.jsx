@@ -1,22 +1,26 @@
-// app/layouts/AuthenticatedLayout.js
 "use client";
 
-import React from "react";
-import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function AuthenticatedLayout({ children }) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // State to track auth status
   const router = useRouter();
-  const token = Cookies.get("authToken");
+  const pathname = usePathname(); // Get the current path
 
-  // Redirect if no token found (client-side)
-  React.useEffect(() => {
+  useEffect(() => {
+    const token = Cookies.get("authToken");
     if (!token) {
-      router.push("/login");
+      // Redirect to login with redirectUrl query parameter
+      router.push(`/login?redirectUrl=${encodeURIComponent(pathname)}`);
+    } else {
+      setIsAuthenticated(true); // Set as authenticated once the token is confirmed
     }
-  }, [token, router]);
+  }, [router, pathname]);
 
-  if (!token) return null; // Prevent rendering layout until redirected
+  // Avoid rendering layout until authentication status is determined
+  if (!isAuthenticated) return null;
 
   return (
     <div>
