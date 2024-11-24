@@ -1,7 +1,5 @@
 "use client";
-
-import { useRouter, useSearchParams } from "next/navigation";
-import React, { useState } from "react";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,16 +24,14 @@ const LoginModule = () => {
     password: "",
   });
 
+  const [currentTab, setCurrentTab] = useState("login"); // state for current tab
+
   const loading = useUtilStore((state) => state.loading);
   const loginMutation = useLogin();
   const registerMutation = useRegister();
-  const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const currentTab = searchParams.get("tab") || "login";
 
   const handleTabChange = (tab) => {
-    router.replace(`?tab=${tab}`);
+    setCurrentTab(tab); // Update the current tab
   };
 
   const handleLoginSubmit = (e) => {
@@ -50,7 +46,7 @@ const LoginModule = () => {
 
     registerMutation.mutate(registerCredentials, {
       onSuccess: () => {
-        router.replace("?tab=login"); // Redirect to login tab
+        setCurrentTab("login"); // Switch to login tab on successful registration
         setRegisterCredentials({
           name: "",
           email: "",
@@ -73,12 +69,12 @@ const LoginModule = () => {
       },
     });
   };
+
   return (
     <UnauthenticatedLayout>
       <div className="flex h-screen w-full items-center justify-center px-4">
         <Tabs
-          defaultValue={currentTab}
-          value={currentTab}
+          value={currentTab} // Controlled value for the current tab
           onValueChange={handleTabChange}
           className="w-[400px]"
         >

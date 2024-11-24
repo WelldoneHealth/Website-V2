@@ -1,7 +1,7 @@
 // app/layouts/UnauthenticatedLayout.js
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Cookies from "js-cookie";
 
@@ -22,9 +22,9 @@ export default function UnauthenticatedLayout({ children }) {
   if (token) return null; // Prevent rendering layout until redirected
 
   return (
-    <div>
+    <Suspense fallback={"Loading..."}>
       {/* You can add a different header or hero section here */}
       <main>{children}</main>
-    </div>
+    </Suspense>
   );
 }
