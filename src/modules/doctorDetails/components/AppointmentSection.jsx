@@ -47,9 +47,6 @@ const AppointmentSection = ({
     staleTime: 3000,
   });
 
-
-
-  
   useEffect(() => {
     if (equeueDataList?.length > 0) {
       setSelectedEqueue(equeueDataList[0]);
@@ -60,13 +57,13 @@ const AppointmentSection = ({
 
   return (
     <div
-      className={`w-full max-lg:hidden flex-1 lg:w-[90%] max-lg:absolute  max-lg:bg-white   transition-all duration-150 ease-linear`}
+      className={`w-full  flex-1 lg:w-[90%]   max-lg:bg-white   transition-all duration-150 ease-linear`}
     >
-      <div className="w-full max-lg:mt-16  border-2 boreder-black rounded-[20px] pt-4 pb-0 overflow-hidden ">
-        <p className="text-lg font-medium  text-center">
+      <div className="w-full   lg:border-2 boreder-black rounded-[20px] lg:pt-4 pb-0 lg:overflow-hidden ">
+        <p className="text-lg font-medium  text-center hidden lg:block">
           Book Your Appointment{" "}
         </p>
-        <hr className="my-3" />
+        <hr className="my-3 hidden lg:block" />
 
         <div className="px-2 sm:px-4 w-full">
           <p className="mb-2 font-medium ">Select office</p>
@@ -92,7 +89,9 @@ const AppointmentSection = ({
 
           <div
             className={` mt-5 w-full ${
-              equeueDataList.length > 0 ? "h-[500px]" : "h-auto"
+              equeueDataList.length > 0
+                ? "h-[calc(100vh-290px)] lg:h-[500px]"
+                : "h-auto"
             } overflow-y-scroll flex flex-col items-center gap-y-5 `}
           >
             {isEqueueLoading ? (

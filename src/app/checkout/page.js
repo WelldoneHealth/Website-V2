@@ -68,7 +68,6 @@ export default function page() {
   };
 
   const [view, setView] = useState(false);
-  const [sliderHeading, setSliderHeading] = useState("Select Doctor");
   const [viewSliderType, setViewSliderType] = useState({
     doctor: false,
     hospital: false,
