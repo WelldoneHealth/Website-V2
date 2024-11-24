@@ -30,7 +30,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className=" w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-0 mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
+    <div className=" w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7 ">
       <div className="w-full lg:w-[68%] max-h-max">
         <BasicDetails basicInfo={doctorInfo} />
         <ExtraDetails extraDocInfo={doctorInfo} />
