@@ -1,30 +1,23 @@
-// app/layouts/UnauthenticatedLayout.js
 "use client";
 
-import React, { Suspense } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 
 export default function UnauthenticatedLayout({ children }) {
   const router = useRouter();
   const token = Cookies.get("authToken");
-  const searchParams = useSearchParams();
-  const redirectUrl = searchParams.get("redirectUrl");
 
-  // Redirect to dashboard if a token is found
-  React.useEffect(() => {
+  useEffect(() => {
     if (token) {
-      const redirectTo = redirectUrl ?? "/";
-      router.push(redirectTo);
+      // Use the browser API to read the query parameter for redirectUrl
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirectUrl = searchParams.get("redirectUrl") || "/";
+      router.push(redirectUrl);
     }
   }, [token, router]);
 
   if (token) return null; // Prevent rendering layout until redirected
 
-  return (
-    <Suspense fallback={"Loading..."}>
-      {/* You can add a different header or hero section here */}
-      <main>{children}</main>
-    </Suspense>
-  );
+  return <main>{children}</main>;
 }
