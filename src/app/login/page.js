@@ -1,4 +1,4 @@
-import LoginModule from "@/modules/login/Login.module";
+import LoginModule from "@/modules/login/login.module";
 import React from "react";
 
 const Login = () => {

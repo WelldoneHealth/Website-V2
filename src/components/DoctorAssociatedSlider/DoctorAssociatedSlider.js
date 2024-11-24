@@ -43,16 +43,11 @@ export default function () {
     ],
   };
 
-
-  const {
-    data: doctorList,
-    isLoading,
-  } = useQuery({
+  const { data: doctorList, isLoading } = useQuery({
     queryKey: ["doctorList"],
     queryFn: getDoctorList,
     enabled: true,
   });
-
 
   return (
     <div className="w-full my-20  ">
@@ -91,6 +86,10 @@ export default function () {
 
       <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" > <Link href="/search-listing" >View All</Link> </div>
 
+      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
+        {" "}
+        <Link href="/doctorListingPage">View All</Link>{" "}
+      </div>
 
       <div className="my-7 w-full  flex justify-center items-center md:hidden space-x-6">
         <button
@@ -110,11 +109,6 @@ export default function () {
           <img src={sliderArrowIcon?.src} className="h-5" alt="load..." />
         </button>
       </div>
-
-
-
-
-
     </div>
   );
 }

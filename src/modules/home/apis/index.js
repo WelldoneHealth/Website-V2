@@ -5,14 +5,16 @@ export const doctorHospitalSearch = async (searchText = "") => {
     return axiosInstance
       .get(`apiV1/home-search/`, { params: { search: searchText } })
       .then((res) => {
-        return res.data?.map((each) => ({
+        return res.data?.results?.map((each) => ({
           label:
             each?.establishment_name ||
             `${each?.suffix} ${each?.first_name ?? ""} ${
               each?.middle_name ?? ""
             } ${each?.last_name ?? ""}`,
-          value:
-            each?.establishment_name || `${each?.slug}_${each?.branch__slug}`,
+          value: each?.is_hospital
+            ? each?.slug
+            : `${each?.slug}_${each?.branch__slug}`,
+          is_hospital: each?.is_hospital,
         }));
       });
   }

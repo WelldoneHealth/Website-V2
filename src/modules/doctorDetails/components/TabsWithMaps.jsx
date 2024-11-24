@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import SectionTabsWithMaps from "@/components/setionTabsWithMaps/SectionTabsWithMaps";
 
-const TabsWithMaps = ({officeInfo}) => {
+const TabsWithMaps = ({ officeInfo }) => {
   const [newTabData, setNewTabData] = useState(0);
   const changeTab = (tabNumber) => setNewTabData(tabNumber);
 
@@ -17,24 +17,27 @@ const TabsWithMaps = ({officeInfo}) => {
       </h3>
 
       <div className="w-full text-[15px] flex flex-wrap gap-y-5 justify-start gap-x-5 border-b-2 border-[#EFEFEF]">
-        {officeInfo && officeInfo.map((item,index) => (
-          <button
-            key={item?.id}
-            onClick={() => changeTab(index)}
-            type="button"
-            className={`px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[#01549A] ${
-              newTabData === index
-                ? "bg-[#F3FAFF] text-[#01549A]"
-                : "bg-[#F5F5F5] text-[#919196]"
-            }`}
-          >
-            Office {index+1}
-          </button>
-        ))}
+        {officeInfo &&
+          officeInfo.map((item, index) => (
+            <button
+              key={item?.id}
+              onClick={() => changeTab(index)}
+              type="button"
+              className={`px-6 py-2 font-medium rounded-t-lg hover:bg-[#F3FAFF] hover:text-[#01549A] ${
+                newTabData === index
+                  ? "bg-[#F3FAFF] text-[#01549A]"
+                  : "bg-[#F5F5F5] text-[#919196]"
+              }`}
+            >
+              Office {index + 1}
+            </button>
+          ))}
       </div>
 
-  <SectionTabsWithMaps tab={newTabData} tabDetails={officeInfo[newTabData]} />
-
+      <SectionTabsWithMaps
+        tab={newTabData}
+        tabDetails={officeInfo[newTabData]}
+      />
     </div>
   );
 };

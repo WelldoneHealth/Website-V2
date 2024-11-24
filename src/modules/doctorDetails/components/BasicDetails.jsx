@@ -30,13 +30,15 @@ const BasicDetails = ({ basicInfo }) => {
         </h3>
         <div className="w-full flex flex-col gap-y-1 text-sm">
           <p className="text-[#A7A7A7] font-normal text-sm asm:text-base">
-           {basicInfo?.education_and_background.map(item => item.qualification).join(', ')}
+            {basicInfo?.education_and_background
+              .map((item) => item.qualification)
+              .join(", ")}
           </p>
           <p className="text-[#A7A7A7] font-medium text-sm asm:text-base">
-           {basicInfo?.practice_specialty}
+            {basicInfo?.practice_specialty}
           </p>
           <p className="max-sm:w-full text-[#A7A7A7] font-normal w-[70%] max-w-[450px]">
-          {basicInfo?.specialty_treatment}
+            {basicInfo?.specialty_treatment}
           </p>
           <p className="my-4 text-[#A7A7A7] font-normal asm:text-base">
             <span className="mr-2 relative w-[12px] h-[15px] inline-block">

@@ -15,20 +15,21 @@ import {
 import axiosInstance from "@/shared/apis/axiosInstance";
 import { useAppointmentStore } from "@/modules/doctorDetails/data/appointmentStore";
 import moment from "moment";
-import AddPatientDrawer from "@/modules/checkout/components/addPatientDrawer";
+import AddPatientDrawer from "@/shared/atoms/addPatientDrawer";
 import { addAppointment } from "@/modules/checkout/apis";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
+import { toast } from "sonner";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
 
-  console.log(appointmentData)
+  console.log(appointmentData);
 
   const router = useRouter();
 
-  const [statusChange, setStatusChange] = useState({ 
+  const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
     patientStatus: false,
     paymentStatus: false,
@@ -43,7 +44,7 @@ export default function page() {
     appointmentSelection: appointmentOptions[0],
   });
 
-  console.log("the doctor is",statusData.doctorSelection)
+  console.log("the doctor is", statusData.doctorSelection);
 
   // --------------------- hide or view the
   const [dataVisibilityToggle, setDataVisibilityToggle] = useState({
@@ -76,10 +77,8 @@ export default function page() {
 
   const [patientList, setPatientList] = useState([]);
   const getPatients = async () => {
-    // console.log("ok hello")
     try {
       const response = await axiosInstance.get("apiV1/patient/");
-      // console.log("the data returned from respone is", response.data);
       setStatusData({ ...statusData, patientSelection: response.data[0] });
       setPatientList(response.data);
       return response.data;
@@ -96,10 +95,15 @@ export default function page() {
     mutationFn: addAppointment,
     onSuccess: () => {
       router.push(`/checkout/appointmentConfirmation`);
+      toast("Appointment has been created", {
+        description: "Sunday, December 03, 2023 at 9:00 AM",
+      });
     },
     onError: (error) => {
+      toast("Something went wrong!", {
+        description: "Try again later!",
+      });
       console.error("Error adding appointment:", error);
-      // Handle error (e.g., show error notification)
     },
   });
 
@@ -108,7 +112,7 @@ export default function page() {
       ...{
         doctor: appointmentData?.doctorData?.id,
         slot: null,
-        branch: appointmentData?.branchData?.id,
+        branch: appointmentData?.branchData?.branch_id,
         is_first_visit: statusData.appointmentSelection?.isFirstVisit,
         is_equeue: true,
         amount: statusData.appointmentSelection?.charge ?? 0,
@@ -212,7 +216,10 @@ export default function page() {
                     >
                       {/* ------hospital image------------ */}
                       <div className="size-[100px] rounded-xl overflow-hidden ">
-                        <img src={appointmentData?.branchData?.clinic_logo} className="w-full " />
+                        <img
+                          src={appointmentData?.branchData?.clinic_logo}
+                          className="w-full "
+                        />
                       </div>
 
                       <div className="flex-1 space-y-1">
@@ -282,76 +289,75 @@ export default function page() {
             {/* ----------------------on button click new updated card ui------------------------ */}
             {dataVisibilityToggle.doctorsToggle && (
               <div className="w-full  flex flex-col sm:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
-               {/*------------------new doctor card---------------- */}
-               <div className="space-y-1 flex-1">
-                    <p className="font-semibold ">Doctor</p>
-                    <div
-                     
-                      style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-                      className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
-                    >
-                      {/* ------doctor image------------ */}
+                {/*------------------new doctor card---------------- */}
+                <div className="space-y-1 flex-1">
+                  <p className="font-semibold ">Doctor</p>
+                  <div
+                    style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
+                    className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
+                  >
+                    {/* ------doctor image------------ */}
 
-                      <img
-                        src={statusData.doctorSelection?.profile_picture}
-                        className="w-[60px] sm:w-[70px] md:w-[100px] "
-                      />
-                      <div className="w-full space-y-1">
-                        <div className="w-full flex  justify-between items-center text-sm font-medium">
-                          <p className="max-sm:text-sm">
-                            {statusData.doctorSelection?.first_name}&nbsp;
-                            {statusData.doctorSelection?.middle_name}&nbsp;
-                            {statusData.doctorSelection?.last_name};
-                          </p>
-                        </div>
-                        <p className="text-xs sm:text-sm font-medium">
-                          {statusData.doctorSelection?.education_and_background
-                            ?.map((item) => item.qualification)
-                            .join(" / ")}
-                        </p>
-                        <p className="text-sm max-md:hidden leading-tight">
-                          {" "}
-                          Surgical Oncologist | Advanced Laparoscopic Surgeon |
-                          Nodules{" "}
-                        </p>
-                        <p className="text-xs sm:text-sm md:hidden">
-                          Surgical Oncologist
+                    <img
+                      src={statusData.doctorSelection?.profile_picture}
+                      className="w-[60px] sm:w-[70px] md:w-[100px] "
+                    />
+                    <div className="w-full space-y-1">
+                      <div className="w-full flex  justify-between items-center text-sm font-medium">
+                        <p className="max-sm:text-sm">
+                          {statusData.doctorSelection?.first_name}&nbsp;
+                          {statusData.doctorSelection?.middle_name}&nbsp;
+                          {statusData.doctorSelection?.last_name};
                         </p>
                       </div>
+                      <p className="text-xs sm:text-sm font-medium">
+                        {statusData.doctorSelection?.education_and_background
+                          ?.map((item) => item.qualification)
+                          .join(" / ")}
+                      </p>
+                      <p className="text-sm max-md:hidden leading-tight">
+                        {" "}
+                        Surgical Oncologist | Advanced Laparoscopic Surgeon |
+                        Nodules{" "}
+                      </p>
+                      <p className="text-xs sm:text-sm md:hidden">
+                        Surgical Oncologist
+                      </p>
                     </div>
                   </div>
+                </div>
 
-                  {/* ------------------------new hospital card-------------------- */}
-                  <div className="space-y-1 flex-1">
-                    <p className="font-semibold ">Clinic/Hospital</p>
-                    <div
-                      style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-                      className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
-                    >
-                      {/* ------hospital image------------ */}
+                {/* ------------------------new hospital card-------------------- */}
+                <div className="space-y-1 flex-1">
+                  <p className="font-semibold ">Clinic/Hospital</p>
+                  <div
+                    style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
+                    className="w-full flex-1 max-w-[900px] p-3 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
+                  >
+                    {/* ------hospital image------------ */}
 
-                      <img
-                        src={appointmentData?.branchData?.clinic_logo}
-                        className="w-[60px] sm:w-[70px] md:w-[100px] "
-                      />
-                      <div className="w-full space-y-1">
-                        {/* <div className="w-full flex  justify-between items-center text-sm font-medium">
+                    <img
+                      src={appointmentData?.branchData?.clinic_logo}
+                      className="w-[60px] sm:w-[70px] md:w-[100px] "
+                    />
+                    <div className="w-full space-y-1">
+                      {/* <div className="w-full flex  justify-between items-center text-sm font-medium">
                           <p className="max-sm:text-sm">
                       {appointmentData?.branchData?.clinic_name}
                           </p>
                         </div>  */}
-                        <p className="text-xs sm:text-sm font-medium">
+                      <p className="text-xs sm:text-sm font-medium">
                         {appointmentData?.branchData?.clinic_name}
-                        </p>
-                        <p className="text-sm max-md:hidden leading-tight">
+                      </p>
+                      <p className="text-sm max-md:hidden leading-tight">
                         {appointmentData?.branchData?.clinic_address}
-                        </p>
-                        <p className="text-xs sm:text-sm md:hidden">
-                          Surgical Oncologist
-                        </p>
-                      </div>
+                      </p>
+                      <p className="text-xs sm:text-sm md:hidden">
+                        Surgical Oncologist
+                      </p>
                     </div>
                   </div>
+                </div>
               </div>
             )}
           </div>
@@ -1023,7 +1029,7 @@ export default function page() {
         onClose={() => {
           setView(false);
         }}
-        setSelectedPatient={(item) => {
+        successCallback={(item) => {
           setStatusData((prev) => ({
             ...prev,
             patientSelection: item,

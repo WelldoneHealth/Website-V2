@@ -8,7 +8,6 @@ import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { getHospitalList } from "@/shared/apis/hospitalCard";
 import { useQuery } from "@tanstack/react-query";
 
-
 export default function HospitalAssociatedSlider() {
   const sliderRef = useRef(null);
 
@@ -43,11 +42,7 @@ export default function HospitalAssociatedSlider() {
     ],
   };
 
-
-  const {
-    data: hospitalList,
-    isLoading,
-  } = useQuery({
+  const { data: hospitalList, isLoading } = useQuery({
     queryKey: ["hospitalList"],
     queryFn: getHospitalList,
     enabled: true,
@@ -79,8 +74,16 @@ export default function HospitalAssociatedSlider() {
         </div>
       </div>
 
-      <Slider ref={sliderRef} {...settings}  className="   max-w-[850px] lg:max-w-[1280px] mx-auto " >
-    {hospitalList && hospitalList.map((item)=>  <HospitalAssociatedCard key={item?.id} cardDetails={item} /> )  }    </Slider>
+      <Slider
+        ref={sliderRef}
+        {...settings}
+        className="   max-w-[850px] lg:max-w-[1280px] mx-auto "
+      >
+        {hospitalList &&
+          hospitalList.map((item) => (
+            <HospitalAssociatedCard key={item?.id} cardDetails={item} />
+          ))}{" "}
+      </Slider>
 
       <div className=" my-7 w-full  flex justify-center items-center md:hidden space-x-6">
         <button

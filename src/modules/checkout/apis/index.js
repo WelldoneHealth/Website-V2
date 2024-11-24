@@ -12,7 +12,7 @@ export const addPatient = async (patientData) => {
 
 export const addAppointment = async (data) => {
   try {
-    const response = await axiosInstance.post("/apiV1/appointment/", data);
+    const response = await axiosInstance.post("/apiV1/book-appointment/", data);
     return response.data; // Return the data from the response
   } catch (error) {
     throw new Error(error.message || "Error adding appointment");

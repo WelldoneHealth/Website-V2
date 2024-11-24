@@ -18,14 +18,18 @@ export default function Navbar() {
 
   return (
     <>
-     <header className="  w-full    fixed top-0 left-0 z-[1000] bg-white    ">
-      <div
-         style={{ boxShadow: "0px -2px 4px #01549A40, 0px 2px 4px #01549A40" }}
+      <header className="  w-full   fixed top-0 left-0 z-[10] bg-white    ">
+        <div
+          style={{ boxShadow: "0px -2px 4px #01549A40, 0px 2px 4px #01549A40" }}
           className="w-full max-w-[1620px] max-md:h-[62px]  flexBetween  p-2 px-3  md:p-3 md:px-5 mx-auto "
-      >
-         <div className="flex items-center gap-x-4">
-{/* ----------------------non animated menu-------------------- */}
-            <button type="button" onClick={toggleNavBar} className="w-7 lg:hidden">
+        >
+          <div className="flex items-center gap-x-4">
+            {/* ----------------------non animated menu-------------------- */}
+            <button
+              type="button"
+              onClick={toggleNavBar}
+              className="w-7 lg:hidden"
+            >
               {/* <button type="button" onClick={toggleNavBar} className="w-8 block md:hidden"> */}
               {!navOpen && (
                 <img
@@ -38,53 +42,55 @@ export default function Navbar() {
                 <p className="text-4xl font-medium text-primary">X</p>
               )}
             </button>
-{/* -------------icon--------------- */}
+            {/* -------------icon--------------- */}
             <div className="w-[78px] md:w-24 ">
-              <Link href="/" >
+              <Link href="/">
                 <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
               </Link>
             </div>
           </div>
 
-        <div className="flex gap-x-8 md:gap-x-14 ">
-          <Link href="https://practice.welldonehealth.in/" passHref target="_blank" className="block " >
-          <button className="  text-[#01549A] hidden sm:flex justify-center items-center font-medium text-lg">
-            {" "}
-            <img
-              src={hospitalIcon2?.src}
-              className="w-[30px]  mx-3"
-              alt="load..."
-            />{" "}
-            I have Clinic/ Hospital
-          </button>
-          </Link>
-          {token ? (
-            <button
-              onClick={logout}
-              className=" flex justify-center items-center gap-x-2 px-4 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white"
+          <div className="flex gap-x-8 md:gap-x-14 ">
+            <Link
+              href="https://practice.welldonehealth.in/"
+              passHref
+              target="_blank"
+              className="block "
             >
-              Logout
-            </button>
-          ) : (
-            <Link href={"/login"}>
-              <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
-                Login{" "}
-                <div className="flexCenter rounded-full p-1 bg-white">
-                  <img
-                    src={loginIcon?.src}
-                    width={16}
-                    height={11}
-                    alt="load..."
-                  />
-                </div>
+              <button className="  text-[#01549A] hidden sm:flex justify-center items-center font-medium text-lg">
+                {" "}
+                <img
+                  src={hospitalIcon2?.src}
+                  className="w-[30px]  mx-3"
+                  alt="load..."
+                />{" "}
+                I have Clinic/ Hospital
               </button>
             </Link>
-          )}
-
-          
+            {token ? (
+              <button
+                onClick={logout}
+                className=" flex justify-center items-center gap-x-2 px-4 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link href={"/login"}>
+                <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-[#01549A] font-normal text-white">
+                  Login{" "}
+                  <div className="flexCenter rounded-full p-1 bg-white">
+                    <img
+                      src={loginIcon?.src}
+                      width={16}
+                      height={11}
+                      alt="load..."
+                    />
+                  </div>
+                </button>
+              </Link>
+            )}
+          </div>
         </div>
-
-      </div>
       </header>
 
       <div
@@ -114,15 +120,16 @@ export default function Navbar() {
             <img src={wellDoneLogo?.src} className="w-full mt-14" />
           </div>
           <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
-            {[1,2,3,4,5].map((item,index) => (
-                <div
-                  key={index}                  style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-                  className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
-                >
-              <Link className="w-full" href="/">
-                 home
-              </Link>
-                </div>
+            {[1, 2, 3, 4, 5].map((item, index) => (
+              <div
+                key={index}
+                style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
+                className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+              >
+                <Link className="w-full" href="/">
+                  home
+                </Link>
+              </div>
             ))}
           </div>
         </div>

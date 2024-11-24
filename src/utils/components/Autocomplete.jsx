@@ -40,7 +40,7 @@ export const AutoComplete = ({
     queryKey: ["searchResults", searchText], // Query key
     queryFn: () => fetchData(searchText), // Fetch function
     enabled: searchText.length > 0, // Only trigger the query if searchText has content
-    staleTime: 3000,
+    // staleTime: 3000,
   });
 
   const handleKeyDown = useCallback(
@@ -75,7 +75,7 @@ export const AutoComplete = ({
       setInputValue(selectedOption.label);
       setSelected(selectedOption);
       onValueChange(selectedOption);
-      onOptionClick(selectedOption.value); // Trigger the onClick handler
+      onOptionClick(selectedOption); // Trigger the onClick handler
       setTimeout(() => inputRef.current?.blur(), 0);
     },
     [onValueChange, onOptionClick]

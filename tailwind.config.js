@@ -60,14 +60,14 @@ module.exports = {
         screens: {},
       },
       screens: {
-        "ssm":"300px",
+        ssm: "300px",
         // "msm":"350px",
-        "asm":"400px",
-        "msm":"500px",
+        asm: "400px",
+        msm: "500px",
 
-        "lsm":"900px",
-        
-        "esm":"1200px", 
+        lsm: "900px",
+
+        esm: "1200px",
       },
       borderRadius: {
         lg: "var(--radius)",

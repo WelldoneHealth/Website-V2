@@ -6,16 +6,28 @@ import cashCounterIcon from "@/asset/Icons/cashCounter.svg";
 import ratingIcon from "@/asset/Icons/rating.svg";
 import femaleIcon from "@/asset/Icons/female.svg";
 
-
-
-const ExtraDetails = ({extraDocInfo}) => {
+const ExtraDetails = ({ extraDocInfo }) => {
   const extraDetails = [
-    { img: languageIcon, text:  extraDocInfo?.language?.length >0 ? extraDocInfo?.language.join(', ') :   "English , हिंदी" },
-    { img: doctorBagIcon, text: extraDocInfo?.total_experience ? `${Number(extraDocInfo?.total_experience)}+ Years Experience` :  "Experience not available" },
+    {
+      img: languageIcon,
+      text:
+        extraDocInfo?.language?.length > 0
+          ? extraDocInfo?.language.join(", ")
+          : "English , हिंदी",
+    },
+    {
+      img: doctorBagIcon,
+      text: extraDocInfo?.total_experience
+        ? `${Number(extraDocInfo?.total_experience)}+ Years Experience`
+        : "Experience not available",
+    },
     { img: doctorBagIcon2, text: "No charges for booking" },
     { img: cashCounterIcon, text: "Cash on counter" },
     // { img: ratingIcon, text: "4.8 (234 Reviews)" },
-    { img: femaleIcon, text: extraDocInfo?.gender ? extraDocInfo?.gender : "N/A" },
+    {
+      img: femaleIcon,
+      text: extraDocInfo?.gender ? extraDocInfo?.gender : "N/A",
+    },
   ];
   return (
     <div className="my-7 w-full flex max-lg:overflow-x-auto max-lg:whitespace-nowrap gap-x-6 py-4 border-y-2 border-[#EFEFEF]">
