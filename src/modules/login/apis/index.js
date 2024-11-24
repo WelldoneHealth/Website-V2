@@ -5,6 +5,20 @@ export const loginUser = async (credentials) => {
   return response.data; // Expects an object with `access` token
 };
 
+export const registerUser = async (userData) => {
+  try {
+    const response = await axiosInstance.post(`/apiV1/user/`, {
+      ...userData,
+      roles: 3,
+    });
+    return response.data; // Expects the API to return the user data or success message
+  } catch (error) {
+    throw new Error(
+      error.response?.data?.message || "Registration failed. Please try again."
+    );
+  }
+};
+
 export const getCurrentUser = async (authToken) => {
   const response = await axiosInstance.get(`apiV1/current-user/`, {
     headers: {
@@ -13,4 +27,3 @@ export const getCurrentUser = async (authToken) => {
   });
   return response.data;
 };
- 

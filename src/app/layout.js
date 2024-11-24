@@ -10,6 +10,7 @@ import Navbar from "@/components/Layout/Navbar/Navbar";
 import Providers from "./providers";
 import Footer from "@/components/Layout/Footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
+import NextTopLoader from "nextjs-toploader";
 // import 'leaflet/dist/leaflet.css';
 
 const geistSans = localFont({
@@ -39,6 +40,7 @@ export default function RootLayout({ children }) {
       >
         <Providers>
           <Navbar />
+          <NextTopLoader />
           <main className=" mx-auto lg:container mt-[60px]  md:mt-[68px] min-h-[calc(100vh-100px)] ">
             <Toaster />
             {children}
