@@ -15,7 +15,7 @@ const HomeModule = () => {
       <DoctoAssociateSlider />
 
       {/* -----hopital slider------- */}
-      {/* <HospitalAssociatedSlider /> */}
+      <HospitalAssociatedSlider />
 
       <MobileAppBanner />
     </div>
