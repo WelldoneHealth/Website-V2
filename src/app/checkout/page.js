@@ -1,8 +1,6 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-
-import doctorImage2 from "@/asset/Images/doctorImage2.png";
 import smallHospital3 from "@/asset/Images/smallHospital3.png";
 
 import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
@@ -21,10 +19,11 @@ import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 import { toast } from "sonner";
+import useAuthStore from "@/store/authStore";
 
 export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
-
+  const userData = useAuthStore((state) => state.userDetails);
   console.log(appointmentData);
 
   const router = useRouter();
@@ -301,15 +300,15 @@ export default function page() {
                     {/* ------doctor image------------ */}
 
                     <img
-                      src={statusData.doctorSelection?.profile_picture}
+                      src={appointmentData.doctorData?.profile_picture}
                       className="w-[60px] sm:w-[70px] md:w-[100px] "
                     />
                     <div className="w-full space-y-1">
                       <div className="w-full flex  justify-between items-center text-sm font-medium">
                         <p className="max-sm:text-sm">
-                          {statusData.doctorSelection?.first_name}&nbsp;
-                          {statusData.doctorSelection?.middle_name}&nbsp;
-                          {statusData.doctorSelection?.last_name};
+                          {appointmentData?.doctorData?.first_name}&nbsp;
+                          {appointmentData?.doctorData?.middle_name}&nbsp;
+                          {appointmentData?.doctorData?.last_name}
                         </p>
                       </div>
                       <p className="text-xs sm:text-sm font-medium">
@@ -339,7 +338,10 @@ export default function page() {
                     {/* ------hospital image------------ */}
 
                     <img
-                      src={appointmentData?.branchData?.clinic_logo}
+                      src={
+                        appointmentData?.branchData?.clinic_logo ??
+                        smallHospital3?.src
+                      }
                       className="w-[60px] sm:w-[70px] md:w-[100px] "
                     />
                     <div className="w-full space-y-1">
@@ -862,17 +864,11 @@ export default function page() {
                 <div className="w-full gap-y-3 p-5 py-3 max-sm:text-xs flex flex-col sm:flex-row justify-between items-center bg-[#EFEFEF]">
                   <p>
                     Appointment confirmation WhatsApp Massage will be sent to{" "}
-                    <span className="font-medium">+91 9876543210</span>{" "}
+                    <span className="font-medium">{userData?.contact}</span>{" "}
                   </p>
                   <button
                     type="button"
-                    onClick={() =>
-                      statusData.appointmentSelection &&
-                      setDataVisibilityToggle({
-                        ...dataVisibilityToggle,
-                        appointmentToggle: true,
-                      })
-                    }
+                    onClick={handleBookAppointment}
                     className={`px-8 py-3 max-sm:w-full  font-semibold text-sm rounded-[10px]  ${
                       !statusData.appointmentSelection
                         ? " text-[#5A5D62] border-[1px] border-[#5A5D62] bg-[#EFEFEF]"
@@ -880,7 +876,7 @@ export default function page() {
                     } `}
                     disabled={!statusData.appointmentSelection}
                   >
-                    Confirm
+                    Book Appointment
                   </button>
                 </div>
               )}
@@ -888,7 +884,7 @@ export default function page() {
           )}
 
           {/* --------------------------mobile view button for moving to next processes-------------- */}
-          <div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex justify-center items-center border-t-[2px] border-[#DADADA] ">
+          {/* <div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex justify-center items-center border-t-[2px] border-[#DADADA] ">
             <button
               type="button"
               onClick={handleBookAppointment}
@@ -896,7 +892,7 @@ export default function page() {
             >
               Book Appointment
             </button>
-          </div>
+          </div> */}
 
           {/* ---------------------steps to show in each process----------------- */}
           {!statusChange.patientStatus && (

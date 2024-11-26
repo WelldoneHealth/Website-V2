@@ -195,6 +195,10 @@ const AppointmentSection = ({
                 setAppointmentData({
                   equeueData: selectedEqueue,
                   doctorData: doctorInfo,
+                  branchData:
+                    doctorInfo?.establishment?.filter(
+                      (e) => e?.branch_slug === selectedBranch
+                    )[0] ?? null,
                 });
               }}
               className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
