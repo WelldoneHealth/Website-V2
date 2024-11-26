@@ -131,7 +131,7 @@ const NavbarHero = () => {
               {/* Search Button */}
               <button
                 onClick={() => handleSearch(searchTerm)}
-                className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition"
+                className="bg-[#01549A] text-white px-8 py-3 rounded-lg hover:bg-blue-600 transition"
               >
                 Search Now
               </button>
@@ -139,7 +139,7 @@ const NavbarHero = () => {
           </div>
 
           {/* Loading State */}
-          {loading && <p className="text-blue-600 mt-4">Loading...</p>}
+          {loading && <p className="text-[#01549A] mt-4">Loading...</p>}
 
           {/* Error State */}
           {error && <p className="text-red-600 mt-4">{error}</p>}
