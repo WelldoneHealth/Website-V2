@@ -64,8 +64,12 @@ const HospitalDetailsModule = ({ slug }) => {
           <p className="my-3 text-sm">
             {/* Dr. B.D.Ahirrao Memorial Hospital (Baba Ahirrao) Dhule Road, 424304. */}
           </p>
-          <Branches branches={hospitalInfo?.available_branches} />
-          <DoctorsList doctors={hospitalInfo?.doctors ?? []} branch={slug} />
+          {hospitalInfo?.available_branches?.length > 0 && (
+            <Branches branches={hospitalInfo?.available_branches} />
+          )}
+          {hospitalInfo?.doctors?.length > 0 && (
+            <DoctorsList doctors={hospitalInfo?.doctors ?? []} branch={slug} />
+          )}
           <TimingSection timings={hospitalInfo?.timing} />
           <ServicesAvailable services={convenienceServices} />
           <OtherServices

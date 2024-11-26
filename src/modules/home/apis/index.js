@@ -13,7 +13,7 @@ export const doctorHospitalSearch = async (searchText = "") => {
             } ${each?.last_name ?? ""}`,
           value: each?.is_hospital
             ? each?.slug
-            : `${each?.slug}_${each?.branch__slug}`,
+            : `${each?.slug}_${each?.branch_slug}`,
           is_hospital: each?.is_hospital,
         }));
       });

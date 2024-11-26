@@ -58,7 +58,10 @@ const NavbarHero = () => {
   const handleOptionClick = (option) => {
     if (option?.is_hospital) {
       const slug = option?.value;
-      const pathname = Routes.hospitalDetailsPage.replace("/[slug]", `/${slug}`);
+      const pathname = Routes.hospitalDetailsPage.replace(
+        "/[slug]",
+        `/${slug}`
+      );
       router.push(pathname);
     } else {
       const combinedSlug = option?.value;
@@ -108,7 +111,9 @@ const NavbarHero = () => {
                       >
                         <p className="font-medium">{result.label}</p>
                         <p className="text-sm text-gray-600">
-                          {result.is_hospital ? "Type: Hospital" : "Type: Doctor"}
+                          {result.is_hospital
+                            ? "Type: Hospital"
+                            : "Type: Doctor"}
                         </p>
                       </li>
                     ))}

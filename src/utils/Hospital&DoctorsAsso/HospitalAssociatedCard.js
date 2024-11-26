@@ -2,7 +2,8 @@ import React from "react";
 import { HOSPITAL_IMAGE1 } from "../ImageConstants";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 import doctorIcon from "@/asset/Icons/doctor.svg";
-//import hospiatalImage from "@/asset/Images/hospital_Image1.png.png"
+import Link from "next/link";
+// import hospiatalImage from "@/asset/Images/hospital_Image1.png.png";
 
 export default function HospitalAssociatedCard({ cardDetails }) {
   return (
@@ -15,7 +16,7 @@ export default function HospitalAssociatedCard({ cardDetails }) {
 
         <div className="w-[106px] flex justify-center items-center ssm:w-[75px] asm:w-[103px] sm:w-[90px]  relative  ">
           <img
-            src={cardDetails?.page_setup__page_logo}
+            src={cardDetails?.page_setup__page_logo ?? HOSPITAL_IMAGE1}
             className="w-full"
             alt="load..."
           />
@@ -44,9 +45,11 @@ export default function HospitalAssociatedCard({ cardDetails }) {
         </div>
       </div>
 
-      <div className=" py-2 text-sm rounded-[20px] text-center bg-[#EFF8FF]">
-        <span className="text-[#01549A] font-medium">View Details</span>
-      </div>
+      <Link href={`/hospital-details/${cardDetails?.slug}`}>
+        <div className=" py-2 text-sm rounded-[20px] text-center bg-[#EFF8FF]">
+          <span className="text-[#01549A] font-medium">View Details</span>
+        </div>
+      </Link>
     </div>
   );
 }
