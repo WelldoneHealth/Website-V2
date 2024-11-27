@@ -168,20 +168,15 @@ export default function CompletedAppo_Cards({
         <div className=" w-full">
           <div className="w-full  mt-2 asm:mt-4 flex gap-x-3 sm:gap-x-7  ">
             {/* -----------1st part------------- */}
-            {/* <div className=" max-ssm:hidden w-[120px] asm:w-[150px] sm:w-[180px] md:w-[205px]  overflow-hidden  rounded-full ">
+            <div className=" max-ssm:hidden w-[100px]  asm:w-[150px] sm:w-[180px] md:w-[205px] aspect-[1/1]  bg-[#EFF8FF] overflow-hidden  rounded-full">
               <img
-                src={appointmentCardData?.doctor_image}
-                className=" w-full "
+                src={appointmentCardData?.doctor_image ?? defaultDoctor?.src}
+                className=" w-full h-full object-cover object-center "
                 alt="load..."
               />
-            </div> */}
-            <img
-              src={appointmentCardData?.doctor_image ?? defaultDoctor?.src}
-              className="  object-cover max-ssm:hidden size-[100px] rounded-full bg-[#EFF8FF]"
-              alt="load..."
-            />
+            </div>
             {/* ---------2nd part-------------- */}
-            <div className=" w-full  ">
+            <div className=" w-full flex-1 ">
               <div className="w-full flex   gap-y-3 justify-between  max-md:flex-wrap ">
                 <div className="  space-y-1  lsm:text-nowrap   md:space-y-2">
                   <p className="tet-base asm:text-lg msm:text-[20px] font-medium">

@@ -33,7 +33,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
   const DataCard = ({ image, mainText, subText, textSize,linkTo }) => (
     <div  onClick={()=>router.push(linkTo)} className="w-full cursor-pointer px-3 sm:px-6 py-4 flex  gap-x-2 ssm:gap-x-4  mams:gap-x-6 border-b-[1px] ">
       <div className=" flex items-center justify-center w-[40px]  ssm:size-[50px] asm:size-[70px] msm:size-[85px] aspect-[1/1] bg-[#EFF8FF]   rounded-full overflow-hidden">
-        <img src={image?.src} className="w-full  h-full object-cover object-center " alt="load..." />
+        <img src={image} className="w-full  h-full object-cover object-center " alt="load..." />
       </div>
   
       <div className="space-y-1 flex flex-col justify-center ">
@@ -61,7 +61,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
        
   {/* ----------------------painet card-------------------- */}
         <DataCard
-          image={patientDefault}
+          image={patientDefault?.src}
           mainText={`${appointmentData?.patient_first_name ?? ""} ${
             appointmentData?.patient_middle_name ?? ""
           } ${appointmentData?.patient_last_name ?? ""}`}

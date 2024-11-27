@@ -7,6 +7,7 @@ import TabsWithMaps from "./components/TabsWithMaps";
 import EducationCard from "./components/EducationCard";
 import ExperienceCard from "./components/ExperienceCard";
 import AppointmentSection from "./components/AppointmentSection";
+import backArrow from "@/asset/Icons/backArrow.svg"
 import { getDoctorDetails } from "./apis";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -92,7 +93,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
             onClick={() => {
               setShowAppointmentDrawer(true);
             }}
-            className="w-[90%] sm:w-[450px] mx-auto block bg-[#01549A] py-2 rounded-lg text-white"
+            className="w-[90%] sm:w-[450px] mx-auto block bg-[#01549A]  py-2 rounded-lg text-white "
           >
             Book Appointment
           </button>
@@ -104,10 +105,11 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
         onClose={closeDrawer}
         // direction="bottom"
       >
-        <DrawerContent className="w-full">
+        <DrawerContent className="w-full mt-12">
           <DrawerClose onClick={closeDrawer} />
           <DrawerHeader className= "relative w-full justify-center flex mt-3">
-            <DrawerTitle>Book Your Appointment</DrawerTitle>  <div onClick={closeDrawer}  className="text-4xl cursor-pointer font-semibold absolute right-7 top-2 ">X</div>
+            <DrawerTitle>Book Your Appointment</DrawerTitle> 
+            <div onClick={closeDrawer} className="absolute right-5 top-3 flex lsm:hidden cursor-pointer "><img src={backArrow?.src} className="rotate-180 w-7"  alt="load..." /></div>
           </DrawerHeader>
           <AppointmentSection
             doctorSlug={doctorSlug}
