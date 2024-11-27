@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function CheckoutModule() {
+export default function Checkoutodule() {
   return (
    
   )

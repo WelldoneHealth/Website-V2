@@ -25,7 +25,7 @@ export default function CheckoutPaymentCard({paymentData}) {
       <p className="text-base font-medium ">
         {paymentData?.primaryText}
       </p>
-      <p classNametext="text-[4px] sm:text-sm bg-red-900 ">
+      <p className="text-[4px] sm:text-sm bg-red-900 ">
         {paymentData?.subText}
       </p>
     </div>
