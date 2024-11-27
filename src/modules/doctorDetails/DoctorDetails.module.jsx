@@ -44,7 +44,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full relative max-w-[1600px] md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
+    <div className="w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
       <div className="w-full lg:w-[68%] max-h-max">
         <BasicDetails basicInfo={doctorInfo} />
         <ExtraDetails extraDocInfo={doctorInfo} />
@@ -77,7 +77,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
         </div>
       </div>
 
-      <div className="hidden lg:w-[32%] lg:block">
+      <div className="hidden flex-1 lg:w-[32%] lg:block">
         <AppointmentSection
           doctorSlug={doctorSlug}
           branchSlug={branchSlug}
@@ -86,16 +86,17 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
       </div>
 
       {/* Fixed Button for Small Screens */}
-      <div className="p-3">
-        <div className="lg:hidden fixed bottom-4  left-1/2 transform -translate-x-1/2 w-full  px-4 py-2 rounded-full shadow-lg">
+      <div className="w-full p-3 lg:hidden  ">
+        <div className=" fixed bottom-4   left-1/2 transform -translate-x-1/2 w-full   px-4 py-2 rounded-full shadow-lg">
           <button
             onClick={() => {
               setShowAppointmentDrawer(true);
             }}
-            className="w-full sm:w-auto bg-[#01549A] py-2 rounded-lg text-white"
+            className="w-[90%] sm:w-[450px] mx-auto block bg-[#01549A] py-2 rounded-lg text-white"
           >
             Book Appointment
           </button>
+      
         </div>
       </div>
       <Drawer
@@ -105,8 +106,8 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
       >
         <DrawerContent className="w-full">
           <DrawerClose onClick={closeDrawer} />
-          <DrawerHeader>
-            <DrawerTitle>Book Your Appointment</DrawerTitle>
+          <DrawerHeader className= "relative w-full justify-center flex mt-3">
+            <DrawerTitle>Book Your Appointment</DrawerTitle>  <div onClick={closeDrawer}  className="text-4xl cursor-pointer font-semibold absolute right-7 top-2 ">X</div>
           </DrawerHeader>
           <AppointmentSection
             doctorSlug={doctorSlug}

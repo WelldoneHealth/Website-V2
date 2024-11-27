@@ -16,30 +16,31 @@ import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
 import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { useRouter } from 'next/navigation';
+import defaultClinic from "@/asset/Images/defaultClinic.png";
 
 export default function HospitalCard({listInfo}) {
-
+const router=useRouter()
 
   return (
     <div
             onClick={() =>
-              setPlaceLocation([51.562861336440584, -0.2900755252434501])
-            }
+router.push(`/hospital-details/${listInfo?.slug}`)            }
             style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
             className="w-full min-h-[120px]  sm:min-h-[170px] lg:min-h-[180px] max-h-[190px] mx-auto xl:w-[96%] max-w-[800px]  xl:max-w-[900px] px-2 msm:px-4 lg:px-6  py-3 asm:py-4 lg:py-5    border-[1px] border-gray-500 rounded-[20px] flex flex-col sm:flex-row  md:items-start justify-between gap-y-4 "
           >
             {/* -----------left part------ */}
             <div className=" flex items-start gap-x-4 sm:gap-x-8 lg:gap-x-4 esm:gap-x-8">
               {/* ----------image----------- */}
-              <div className="rounded-full w-[180px]  flexCenter">
+              {/* <div className="rounded-full w-[180px] aspect-[1/1]   flexCenter overflow-hidden bg-[#EFF8FF] "> */}
+              <div className="rounded-full size-20 ssm:size-24  asm:size-28 msm:size-32 sm:size-40 aspect-[1/1]   flexCenter overflow-hidden bg-[#EFF8FF] ">
                 <img
-                  src={listInfo?.logo}
-                  className="w-full "
+                  src={listInfo?.logo ?? defaultClinic?.src }
+                  className="w-full h-full object-cover object-center"
                   alt="load...."
                 />
               </div>
               {/* ------details portion beside image---- */}
-              <div className="flex flex-col   gap-y-2">
+              <div className="flex flex-col flex-1   gap-y-2"> 
               <p className="font-medium text-sm asm:text-base msm:text-lg leading-tight  ">
              {listInfo?.establishment_name ?? ''}
         </p>
@@ -53,14 +54,14 @@ export default function HospitalCard({listInfo}) {
                   General practitioner<span className="font-bold text-red-700">NA</span>
                 </p>
 
-                <p className="mt-1  text-xs msm:text-sm flex gap-x-2 items-start">
+                { (listInfo?.city || listInfo?.state)  &&     <p className="mt-1  text-xs msm:text-sm flex gap-x-2 items-start">
           <img
             src={redGeoLocationIcon?.src}
             className="w-[12px] "
             alt="load..."
           />
       {listInfo?.city ?? ''}, {listInfo?.state ?? ''}
-        </p>
+        </p>  }
 {/* -------for future--------------- */}
                 <p className="mt-1  text-xs msm:text-sm  hidden gap-x-2 items-baseline">
                   <img
@@ -69,7 +70,7 @@ export default function HospitalCard({listInfo}) {
                     alt="load..."
                   />
                   1+ Doctors associated<span className="font-bold text-red-700">NA</span>
-                </p>
+                </p> 
               </div>
             </div>
             {/* ------------------right part------ */}

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { getHospitalList } from "@/shared/apis/hospitalCard";
 import { useQuery } from "@tanstack/react-query";
+import Link from "next/link";
 
 export default function HospitalAssociatedSlider() {
   const sliderRef = useRef(null);
@@ -53,7 +54,9 @@ export default function HospitalAssociatedSlider() {
       <div className="my-5 lg:my-7 flex justify-between items-center ">
         <p className="text-base ssm:text-xl sm:text-2xl lg:text-2xl font-medium">
           Clinic/ Hospitals associated with us
-        </p>
+          </p>
+          <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" ><Link href="/search-listing" > View All</Link></div>
+
         <div className="hidden md:flex justify-center items-center space-x-6">
           <button
             onClick={() => sliderRef.current.slickPrev()}
@@ -84,6 +87,9 @@ export default function HospitalAssociatedSlider() {
             <HospitalAssociatedCard key={item?.id} cardDetails={item} />
           ))}{" "}
       </Slider>
+
+      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" > <Link href="/search-listing" >View All</Link> </div>
+
 
       <div className=" my-7 w-full  flex justify-center items-center md:hidden space-x-6">
         <button

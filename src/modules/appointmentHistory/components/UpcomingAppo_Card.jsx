@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cancelAppointment } from "../apis";
 import { toast } from "sonner";
 import { PopConfirm } from "@/shared/components/Popconfirm";
+import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 
 export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
   const queryClient = useQueryClient();
@@ -130,9 +131,9 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
         style={{ boxShadow: "0px 0px 4px 0px #01549A40" }}
         className="rounded-[20px] w-full p-3 flex items-center gap-x-3 msm:gap-x-4 "
       >
-        <div className=" max-md:size-[120px] max-md:rounded-full max-md:flex items-center p-1 md:w-auto">
+        <div className=" max-md:size-[120px] max-md:rounded-full max-md:flex items-center p-1 md:w-auto bg-[#EFF8FF]">
           <img
-            src={appointmentData?.doctor_image ?? doctorAppointmentImage?.src}
+            src={appointmentData?.doctor_image ?? defaultDoctor?.src}
             className="size-20 object-cover rounded-full"
             alt="load..."
           />

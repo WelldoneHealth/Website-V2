@@ -16,7 +16,7 @@ const TabsWithMaps = ({ officeInfo }) => {
         Clinic/ Hospital details
       </h3>
 
-      <div className="w-full text-[15px] flex flex-wrap gap-y-5 justify-start gap-x-5 border-b-2 border-[#EFEFEF]">
+      <div className="w-full mt-7 text-[15px] flex  gap-y-5 justify-start gap-x-3  msm:gap-x-4 sm:gap-x-5  border-b-2 border-[#EFEFEF] flex-nowrap text-nowrap overflow-x-scroll overflow-hidden ">
         {officeInfo &&
           officeInfo.map((item, index) => (
             <button

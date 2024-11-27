@@ -10,6 +10,7 @@ import moment from "moment";
 import { useRouter } from "next/navigation";
 import { getRemainingDays } from "../utilFunc/dateComparison";
 import useIsShortScreen from "@/shared/utils/useIsShortScreen";
+import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 
 export default function CompletedAppo_Cards({
   appointmentCardData,
@@ -46,18 +47,18 @@ export default function CompletedAppo_Cards({
     },
     {
       boldText: "Appointment id-",
-      text: appointmentCardData?.id ?? "N/A",
+      text: appointmentCardData?.id ?? "",
     },
     {
       boldText: "Booking Date-",
-      text: appointmentCardData?.booked_on ?? "N/A",
+      text: appointmentCardData?.booked_on ?? "",
     },
   ];
 
   const appo_data2 = [
     {
       boldText: "Reason-",
-      text: appointmentCardData?.reason?.split("_").join(" ") ?? "N/A",
+      text: appointmentCardData?.reason?.split("_").join(" ") ?? "General Consulant",
     },
     {
       boldText: "Payment Method-",
@@ -65,7 +66,7 @@ export default function CompletedAppo_Cards({
     },
     {
       boldText: "Total-",
-      text: `₹  ${Number(appointmentCardData?.amount) ?? "N/A"} `,
+      text: `₹  ${Number(appointmentCardData?.amount) ?? ""} `,
     },
   ];
 
@@ -76,7 +77,7 @@ export default function CompletedAppo_Cards({
         router.push(`/appointment-history/${appointmentCardData?.id}`)
       }
       style={{ boxShadow: " 1px 1px 4px 2px #8383834D" }}
-      className="w-full    md:space-y-2 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] sm:border-[0.5px] border-[#DADADA]"
+      className="w-full max-w-[950px] mx-auto   md:space-y-2 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] sm:border-[0.5px] border-[#DADADA]"
     >
       {/* --------------cards text--if not used by specific appointment page-------- */}
       {!isSpecific && (
@@ -165,7 +166,7 @@ export default function CompletedAppo_Cards({
         />
 
         <div className=" w-full">
-          <div className="w-full  mt-2 asm:mt-4 flex gap-x-3 sm:gap-x-7 ">
+          <div className="w-full  mt-2 asm:mt-4 flex gap-x-3 sm:gap-x-7  ">
             {/* -----------1st part------------- */}
             {/* <div className=" max-ssm:hidden w-[120px] asm:w-[150px] sm:w-[180px] md:w-[205px]  overflow-hidden  rounded-full ">
               <img
@@ -175,8 +176,8 @@ export default function CompletedAppo_Cards({
               />
             </div> */}
             <img
-              src={appointmentCardData?.doctor_image}
-              className="  object-cover max-ssm:hidden size-[100px] rounded-full"
+              src={appointmentCardData?.doctor_image ?? defaultDoctor?.src}
+              className="  object-cover max-ssm:hidden size-[100px] rounded-full bg-[#EFF8FF]"
               alt="load..."
             />
             {/* ---------2nd part-------------- */}
@@ -191,13 +192,13 @@ export default function CompletedAppo_Cards({
                     }`}
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
-                    {appointmentCardData?.doctor_specialty ?? "N/A"}{" "}
+                    {appointmentCardData?.doctor_specialty ?? ""}
                     <span className="text-red-900 text-xs">
                       {appointmentCardData?.doctor_expected_visiting_time}
                     </span>
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
-                    {appointmentCardData?.clinic_name ?? "N/A"}
+                    {appointmentCardData?.clinic_name ?? ""}
                   </p>
                   <p className="pt-1 text-xs asm:text-sm msm:text-base md:hidden">
                     Book for Rakesh Nandre (
@@ -231,7 +232,7 @@ export default function CompletedAppo_Cards({
                 >
                   Book Follow-Up
                 </button>
-                <p className="flex items-center text-sm">
+                {appointmentCardData?.followup_date && <p className="flex items-center text-sm">
                   <img src={infoIcon?.src} className="mr-2 " alt="load..." />{" "}
                   {appointmentCardData?.followup_date
                     ? remainingDays !== 0
@@ -242,7 +243,7 @@ export default function CompletedAppo_Cards({
                         }, ${remainingDays} days remaining​  `
                       : "FollowUp Today"
                     : "FollowUp Date - N/A "}
-                </p>
+                </p> }
 
                 {/* --------------message---------------- */}
                 {appointmentCardData?.is_clinic_booking && (
@@ -254,13 +255,13 @@ export default function CompletedAppo_Cards({
               </div>
             </div>
             {/* ------------------3rd part------------- */}
-            <div className=" flex items-center lsm:hidden msm:pr-1 sm:pr-4  ">
+          {!isSpecific &&  <div className=" flex items-center lsm:hidden msm:pr-1 sm:pr-4  ">
               <img
                 src={cardArrow?.src}
                 className="block h-5 sm:h-10  cursor-pointer"
                 alt="load..."
               />
-            </div>
+            </div> }
           </div>
         </div>
       </div>

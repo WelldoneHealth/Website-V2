@@ -40,7 +40,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
   }, []);
 
   const handleClick = () => {
- router.push(`/doctor-details/${listInfo?.slug}/${listInfo?.branch__slug}`)
+ router.push(`/doctor-details/${listInfo?.slug}/${listInfo?.branch_slug}`)
   };
 
   return (
@@ -59,10 +59,10 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
           alt="load...."
         />
       </div> */}
-      <div className="rounded-full size-20 ssm:size-24 bg-red-900 asm:size-28 msm:size-32 sm:size-40 flexCenter overflow-hidden">
+      <div className="rounded-full size-20 ssm:size-24  asm:size-28 msm:size-32 sm:size-40 flexCenter bg-[#EFF8FF] overflow-hidden">
   <img
     src={listInfo?.profile_picture}
-    className="w-full h-full object-cover object-center bg-green-900"
+    className="w-full h-full object-cover object-center "
     alt="load...."
   />
 </div>
@@ -85,46 +85,46 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
         </p>
 
         <p className="flex gap-y-2 justify-start   text-xs msm:text-sm  capitalize ">
-          {listInfo?.specialty ?? "Speciality N/A" }
+          {listInfo?.specialty ?? "" }
         </p>
 
-        <p className="text-xs msm:text-sm asm:mt-1 flex gap-x-2 items-center ">
+       {listInfo?.qualification && <p className="text-xs msm:text-sm asm:mt-1 flex gap-x-2 items-center ">
           <img
             src={smallHatIcon?.src}
             className="h-[12px] asm:h-[16px] "
             alt="load..."
           />
-         {listInfo?.qualification ?? "Qualification N/A"}
-        </p>
+         {listInfo?.qualification ?? ""}
+        </p>}
 
-        <p className="text-xs msm:text-sm  asm:mt-1 flex gap-x-2 items-center">
+       {listInfo?.total_experience && <p className="text-xs msm:text-sm  asm:mt-1 flex gap-x-2 items-center">
           <img
             src={doctorBagV2Icon?.src}
             className="w-[14px] asm:w-[16px] "
             alt="load..."
           />
-          {listInfo?.total_experience ? `${listInfo?.total_experience} + Years experience` : 'Experience N/A'} 
-        </p>
+          {listInfo?.total_experience ? `${listInfo?.total_experience} + Years experience` : ''} 
+        </p>}
 
 
 {/* -----------------for future ------------flex max-ssm:hidden */}
-        <p className="hidden text-xs msm:text-sm  asm:mt-1   gap-x-2 items-start">
+      {listInfo?.branch__establishment_name &&  <p className="hidden text-xs msm:text-sm  asm:mt-1   gap-x-2 items-start">
           <img
             src={hospitalIcon?.src}
             className=" w-[18px] "
             alt="load..."
           />
-       {listInfo?.branch__establishment_name}
-        </p>
+       {listInfo?.branch__establishment_name ?? ''}
+        </p>}
 
-        <p className="mt-1 max-sm:hidden text-sm  flex gap-x-2 items-start capitalize">
+      { (listInfo?.city || listInfo?.state)  &&   <p className="mt-1 max-sm:hidden text-sm  flex gap-x-2 items-start capitalize">
           <img
             src={redGeoLocationIcon?.src}
             className="w-[12px] "
             alt="load..."
           />
-       {listInfo?.city ?? 'N/A'}, {listInfo?.state ?? ''}
-        </p>
+       {listInfo?.city ?? ''}, {listInfo?.state ?? ''}
+        </p>}
       </div>
     </div>
     {/* ------------------right part------ */}

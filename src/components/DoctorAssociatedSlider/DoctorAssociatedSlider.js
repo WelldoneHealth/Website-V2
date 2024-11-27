@@ -86,10 +86,7 @@ export default function () {
 
       <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" > <Link href="/search-listing" >View All</Link> </div>
 
-      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
-        {" "}
-        <Link href="/doctorListingPage">View All</Link>{" "}
-      </div>
+      
 
       <div className="my-7 w-full  flex justify-center items-center md:hidden space-x-6">
         <button

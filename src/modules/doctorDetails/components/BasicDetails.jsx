@@ -48,7 +48,7 @@ const BasicDetails = ({ basicInfo }) => {
                 alt="Location"
               />
             </span>
-            Pune, Maharashtra
+           {basicInfo?.address[0]?.city ?? ''},{basicInfo?.address[0]?.state ?? ''}
           </p>
         </div>
       </div>

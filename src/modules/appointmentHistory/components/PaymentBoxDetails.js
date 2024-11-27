@@ -30,7 +30,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
               {" "}
               <p className="">Total :</p>{" "}
               <p className="text-red-800">
-                ₹ {Number(appointmentData?.amount) ?? "N/A"}
+                ₹ {Number(appointmentData?.amount) ?? ''}
               </p>{" "}
             </div>
           </div>
@@ -38,7 +38,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
         <div className="w-full sm:w-1/2  px-11 sm:border-l-[1px]    border-[#DADADA]">
           <p className="text-lg sm:text-base mb-3 font-medium">More actions</p>
           <div className="w-full flex flex-col gap-3">
-            <div className="flex justify-between items-center">
+     {  appointmentData?.prescription_link &&        <div className="flex justify-between items-center">
               {" "}
               <p className="max-md:hidden tex-base"> Prescription :</p>{" "}
               <Link
@@ -53,10 +53,10 @@ export default function PaymentBoxDetails({ appointmentData }) {
                   className="w-full py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]"
                 >
                   {" "}
-                  {appointmentData?.prescription_link ? "View" : "N/A"}{" "}
+                  {appointmentData?.prescription_link ? "View" : ''}{" "}
                 </button>{" "}
               </Link>
-            </div>
+            </div>  }
             <div className="flex justify-between items-center">
               {" "}
               <p className="max-md:hidden tex-base"> Invoice :</p>{" "}
@@ -96,7 +96,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
             <div className=" w-full flex justify-between font-medium">
               <p className="">Total :</p>
               <p className="text-red-800">
-                ₹ {Number(appointmentData?.amount)}
+                ₹ {Number(appointmentData?.amount)}    
               </p>
             </div>
           </div>
