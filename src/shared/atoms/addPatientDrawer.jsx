@@ -91,7 +91,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     if (formData.mobileNumber && !/^\d{10}$/.test(formData.mobileNumber)) {
       formErrors.mobileNumber = "Mobile number should be 10 digits";
     }
-    if(isNaN(formData.pincode) || formData.pincode.length !==6) formErrors.pincode="Pin Code must be a valid Number"
+    if( formData.pincode && ( isNaN(formData.pincode) || formData.pincode.length !==6)) formErrors.pincode="Pin Code must be a valid Number"
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -126,7 +126,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
 
 
   return (
-    <div className="">
+    <div className=" ">
       <Drawer className open={isOpen} onClose={onClose}>
         <DrawerContent className="overflow-y-scroll w-full  msm:w-[490px]  overflow-x-hidden ">
           <DrawerClose onClick={onClose} />

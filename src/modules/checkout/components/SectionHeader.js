@@ -4,7 +4,7 @@ export default function SectionHeader({showChangeTextBtn,headingText,btnFunc,tog
   return (
     <div
     style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-    className="w-full font-medium p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "
+    className="w-full font-medium p-3  sm:p-4  flex items-center justify-between bg-[1px] border-[#EFEFEF] "
   >
     <p>{headingText}</p>{" "}
     <button

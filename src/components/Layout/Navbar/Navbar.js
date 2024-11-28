@@ -145,10 +145,11 @@ export default function Navbar() {
             {hamburgerLink.map((item, index) => (
               <div
                 key={index}
+                onClick={toggleNavBar}
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-                className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+                className=" w-[90%] max-w-[400px] sm:max-w-[700px]     rounded-md py-2 text-center "
               >
-                <Link className="w-full" href={item.linkTo}>
+                <Link  className="w-full" href={item.linkTo}>
                 {item.linkName}
                 </Link>
               </div>
