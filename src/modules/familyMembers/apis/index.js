@@ -1,8 +1,8 @@
 import axiosInstance from "@/shared/apis/axiosInstance";
 
-export const fetchFamilyMemberList = async () => {
+export const fetchFamilyMemberList = async (pageNumber = 1) => {
   try {
-    const response = await axiosInstance.get(`apiV1/patient/`);
+    const response = await axiosInstance.get(`apiV1/patient/?page_size=10&page=${pageNumber}`);
     return response?.data;
   } catch (error) {
     console.error("Error fetching doctor details:", error);
