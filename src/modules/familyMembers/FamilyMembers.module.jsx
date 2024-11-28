@@ -8,6 +8,15 @@ import { PlusIcon } from "lucide-react";
 import { PopConfirm } from "@/shared/components/Popconfirm";
 import { toast } from "sonner";
 import AddPatientDrawer from "@/shared/atoms/addPatientDrawer";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
 
 const FamilyMembersModule = () => {
   const queryClient = useQueryClient();
@@ -16,11 +25,26 @@ const FamilyMembersModule = () => {
     data: null,
   });
   const [showAddPatientDrawer, setShowAddPatientDrawer] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  const { data: familyMemberList = [], isLoading } = useQuery({
-    queryKey: ["familyMemberList"],
-    queryFn: fetchFamilyMemberList,
+  const limit = 10; // Number of items per page
+
+  const { data: familyMemberList = { results: [], count: 0 }, isLoading } = useQuery({
+    queryKey: ["familyMemberList", currentPage],
+    queryFn: () => fetchFamilyMemberList(currentPage), // Updated to return a function
   });
+
+  const totalPages = Math.ceil((familyMemberList?.count || 0) / limit);
+
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    }
+  };
 
   // Delete member mutation
   const deleteMemberMutation = useMutation({
@@ -38,17 +62,44 @@ const FamilyMembersModule = () => {
       toast("Something went wrong!");
     },
   });
+
   const handleDeleteMember = (member) => {
     setPopconfirm({
       show: true,
       data: member,
     });
   };
+
   const handleClosePopconfirm = () => {
     setPopconfirm({
       show: false,
       data: null,
     });
+  };
+
+  const renderPageNumbers = () => {
+    const pageNumbers = [];
+    const maxPageLinks = 3;
+    const halfMax = Math.floor(maxPageLinks / 2);
+
+    const startPage = Math.max(currentPage - halfMax, 1);
+    const endPage = Math.min(currentPage + halfMax, totalPages);
+
+    if (startPage > 1) {
+      pageNumbers.push(1);
+      if (startPage > 2) pageNumbers.push("...");
+    }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    if (endPage < totalPages) {
+      if (endPage < totalPages - 1) pageNumbers.push("...");
+      pageNumbers.push(totalPages);
+    }
+
+    return pageNumbers;
   };
 
   return (
@@ -58,7 +109,7 @@ const FamilyMembersModule = () => {
           Here you can see the list of all members and also add new member.
         </p>
         <button
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white  rounded shadow "
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded shadow"
           onClick={() => {
             setShowAddPatientDrawer(true);
           }}
@@ -66,15 +117,56 @@ const FamilyMembersModule = () => {
           <PlusIcon /> Add New Patient
         </button>
       </div>
-      <div className="grid grid-cols-12 gap-6">
-        {familyMemberList?.map((item, index) => (
-          <MemberCard
-            key={index}
-            memberDetails={item}
-            deleteMember={handleDeleteMember}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <p>Loading family members...</p>
+      ) : familyMemberList?.results?.length > 0 ? (
+        <div className="grid grid-cols-12 gap-6">
+          {familyMemberList?.results?.map((item, index) => (
+            <MemberCard
+              key={index}
+              memberDetails={item}
+              deleteMember={handleDeleteMember}
+            />
+          ))}
+        </div>
+      ) : (
+        <p>No family members found.</p>
+      )}
+      <Pagination>
+        <PaginationContent>
+          <PaginationItem>
+            <PaginationPrevious
+              onClick={() => handlePageChange(currentPage - 1)}
+              disabled={currentPage === 1}
+              className="hover:cursor-pointer"
+            />
+          </PaginationItem>
+
+          {renderPageNumbers().map((page, index) =>
+            typeof page === "number" ? (
+              <PaginationItem key={index}>
+                <PaginationLink
+                  isActive={currentPage === page}
+                  onClick={() => handlePageChange(page)}
+                  className="hover:cursor-pointer"
+                >
+                  {page}
+                </PaginationLink>
+              </PaginationItem>
+            ) : (
+              <PaginationEllipsis key={index} />
+            )
+          )}
+
+          <PaginationItem>
+            <PaginationNext
+              onClick={() => handlePageChange(currentPage + 1)}
+              disabled={currentPage === totalPages}
+              className="hover:cursor-pointer"
+            />
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
       <PopConfirm
         triggerLabel="Delete Member"
         title="Are you absolutely sure?"
@@ -108,6 +200,7 @@ const FamilyMembersModule = () => {
           toast("Member Added Successfully", {
             description: `${item?.first_name ?? ""} ${item?.last_name ?? ""}`,
           });
+          queryClient.invalidateQueries(["familyMemberList"]);
         }}
       />
     </div>
