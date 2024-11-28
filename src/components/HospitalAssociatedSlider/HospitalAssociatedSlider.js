@@ -54,7 +54,9 @@ export default function HospitalAssociatedSlider() {
       <div className="my-5 lg:my-7 flex justify-between items-center ">
         <p className="text-base ssm:text-xl sm:text-2xl lg:text-2xl font-medium">
           Clinic/ Hospitals associated with us
-        </p>
+          </p>
+          <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" ><Link href="/search-listing" > View All</Link></div>
+
         <div className="hidden md:flex justify-center items-center space-x-6">
           <button
             onClick={() => sliderRef.current.slickPrev()}

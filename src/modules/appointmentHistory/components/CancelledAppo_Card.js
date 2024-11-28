@@ -4,6 +4,7 @@ import InfoBar from "./InfoBar";
 import Msg from "./Msg";
 import moment from "moment";
 import { useRouter } from "next/navigation";
+import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 
 export default function CanceledAppo_Card({ appointmentCardData, status }) {
   const router = useRouter();
@@ -32,18 +33,18 @@ export default function CanceledAppo_Card({ appointmentCardData, status }) {
     },
     {
       boldText: "Appointment id-",
-      text: appointmentCardData?.id ?? "N/A",
+      text: appointmentCardData?.id ?? "",
     },
     {
       boldText: "Booking Date-",
-      text: appointmentCardData?.booked_on ?? "N/A",
+      text: appointmentCardData?.booked_on ?? "",
     },
   ];
 
   const appo_data2 = [
     {
       boldText: "Reason-",
-      text: appointmentCardData?.reason?.split("_").join(" ") ?? "N/A",
+      text: appointmentCardData?.reason?.split("_").join(" ") ?? "General Consulant",
     },
     {
       boldText: "Payment Method-",
@@ -51,20 +52,20 @@ export default function CanceledAppo_Card({ appointmentCardData, status }) {
     },
     {
       boldText: "Total-",
-      text: `₹  ${Number(appointmentCardData?.amount) ?? "N/A"} `,
+      text: `₹  ${Number(appointmentCardData?.amount) ?? ""} `,
     },
   ];
 
   return (
     <div
-      style={{ boxShadow: " 1px 1px 4px 2px #8383834D" }}
+      style={{ boxShadow: " 1px 1px 4px 2px #8383834D" }}  
       onClick={() =>
         isSmallScreen &&
         router.push(
           `/doctor-details/${appointmentCardData?.doctor_slug}/${appointmentCardData?.branch_slug}`
         )
       }
-      className="w-full  md:space-y-2 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] sm:border-[0.5px] border-[#DADADA]"
+      className="w-full max-w-[950px] mx-auto   md:space-y-2 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] sm:border-[0.5px] border-[#DADADA]"
     >
       {/* --------------cards text---------- */}
       <div className="w-full max-lsm:hidden max-w-[800px] max-sm:hidden flex  items-start flex-wrap  gap-x-11 gap-y-3  justify-between  text-base lg:text-[13px] esm:text-sm">
@@ -115,29 +116,29 @@ export default function CanceledAppo_Card({ appointmentCardData, status }) {
         <div className="w-full">
           <div className="w-full mt-2 asm:mt-4 flex gap-x-3 sm:gap-x-7  ">
             {/* -----------1st part------------- */}
-            <div className=" max-ssm:hidden w-[120px]  asm:w-[150px] sm:w-[180px] md:w-[205px]  overflow-hidden  rounded-full">
+            <div className=" max-ssm:hidden w-[120px]  asm:w-[150px] sm:w-[180px] md:w-[205px] aspect-[1/1]  bg-[#EFF8FF] overflow-hidden  rounded-full">
               <img
-                src={appointmentCardData?.doctor_image}
-                className=" w-full "
+                src={appointmentCardData?.doctor_image ?? defaultDoctor?.src}
+                className=" w-full h-full object-cover object-center "
                 alt="load..."
               />
             </div>
             {/* ---------2nd part-------------- */}
-            <div className=" w-full ">
+            <div className=" w-full flex-1">
               <div className="w-full flex justify-between flex-wrap gap-x-16 gap-y-3 ">
                 <div className="  space-y-1  lsm:text-nowrap   md:space-y-2">
                   <p className="tet-base asm:text-lg msm:text-[20px] font-medium">
                     {`${appointmentCardData?.doctor_suffix} ${appointmentCardData?.doctor_name} ${appointmentCardData?.doctor_middle_name} ${appointmentCardData?.doctor_last_name}`}
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
-                    {appointmentCardData?.doctor_specialty ?? "N/A"}
+                    {appointmentCardData?.doctor_specialty ?? ""}
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
-                    {appointmentCardData?.clinic_name ?? "N/A"}{" "}
+                    {appointmentCardData?.clinic_name ?? ""}{" "}
                   </p>
                   <p className="pt-1 text-xs asm:text-sm msm:text-base md:hidden">
                     Book for Rakesh Nandre (
-                    {appointmentCardData?.patient_relation ?? " - "})
+                    {appointmentCardData?.patient_relation ?? ""})
                   </p>
                 </div>
                 <div className="max-md:hidden space-y-3">

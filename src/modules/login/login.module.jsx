@@ -9,7 +9,9 @@ import { useLogin } from "@/hooks/useLogin";
 import UnauthenticatedLayout from "@/shared/layouts/UnauthenticatedLayout";
 import useUtilStore from "@/store/utiStore";
 import { useRegister } from "@/hooks/useRegister";
+import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import { toast } from "sonner";
+import Link from "next/link";
 
 const LoginModule = () => {
   const [loginCredentials, setLoginCredentials] = useState({
@@ -72,9 +74,21 @@ const LoginModule = () => {
 
   return (
     <UnauthenticatedLayout>
-      <div className="flex h-screen w-full items-center justify-center px-4">
+     <div className="w-full h-screen flex flex-col items-center justify-center">
+    <p className="text-[#01549A] font-medium text-sm  mb-7 "><Link
+              href="https://practice.welldonehealth.in/"
+              passHref
+              target="_blank"
+              className="flex items-center gap-x-3  "
+            >  <img
+            src={hospitalIcon2?.src}
+            className="w-[20px]"
+            alt="load..."
+          />  I have Clinic/ Hospital </Link ></p> 
+
+     <div className="flex   w-full items-center justify-center px-4">
         <Tabs
-          value={currentTab} // Controlled value for the current tab
+          value={currentTab} 
           onValueChange={handleTabChange}
           className="w-[400px]"
         >
@@ -241,6 +255,7 @@ const LoginModule = () => {
           </TabsContent>
         </Tabs>
       </div>
+     </div>
     </UnauthenticatedLayout>
   );
 };

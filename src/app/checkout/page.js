@@ -89,6 +89,9 @@ export default function page() {
     getPatients();
   }, []);
 
+
+  const updatePatient=()=>getPatients()
+
   const appointmentMutation = useMutation({
     mutationFn: addAppointment,
     onSuccess: () => {
@@ -937,7 +940,7 @@ export default function page() {
         </div>
 
         {/* -----------------appointment details-------------------- */}
-        <div className="w-full flex-1  lg:w-[90%] max-lg:absolute     transition-all duration-150 ease-linear">
+        <div className="w-full flex-1  max-lg:hidden lg:w-[90%] max-lg:absolute     transition-all duration-150 ease-linear">
           {/* --------------just for development purpose to show or hide the slider one----------------  */}
           {/* <button type="button" onClick={()=>setView(!view)} className="text-white px-6 py-3 bg-primary  "  >view / hide </button> */}
 
@@ -1024,6 +1027,7 @@ export default function page() {
 
       <AddPatientDrawer
         isOpen={view}
+        updatePatientListFunc={()=>getPatients()}
         onClose={() => {
           setView(false);
         }}

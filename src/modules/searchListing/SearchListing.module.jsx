@@ -197,7 +197,7 @@ export default function SearchListingModule() {
           isMapExpanded ? "w-0" : "w-full  md:w-[90%] mx-auto lg:w-[65%] xl:max-w-[950px] "
         } mt-12 min-h-screen space-y-3  transition-all duration-700 ease-linear`}
       >
-       {searchList && searchList?.map((item,index)=>item?.is_hospital ? <HospitalCard key={item?.id} listInfo={item} /> : <DoctorCard key={item?.id} listInfo={item} /> ) 
+       {searchList && searchList?.map((item,index)=>item?.is_hospital ? <HospitalCard key={index} listInfo={item} /> : <DoctorCard key={index} listInfo={item} /> ) 
         }
       </div>
 

@@ -57,13 +57,14 @@ const AppointmentSection = ({
 
   return (
     <div
-      className={`w-full  flex-1 lg:w-[90%]   max-lg:bg-white   transition-all duration-150 ease-linear`}
+      className={`w-full   flex-1 lg:w-full   max-lg:bg-white   transition-all duration-150 ease-linear`}
     >
-      <div className="w-full   lg:border-2 boreder-black rounded-[20px] lg:pt-4 pb-0 lg:overflow-hidden ">
-        <p className="text-lg font-medium  text-center hidden lg:block">
+      <div className="w-full    lg:border-2 boreder-black rounded-[20px] lg:pt-4 pb-0 lg:overflow-hidden ">
+        <p className=" text-lg font-medium  text-center hidden lg:block">
           Book Your Appointment{" "}
         </p>
-        <hr className="my-3 hidden lg:block" />
+        
+        <hr className="my-3 hidden lg:block" /> 
 
         <div className="px-2 sm:px-4 w-full">
           <p className="mb-2 font-medium ">Select office</p>
@@ -79,8 +80,13 @@ const AppointmentSection = ({
               <SelectGroup>
                 <SelectLabel>Branches</SelectLabel>
                 {doctorInfo?.establishment?.map((branch) => (
-                  <SelectItem key={branch?.id} value={branch?.branch_slug}>
-                    {branch?.clinic_name}
+                  <SelectItem key={branch?.id} value={branch?.branch_slug}
+              //  className="[&[aria-selected=true]]:text-green-600 [&[aria-selected=true] svg]:text-green-600"
+              //  className="[&[aria-selected=true] svg]:text-red-900"
+                  >
+                    {branch?.clinic_name} <br/>
+               { branch?.clinic_name && <p className="mt-1 text-[11px] w-full text-wrap">{branch?.clinic_address}</p>  }
+                 
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -92,7 +98,7 @@ const AppointmentSection = ({
               equeueDataList.length > 0
                 ? "h-[calc(100vh-290px)] lg:h-[500px]"
                 : "h-auto"
-            } overflow-y-scroll flex flex-col items-center gap-y-5 `}
+            } overflow-y-scroll flex flex-col items-center gap-y-5  `}
           >
             {isEqueueLoading ? (
               <Loader />
@@ -169,11 +175,11 @@ const AppointmentSection = ({
             )}
           </div>
 
-          <div className="mt-5 py-3 flex flex-col items-center  w-full border-t-[1px] border-[#919196] space-y-2">
+          <div className="mt-5 max-lg:fixed max-lg:left-1/2 transform max-lg:-translate-x-1/2 max-lg:bottom-0 py-3 flex max-lg:bg-gray-300 flex-col items-center  w-full border-t-[1px] lg:border-[#919196] space-y-2">
             <button
               type="button"
-              disabled={!selectedBranch}
-              className="w-[95%] max-lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
+              disabled={!selectedBranch && equeueDataList?.length < 1 }
+              className={`w-[95%] max-lg:hidden py-3 text-center text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A]  "}  font-semibold rounded-[10px]`}
               onClick={() => {
                 router.push(`/checkout`);
                 setAppointmentData({
@@ -185,6 +191,7 @@ const AppointmentSection = ({
                     )[0] ?? null,
                 });
               }}
+              
             >
               Appointment Booking
             </button>
@@ -201,8 +208,9 @@ const AppointmentSection = ({
                     )[0] ?? null,
                 });
               }}
-              className="w-[95%] lg:hidden py-3 text-center bg-[#01549A] text-white font-semibold rounded-[10px]"
-            >
+              className={`w-[95%]  lg:hidden py-3 text-center  text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A] "}  font-semibold rounded-[10px]`}
+           disabled={ equeueDataList?.length <  1 }
+           >
               Checkout
             </button>
             <p className="text-xs text-center font-normal">

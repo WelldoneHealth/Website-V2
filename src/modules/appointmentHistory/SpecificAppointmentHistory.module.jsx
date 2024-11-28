@@ -26,21 +26,21 @@ export default function SpecificAppointmentHistoryModule({appointmentId}) {
     },
     {
       boldText: "Age-",
-      text:specificHistoryData?.patient_age ?? 'N/A'
+      text:specificHistoryData?.patient_age ?? ''
     },
     {
       boldText: "Booking Date-",
-      text:specificHistoryData?.booked_on ?? "N/A"
+      text:specificHistoryData?.booked_on ?? ""
     }
   ]
   
   const data2=[
     {
       boldText:"Appointment id-",
-     text:specificHistoryData?.id ?? 'N/A'
+     text:specificHistoryData?.id ?? ''
     },{
       boldText:"Reason-",
-      text:specificHistoryData?.reason?.split('_').join(' ') ?? "N/A"
+      text:specificHistoryData?.reason?.split('_').join(' ') ?? "General Consulant"
     },{
       boldText:"Payment Method-",
       text:"Pay on Conter"

@@ -7,6 +7,7 @@ import TabsWithMaps from "./components/TabsWithMaps";
 import EducationCard from "./components/EducationCard";
 import ExperienceCard from "./components/ExperienceCard";
 import AppointmentSection from "./components/AppointmentSection";
+import backArrow from "@/asset/Icons/backArrow.svg"
 import { getDoctorDetails } from "./apis";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -44,7 +45,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
   if (error) return <div>Error: {error.message}</div>;
 
   return (
-    <div className="w-full relative max-w-[1600px] md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
+    <div className="w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
       <div className="w-full lg:w-[68%] max-h-max">
         <BasicDetails basicInfo={doctorInfo} />
         <ExtraDetails extraDocInfo={doctorInfo} />
@@ -77,7 +78,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
         </div>
       </div>
 
-      <div className="hidden lg:w-[32%] lg:block">
+      <div className="hidden flex-1 lg:w-[32%] lg:block">
         <AppointmentSection
           doctorSlug={doctorSlug}
           branchSlug={branchSlug}
@@ -86,16 +87,17 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
       </div>
 
       {/* Fixed Button for Small Screens */}
-      <div className="p-3">
-        <div className="lg:hidden fixed bottom-4  left-1/2 transform -translate-x-1/2 w-full  px-4 py-2 rounded-full shadow-lg">
+      <div className="w-full p-3 lg:hidden  ">
+        <div className=" fixed bottom-4   left-1/2 transform -translate-x-1/2 w-full   px-4 py-2 rounded-full shadow-lg">
           <button
             onClick={() => {
               setShowAppointmentDrawer(true);
             }}
-            className="w-full sm:w-auto bg-[#01549A] py-2 rounded-lg text-white"
+            className="w-[90%] sm:w-[450px] mx-auto block bg-[#01549A]  py-2 rounded-lg text-white "
           >
             Book Appointment
           </button>
+      
         </div>
       </div>
       <Drawer
@@ -103,10 +105,11 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
         onClose={closeDrawer}
         // direction="bottom"
       >
-        <DrawerContent className="w-full">
+        <DrawerContent className="w-full mt-12">
           <DrawerClose onClick={closeDrawer} />
-          <DrawerHeader>
-            <DrawerTitle>Book Your Appointment</DrawerTitle>
+          <DrawerHeader className= "relative w-full justify-center flex mt-3">
+            <DrawerTitle>Book Your Appointment</DrawerTitle> 
+            <div onClick={closeDrawer} className="absolute right-5 top-3 flex lsm:hidden cursor-pointer "><img src={backArrow?.src} className="rotate-180 w-7"  alt="load..." /></div>
           </DrawerHeader>
           <AppointmentSection
             doctorSlug={doctorSlug}
