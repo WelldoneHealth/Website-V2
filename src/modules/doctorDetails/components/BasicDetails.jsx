@@ -40,7 +40,7 @@ const BasicDetails = ({ basicInfo }) => {
           <p className="max-sm:w-full text-[#A7A7A7] font-normal w-[70%] max-w-[450px]">
             {basicInfo?.specialty_treatment}
           </p>
-          <p className="my-4 text-[#A7A7A7] font-normal asm:text-base">
+         { (basicInfo?.address[0]?.city  &&  basicInfo?.address[0]?.state) && <p className="my-4 text-[#A7A7A7] font-normal asm:text-base">
             <span className="mr-2 relative w-[12px] h-[15px] inline-block">
               <img
                 className="w-full"
@@ -48,8 +48,8 @@ const BasicDetails = ({ basicInfo }) => {
                 alt="Location"
               />
             </span>
-           {basicInfo?.address[0]?.city ?? ''},{basicInfo?.address[0]?.state ?? ''}
-          </p>
+           {basicInfo?.address[0]?.city ?? ''} {basicInfo?.address[0]?.state ?? ''}
+          </p> }
         </div>
       </div>
     </div>

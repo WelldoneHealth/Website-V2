@@ -15,9 +15,13 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
+import { useRouter } from "next/navigation";
 
 export default function AppointmentHistoryModule() {
+  const router=useRouter()
   const [currentPage, setCurrentPage] = useState(1);
+  
 
   const { data: appointmentHistoryList, isLoading } = useQuery({
     queryKey: ["appointmentHistoryList", currentPage],
@@ -97,9 +101,18 @@ export default function AppointmentHistoryModule() {
     return pageNumbers;
   };
 
+
+  if(isLoading) return <div> Loading... </div> 
+
+
   return (
+    <AuthenticatedLayout>
     <div className="max-lg:mt-[85px] w-full max-w-[1600px] mx-auto px-1 pt-[1px] asm:px-3 gap-x-2 lg:px-[2rem]">
-      <div
+    { ( upcoming.length === 0 && past.length === 0 )  ?   <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
+      <p>No Appointments Yet!</p>
+      <p>Book Your First Appointment</p>
+      <button type="button"  className="w-[200px] text-sm font-semibold bg-primary rounded-[10px] text-white py-3 text-center cursor-pointer" onClick={()=>router.push('/')} >Create Appointment</button>
+      </div>  : ( <> <div
         className="overflow-hidden px-1 overflow-y-scroll custom-scrollbar"
         style={{ height: "calc(100vh - 170px)" }}
       >
@@ -181,7 +194,8 @@ export default function AppointmentHistoryModule() {
             />
           </PaginationItem>
         </PaginationContent>
-      </Pagination>
+      </Pagination> </>   )  }  
     </div>
+    </AuthenticatedLayout>
   );
 }

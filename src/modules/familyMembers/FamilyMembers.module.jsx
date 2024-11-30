@@ -17,8 +17,10 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "@/components/ui/pagination";
+import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 
 const FamilyMembersModule = () => {
+  
   const queryClient = useQueryClient();
   const [popconfirm, setPopconfirm] = useState({
     show: false,
@@ -102,8 +104,16 @@ const FamilyMembersModule = () => {
     return pageNumbers;
   };
 
+if(isLoading) return  <div>Loading...</div>
+
   return (
-    <div className="max-w-[1600px] mx-auto p-5">
+    <AuthenticatedLayout>
+  { familyMemberList?.results?.length === 0  ? <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
+      <p>No Members Yet!</p>
+      <button type="button"  className="w-[200px] text-sm font-semibold bg-primary rounded-[10px] text-white py-3 text-center cursor-pointer"   onClick={() => {
+            setShowAddPatientDrawer(true);
+          }} >Add Patient</button>
+      </div> :  <div className="max-w-[1600px] mx-auto p-5">
       <div className="flex justify-between items-center mb-6">
         <p className="text-lg ">
           Here you can see the list of all members and also add new member.
@@ -190,10 +200,12 @@ const FamilyMembersModule = () => {
         visible={popconfirm.show}
         loading={deleteMemberMutation.isPending}
       />
-      <AddPatientDrawer
+      
+    </div> }
+    <AddPatientDrawer
         isOpen={showAddPatientDrawer}
         onClose={() => {
-          setShowAddPatientDrawer(false);
+          setShowAddPatientDrawer(false);  
         }}
         successCallback={(item) => {
           setShowAddPatientDrawer(false);
@@ -203,7 +215,7 @@ const FamilyMembersModule = () => {
           queryClient.invalidateQueries(["familyMemberList"]);
         }}
       />
-    </div>
+    </AuthenticatedLayout>
   );
 };
 

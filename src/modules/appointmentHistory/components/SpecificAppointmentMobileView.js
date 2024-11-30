@@ -1,7 +1,5 @@
 import React from "react";
-import patientDefault from "@/asset/Icons/patientDefault.svg";
-import hospital0 from "@/asset/Images/hospital0.png";
-import smallDoc2 from "@/asset/Images/smallDoc2.png";
+import defaultPatient from "@/asset/Images/defaultPatient.png";
 import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 import defaultClinic from "@/asset/Images/defaultClinic.png";
 import Msg from "./Msg";
@@ -61,7 +59,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
        
   {/* ----------------------painet card-------------------- */}
         <DataCard
-          image={patientDefault?.src}
+          image={defaultPatient?.src}
           mainText={`${appointmentData?.patient_first_name ?? ""} ${
             appointmentData?.patient_middle_name ?? ""
           } ${appointmentData?.patient_last_name ?? ""}`}

@@ -6,6 +6,7 @@ import PaymentBoxDetails from './components/PaymentBoxDetails'
 import { getSpecificHistory } from './apis'
 import { useQuery } from '@tanstack/react-query'
 import SpecificAppointmentMobileView from './components/SpecificAppointmentMobileView'
+import AuthenticatedLayout from '@/shared/layouts/AuthenticatedLayout'
 
 
 export default function SpecificAppointmentHistoryModule({appointmentId}) {
@@ -52,6 +53,7 @@ export default function SpecificAppointmentHistoryModule({appointmentId}) {
 //  if(!isLoading) console.log("--s",specificHistoryData)
  
   return ( 
+    <AuthenticatedLayout>
     <div className="w-full mt-[85px] lg:max-w-[940px] mx-auto px-1  space-y-5 asm:px-3 lg:px-0">
 
 {/* --------------------card--------after 720px-------- */}
@@ -75,5 +77,6 @@ export default function SpecificAppointmentHistoryModule({appointmentId}) {
 
             
    </div>
+   </AuthenticatedLayout>
   )
 }

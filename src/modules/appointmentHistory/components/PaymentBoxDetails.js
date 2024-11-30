@@ -1,4 +1,5 @@
 import useAppointmentInvoice from "@/hooks/useAppointmentInvoice";
+import moment from "moment";
 import Link from "next/link";
 import React from "react";
 
@@ -82,7 +83,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
             <p className="font-medium text-sm asm:text-base">Payment methods</p>
             <div className="text-sm asm:text-base">
               <p>Pay on Counter</p>
-              <p>28/01/2024, 2:50 PM</p>
+              <p>{moment(appointmentData?.payment_history[0]?.created_at).format("DD/MM/YYYY, h:mm A")}</p>
             </div>
           </div>
           <div className="px-4 asm:px-6 py-3 flex flex-col gap-y-2 text-sm ssm:text-base">
@@ -96,7 +97,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
             <div className=" w-full flex justify-between font-medium">
               <p className="">Total :</p>
               <p className="text-red-800">
-                ₹ {Number(appointmentData?.amount)}    
+                ₹ {Number(appointmentData?.payment_history[0]?.amount)}    
               </p>
             </div>
           </div>

@@ -38,11 +38,19 @@ import ButtonType2 from "@/modules/checkout/components/ButtonType2";
 import MobileViewButtons from "@/modules/checkout/components/MobileViewButtons";
 
 export default function page() {
+  const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
   const userData = useAuthStore((state) => state.userDetails);
-  console.log(appointmentData);
 
-  const router = useRouter();
+  console.log( "the value of fata in checkkout is ",appointmentData);
+
+// useEffect(() => {
+//   if(!appointmentData){
+//     router.push('/')
+//   }
+// }, [])
+
+
 
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -110,17 +118,21 @@ export default function page() {
 
   const appointmentMutation = useMutation({
     mutationFn: addAppointment,
-    onSuccess: () => {
-      router.push(`/checkout/appointmentConfirmation`);
-      toast("Appointment has been created", {
-        description: "Sunday, December 03, 2023 at 9:00 AM",
-      });
+    onSuccess: (data) => {
+// console.log("the appointment data is",data).id
+      router.push(`/checkout/appointmentConfirmation?id=${data?.id}`);
+
+      // toast("Appointment has been created", { 
+      //   description: " ", 
+      // });
     },
     onError: (error) => {
-      toast("Something went wrong!", {
-        description: "Try again later!",
-      });
-      console.error("Error adding appointment:", error);
+      console.log("the error irn react query is",error)
+    //   toast(error, {
+    //     description: "hjfh",
+    //   }
+    // );
+      // console.error("Error adding appointment:", error);
     },
   });
 
@@ -166,6 +178,8 @@ export default function page() {
   }
   
 
+  if(!appointmentData?.doctorData)  return router.push('/')
+
   return (
     <AuthenticatedLayout>
       <div
@@ -197,7 +211,7 @@ export default function page() {
                 </div>
                 <div className=" max-sm:hidden p-5 py-3 bg-[#EFEFEF]">
                   {!statusChange.patientStatus && (
-                    <ButtonType2 btnFor="Continue Appointment1"  btnOnClickFunc={() => {
+                    <ButtonType2 btnFor="Continue Appointment"  btnOnClickFunc={() => {
                       setStatusChange({
                         ...statusChange,
                         patientStatus: true,
@@ -210,7 +224,7 @@ export default function page() {
                     }}  />
                   )}
                   {statusChange.patientStatus && (
-                    <ButtonType2 btnFor="Continue Appointment2"  btnOnClickFunc={() =>
+                    <ButtonType2 btnFor="Continue Appointment"  btnOnClickFunc={() =>
                       statusData.doctorSelection &&
                       (setDataVisibilityToggle({
                         ...dataVisibilityToggle,
@@ -279,7 +293,7 @@ export default function page() {
                   </div>
                   <div className=" max-sm:hidden p-5 py-3 bg-[#EFEFEF]">
                     {!statusChange.paymentStatus && (
-                      <ButtonType2 btnFor=" Appointment for this Patient1" btnOnClickFunc={() =>
+                      <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
                         statusData.patientSelection &&
                         (setDataVisibilityToggle({
                           ...dataVisibilityToggle,
@@ -292,7 +306,7 @@ export default function page() {
                         handleScrollToBox(1))} />
                     )}
                     {statusChange.paymentStatus && (
-                   <ButtonType2 btnFor=" Appointment for this Patient2" btnOnClickFunc={() =>
+                   <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
                     statusData.patientSelection &&
                     (setDataVisibilityToggle({
                       ...dataVisibilityToggle,
@@ -331,7 +345,7 @@ export default function page() {
                   <div className=" max-sm:hidden p-5  py-3 bg-[#EFEFEF]">
                     {!statusChange.appointmentStatus && (
                     
-                      <ButtonType2 btnFor="Continue1"  btnOnClickFunc={() =>
+                      <ButtonType2 btnFor="Continue"  btnOnClickFunc={() =>
                         statusData.paymentSelection &&
                         (setDataVisibilityToggle({
                           ...dataVisibilityToggle,
@@ -344,7 +358,7 @@ export default function page() {
                     )}
                     {statusChange.appointmentStatus && (
                     
-                      <ButtonType2 btnFor="Continue2"  btnOnClickFunc={() =>
+                      <ButtonType2 btnFor="Continue"  btnOnClickFunc={() =>
                         statusData.paymentSelection &&
                         setDataVisibilityToggle({
                           ...dataVisibilityToggle,
@@ -452,11 +466,7 @@ export default function page() {
           )}
 
           {/* ----------mobile view button for moving to next processes - based on the statusChange of the processes------------- */}
-          <div className="w-full sm:hidden fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-t-[2px] border-red-700 2xl:border-[#DADADA] bg-white pt-5 pb-8">
-      {/* {statusChange.doctorStatus &&  <ButtonType1  btnText="Continue"  btnFunc={()=>mobileViewButtonsChange("patientStatus")} /> }
-  {statusChange.patientStatus &&  <ButtonType1  btnText="Continue Appointment"  btnFunc={()=>mobileViewButtonsChange("paymentStatus")} /> }
-  {statusChange.paymentStatus &&  <ButtonType1  btnText="Confirm Payment"  btnFunc={()=>mobileViewButtonsChange("appointmentStatus")} /> }
-  {statusChange.appointmentStatus  &&  <ButtonType1  btnText="Book Appointment"  btnFunc={handleBookAppointment} /> } */}
+          <div className="w-full sm:hidden z-[50] fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-t-[2px] border-red-700 2xl:border-[#DADADA] bg-white pt-5 pb-8">
   {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
   {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus","patientToggle")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus","doctorsToggle")}     />  }
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus","paymentToggle")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus","patientToggle")}    />  }

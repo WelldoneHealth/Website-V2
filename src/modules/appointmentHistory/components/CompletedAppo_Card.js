@@ -188,9 +188,9 @@ export default function CompletedAppo_Cards({
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
                     {appointmentCardData?.doctor_specialty ?? ""}
-                    <span className="text-red-900 text-xs">
+                    {/* <span className="text-red-900 text-xs">
                       {appointmentCardData?.doctor_expected_visiting_time}
-                    </span>
+                    </span> */}
                   </p>
                   <p className="text-xs asm:text-sm msm:text-base md:text-sm">
                     {appointmentCardData?.clinic_name ?? ""}

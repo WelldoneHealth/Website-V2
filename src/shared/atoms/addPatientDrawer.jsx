@@ -52,6 +52,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     onSuccess: (data) => {
       console.log("Patient added successfully:", data);
       successCallback(data);
+      console.log("the padded patient dat6a is",data)
       onClose(); // Close the drawer
       updatePatientListFunc()
       setFormData({
@@ -135,7 +136,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
             <div onClick={onClose} className="absolute left-5 top-3 flex lsm:hidden cursor-pointer">
               <img src={backArrow?.src} className="rotate-180 w-7" alt="back" />
             </div>
-            <DrawerDescription>Please provide the necessary details.</DrawerDescription>
+            {/* <DrawerDescription>Please provide the necessary details.</DrawerDescription> */}
           </DrawerHeader>
 
           <div onClick={(e) => e.stopPropagation()} className="w-full px-5 space-y-2 ">
@@ -384,7 +385,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     <SelectContent>
       <SelectGroup>
         <SelectLabel>Relationship</SelectLabel>
-        {["Me", "Daughter", "Son", "Sister", "Brother", "Relative", "Friend"].map((item, index) => (
+        {["Me", "Daughter", "Son", "Sister", "Brother", "Relative", "Friend","Guest"].map((item, index) => (
           <SelectItem className="cursor-pointer" key={index} value={item}>
             {item}
           </SelectItem>
