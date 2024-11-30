@@ -42,7 +42,7 @@ export default function page() {
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
   const userData = useAuthStore((state) => state.userDetails);
 
-  console.log( "the value of fata in checkkout is ",appointmentData);
+  // console.log( "the value of fata in checkkout is ",appointmentData);
 
 // useEffect(() => {
 //   if(!appointmentData){

@@ -14,7 +14,7 @@ export default function page() {
 
 
   useEffect(() => {
-    if(appointmentData){
+    if(appointmentData?.doctorData){
       setAppointmentData(null)
       return
     }
