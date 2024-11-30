@@ -179,6 +179,7 @@ export default function page() {
   
 
   if(!appointmentData?.doctorData)  return router.push('/')
+    
 
   return (
     <AuthenticatedLayout>
