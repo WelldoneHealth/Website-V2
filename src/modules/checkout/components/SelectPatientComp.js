@@ -4,7 +4,8 @@ import outlineMobilePhone from "@/asset/Icons/outlineMobilePhone.svg";
 
 
 
-export default function SelectPatientComp({patientData,isSelected,onChangeFunc}) {
+export default function SelectPatientComp({patientData,isSelected,onChangeFunc,onOpen,patientEditFunc}) {
+  console.log("the patientdata is",patientData)
   return (
     <div
                           style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
@@ -44,9 +45,10 @@ export default function SelectPatientComp({patientData,isSelected,onChangeFunc})
                                       {patientData?.contact}
                                     </p>}
                                   </div>
-                                  <p className="text-primary font-medium hidden">
+                                  {/* -----------------------patient edit----------------------- */}
+                                  {/* <p  onClick={()=>{patientEditFunc();onOpen()}} className="text-primary font-medium cursor-pointer">
                                     Edit
-                                  </p>
+                                  </p> */}
                                 </div>
 
                                 <p className="text-sm">{patientData?.age} years</p>

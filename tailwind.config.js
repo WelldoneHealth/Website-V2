@@ -54,8 +54,15 @@ module.exports = {
           5: "hsl(var(--chart-5))",
         },
       },
+     
+     
+      // colors: {
+      //   primary: 'var(--color-primary)',
+      //   secondary: 'var(--color-secondary)',
+      //   borderPrimary:'var(--color-borderPrimary)',
+      // },
       container: {
-        center: "true",
+        center: "true", 
         padding: "2rem",
         screens: {},
       },

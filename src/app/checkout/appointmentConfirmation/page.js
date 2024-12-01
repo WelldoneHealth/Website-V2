@@ -14,12 +14,12 @@ export default function page() {
   console.log("the vailabvke conformation dat is",appointmentData)
 
 
-  useEffect(() => {
-    if(appointmentData?.doctorData){
-      setAppointmentData(null)
-      return
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(appointmentData?.doctorData){
+  //     setAppointmentData(null)
+  //     return
+  //   }
+  // }, [])
   
   const [redirectingTimer,setRedirectingTimer]=useState(5)
  
@@ -43,8 +43,8 @@ export default function page() {
   //  ------if the id ios not avaolable then navigate to the home page-------------
 // if(!id)  return router.push("/") 
 
-if(!appointmentData?.doctorData || !id ) return router.push('/')
- 
+if(!id) return router.push('/')
+  
   return (
   <div className="w-full relative -my-14  max-w-[1600px] mx-auto px-1 py-2  min-h-screen   asm:px-3 lg:px-0 xl:px-8  flex  flex-col  justify-center items-center gap-y-6 overflow-hidden ">
     <img src={successTickIcon?.src} className="w-40 rotate-[15deg]" alt="load..." />

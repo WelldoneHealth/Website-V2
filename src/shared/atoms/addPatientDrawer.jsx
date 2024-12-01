@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+"use client"
+
+import React, { useEffect, useState } from "react";
 import {
   Drawer,
   DrawerClose,
@@ -15,29 +17,51 @@ import backArrow from "@/asset/Icons/backArrow.svg";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { bloodGroups } from "../usefulData/addPatientDrawerData";
 
-const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFunc }) => {
+const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFunc,patientDataToEdit }) => {
+
+// console.log("the final detail to edit is",patientDataToEdit )  
+
   const [formData, setFormData] = useState({
-    patientName: "",
-    lastName: "",
-    middleName: "",
-    email: "",
-    age: "",
-    gender: "",
-    bloodGroup: "",
-    primaryLanguage: "",
-    address: "",
-    pincode: "",
-    city: "",
-    relationship: "",
-    mobileNumber: "",
+    patientName:patientDataToEdit?.first_name || "" ,
+    lastName:patientDataToEdit?.last_name  ||  "",
+    middleName:patientDataToEdit?.middle_name  ||   "",
+    email:patientDataToEdit?.email  ||  "",
+    age:patientDataToEdit?.age  ||  "",
+    gender:patientDataToEdit?.gender  ||  "",
+    bloodGroup:patientDataToEdit?.blood_group  ||  "",
+    primaryLanguage:patientDataToEdit?.primary_language || "",
+    address:patientDataToEdit?.address  ||  "",
+    pincode:patientDataToEdit?.pincode  ||  "",
+    city:patientDataToEdit?.city   ||  "",
+    relationship:patientDataToEdit?.relation  || "",
+    mobileNumber:patientDataToEdit?.contact   ||  "",
   });
 
+
+  useEffect(() => {
+    setFormData({
+      patientName: patientDataToEdit?.first_name || "",
+      lastName: patientDataToEdit?.last_name || "",
+      middleName: patientDataToEdit?.middle_name || "",
+      email: patientDataToEdit?.email || "",
+      age: patientDataToEdit?.age || "",
+      gender: patientDataToEdit?.gender || "",
+      bloodGroup: patientDataToEdit?.blood_group || "",
+      primaryLanguage: patientDataToEdit?.primary_language || "",
+      address: patientDataToEdit?.address || "",
+      pincode: patientDataToEdit?.pincode || "",
+      city: patientDataToEdit?.city || "",
+      relationship: patientDataToEdit?.relation || "",
+      mobileNumber: patientDataToEdit?.contact || "",
+    });
+  }, [patientDataToEdit]);  
+  
+  
   const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
 
     const { name, value } = e.target;
-    console.log("te ",name)
     setFormData({ ...formData, [name]: value });
 
     // Clear error message when the user types
@@ -140,6 +164,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
           </DrawerHeader>
 
           <div onClick={(e) => e.stopPropagation()} className="w-full px-5 space-y-2 ">
+            {/* <button type="bitton" onClick={()=>console.log("-->>>",patientDataToEdit)} >jhsdgjhdfjhh</button> */}
             {/* ---- First Name ---- */}
             <div>
               <label className="block text-sm font-medium mb-1">First Name <span className="text-lg text-red-600">*</span></label>

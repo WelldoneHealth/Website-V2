@@ -11,11 +11,15 @@ import {
   Trash2,
 } from "lucide-react";
 
-const MemberCard = ({ memberDetails = {}, deleteMember = () => {} }) => {
+const MemberCard = ({ memberDetails = {}, deleteMember = () => {},patientEditFunc,isOpen }) => {
+
+
+
+
   return (
     <div className="col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-4 my-3">
       <div className="w-full h-full p-3 bg-white shadow-sm rounded-lg flex flex-col justify-between border">
-        <div className="flex justify-between">
+        <div className="flex justify-between relative">
           {/* Patient Info */}
           <div className="flex gap-4">
             <img
@@ -55,9 +59,15 @@ const MemberCard = ({ memberDetails = {}, deleteMember = () => {} }) => {
               </div>
             </div>
           </div>
+          
+
+                                 {/* -----------------------patient edit----------------------- */}
+{/* <p onClick={()=>{patientEditFunc();isOpen()}} className=" absolute right-0 -top-3 underline underline-offset-2 text-primary cursor-pointer">Edit</p> */}
+
+
           {/* Delete Button */}
-          <button
-            className="text-red-600 hover:text-red-800"
+           <button
+            className="text-red-600 pt-5 hover:text-red-800"
             onClick={() => deleteMember(memberDetails)}
           >
             <Trash2 />

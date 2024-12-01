@@ -88,7 +88,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
 
       {/* Fixed Button for Small Screens */}
       <div className="w-full p-3 lg:hidden  ">
-        <div className=" fixed bottom-4   left-1/2 transform -translate-x-1/2 w-full   px-4 py-2 rounded-full shadow-lg">
+        <div className=" fixed bottom-4   left-1/2 transform -translate-x-1/2 w-full   px-4 py-2  shadow-lg">
           <button
             onClick={() => {
               setShowAppointmentDrawer(true);
@@ -102,12 +102,12 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
       </div>
       <Drawer
         open={showAppointmentDrawer}
-        onClose={closeDrawer}
+        onClose={closeDrawer} className="bg-white w-full"
         // direction="bottom"
       >
         <DrawerContent className="w-full mt-12">
           <DrawerClose onClick={closeDrawer} />
-          <DrawerHeader className= "relative w-full justify-center flex mt-3">
+          <DrawerHeader className= "relative w-full justify-center flex mt-3 bg-white">
             <DrawerTitle>Book Your Appointment</DrawerTitle> 
             <div onClick={closeDrawer} className="absolute right-5 top-3 flex lsm:hidden cursor-pointer "><img src={backArrow?.src} className="rotate-180 w-7"  alt="load..." /></div>
           </DrawerHeader>

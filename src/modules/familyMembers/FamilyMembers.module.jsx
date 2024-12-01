@@ -28,6 +28,7 @@ const FamilyMembersModule = () => {
   });
   const [showAddPatientDrawer, setShowAddPatientDrawer] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
+const [editPatientData,setEditPatientData]=useState(null)
 
   const limit = 10; // Number of items per page
 
@@ -104,6 +105,9 @@ const FamilyMembersModule = () => {
     return pageNumbers;
   };
 
+  const handleEditPatient=(patientData)=>setEditPatientData(patientData)
+
+
 if(isLoading) return  <div>Loading...</div>
 
   return (
@@ -136,6 +140,8 @@ if(isLoading) return  <div>Loading...</div>
               key={index}
               memberDetails={item}
               deleteMember={handleDeleteMember}
+              isOpen={()=>setShowAddPatientDrawer(true)}
+              patientEditFunc={()=>handleEditPatient(item)}
             />
           ))}
         </div>
@@ -204,6 +210,7 @@ if(isLoading) return  <div>Loading...</div>
     </div> }
     <AddPatientDrawer
         isOpen={showAddPatientDrawer}
+        patientDataToEdit={editPatientData}    
         onClose={() => {
           setShowAddPatientDrawer(false);  
         }}
