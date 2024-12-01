@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export default function RightSideBox({appointmentInfo}) {
   return (
-    <div className="w-full max-lg:hidden flex-1  lg:w-[90%] max-lg:absolute     transition-all duration-150 ease-linear">
+    <div className="w-full  max-lg:hidden flex-1  lg:w-[90%] max-lg:absolute     transition-all duration-150 ease-linear">
     <div className="w-full  hidden md:block  max-lg:mt-16  border-2 boreder-black rounded-[20px] py-4 overflow-hidden ">
     <p className="text-lg font-medium  text-center">
       Book Your Appointment{" "}

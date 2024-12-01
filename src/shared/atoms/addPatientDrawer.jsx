@@ -52,6 +52,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     onSuccess: (data) => {
       console.log("Patient added successfully:", data);
       successCallback(data);
+      console.log("the padded patient dat6a is",data)
       onClose(); // Close the drawer
       updatePatientListFunc()
       setFormData({
@@ -91,7 +92,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     if (formData.mobileNumber && !/^\d{10}$/.test(formData.mobileNumber)) {
       formErrors.mobileNumber = "Mobile number should be 10 digits";
     }
-    if(isNaN(formData.pincode) || formData.pincode.length !==6) formErrors.pincode="Pin Code must be a valid Number"
+    if( formData.pincode && ( isNaN(formData.pincode) || formData.pincode.length !==6)) formErrors.pincode="Pin Code must be a valid Number"
 
     setErrors(formErrors);
     return Object.keys(formErrors).length === 0;
@@ -126,7 +127,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
 
 
   return (
-    <div className="">
+    <div className=" ">
       <Drawer className open={isOpen} onClose={onClose}>
         <DrawerContent className="overflow-y-scroll w-full  msm:w-[490px]  overflow-x-hidden ">
           <DrawerClose onClick={onClose} />
@@ -135,7 +136,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
             <div onClick={onClose} className="absolute left-5 top-3 flex lsm:hidden cursor-pointer">
               <img src={backArrow?.src} className="rotate-180 w-7" alt="back" />
             </div>
-            <DrawerDescription>Please provide the necessary details.</DrawerDescription>
+            {/* <DrawerDescription>Please provide the necessary details.</DrawerDescription> */}
           </DrawerHeader>
 
           <div onClick={(e) => e.stopPropagation()} className="w-full px-5 space-y-2 ">
@@ -384,7 +385,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     <SelectContent>
       <SelectGroup>
         <SelectLabel>Relationship</SelectLabel>
-        {["Me", "Daughter", "Son", "Sister", "Brother", "Relative", "Friend"].map((item, index) => (
+        {["Me", "Daughter", "Son", "Sister", "Brother", "Relative", "Friend","Guest"].map((item, index) => (
           <SelectItem className="cursor-pointer" key={index} value={item}>
             {item}
           </SelectItem>

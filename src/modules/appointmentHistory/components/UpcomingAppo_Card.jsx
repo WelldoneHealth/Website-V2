@@ -81,7 +81,7 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
               ? "Today"
               : appointmentData?.appointment_date}
           </p>
-          <p className="text-sm md:text-xs">Last updated: 2 Minutes ago</p>
+          {/* <p className="text-sm md:text-xs">Last updated: 2 Minutes ago</p> */}
         </div>
         <div className="flex justify-center gap-x-5">
           <div
@@ -89,11 +89,11 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
             className="size-[60px] msm:size-[70px] md:px-5 rounded-[10px] flexCenter text-[32px] msm:text-[40px] lg:text-xl esm:text-[26px] font-bold text-[#FF0000]"
           >
             {" "}
-            2{" "}
+          {appointmentData?.equeue_no ?? ""}
           </div>
           <div className="space-y-1 msm:space-y-2">
             <p className="font-medium text-base md:text-sm lg:text-xs esm:text-sm">
-              Waiting Number
+              Equeue Number
             </p>
             <p className="text-[25px] msm:text-3xl md:text-[22px] esm:text-2xl font-medium text-[#4472C4] tracking-wide">
               {moment(
@@ -118,9 +118,9 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
     >
       <div className="w-full flex items-center gap-x-3">
         <div className="size-10 flexCenter text-lg rounded-full text-white font-medium bg-[#01A400]">
-          {appointmentData?.equeue_no ?? ""}
+        {appointmentData?.patient_first_name[0]?.toUpperCase()}{appointmentData?.patient_last_name[0]?.toUpperCase()}
         </div>
-        <p className="text-base font-medium">
+        <p className="text-sm msm:text-base font-medium">
           {appointmentData?.patient_first_name ?? ""}{" "}
           {appointmentData?.patient_middle_name ?? ""}{" "}
           {appointmentData?.patient_last_name ?? ""}, (
@@ -131,14 +131,14 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
         style={{ boxShadow: "0px 0px 4px 0px #01549A40" }}
         className="rounded-[20px] w-full p-3 flex items-center gap-x-3 msm:gap-x-4 "
       >
-        <div className=" max-md:size-[120px] max-md:rounded-full max-md:flex items-center p-1 md:w-auto bg-[#EFF8FF]">
+        <div className="size-[50px] asm:size-[70px] msm:size-[90px] md:size-[60px] lsm:size-[80px]  aspect-[1/1] rounded-full flex items-center justify-center  bg-[#EFF8FF]">
           <img
             src={appointmentData?.doctor_image ?? defaultDoctor?.src}
-            className="size-20 object-cover rounded-full"
+            className="w-full h-full  object-center object-cover rounded-full"
             alt="load..."
           />
         </div>
-        <div className="space-y-1">
+        <div className="space-y-0 flex-1">
           <p className="text-base msm:text-xl md:text-base xl:text-[17px] font-medium">
             {" "}
             {appointmentData?.doctor_suffix ?? ""}{" "}
@@ -182,7 +182,7 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
   return (
     <div
       style={{ boxShadow: " 1px 1px 4px 2px #8383834D" }}
-      className="w-full md:space-y-4 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] border-[2px] md:border-[0.5px] border-[#01A400] md:border-[#DADADA] "
+      className="w-full  max-w-[950px] mx-auto md:space-y-4 px-3 ssm:px-2 asm:px-4 py-2 max-asm:pb-3 asm:py-4 rounded-[15px] border-[2px] md:border-[0.5px] border-[#01A400] md:border-[#DADADA] "
     >
       <div className="hidden md:flex">
         <div className="div md:w-1/2  w-full">
@@ -200,8 +200,8 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
           ))}
         </div>
       </div>
-      <div className=" text-nowrap space-y-1 border-b-2"></div>
-      <div className="w-full flex flex-wrap gap-4">
+      <div className=" text-nowrap space-y-1 md:border-b-2"></div>
+      <div className="w-full flex flex-col md:flex-row gap-4">
         {/* Left card section */}
         <LeftCard />
         {/* Right card section */}

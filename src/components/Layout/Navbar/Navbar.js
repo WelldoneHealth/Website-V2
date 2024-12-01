@@ -54,7 +54,7 @@ export default function Navbar() {
                 <p className="text-4xl font-medium text-primary">X</p>
               )}
             </button>
-            {/* -------------icon--------------- */}
+            {/* --------welldone logo-----icon--------------- */}
             <div className="w-[78px] md:w-24 ">
             <Link href="/" className="block w-full ">
                 <img src={wellDoneLogo?.src} className="w-full" alt="load..." />
@@ -65,13 +65,14 @@ export default function Navbar() {
           <div className="flex items-center gap-x-8 md:gap-x-14 ">
 
 
+
+{/* ------------------desktop link-------------------- */}
             { token && <>
               <Link href="/appointment-history" className="hidden sm:block text-base xl:text-lg font-medium text-primary" > Appointments</Link>
               <Link href="/family-members" className=" hidden sm:block text-base xl:text-lg font-medium text-primary" >My family Members</Link>
             </> }
       
          
-
 
            {!token && <Link
               href="https://practice.welldonehealth.in/"
@@ -89,6 +90,7 @@ export default function Navbar() {
                 I have Clinic/ Hospital
               </button>
             </Link> }
+            {/* -------------------------login links-------------- */}
             {token ? (
               <button
                 onClick={logout}
@@ -115,12 +117,13 @@ export default function Navbar() {
         </div>
       </header>
 
+
+{/* -----------------------side navigation bar--------------- */}
       <div
         onClick={(e) => {
           setNavOpen(!navOpen);
           e.stopPropagation();
         }}
-        // bg-[#EFF8FF]
         className={`w-full  fixed transition-all duration-300 top-0 overflow-hidden   bg-[#F5F5F5] bg-opacity-10 z-50  h-screen  ${
           navOpen ? "left-0" : "-left-full"
         } `}
@@ -129,36 +132,30 @@ export default function Navbar() {
           onClick={(e) => e.stopPropagation()}
           className="w-full px-2 py-4 relative sm:w-[85%] h-full  bg-white flex flex-col justify-start items-center "
         >
-          <button
-            type="button"
-            onClick={toggleNavBar}
-            className="w-8  right-0  block md:hidden"
-          >
-            <img src={hamburgerIcon?.src} className="w-full" alt="load..." />
-            {/* {navOpen && <p className="text-2xl">X</p>} */}
-          </button>
 
-          <div className="w-28 h-28 hidden rounded-lg   ">
-            <img src={wellDoneLogo?.src} className="w-full mt-14" />
-          </div>
+
+       {/* ----------------------diffrent links sonside navbatr-------------------- */}
           { token &&    <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
             {hamburgerLink.map((item, index) => (
               <div
                 key={index}
+                onClick={toggleNavBar}
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-                className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+                className=" w-[90%] max-w-[400px] sm:max-w-[700px]     rounded-md py-2 text-center "
               >
-                <Link className="w-full" href={item.linkTo}>
+                <Link  className="w-full" href={item.linkTo}>
                 {item.linkName}
                 </Link>
               </div>
             ))}
           </div>   }
 
+{/* ------------------------i have clinic togle on changing width size ---------- */}
           { !token &&    <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">         
               <div
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
                 className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
+                onClick={toggleNavBar}
               >
                 <Link
                   href="https://practice.welldonehealth.in/"

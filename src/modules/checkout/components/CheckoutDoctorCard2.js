@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function CheckoutDoctorCard2({doctorData}) {
   return (
-    <div className="space-y-1 flex-1">
+    <div className=" max-md:w-full space-y-1 flex-1">
     <p className="font-semibold ">Doctor</p>
     <div
       style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
@@ -12,22 +12,22 @@ export default function CheckoutDoctorCard2({doctorData}) {
 
       <img
         src={doctorData?.profile_picture}
-        className="w-[60px] sm:w-[70px] md:w-[100px] "
+        className="w-[60px] sm:w-[70px] md:w-[100px] aspect-[1/1] object-center object-cover rounded-full overflow-hidden "
       />
       <div className="w-full space-y-1">
         <div className="w-full flex  justify-between items-center text-sm font-medium">
-          <p className="max-sm:text-sm">
+          <p className="text-base msm:text-lg md:text-base">
             {doctorData?.first_name}&nbsp;
             {doctorData?.middle_name}&nbsp;
-            {doctorData?.last_name};
+            {doctorData?.last_name}; 
           </p>
         </div>
-        <p className="text-xs sm:text-sm font-medium">
+        <p className="text-sm md:text-[13px]">
           {doctorData?.education_and_background
             ?.map((item) => item.qualification)
             .join(" / ")}
         </p>
-        <p className="text-sm max-md:hidden leading-tight">
+        <p className="text-sm md:text-[13px] max-md:hidden leading-tight">
           {" "}
           Surgical Oncologist | Advanced Laparoscopic Surgeon |
           Nodules{" "}

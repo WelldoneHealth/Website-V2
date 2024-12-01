@@ -8,6 +8,7 @@ export const useAppointmentStore = create(
         equeueData: null,
         doctorData: null,
       },
+      // appointmentData:null,
       setAppointmentData: (data) => {
         set({ appointmentData: { ...data } });
       },
