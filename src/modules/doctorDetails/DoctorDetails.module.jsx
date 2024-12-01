@@ -50,7 +50,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
         <BasicDetails basicInfo={doctorInfo} />
         <ExtraDetails extraDocInfo={doctorInfo} />
         <TabsWithMaps officeInfo={doctorInfo?.establishment} />
-        <div className="w-full my-7">
+       {doctorInfo?.education_and_background.length > 0 && <div className="w-full my-7">
           <h3 className="my-3 text-[22px] sm:text-2xl text-[#01549A] font-semibold">
             Education
           </h3>
@@ -59,8 +59,8 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
               <EducationCard key={index} eduDetails={item} />
             ))}
           </div>
-        </div>
-        <h3 className="my-3 text-[22px] sm:text-2xl text-[#01549A] font-semibold">
+        </div> }
+      {doctorInfo?.experience.length > 0 &&  <>  <h3 className="my-3 text-[22px] sm:text-2xl text-[#01549A] font-semibold">
           Training and Experience
         </h3>
         <div className="flex flex-wrap gap-x-4 gap-y-5">
@@ -75,7 +75,7 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
               year={`${item.from_date} to ${item.to_date}`}
             />
           ))}
-        </div>
+        </div> </> }
       </div>
 
       <div className="hidden flex-1 lg:w-[32%] lg:block">
