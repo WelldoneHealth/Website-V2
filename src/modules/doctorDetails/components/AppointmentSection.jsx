@@ -57,9 +57,9 @@ const AppointmentSection = ({
 
   return (
     <div
-      className={`w-full   flex-1 lg:w-full   max-lg:bg-white   transition-all duration-150 ease-linear`}
+      className={`w-full   flex-1 lg:w-full   bg-white   transition-all duration-150 ease-linear`}
     >
-      <div className="w-full    lg:border-2 boreder-black rounded-[20px] lg:pt-4 pb-0 lg:overflow-hidden ">
+      <div className="w-full bg-white    lg:border-2 border-black rounded-[20px] lg:pt-4 pb-0 lg:overflow-hidden ">
         <p className=" text-lg font-medium  text-center hidden lg:block">
           Book Your Appointment{" "}
         </p>

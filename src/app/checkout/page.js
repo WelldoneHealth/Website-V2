@@ -40,17 +40,18 @@ import MobileViewButtons from "@/modules/checkout/components/MobileViewButtons";
 export default function page() {
   const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
+  const setAppointmentData = useAppointmentStore((state) => state.setAppointmentData);
   const userData = useAuthStore((state) => state.userDetails);
 
   // console.log( "the value of fata in checkkout is ",appointmentData);
 
-// useEffect(() => {
-//   if(!appointmentData){
-//     router.push('/')
-//   }
-// }, [])
+  // useEffect(() => {
+  //   return () => {
+  //     setAppointmentData(null);
+  //   };
+  // }, []);
 
-
+const [editPatientData,setEditPatientData]=useState(null)
 
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -119,20 +120,18 @@ export default function page() {
   const appointmentMutation = useMutation({
     mutationFn: addAppointment,
     onSuccess: (data) => {
-// console.log("the appointment data is",data).id
-      router.push(`/checkout/appointmentConfirmation?id=${data?.id}`);
-
-      // toast("Appointment has been created", { 
-      //   description: " ", 
-      // });
+// -------------if appointment booking is successful------------
+    if(data?.id){
+        router.push(`/checkout/appointmentConfirmation?id=${data?.id}`);
+        toast("Appointment booked successfully");
+        return  
+      }
+  // -------------------if unsuccessful od previously booked appointment---------------------
+      return   toast(data?.message);
     },
     onError: (error) => {
-      console.log("the error irn react query is",error)
-    //   toast(error, {
-    //     description: "hjfh",
-    //   }
-    // );
-      // console.error("Error adding appointment:", error);
+      // console.log("the error occured in react query is",error)
+      toast("Server Error!");
     },
   });
 
@@ -178,7 +177,10 @@ export default function page() {
   }
   
 
-  if(!appointmentData?.doctorData)  return router.push('/')
+
+  const handleEditPatient=(patientData)=>setEditPatientData(patientData)
+
+  // if(!appointmentData?.doctorData)  return router.push('/')
     
 
   return (
@@ -269,7 +271,7 @@ export default function page() {
                   >
                     {patientList.length > 0 &&
                       patientList.map((item, index) => (
-                        <SelectPatientComp  patientData={item} key={index}  isSelected={statusData.patientSelection.id == item.id} 
+                        <SelectPatientComp onOpen={()=>setView(true)}  patientEditFunc={()=>handleEditPatient(item)}  patientData={item} key={index}  isSelected={statusData.patientSelection.id == item.id} 
                         onChangeFunc={()=>setStatusData((prev) => ({
                                   ...prev,
                                   patientSelection: item,
@@ -282,6 +284,7 @@ export default function page() {
                       type="button"
                       onClick={() => {
                         setView(true);
+                        setEditPatientData(null);
                         setViewSliderType({
                           ...viewSliderType,
                           appointment: true,
@@ -444,7 +447,7 @@ export default function page() {
               </div>
 
               {!dataVisibilityToggle.appointmentToggle && (
-                <div className="w-full max-md:hidden gap-y-3 p-5 py-3 max-sm:text-xs flex flex-col sm:flex-row justify-between items-center bg-[#EFEFEF]">
+                <div className="w-full max-sm:hidden gap-y-3 p-5 py-3 max-sm:text-xs flex flex-col sm:flex-row justify-between items-center bg-[#EFEFEF]">
                   <p>
                     Appointment confirmation WhatsApp Massage will be sent to{" "}
                     <span className="font-medium">{userData?.contact}</span>{" "}
@@ -507,6 +510,7 @@ export default function page() {
 
       <AddPatientDrawer
         isOpen={view}
+patientDataToEdit={editPatientData}
         updatePatientListFunc={()=>getPatients()}
         onClose={() => {
           setView(false);

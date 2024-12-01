@@ -9,6 +9,7 @@ import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import moment from "moment";
 
 import mapImage from "@/asset/Images/map.png";
+import Link from "next/link";
 
 
 export default function SectionTabsWithMaps({ tab,tabDetails }) {
@@ -17,16 +18,18 @@ export default function SectionTabsWithMaps({ tab,tabDetails }) {
       <div className=" w-full flex my-2">
         <div className="w-full ">
           <h3 className="text-[20px] asm:text-[24px] sm:text-2xl text-[#01549A] font-semibold">
-           {tabDetails?.clinic_name}
+            <Link href={`/hospital-details/${tabDetails?.branch_slug}`}>
+           {tabDetails?.clinic_name} </Link>
           </h3>
-          <p className="w-full my-3 text-sm flex ">
+          <Link href={`/hospital-details/${tabDetails?.branch_slug}`} className="block">
+          <p className="w-full my-3 text-sm flex ">    
             <img
               src={hospitalOutlineIcon?.src}
               className="w-4 mr-3"
               alt="load..."
             />
 {tabDetails?.clinic_address}
-          </p>
+          </p></Link>
           {/* -------------------flex------------------ */}
           <div className="w-full   my-2 bg-[#F5F5F5] hidden max-w-max gap-x-2 text-xs font-medium px-4 py-1 rounded-[20px]">
             <div className="flex gap-x-1">

@@ -15,8 +15,9 @@ export const addAppointment = async (data) => {
     const response = await axiosInstance.post("/apiV1/book-appointment/", data);
     return response.data; // Return the data from the response
   } catch (error) {
-    // console.log("the error is it because",error.response.data.message)
-    throw new Error(error.response.data.message || "Error Booking appointment")
+    console.log("throw new error")
+    // throw new Error(error.response.data.message || "Error Booking appointment")
+    return error?.response?.data ||  "Error Booking appointment. Try after some time."     
     
   }
 };

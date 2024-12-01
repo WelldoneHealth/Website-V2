@@ -15,12 +15,12 @@ const useAppointmentInvoice = (appointmentId, appointmentData) => {
   } = useQuery({
     queryKey: ["servicesPaid", appointmentId],
     queryFn: async () => {
-      const { data } = await axiosInstance.get(`apiV1/service-history/`, {
+      const { data } = await axiosInstance.get(`apiV1/service-history/`, {              
         params: { appointment: appointmentId },
       });
       return data;
     },
-    enabled: !!appointmentId, // Only fetch if the appointmentId is provided
+    enabled: !!appointmentId, // Only fetch if the appointmentId is provided              
   });
 
   const transformData = (inputData) => {
