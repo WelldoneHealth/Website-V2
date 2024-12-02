@@ -114,13 +114,13 @@ const AppointmentSection = ({
                         setSelectedEqueue(item);
                         console.log("the item is", item);
                       }}
-                      className={` w-[95%] cursor-pointer rounded-[10px] border-[1px] border-l-[5px] ${
-                        focusableIndex !== index
-                          ? "bg-[#F7FFF6] border-[#919196]"
-                          : "bg-[#F7FFF6] border-[#01A400]"
-                      } `}
+                      className={` w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ${item?.is_active ?  
+                       ( focusableIndex !== index
+                          ? "bg-[#F7FFF6] border-[#919196] cursor-pointer"
+                          : "bg-[#F7FFF6] border-[#01A400] cursor-pointer" )
+                        : "  pointer-events-none border-red-700 " } `}
                     >
-                      <p className="py-1 px-3 text-sm font-normal border-b-[1px] border-[#919196] font-medium">
+                      <p className={`py-1 px-3 text-sm font-normal border-b-[1px] ${item?.is_active ? "border-[#919196] "  : "border-red-700"  }  font-medium`}>
                         {moment().format("YYYY-MM-DD") === item?.date
                           ? "Today"
                           : moment(item?.date).format("DD MMM")}
@@ -154,9 +154,11 @@ const AppointmentSection = ({
                           </p>
                         </div>
                       </div>
-                      <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                    {item?.is_active &&  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
                         Given Time is approximate can vary by +/-60 Min
-                      </p>
+                      </p>}
+
+                    { !item?.is_active  &&  <div className="w-full py-2 px-3  text-sm border-t-[2px] border-red-700 text-red-700 font-medium flex justify-center items-center gap-x-2" > <p className="pulse-ball size-[5px]  bg-red-700 rounded-full"></p>{ item?.reason || "Out for Lunch"  }</div>   }
                     </div>
                   ))}
 
