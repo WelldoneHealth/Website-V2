@@ -31,7 +31,15 @@ export default function PaymentBoxDetails({ appointmentData }) {
               {" "}
               <p className="">Total :</p>{" "}
               <p className="text-red-800">
-                ₹ {Number(appointmentData?.amount) ?? ''}
+                ₹{" "}
+                {appointmentData?.services_opted
+                  ? Number(
+                      JSON.parse(appointmentData?.services_opted)?.reduce(
+                        (sum, item) => sum + (item?.charge || 0),
+                        0
+                      ) || 0
+                    )
+                  : 0}
               </p>{" "}
             </div>
           </div>
@@ -39,36 +47,40 @@ export default function PaymentBoxDetails({ appointmentData }) {
         <div className="w-full sm:w-1/2  px-11 sm:border-l-[1px]    border-[#DADADA]">
           <p className="text-lg sm:text-base mb-3 font-medium">More actions</p>
           <div className="w-full flex flex-col gap-3">
-     {  appointmentData?.prescription_link &&        <div className="flex justify-between items-center">
-              {" "}
-              <p className="max-md:hidden tex-base"> Prescription :</p>{" "}
-              <Link
-                href={appointmentData?.prescription_link ?? "/"}
-                passHref
-                target="_blank"
-                className="w-[105px]"
-              >
+            {appointmentData?.prescription_link && (
+              <div className="flex justify-between items-center">
                 {" "}
-                <button
-                  type="button"
-                  className="w-full py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]"
+                <p className="max-md:hidden tex-base"> Prescription :</p>{" "}
+                <Link
+                  href={appointmentData?.prescription_link ?? "/"}
+                  passHref
+                  target="_blank"
+                  className="w-[105px]"
                 >
                   {" "}
-                  {appointmentData?.prescription_link ? "View" : ''}{" "}
-                </button>{" "}
-              </Link>
-            </div>  }
-            <div className="flex justify-between items-center">
-              {" "}
-              <p className="max-md:hidden tex-base"> Invoice :</p>{" "}
-              <button
-                type="button"
-                className="w-[105px] py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]"
-                onClick={downloadInvoice}
-              >
-                View
-              </button>
-            </div>
+                  <button
+                    type="button"
+                    className="w-full py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]"
+                  >
+                    {" "}
+                    {appointmentData?.prescription_link ? "View" : ""}{" "}
+                  </button>{" "}
+                </Link>
+              </div>
+            )}
+            {appointmentData?.payment_history?.length > 0 && (
+              <div className="flex justify-between items-center">
+                {" "}
+                <p className="max-md:hidden tex-base"> Invoice :</p>{" "}
+                <button
+                  type="button"
+                  className="w-[105px] py-1 flexCenter text-[#01549A] text-sm border-[1px] border-[#01549A] rounded-[5px]"
+                  onClick={downloadInvoice}
+                >
+                  View
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -97,7 +109,15 @@ export default function PaymentBoxDetails({ appointmentData }) {
             <div className=" w-full flex justify-between font-medium">
               <p className="">Total :</p>
               <p className="text-red-800">
-                ₹ {Number(appointmentData?.payment_history[0]?.amount)}    
+                ₹{" "}
+                {appointmentData?.services_opted
+                  ? Number(
+                      JSON.parse(appointmentData?.services_opted)?.reduce(
+                        (sum, item) => sum + (item?.charge || 0),
+                        0
+                      ) || 0
+                    )
+                  : 0}
               </p>
             </div>
           </div>
