@@ -49,6 +49,47 @@
   z-index: 10;
 }
 
+/* -----------glowing ball animation---------------- */
+/* -----------glowing ball animation---------------- */
+/* .pulse-ball {
+  border-radius: 100%;
+  box-shadow: 0 0 0 rgba(255, 0, 0, 0.7);
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); 
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(255, 0, 0, 0); 
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); 
+  }
+} */
+
+
+/* -----------glowing ball animation---------------- */
+.pulse-ball {
+  border-radius: 100%;
+  box-shadow: 0 0 0 10px rgba(255, 0, 0, 0.7); /* Initial red glow */
+  animation: pulse 2.2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0.7); /* Red glow at the start */
+  }
+  70% {
+    box-shadow: 0 0 20px 10px rgba(255, 0, 0, 0); /* Circular fade */
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 0, 0, 0); /* No shadow at the end */
+  }
+}
+
+
 
 
 /* -----------changing popup------- */
