@@ -58,7 +58,7 @@ const HospitalDetailsModule = ({ slug }) => {
           <div className="mt-32 mb-2 flex justify-between items-center">
             <h3 className="text-[#01549A] font-medium text-3xl">
               {hospitalInfo?.establishment_name ?? ""},{" "}
-              {hospitalInfo?.branch ?? ""}
+              {hospitalInfo?.branch ?? ""}  
             </h3>
           </div>
           <p className="my-3 text-sm">

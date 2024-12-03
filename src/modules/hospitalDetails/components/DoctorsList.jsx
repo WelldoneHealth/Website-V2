@@ -1,7 +1,9 @@
-import DoctorCard from "@/Utilities/listingPageCards/DoctorCard";
 import React from "react";
+// import DoctorCard from "@/Utilities/listingPageCards/DoctorCard";
+import DoctorCard from "@/modules/searchListing/components/DoctorCard"
 
 const DoctorsList = ({ doctors, branch }) => {
+  console.log("------------------",branch)
   return (
     <div className="my-12 w-full">
       <p className="text-[20px] font-medium">
@@ -11,8 +13,9 @@ const DoctorsList = ({ doctors, branch }) => {
         {doctors?.map((doctorDetails, index) => (
           <DoctorCard
             key={index}
-            doctorDetails={doctorDetails}
-            branch={branch}
+            listInfo={doctorDetails}
+            branchSlug={branch}
+            // branch={branch}
           />
         ))}
       </div>
@@ -21,3 +24,4 @@ const DoctorsList = ({ doctors, branch }) => {
 };
 
 export default DoctorsList;
+ 
