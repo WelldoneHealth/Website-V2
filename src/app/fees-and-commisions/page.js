@@ -65,7 +65,7 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
     <div className="text-primary leading-tight">
       <p className=" text-base  asm:text-xl 2xl:text-2xl font-bold">Become a</p>
       <p className=" text-[19px]  asm:text-[26px] msm:text-[28px] md:text-[26px]  lg:text-[36px] 2xl:text-[38px] font-bold">Welldone Health practitioner</p>
-      <p className=" mt-1 text-[20px] ssm:text-[22px]  asm:text-[28px]  msm:text-[32px] md::text-[28px]  lsm:text-[30px] lg:text-[36px] xl:text-[42px] 2xl:text-[44px]  sm:whitespace-nowrap">Get 6-month subscription at just ₹2999*</p>
+      <p className=" mt-1 text-[20px] ssm:text-[22px]  asm:text-[28px]  msm:text-[32px] md::text-[28px]  lsm:text-[30px] lg:text-[36px] xl:text-[42px] 2xl:text-[44px]  sm:whitespace-nowrap">Get 6-month subscription at just ₹4999*</p>
     </div>
 
 
@@ -125,12 +125,12 @@ className="w-full max-md:pb-10 flex  flex-col md:flex-row  relative ">
  <div className="flex gap-x-3 text-lg font-bold "><img src={ratingIcon?.src} className='' alt="load..." />Standard Plan</div>
  <div className="text-[26px] msm:text-3xl lg:text-[34px] flex gap-x-5">
   <p className='text-[#AAD5FA] line-through '>₹6900.00</p>
-  <p className='font-bold'>₹2999*</p>
+  <p className='font-bold'>₹4999*</p>
  </div>
  </div>
 
  <div className=" my-4 lg:my-6 space-y-3">
-  {[" 6-month subscription for only ₹2999*!","15-day money-back promise! ","Zero setup fee","Zero hidden charges ","Unlimited access to Doctors and your staff "].map((item,index)=><div key={index} className="flex gap-x-3 items-center text-xs msm:text-sm  lsm:text-base"><img src={check3?.src} className='' alt="load..."  /> {item}  </div>)}
+  {[" 6-month subscription for only ₹4999*!","15-day money-back promise! ","Zero setup fee","Zero hidden charges ","Unlimited access to Doctors and your staff "].map((item,index)=><div key={index} className="flex gap-x-3 items-center text-xs msm:text-sm  lsm:text-base"><img src={check3?.src} className='' alt="load..."  /> {item}  </div>)}
  </div>
 
 <div className="mt-4 lg:mt-6 mb-3 space-y-2">
