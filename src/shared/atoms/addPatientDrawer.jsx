@@ -16,6 +16,7 @@ import { Spinner } from "@/shared/components/Spinner";
 import backArrow from "@/asset/Icons/backArrow.svg";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { bloodGroups } from "../usefulData/addPatientDrawerData";
+import { toast } from "sonner";
 
 const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFunc,patientDataToEdit }) => {
 
@@ -76,9 +77,9 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     onSuccess: (data) => {
       console.log("Patient added successfully:", data);
       successCallback(data);
-      console.log("the padded patient dat6a is",data)
-      onClose(); // Close the drawer
-      updatePatientListFunc()
+      toast("Patient added successfully!")
+      onClose(); 
+      // updatePatientListFunc()
       setFormData({
         patientName: "",
         lastName: "",
@@ -97,6 +98,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
     },
     onError: (error) => {
       console.error("Error adding patient:", error);
+      toast("Patient addition error")
       // Optionally show an error notification
     },
   });

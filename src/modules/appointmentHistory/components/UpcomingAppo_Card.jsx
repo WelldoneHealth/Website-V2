@@ -89,7 +89,7 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
             className="size-[60px] msm:size-[70px] md:px-5 rounded-[10px] flexCenter text-[32px] msm:text-[40px] lg:text-xl esm:text-[26px] font-bold text-[#FF0000]"
           >
             {" "}
-          {appointmentData?.equeue_no ?? ""}
+            {appointmentData?.equeue_no ?? ""}
           </div>
           <div className="space-y-1 msm:space-y-2">
             <p className="font-medium text-base md:text-sm lg:text-xs esm:text-sm">
@@ -118,7 +118,8 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
     >
       <div className="w-full flex items-center gap-x-3">
         <div className="size-10 flexCenter text-lg rounded-full text-white font-medium bg-[#01A400]">
-        {appointmentData?.patient_first_name[0]?.toUpperCase()}{appointmentData?.patient_last_name[0]?.toUpperCase()}
+          {appointmentData?.patient_first_name[0]?.toUpperCase()}
+          {appointmentData?.patient_last_name[0]?.toUpperCase()}
         </div>
         <p className="text-sm msm:text-base font-medium">
           {appointmentData?.patient_first_name ?? ""}{" "}

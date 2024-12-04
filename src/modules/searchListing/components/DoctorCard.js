@@ -24,6 +24,7 @@ import Link from 'next/link';
 export default function DoctorCard({listInfo,branchSlug=null}) {
   // console.log("Branch Slug Debug:", { branchSlug, branchSlugFromList: listInfo?.branch_slug });
 
+
   const router=useRouter()  
 const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -42,7 +43,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
   }, []);
 
   const handleClick = () => {
-    // const doctorBranchSlug=listInfo?.branch_slug || branchSlug
+    // console.log("the branch slug is",branchSlug)
     const resolvedBranchSlug = listInfo?.branch_slug || branchSlug; 
  router.push(`/doctor-details/${listInfo?.slug}/${resolvedBranchSlug}`)
   };

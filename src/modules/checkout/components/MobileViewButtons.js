@@ -5,7 +5,7 @@ export default function MobileViewButtons({btnText,btnClickFunc,btnBackFunc,proc
   return (
    <>
     <ButtonType1  btnText={btnText}  btnFunc={btnClickFunc} /> 
-    <ButtonType1  btnText="Back"  btnFunc={btnBackFunc} /> 
+    <ButtonType1  btnText="Back"  btnFunc={btnBackFunc} isBtnDisable={btnText=="Continue"} /> 
    </>
   )
 }

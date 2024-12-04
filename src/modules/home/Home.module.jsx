@@ -11,7 +11,7 @@ const HomeModule = () => {
       {/* <PrimaryBanner /> */}
       <NavbarHero />
 
-      {/* <DoctorSpeciality /> */}
+      <DoctorSpeciality />
 
       {/* -----------doctor slider----------- */}
       <DoctoAssociateSlider />

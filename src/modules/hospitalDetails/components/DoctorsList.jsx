@@ -3,7 +3,7 @@ import React from "react";
 import DoctorCard from "@/modules/searchListing/components/DoctorCard"
 
 const DoctorsList = ({ doctors, branch }) => {
-  console.log("------------------",branch)
+  // console.log("------------------",branch)
   return (
     <div className="my-12 w-full">
       <p className="text-[20px] font-medium">

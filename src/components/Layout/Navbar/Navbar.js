@@ -4,6 +4,7 @@ import wellDoneLogo from "@/asset/Icons/wellDoneLogo.svg";
 import loginIcon from "@/asset/Icons/login_icon.svg";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import hamburgerIcon from "@/asset/Icons/hamburger.svg";
+import closeIcon from "@/asset/Icons/closeIcon.svg";
 import Link from "next/link";
 import { logout } from "@/shared/utils/logoutHandler";
 import useAuthStore from "@/store/authStore";
@@ -51,7 +52,7 @@ export default function Navbar() {
                 />
               )}
               {navOpen && (
-                <p className="text-4xl font-medium text-primary">X</p>
+                <p className="text-4xl font-medium text-primary"><img src={closeIcon?.src} className="text-red-900" alt="load..." /> </p>
               )}
             </button>
             {/* --------welldone logo-----icon--------------- */}
@@ -137,16 +138,16 @@ export default function Navbar() {
        {/* ----------------------diffrent links sonside navbatr-------------------- */}
           { token &&    <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
             {hamburgerLink.map((item, index) => (
-              <div
-                key={index}
+                <Link   className="w-[90%] max-w-[400px] sm:max-w-[700px] block " href={item.linkTo}> 
+                 <div    
                 onClick={toggleNavBar}
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
-                className=" w-[90%] max-w-[400px] sm:max-w-[700px]     rounded-md py-2 text-center "
+                className="  w-full   rounded-md py-2 text-center "
               >
-                <Link  className="w-full" href={item.linkTo}>
+            
                 {item.linkName}
-                </Link>
-              </div>
+              
+              </div>  </Link>
             ))}
           </div>   }
 

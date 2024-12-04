@@ -57,7 +57,7 @@ export default function () {
         </p>
 
         <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
-          <Link href="/search-listing"> View All</Link>
+          <Link href={`/search-listing?is_hospital=false`} passHref > View All</Link>
         </div>
 
         <div className=" hidden md:flex justify-center items-center space-x-6">
@@ -95,9 +95,9 @@ export default function () {
         <div>Loading...</div>
       )}
 
-      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
+      <div className="my-7 max-md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
         {" "}
-        <Link href="/search-listing">View All</Link>{" "}
+        <Link href={`/search-listing?is_hospital=false`} passHref > View All</Link>{" "}
       </div>
 
       <div className="my-7 w-full  flex justify-center items-center md:hidden space-x-6">

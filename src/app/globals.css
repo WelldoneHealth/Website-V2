@@ -89,6 +89,10 @@
   }
 }
 
+/* ---------------making the default button of the slider hidden------------- */
+.slick-next{display: none !important; }
+.slick-prev{display: none !important; }
+.slick-prev{background: red !important; }
 
 
 
