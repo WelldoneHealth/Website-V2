@@ -1,20 +1,21 @@
 import React from "react";
 import doctorDetailsImage from "@/asset/Images/doctorDetailsImage.png";
+import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 
 const BasicDetails = ({ basicInfo }) => {
   return (
-    <div className="mt-2 mb-7 w-full flex flex-col md:flex-row gap-x-6 gap-y-8">
+    <div className="mt-2 mb-7 w-full flex flex-col sm:flex-row gap-x-6 gap-y-8">
       {/* Image */}
-      <div>
+      <div className=" max-msm:w-[75%] max-msm:h-[270px] msm:size-[300px] rounded-lg max-sm:mx-auto overflow-hidden  ">
         <img
-          src={basicInfo?.profile_picture ?? basicInfo?.doctorDetailsImage?.src}
-          className="h-[250px] rounded-md"
+          src={basicInfo?.profile_picture ?? defaultDoctor?.src}
+          className=" w-full h-full object-cover object-center"
           alt="Doctor"
         />
       </div>
       {/* Doctor Info */}
-      <div className="flex-1">
+      <div className="max-sm:mx-auto flex-1">
         {/* ------------------------for further use in later------------------- */}
         {/* <div className="flex gap-x-3">
           <button className="border-2 flexCenter rounded-md cursor-pointer text-sm asm:text-base font-medium px-2 py-[2px] border-[#E8E8E8] hover:bg-[#01549A] hover:text-white hover:border-transparent text-[#01549A]">

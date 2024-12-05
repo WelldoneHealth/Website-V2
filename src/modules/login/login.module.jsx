@@ -10,6 +10,8 @@ import UnauthenticatedLayout from "@/shared/layouts/UnauthenticatedLayout";
 import useUtilStore from "@/store/utiStore";
 import { useRegister } from "@/hooks/useRegister";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
+import eyeOpen from "@/asset/Icons/eyeOpen.svg";
+import eyeClose from "@/asset/Icons/eyeClose.svg";
 import { toast } from "sonner";
 import Link from "next/link";
 
@@ -25,6 +27,8 @@ const LoginModule = () => {
     contact: "",
     password: "",
   });
+
+  const [viewPassword,setViewPassword]=useState(false)
 
   const [currentTab, setCurrentTab] = useState("login"); // state for current tab
 

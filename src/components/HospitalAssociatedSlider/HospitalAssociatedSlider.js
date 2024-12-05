@@ -8,8 +8,10 @@ import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { getHospitalList } from "@/shared/apis/hospitalCard";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function HospitalAssociatedSlider() {
+  const router=useRouter()
   const sliderRef = useRef(null);
 
   const settings = {
@@ -55,7 +57,7 @@ export default function HospitalAssociatedSlider() {
         <p className="text-base ssm:text-xl sm:text-2xl lg:text-2xl font-medium">
           Clinic/ Hospitals associated with us
           </p>
-          <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer" ><Link href="/search-listing" > View All</Link></div>
+          <div className=" md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer text-nowrap" > <Link href={`/search-listing?is_hospital=true`} passHref >  View All</Link></div>
 
         <div className="hidden md:flex justify-center items-center space-x-6">
           <button
@@ -88,9 +90,9 @@ export default function HospitalAssociatedSlider() {
           ))}{" "}
       </Slider>
 
-      <div className="my-7 max-md::hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
+      <div className="my-7 max-md:hidden  text-primary text-center  text-base lg:text-lg font-medium cursor-pointer">
         {" "}
-        <Link href="/search-listing">View All</Link>{" "}
+        <Link href={`/search-listing?is_hospital=true`} passHref > View All</Link>{" "}
       </div>
 
       <div className=" my-7 w-full  flex justify-center items-center md:hidden space-x-6">

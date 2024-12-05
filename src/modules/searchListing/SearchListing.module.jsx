@@ -9,7 +9,8 @@ import dynamic from "next/dynamic";
 import { useQuery } from "@tanstack/react-query";
 import HospitalCard from "./components/HospitalCard";
 import DoctorCard from "./components/DoctorCard";
-import { getSerachList } from "./apis";
+import { getSerachList } from "./apis"; 
+import { useRouter, useSearchParams } from "next/navigation";
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(
@@ -57,6 +58,15 @@ const MapResetButton = ({ currentLocation }) => {
 
 
 export default function SearchListingModule() {
+  const [isHospital, setIsHospital] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const isHospitalParam = params.get("is_hospital");
+    setIsHospital(isHospitalParam);
+  }, []);
+
+  // console.log("the is hispitaal is",isHospital)
 
     const [isMapExpanded, setIsMapExpanded] = useState(false);
 

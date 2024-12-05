@@ -196,8 +196,8 @@ export default function CompletedAppo_Cards({
                     {appointmentCardData?.clinic_name ?? ""}
                   </p>
                   <p className="pt-1 text-xs asm:text-sm msm:text-base md:hidden">
-                    Book for Rakesh Nandre (
-                    {appointmentCardData?.patient_relation ?? " - "})
+                    Book for {appointmentCardData?.patient_first_name ?? ''} {appointmentCardData?.patient_middle_name ?? ''} {appointmentCardData?.patient_last_name ?? ''} (
+                     {appointmentCardData?.patient_relation ?? " "})
                   </p>
                 </div>
                 {/* ------------------2 prescription buttons--------- */}

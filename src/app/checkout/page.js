@@ -36,12 +36,14 @@ import CheckoutPaymentCard2 from "@/modules/checkout/components/CheckoutPaymentC
 import CheckoutEqueueCard from "@/modules/checkout/components/CheckoutEqueueCard";
 import ButtonType2 from "@/modules/checkout/components/ButtonType2";
 import MobileViewButtons from "@/modules/checkout/components/MobileViewButtons";
+import { useMediaQuery } from "react-responsive";
 
 export default function page() {
   const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
   const setAppointmentData = useAppointmentStore((state) => state.setAppointmentData);
   const userData = useAuthStore((state) => state.userDetails);
+  const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
 
   // console.log( "the value of fata in checkkout is ",appointmentData);
 
@@ -159,7 +161,7 @@ const [editPatientData,setEditPatientData]=useState(null)
     [togglingData]: false,
   })
 
-  const mobileViewButtonsChange = (btnFor,toggleBox) =>{
+  const mobileViewButtonsChange = (btnFor) =>{
     setStatusChange({
       doctorStatus: false,
       patientStatus: false,
@@ -167,13 +169,13 @@ const [editPatientData,setEditPatientData]=useState(null)
       appointmentStatus: false,
       [btnFor]: true, 
     })
-    setDataVisibilityToggle({
-      doctorsToggle: false,
-    patientToggle: false,
-    paymentToggle: false,
-    appointmentToggle: false,
-    [toggleBox]: true, 
-    })
+    // setDataVisibilityToggle({
+    //   doctorsToggle: false,
+    // patientToggle: false,
+    // paymentToggle: false,
+    // appointmentToggle: false,
+    // [toggleBox]: true, 
+    // })
   }
   
 
@@ -267,7 +269,7 @@ const [editPatientData,setEditPatientData]=useState(null)
                 <>
                   {" "}
                   <div
-                    className={`w-full space-y-5 px-2 py-3 sm:p-5 max-h-[400px] overflow-y-scroll`}
+                    className={`w-full space-y-5 px-2 py-3 sm:p-5 ${isSmallScreen ? " max-h-[60vh]   " : " max-h-[500px] " } overflow-y-scroll`}
                   >
                     {patientList.length > 0 &&
                       patientList.map((item, index) => (
@@ -279,8 +281,10 @@ const [editPatientData,setEditPatientData]=useState(null)
                         />
                       ))}
 
-                    {/* --------------------add patient button---------------------- */}
-                    <button
+                   
+                  </div>
+                   {/* --------------------add patient button---------------------- */}
+                   <button
                       type="button"
                       onClick={() => {
                         setView(true);
@@ -294,8 +298,8 @@ const [editPatientData,setEditPatientData]=useState(null)
                     >
                       + Add a New Patient
                     </button>
-                  </div>
-                  <div className=" max-sm:hidden p-5 py-3 bg-[#EFEFEF]">
+                  <div className="mt-5 max-sm:hidden flex flex-col gap-5 items-start justify-start p-5  py-3 bg-[#EFEFEF]">
+                    
                     {!statusChange.paymentStatus && (
                       <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
                         statusData.patientSelection &&
@@ -471,10 +475,15 @@ const [editPatientData,setEditPatientData]=useState(null)
 
           {/* ----------mobile view button for moving to next processes - based on the statusChange of the processes------------- */}
           <div className="w-full sm:hidden z-[50] fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-t-[2px] border-red-700 2xl:border-[#DADADA] bg-white pt-5 pb-8">
-  {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
+  {/* {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
   {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus","patientToggle")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus","doctorsToggle")}     />  }
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus","paymentToggle")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus","patientToggle")}    />  }
-  {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus","paymentToggle")}    />  }
+  {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus","paymentToggle")}    />  } */}
+          {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus")}     />  }
+  {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus")}     />  }
+  {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus")}    />  }
+  {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus")}    />  }
+   
           </div>
 
           {/* ---------------------steps to show in each process----------------- */}
@@ -511,25 +520,28 @@ const [editPatientData,setEditPatientData]=useState(null)
       <AddPatientDrawer
         isOpen={view}
 patientDataToEdit={editPatientData}
-        updatePatientListFunc={()=>getPatients()}
+        // updatePatientListFunc={()=>getPatients()}
+     
         onClose={() => {
           setView(false);
         }}
+        // updatePatientListFunc=()=>setPatientList((pre)=>[pre,item])
         successCallback={(item) => {
+          setPatientList((pre)=>[...pre,item])  
           setStatusData((prev) => ({
             ...prev,
             patientSelection: item,
           }));
-          setDataVisibilityToggle((prev) => ({
+        if(!isSmallScreen){setDataVisibilityToggle((prev) => ({ 
             ...prev,
             patientToggle: true,
           }));
           setStatusChange({
             ...statusChange,
-            paymentStatus: true,
+            paymentStatus: true, 
           }),
             handleScrollToBox(1);
-        }}
+        }}}
       />
     </AuthenticatedLayout>
   );
