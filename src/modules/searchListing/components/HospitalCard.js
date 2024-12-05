@@ -83,7 +83,7 @@ router.push(`/hospital-details/${listInfo?.slug}`)            }
         Book Appointment
       </button>
       {/* </Link> */}
-      <button
+      {/* <button
         type="button"
         className="w-full msm:w-[45%] sm:w-[190px] cursor-pointer  py-2 flex items-center justify-center text-sm font-medium bg-[#EFF8FF]  rounded-[20px]"
       >
@@ -93,7 +93,7 @@ router.push(`/hospital-details/${listInfo?.slug}`)            }
           alt="load..."
         />{" "}
         View in map
-      </button>
+      </button> */}
     </div>
           </div>
   )
