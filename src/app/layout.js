@@ -8,6 +8,7 @@ import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility
 import Navbar from "@/components/Layout/Navbar/Navbar";
 // import Head from "next/head";
 import { Toaster } from "react-hot-toast";
+import Script from "next/script";
 // import 'leaflet/dist/leaflet.css';
 
 const geistSans = localFont({
@@ -31,13 +32,14 @@ export const metadata = {
     apple: "/apple-touch-icon.png", // For Apple touch devices (optional)
   },
 };
- 
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      {/* <Head>
-   <script src="https://kit.fontawesome.com/65eba670e4.js" crossorigin="anonymous" onLoad={()=>console.log("the scrpt has vbeen loaded")} ></script>
-      </Head> */}
+      <meta
+        name="google-site-verification"
+        content="NTIO7dS4z5yiwPzTPfm_MehtEzzzAdQYXwxhUDfnJWg"
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -47,6 +49,19 @@ export default function RootLayout({ children }) {
         <main className=" mx-auto mt-[60px]  md:mt-[68px]     ">
           {children}
         </main>
+        <Script
+          id="clarity-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function(c,l,a,r,i,t,y){
+                  c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+                  t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+                  y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+              })(window, document, "clarity", "script", "p67x3actih");
+            `,
+          }}
+        />
       </body>
     </html>
   );
