@@ -138,7 +138,7 @@ export default function Navbar() {
        {/* ----------------------diffrent links sonside navbatr-------------------- */}
           { token &&    <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
             {hamburgerLink.map((item, index) => (
-                <Link   className="w-[90%] max-w-[400px] sm:max-w-[700px] block " href={item.linkTo}> 
+                <Link  key={index}  className="w-[90%] max-w-[400px] sm:max-w-[700px] block " href={item.linkTo}> 
                  <div    
                 onClick={toggleNavBar}
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}

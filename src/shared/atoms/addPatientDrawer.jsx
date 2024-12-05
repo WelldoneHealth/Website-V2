@@ -160,7 +160,7 @@ const AddPatientDrawer = ({ isOpen, onClose, successCallback,updatePatientListFu
           <DrawerHeader className="mt-16 relative flex flex-col gap-y-2 items-center">
             <DrawerTitle>Patient Information</DrawerTitle>
             <div onClick={onClose} className="absolute left-5 top-3 flex lsm:hidden cursor-pointer">
-              <img src={backArrow?.src} className="rotate-180 w-7" alt="back" />
+              <img src={backArrow?.src} className="w-7" alt="back" />
             </div>
             {/* <DrawerDescription>Please provide the necessary details.</DrawerDescription> */}
           </DrawerHeader>

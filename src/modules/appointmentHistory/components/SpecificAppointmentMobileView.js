@@ -59,7 +59,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
        
   {/* ----------------------painet card-------------------- */}
         <DataCard
-          image={defaultPatient?.src}
+          image={appointmentData?.patient_logo ?? defaultPatient?.src}
           mainText={`${appointmentData?.patient_first_name ?? ""} ${
             appointmentData?.patient_middle_name ?? ""
           } ${appointmentData?.patient_last_name ?? ""}`}
@@ -85,7 +85,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
         
 {/* -----------------------cliic card--------------------- */}
           <DataCard
-            image={defaultClinic?.src}
+            image={appointmentData?.clinic_logo ?? defaultClinic?.src}
             mainText={appointmentData?.clinic_name?.split("-")[0] ?? ""}
             subText={appointmentData?.clinic_name?.split("-")[1] ?? ""}
             textSize="text-sm asm:text-base msm:text-lg leading-tight"
