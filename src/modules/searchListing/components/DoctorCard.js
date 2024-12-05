@@ -29,7 +29,7 @@ export default function DoctorCard({listInfo,branchSlug=null}) {
 const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 768px)"); // Small screen breakpoint
+    const mediaQuery = window.matchMedia("(max-width: 1024px)"); // Small screen breakpoint
     const handleResize = () => setIsSmallScreen(mediaQuery.matches);
 
     // Check initially
@@ -138,7 +138,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
         {" "}
         Available now book in Seconds
       </p>
-      <Link href={`/doctor-details/${listInfo?.slug}/${listInfo?.branch_slug}`} >
+      <Link href={`/doctor-details/${listInfo?.slug}/${listInfo?.branch_slug || branchSlug}`} >
       <button
         type="button"
         className="w-full msm:w-[45%]  sm:w-[190px] cursor-pointer py-2 flex items-center justify-center bg-primary text-sm text-white font-normal rounded-[20px] "
@@ -146,7 +146,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
         Book Appointment
       </button>
       </Link>
-      <button
+      {/* <button
         type="button"
         className="w-full msm:w-[45%] sm:w-[190px] cursor-pointer  py-2 flex items-center justify-center text-sm font-medium bg-[#EFF8FF]  rounded-[20px]"
       >
@@ -156,7 +156,7 @@ const [isSmallScreen, setIsSmallScreen] = useState(false);
           alt="load..."
         />{" "}
         View in map
-      </button>
+      </button> */}
     </div>
   </div>
   )
