@@ -11,6 +11,7 @@ import Providers from "./providers";
 import Footer from "@/components/Layout/Footer/Footer";
 import { Toaster } from "@/components/ui/sonner";
 import NextTopLoader from "nextjs-toploader";
+import Script from "next/script";
 // import 'leaflet/dist/leaflet.css';
 
 const geistSans = localFont({
@@ -32,10 +33,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-     
-      {/* <Head>
-   <script src="https://kit.fontawesome.com/65eba670e4.js" crossorigin="anonymous" onLoad={()=>console.log("the scrpt has vbeen loaded")} ></script>
-      </Head> */}
+      <meta
+        name="google-site-verification"
+        content="NTIO7dS4z5yiwPzTPfm_MehtEzzzAdQYXwxhUDfnJWg"
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -48,6 +49,22 @@ export default function RootLayout({ children }) {
           </main>
           <Footer />
         </Providers>
+        <Script
+          id="clarity-script"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+      (function(c, l, a, r, i, t, y) {
+          c[a] = c[a] || function() { (c[a].q = c[a].q || []).push(arguments) };
+          t = l.createElement(r); 
+          t.async = 1; 
+          t.src = "https://www.clarity.ms/tag/" + i; 
+          y = l.getElementsByTagName(r)[0]; 
+          y.parentNode.insertBefore(t, y);
+      })(window, document, "clarity", "script", "ia05o00i9q");
+    `,
+          }}
+        />
       </body>
     </html>
   );
