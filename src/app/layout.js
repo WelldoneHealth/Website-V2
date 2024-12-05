@@ -26,7 +26,7 @@ const geistMono = localFont({
 
 export const metadata = {
   title: "Welldone Health",
-  description: "By Welldone Health Pvt Ltd.",
+  description: "Transform Your Practice with an Efficient Appointment Booking Platform",
   icons: {
     icon: "./favicon.ico", // Path to your favicon file
     shortcut: "/favicon.ico",
