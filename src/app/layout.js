@@ -27,6 +27,11 @@ const geistMono = localFont({
 export const metadata = {
   title: "Welldone Health",
   description: "By Welldone Health Pvt Ltd.",
+  icons: {
+    icon: "./favicon.ico", // Path to your favicon file
+    shortcut: "/favicon.ico",
+    apple: "/apple-touch-icon.png", // For Apple touch devices (optional)
+  },
 };
 
 export default function RootLayout({ children }) {
