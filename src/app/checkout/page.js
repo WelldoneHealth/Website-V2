@@ -41,6 +41,7 @@ import { useMediaQuery } from "react-responsive";
 export default function page() {
   const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
+  console.log("the appointment data is---",appointmentData)
   const setAppointmentData = useAppointmentStore((state) => state.setAppointmentData);
   const userData = useAuthStore((state) => state.userDetails);
   const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
@@ -294,7 +295,7 @@ const [editPatientData,setEditPatientData]=useState(null)
                           appointment: true,
                         });
                       }}
-                      className="rounded-[20px] px-7 py-2 text-sm border-[1px] border-primary  text-primary font-medium  "
+                      className="rounded-[20px] m-2 px-7 py-2 text-sm border-[1px] border-primary  text-primary font-medium  "
                     >
                       + Add a New Patient
                     </button>
@@ -474,7 +475,7 @@ const [editPatientData,setEditPatientData]=useState(null)
           )}
 
           {/* ----------mobile view button for moving to next processes - based on the statusChange of the processes------------- */}
-          <div className="w-full sm:hidden z-[50] fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-t-[2px] border-red-700 2xl:border-[#DADADA] bg-white pt-5 pb-8">
+          <div className="w-full sm:hidden z-[50] fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-[#DADADA] bg-white pt-5 pb-8">
   {/* {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
   {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus","patientToggle")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus","doctorsToggle")}     />  }
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus","paymentToggle")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus","patientToggle")}    />  }

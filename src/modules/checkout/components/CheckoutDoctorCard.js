@@ -48,8 +48,7 @@ export default function CheckoutDoctorCard({doctorInfo}) {
             .join(" / ")}{" "}
         </p>
         <p className=" text-[11px] asm:text-xs msm:text-[13px] sm:text-sm ">
-          Surgical Oncologist | Advanced Laparoscopic Surgeon |
-          Nodules | Stomach Disorders Specialist ------
+       {doctorInfo?.specialty_treatment ?? ''}
         </p>
       </div>
     </div>

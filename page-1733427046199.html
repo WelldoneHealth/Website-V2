@@ -1,0 +1,1163 @@
+
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+   <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <meta name="description" content="AI-generated website">
+      <meta name="theme-color" content="#ffffff">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="robots" content="index, follow">
+      
+      <!-- Performance optimization: Preload critical resources -->
+      <link rel="preload" href="https://cdn.tailwindcss.com" as="script">
+      <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" as="style">
+      
+      <!-- Core CSS -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <script>
+        tailwind.config = {
+          theme: {
+            extend: {
+              colors: {
+                primary: {
+                  50: '#f0f9ff',
+                  100: '#e0f2fe',
+                  200: '#bae6fd',
+                  300: '#7dd3fc',
+                  400: '#38bdf8',
+                  500: '#0ea5e9',
+                  600: '#0284c7',
+                  700: '#0369a1',
+                  800: '#075985',
+                  900: '#0c4a6e',
+                  950: '#082f49',
+                },
+                secondary: {
+                  50: '#f0fdf4',
+                  100: '#dcfce7',
+                  200: '#bbf7d0',
+                  300: '#86efac',
+                  400: '#4ade80',
+                  500: '#22c55e',
+                  600: '#16a34a',
+                  700: '#15803d',
+                  800: '#166534',
+                  900: '#14532d',
+                  950: '#052e16',
+                },
+                accent: {
+                  50: '#faf5ff',
+                  100: '#f3e8ff',
+                  200: '#e9d5ff',
+                  300: '#d8b4fe',
+                  400: '#c084fc',
+                  500: '#a855f7',
+                  600: '#9333ea',
+                  700: '#7e22ce',
+                  800: '#6b21a8',
+                  900: '#581c87',
+                  950: '#3b0764',
+                },
+              },
+              fontFamily: {
+                sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'sans-serif'],
+                heading: ['Montserrat', 'Inter', 'system-ui', 'sans-serif'],
+              },
+              spacing: {
+                '18': '4.5rem',
+                '22': '5.5rem',
+                '30': '7.5rem',
+              },
+              maxWidth: {
+                '8xl': '88rem',
+                '9xl': '96rem',
+              },
+              animation: {
+                'fade-in': 'fadeIn 0.5s ease-in',
+                'fade-out': 'fadeOut 0.5s ease-out',
+                'slide-up': 'slideUp 0.5s ease-out',
+                'slide-down': 'slideDown 0.5s ease-out',
+                'slide-left': 'slideLeft 0.5s ease-out',
+                'slide-right': 'slideRight 0.5s ease-out',
+                'scale-in': 'scaleIn 0.5s ease-out',
+                'scale-out': 'scaleOut 0.5s ease-out',
+                'spin-slow': 'spin 3s linear infinite',
+                'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                'bounce-slow': 'bounce 3s infinite',
+                'float': 'float 3s ease-in-out infinite',
+              },
+              keyframes: {
+                fadeIn: {
+                  '0%': { opacity: '0' },
+                  '100%': { opacity: '1' },
+                },
+                fadeOut: {
+                  '0%': { opacity: '1' },
+                  '100%': { opacity: '0' },
+                },
+                slideUp: {
+                  '0%': { transform: 'translateY(20px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                slideDown: {
+                  '0%': { transform: 'translateY(-20px)', opacity: '0' },
+                  '100%': { transform: 'translateY(0)', opacity: '1' },
+                },
+                slideLeft: {
+                  '0%': { transform: 'translateX(20px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                slideRight: {
+                  '0%': { transform: 'translateX(-20px)', opacity: '0' },
+                  '100%': { transform: 'translateX(0)', opacity: '1' },
+                },
+                scaleIn: {
+                  '0%': { transform: 'scale(0.9)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                scaleOut: {
+                  '0%': { transform: 'scale(1.1)', opacity: '0' },
+                  '100%': { transform: 'scale(1)', opacity: '1' },
+                },
+                float: {
+                  '0%, 100%': { transform: 'translateY(0)' },
+                  '50%': { transform: 'translateY(-10px)' },
+                },
+              },
+              aspectRatio: {
+                'portrait': '3/4',
+                'landscape': '4/3',
+                'ultrawide': '21/9',
+              },
+            },
+          },
+          variants: {
+            extend: {
+              opacity: ['disabled'],
+              cursor: ['disabled'],
+              backgroundColor: ['active', 'disabled'],
+              textColor: ['active', 'disabled'],
+            },
+          },
+        }
+      </script>
+
+      <!-- Utilities and Components -->
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/alpinejs/3.13.3/cdn.min.js"></script>
+      <script defer src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.45.1/apexcharts.min.js"></script>
+      
+      <!-- Optimized Font Loading -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+      
+      <!-- Icons -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" 
+            integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+      <!-- Base Styles -->
+      <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+          width: 0px;
+          height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+          background: #888;
+          border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+          background: #666;
+        }
+
+        /* Remove tap highlight on mobile */
+        * {
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Improve text rendering */
+        body {
+          text-rendering: optimizeLegibility;
+          -webkit-font-smoothing: antialiased;
+          -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Focus outline styles */
+        :focus-visible {
+          outline: 2px solid currentColor;
+          outline-offset: 2px;
+        }
+
+        /* Print styles */
+        @media print {
+          .no-print {
+            display: none !important;
+          }
+          
+          a[href]:after {
+            content: " (" attr(href) ")";
+          }
+        }
+      </style>
+
+      <!-- Enhanced Image Handler -->
+      <script>
+        document.addEventListener('DOMContentLoaded', () => {
+          const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                const img = entry.target;
+                if (img.dataset.src) {
+                  const tempImage = new Image();
+                  tempImage.onload = () => {
+                    img.src = img.dataset.src;
+                    img.classList.remove('opacity-0');
+                    img.classList.add('opacity-100');
+                  };
+                  tempImage.src = img.dataset.src;
+                  img.removeAttribute('data-src');
+                  observer.unobserve(img);
+                }
+              }
+            });
+          }, {
+            rootMargin: '50px 0px',
+            threshold: 0.01
+          });
+
+          const loadImage = (img) => {
+            if ('loading' in HTMLImageElement.prototype) {
+              img.loading = 'lazy';
+            }
+            
+            img.classList.add('transition-opacity', 'duration-300', 'opacity-0');
+            
+            img.onerror = () => {
+              const width = img.getAttribute('width') || img.clientWidth || 300;
+              const height = img.getAttribute('height') || img.clientHeight || 200;
+              img.src = `https://placehold.co/${width}x${height}/DEDEDE/555555?text=Image+Unavailable`;
+              img.alt = 'Image unavailable';
+              img.classList.remove('opacity-0');
+              img.classList.add('opacity-100', 'error-image');
+            };
+
+            if (img.dataset.src) {
+              imageObserver.observe(img);
+            } else {
+              img.classList.remove('opacity-0');
+              img.classList.add('opacity-100');
+            }
+          };
+
+          document.querySelectorAll('img[data-src], img:not([data-src])').forEach(loadImage);
+
+          // Watch for dynamically added images
+          new MutationObserver((mutations) => {
+            mutations.forEach(mutation => {
+              mutation.addedNodes.forEach(node => {
+                if (node.nodeType === 1) {
+                  if (node.tagName === 'IMG') {
+                    loadImage(node);
+                  }
+                  node.querySelectorAll('img').forEach(loadImage);
+                }
+              });
+            });
+          }).observe(document.body, {
+            childList: true,
+            subtree: true
+          });
+        });
+
+        // Performance monitoring
+        if ('performance' in window && 'PerformanceObserver' in window) {
+          // Create performance observer
+          const observer = new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            entries.forEach((entry) => {
+              if (entry.entryType === 'largest-contentful-paint') {
+                console.log(`LCP: ${entry.startTime}ms`);
+              }
+              if (entry.entryType === 'first-input') {
+                console.log(`FID: ${entry.processingStart - entry.startTime}ms`);
+              }
+              if (entry.entryType === 'layout-shift') {
+                console.log(`CLS: ${entry.value}`);
+              }
+            });
+          });
+
+          // Observe performance metrics
+          observer.observe({ entryTypes: ['largest-contentful-paint', 'first-input', 'layout-shift'] });
+
+          // Log basic performance metrics
+          window.addEventListener('load', () => {
+            const timing = performance.getEntriesByType('navigation')[0];
+            console.log({
+              'DNS Lookup': timing.domainLookupEnd - timing.domainLookupStart,
+              'TCP Connection': timing.connectEnd - timing.connectStart,
+              'DOM Content Loaded': timing.domContentLoadedEventEnd - timing.navigationStart,
+              'Page Load': timing.loadEventEnd - timing.navigationStart
+            });
+          });
+        }
+
+        // Handle offline/online status
+        window.addEventListener('online', () => {
+          document.body.classList.remove('offline');
+          console.log('Connection restored');
+        });
+        
+        window.addEventListener('offline', () => {
+          document.body.classList.add('offline');
+          console.log('Connection lost');
+        });
+      </script>
+   </head>
+   <body class="antialiased text-gray-800 min-h-screen flex flex-col">
+      <!-- Skip to main content link for accessibility -->
+      <a href="#main-content" 
+         class="sr-only focus:not-sr-only focus:absolute focus:top-0 focus:left-0 focus:z-50 focus:p-4 focus:bg-white focus:text-black">
+         Skip to main content
+      </a>
+
+      <!-- Header -->
+      <header class="relative z-50 bg-white dark:bg-gray-900">
+        <!-- Header content goes here -->
+      </header>
+
+      <!-- Main content area -->
+      <main id="main-content" class="flex-1 relative">
+        <!-- Content will be injected here -->
+      </main>
+
+      <!-- Offline notification -->
+      <div class="fixed bottom-4 right-4 transform translate-y-full opacity-0 transition-all duration-300 offline:translate-y-0 offline:opacity-100">
+        <div class="bg-red-500 text-white px-4 py-2 rounded-lg shadow-lg">
+          You are currently offline
+        </div>
+      </div>
+   </body>
+</html><element id="a660ac06-8e72-4cdd-93b7-cfce07a6ebb3" data-section-id="a660ac06-8e72-4cdd-93b7-cfce07a6ebb3">
+
+<htmlCode>
+<div id="root">
+  <section id="navbar_hero" class="relative bg-white">
+    <!-- Navigation -->
+    <nav class="relative z-50 border-b">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <img src="https://placehold.co/120x40/333333/FFFFFF.png" alt="Welldone Health Logo" class="h-10 w-auto">
+          </div>
+
+          <!-- Desktop Navigation -->
+          <div class="hidden md:flex items-center space-x-8">
+            <a href="#services" class="text-gray-600 hover:text-primary-600 transition-colors">Services</a>
+            <a href="#specialties" class="text-gray-600 hover:text-primary-600 transition-colors">Specialties</a>
+            <a href="#doctors" class="text-gray-600 hover:text-primary-600 transition-colors">Doctors</a>
+            <a href="#contact" class="text-gray-600 hover:text-primary-600 transition-colors">Contact</a>
+            <button class="bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+              Login
+            </button>
+          </div>
+
+          <!-- Mobile menu button -->
+          <div class="md:hidden">
+            <button type="button" class="p-2 rounded-md text-gray-600" aria-controls="mobile-menu" aria-expanded="false">
+              <span class="sr-only">Open main menu</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile menu -->
+      <div class="md:hidden hidden" id="mobile-menu">
+        <div class="px-2 pt-2 pb-3 space-y-1 bg-white border-b">
+          <a href="#services" class="block px-3 py-2 text-gray-600">Services</a>
+          <a href="#specialties" class="block px-3 py-2 text-gray-600">Specialties</a>
+          <a href="#doctors" class="block px-3 py-2 text-gray-600">Doctors</a>
+          <a href="#contact" class="block px-3 py-2 text-gray-600">Contact</a>
+          <button class="w-full text-left px-3 py-2 text-primary-600">Login</button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20 lg:pt-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Left Column -->
+        <div class="space-y-8">
+          <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 leading-tight">
+            Find Doctors and Clinics Near You Instantly!
+          </h1>
+          <p class="text-lg text-gray-600">
+            Book appointments, manage your healthcare history, and take control of your health journey—all in one place.
+          </p>
+          
+          <!-- City Search Form -->
+          <form class="flex flex-col sm:flex-row gap-4">
+            <select class="flex-grow px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200">
+              <option value="">Select City</option>
+            </select>
+            <button class="bg-primary-600 text-white px-8 py-3 rounded-lg hover:bg-primary-700 transition-colors">
+              Search Now
+            </button>
+          </form>
+          
+          <!-- App Store Buttons -->
+          <div class="flex flex-wrap gap-4">
+            <img src="https://welldonehealth.in/Images/googlePlay.png" alt="Get it on Google Play" class="h-12 w-auto cursor-pointer">
+            <img src="https://welldonehealth.in/Images/appleButton.png" alt="Download on App Store" class="h-12 w-auto cursor-pointer">
+          </div>
+        </div>
+
+        <!-- Right Column -->
+        <div class="relative">
+          <img src="https://welldonehealth.in/_next/static/media/mobileBanner2.2fd1c98a.png" alt="Welldone Health Mobile App" class="w-full h-auto animate-float">
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="a4a4200f-5e72-404d-8068-25659cc01085" data-section-id="a4a4200f-5e72-404d-8068-25659cc01085">
+
+<htmlCode>
+<div id="root">
+  <section id="services" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Doctor Speciality</p>
+      </div>
+
+      <!-- Services Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Service Card 1 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-user-md text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Dermatology</h3>
+            <p class="text-gray-600">Expert skin care and treatment services</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Card 2 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-brain text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Neurology</h3>
+            <p class="text-gray-600">Comprehensive neurological care</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Card 3 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-tooth text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Dentist</h3>
+            <p class="text-gray-600">Complete dental care solutions</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Card 4 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-baby text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Paediatrics</h3>
+            <p class="text-gray-600">Specialized care for children</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Card 5 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-virus text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">HIV/AIDS</h3>
+            <p class="text-gray-600">Specialized treatment and support</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+
+        <!-- Service Card 6 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6 group">
+          <div class="text-center">
+            <div class="w-16 h-16 bg-primary-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <i class="fas fa-allergies text-2xl text-primary-600"></i>
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Allergy</h3>
+            <p class="text-gray-600">Allergy testing and treatment</p>
+            <button class="mt-4 px-6 py-2 text-primary-600 border border-primary-600 rounded-full hover:bg-primary-600 hover:text-white transition-colors">
+              Learn More
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- View All Button -->
+      <div class="text-center mt-12">
+        <button class="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors inline-flex items-center">
+          View All Specialties
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="fdc1ec4c-fbb6-4cba-87da-32704b6a9b10" data-section-id="fdc1ec4c-fbb6-4cba-87da-32704b6a9b10">
+
+<htmlCode>
+<div id="root">
+  <section id="specialties" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Your Health, One Tap Away!</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+          Book doctor appointments faster and manage your health on the go with our app.
+        </p>
+      </div>
+
+      <!-- Features Grid -->
+      <div class="grid md:grid-cols-3 gap-8 mb-12">
+        <!-- Feature 1 -->
+        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="mb-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-calendar-check text-xl text-primary-600"></i>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Instant Booking</h3>
+          <p class="text-gray-600">Find and book appointments in just a few taps.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="mb-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-clock text-xl text-primary-600"></i>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">24/7 Access</h3>
+          <p class="text-gray-600">Manage appointments anytime, anywhere.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+          <div class="mb-4">
+            <div class="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+              <i class="fas fa-bell text-xl text-primary-600"></i>
+            </div>
+          </div>
+          <h3 class="text-xl font-semibold text-gray-900 mb-2">Reminders & Alerts</h3>
+          <p class="text-gray-600">Get notified about upcoming appointments and health tips.</p>
+        </div>
+      </div>
+
+      <!-- Download Section -->
+      <div class="text-center mt-12">
+        <p class="text-lg font-semibold text-gray-900 mb-6">Download Now for Instant Access</p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <img 
+            src="https://welldonehealth.in/Images/googlePlay.png" 
+            alt="Get it on Google Play" 
+            class="h-14 w-auto cursor-pointer hover:opacity-90 transition-opacity"
+          >
+          <img 
+            src="https://welldonehealth.in/Images/appleButton.png" 
+            alt="Download on App Store" 
+            class="h-14 w-auto cursor-pointer hover:opacity-90 transition-opacity"
+          >
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="8d52ff83-cba7-4ae0-8169-9c138375979c" data-section-id="8d52ff83-cba7-4ae0-8169-9c138375979c">
+
+<htmlCode>
+<div id="root">
+  <section id="doctors" class="py-20 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Doctors associated with us</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Experienced healthcare professionals you can trust</p>
+      </div>
+
+      <!-- Doctor Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <!-- Doctor Card Template (Repeated 6 times) -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+          <div class="text-center">
+            <div class="w-32 h-32 mx-auto mb-4">
+              <img src="https://placehold.co/200x200/primary-100/primary-600?text=Dr" alt="Doctor" class="w-full h-full rounded-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Dr. Sarah Wilson</h3>
+            <p class="text-primary-600 font-medium mb-2">Dermatologist</p>
+            <div class="flex justify-center items-center mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="ml-1 text-gray-600">4.9 (120 reviews)</span>
+            </div>
+            <button class="w-full bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+              Book Appointment
+            </button>
+          </div>
+        </div>
+
+        <!-- Repeat for other doctors -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+          <div class="text-center">
+            <div class="w-32 h-32 mx-auto mb-4">
+              <img src="https://placehold.co/200x200/primary-100/primary-600?text=Dr" alt="Doctor" class="w-full h-full rounded-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Dr. John Smith</h3>
+            <p class="text-primary-600 font-medium mb-2">Neurologist</p>
+            <div class="flex justify-center items-center mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="ml-1 text-gray-600">4.8 (95 reviews)</span>
+            </div>
+            <button class="w-full bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+              Book Appointment
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-6">
+          <div class="text-center">
+            <div class="w-32 h-32 mx-auto mb-4">
+              <img src="https://placehold.co/200x200/primary-100/primary-600?text=Dr" alt="Doctor" class="w-full h-full rounded-full object-cover">
+            </div>
+            <h3 class="text-xl font-bold text-gray-900">Dr. Emily Chen</h3>
+            <p class="text-primary-600 font-medium mb-2">Dentist</p>
+            <div class="flex justify-center items-center mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <span class="ml-1 text-gray-600">4.9 (150 reviews)</span>
+            </div>
+            <button class="w-full bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
+              Book Appointment
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- View All Button -->
+      <div class="text-center">
+        <button class="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors inline-flex items-center">
+          View All Doctors
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div class="text-center mt-8 text-gray-600">
+        <span>Loading...</span>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="c6019daf-fab0-4461-8d00-8dff61b2e463" data-section-id="c6019daf-fab0-4461-8d00-8dff61b2e463">
+
+<htmlCode>
+<div id="root">
+  <section id="appointment" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Book Your Appointment</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Schedule your visit with our experienced healthcare professionals</p>
+      </div>
+
+      <!-- Appointment Form -->
+      <div class="max-w-3xl mx-auto">
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <form class="space-y-6">
+            <!-- Personal Information -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="fullName" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                <input type="text" id="fullName" name="fullName" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+              </div>
+              <div>
+                <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+              </div>
+            </div>
+
+            <!-- Appointment Details -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="specialty" class="block text-sm font-medium text-gray-700 mb-1">Select Specialty</label>
+                <select id="specialty" name="specialty" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+                  <option value="">Choose a specialty</option>
+                  <option value="dermatology">Dermatology</option>
+                  <option value="neurology">Neurology</option>
+                  <option value="dentist">Dentist</option>
+                  <option value="paediatrics">Paediatrics</option>
+                  <option value="hiv">HIV/AIDS</option>
+                  <option value="allergy">Allergy</option>
+                </select>
+              </div>
+              <div>
+                <label for="doctor" class="block text-sm font-medium text-gray-700 mb-1">Select Doctor</label>
+                <select id="doctor" name="doctor" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+                  <option value="">Choose a doctor</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label for="date" class="block text-sm font-medium text-gray-700 mb-1">Preferred Date</label>
+                <input type="date" id="date" name="date" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+              </div>
+              <div>
+                <label for="time" class="block text-sm font-medium text-gray-700 mb-1">Preferred Time</label>
+                <select id="time" name="time" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+                  <option value="">Select time slot</option>
+                  <option value="morning">Morning (9 AM - 12 PM)</option>
+                  <option value="afternoon">Afternoon (2 PM - 5 PM)</option>
+                  <option value="evening">Evening (6 PM - 9 PM)</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label for="notes" class="block text-sm font-medium text-gray-700 mb-1">Additional Notes</label>
+              <textarea id="notes" name="notes" rows="3" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200"></textarea>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center">
+              <button type="submit" class="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors flex items-center gap-2">
+                <i class="fas fa-calendar-check"></i>
+                Book Appointment
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Additional Information -->
+        <div class="mt-8 text-center text-sm text-gray-600">
+          <p>Need immediate assistance? Call us at <a href="tel:7757080066" class="text-primary-600 font-medium">775-708-0066</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="16ce92b9-0838-49f1-90aa-66e39c1a6221" data-section-id="16ce92b9-0838-49f1-90aa-66e39c1a6221">
+
+<htmlCode>
+<div id="root">
+  <section id="testimonials" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What Our Patients Say</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Real experiences from our valued patients</p>
+      </div>
+
+      <!-- Testimonials Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8">
+          <div class="flex flex-col h-full">
+            <div class="flex items-center mb-6">
+              <img src="https://placehold.co/100x100/primary-100/primary-600?text=P" alt="Patient" class="w-16 h-16 rounded-full">
+              <div class="ml-4">
+                <h3 class="font-bold text-gray-900">Rajesh Kumar</h3>
+                <p class="text-gray-600 text-sm">Patient</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 flex-grow">"Excellent service! The booking process was seamless, and the doctor was very professional. Highly recommended!"</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8">
+          <div class="flex flex-col h-full">
+            <div class="flex items-center mb-6">
+              <img src="https://placehold.co/100x100/primary-100/primary-600?text=P" alt="Patient" class="w-16 h-16 rounded-full">
+              <div class="ml-4">
+                <h3 class="font-bold text-gray-900">Priya Sharma</h3>
+                <p class="text-gray-600 text-sm">Patient</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star-half-alt text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 flex-grow">"The app made it so easy to find the right specialist. I got an appointment quickly and the reminders were very helpful."</p>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow p-8">
+          <div class="flex flex-col h-full">
+            <div class="flex items-center mb-6">
+              <img src="https://placehold.co/100x100/primary-100/primary-600?text=P" alt="Patient" class="w-16 h-16 rounded-full">
+              <div class="ml-4">
+                <h3 class="font-bold text-gray-900">Amit Patel</h3>
+                <p class="text-gray-600 text-sm">Patient</p>
+              </div>
+            </div>
+            <div class="flex mb-4">
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+              <i class="fas fa-star text-yellow-400"></i>
+            </div>
+            <p class="text-gray-600 flex-grow">"Great experience with the online consultation. The doctor was very patient and understanding. Will definitely use again!"</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trust Indicators -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div>
+          <div class="text-4xl font-bold text-primary-600 mb-2">10k+</div>
+          <p class="text-gray-600">Happy Patients</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-primary-600 mb-2">500+</div>
+          <p class="text-gray-600">Expert Doctors</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-primary-600 mb-2">100+</div>
+          <p class="text-gray-600">Specialties</p>
+        </div>
+        <div>
+          <div class="text-4xl font-bold text-primary-600 mb-2">4.9</div>
+          <p class="text-gray-600">Average Rating</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="2962c82a-4dee-4cfe-8e74-cc4c0620faf8" data-section-id="2962c82a-4dee-4cfe-8e74-cc4c0620faf8">
+
+<htmlCode>
+<div id="root">
+  <section id="facilities" class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Clinic/ Hospitals associated with us</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Access top-quality healthcare facilities in your area</p>
+      </div>
+
+      <!-- Facilities Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Facility Card 1 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+          <div class="aspect-video w-full bg-gray-200">
+            <img src="https://placehold.co/600x400/primary-100/primary-600?text=Hospital" alt="Hospital" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">City General Hospital</h3>
+            <div class="flex items-center mb-4">
+              <i class="fas fa-map-marker-alt text-primary-600 mr-2"></i>
+              <span class="text-gray-600">Central District, Mumbai</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="text-gray-600">4.8 (350 reviews)</span>
+              </div>
+              <button class="text-primary-600 hover:text-primary-700 font-medium">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Facility Card 2 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+          <div class="aspect-video w-full bg-gray-200">
+            <img src="https://placehold.co/600x400/primary-100/primary-600?text=Clinic" alt="Clinic" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">HealthFirst Clinic</h3>
+            <div class="flex items-center mb-4">
+              <i class="fas fa-map-marker-alt text-primary-600 mr-2"></i>
+              <span class="text-gray-600">Andheri West, Mumbai</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="text-gray-600">4.9 (280 reviews)</span>
+              </div>
+              <button class="text-primary-600 hover:text-primary-700 font-medium">View Details</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Facility Card 3 -->
+        <div class="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+          <div class="aspect-video w-full bg-gray-200">
+            <img src="https://placehold.co/600x400/primary-100/primary-600?text=Medical+Center" alt="Medical Center" class="w-full h-full object-cover">
+          </div>
+          <div class="p-6">
+            <h3 class="text-xl font-bold text-gray-900 mb-2">Care Medical Center</h3>
+            <div class="flex items-center mb-4">
+              <i class="fas fa-map-marker-alt text-primary-600 mr-2"></i>
+              <span class="text-gray-600">Bandra East, Mumbai</span>
+            </div>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <i class="fas fa-star text-yellow-400 mr-1"></i>
+                <span class="text-gray-600">4.7 (420 reviews)</span>
+              </div>
+              <button class="text-primary-600 hover:text-primary-700 font-medium">View Details</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- View All Button -->
+      <div class="text-center mt-12">
+        <button class="bg-primary-600 text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors inline-flex items-center">
+          View All Facilities
+          <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="a9270bac-9305-4332-aac4-96ad9a42bc56" data-section-id="a9270bac-9305-4332-aac4-96ad9a42bc56">
+
+<htmlCode>
+<div id="root">
+  <section id="contact" class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Contact Us</h2>
+        <p class="text-lg text-gray-600 max-w-2xl mx-auto">Get in touch with our support team for any queries</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-12">
+        <!-- Contact Form -->
+        <div class="bg-white rounded-2xl shadow-lg p-8">
+          <form class="space-y-6">
+            <div>
+              <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+              <input type="text" id="name" name="name" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+            </div>
+            
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email Address</label>
+              <input type="email" id="email" name="email" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+            </div>
+            
+            <div>
+              <label for="subject" class="block text-sm font-medium text-gray-700 mb-1">Subject</label>
+              <input type="text" id="subject" name="subject" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required>
+            </div>
+            
+            <div>
+              <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+              <textarea id="message" name="message" rows="4" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:border-primary-500 focus:ring-2 focus:ring-primary-200" required></textarea>
+            </div>
+
+            <button type="submit" class="w-full bg-primary-600 text-white px-6 py-3 rounded-full hover:bg-primary-700 transition-colors flex items-center justify-center gap-2">
+              <i class="fas fa-paper-plane"></i>
+              Send Message
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="space-y-8">
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-map-marker-alt text-xl text-primary-600"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Address</h3>
+                <p class="text-gray-600">G.NO.9/1, PRASAD NAGAR, BHADANE TAL.SAKRI, Dhule, Maharashtra, India, 424304</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-phone text-xl text-primary-600"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Phone</h3>
+                <a href="tel:7757080066" class="text-primary-600 hover:text-primary-700">775-708-0066</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-envelope text-xl text-primary-600"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Email</h3>
+                <a href="mailto:welldonehealth499@gmail.com" class="text-primary-600 hover:text-primary-700">welldonehealth499@gmail.com</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-6 shadow-sm">
+            <div class="flex items-center gap-4">
+              <div class="w-12 h-12 bg-primary-100 rounded-full flex items-center justify-center">
+                <i class="fas fa-clock text-xl text-primary-600"></i>
+              </div>
+              <div>
+                <h3 class="font-semibold text-gray-900">Working Hours</h3>
+                <p class="text-gray-600">Monday - Saturday: 9:00 AM - 8:00 PM</p>
+                <p class="text-gray-600">Sunday: Closed</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+</htmlCode></element><element id="7159aefb-7896-4337-ace7-1cb6dc89b9d6" data-section-id="7159aefb-7896-4337-ace7-1cb6dc89b9d6">
+
+<htmlCode>
+<div id="root">
+  <footer id="footer" class="bg-white border-t">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- Footer Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+        <!-- Company Info -->
+        <div class="space-y-4">
+          <img src="https://placehold.co/120x40/333333/FFFFFF.png" alt="Welldone Health Logo" class="h-10 w-auto">
+          <p class="text-gray-600">Your trusted partner in healthcare. Making quality healthcare accessible to everyone through innovative digital solutions.</p>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
+          <ul class="space-y-2">
+            <li><a href="#privacy" class="text-gray-600 hover:text-primary-600 transition-colors">Privacy</a></li>
+            <li><a href="#shipping" class="text-gray-600 hover:text-primary-600 transition-colors">Shipping & Return</a></li>
+            <li><a href="#refund" class="text-gray-600 hover:text-primary-600 transition-colors">Refund & Cancellation</a></li>
+            <li><a href="#product" class="text-gray-600 hover:text-primary-600 transition-colors">Product & Checkout</a></li>
+          </ul>
+        </div>
+
+        <!-- Support -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Support</h3>
+          <ul class="space-y-2">
+            <li><a href="#about" class="text-gray-600 hover:text-primary-600 transition-colors">About</a></li>
+            <li><a href="#terms" class="text-gray-600 hover:text-primary-600 transition-colors">Terms & Conditions</a></li>
+            <li><a href="#contact" class="text-gray-600 hover:text-primary-600 transition-colors">Contact Us</a></li>
+          </ul>
+        </div>
+
+        <!-- Download App -->
+        <div>
+          <h3 class="text-lg font-semibold text-gray-900 mb-4">Download App</h3>
+          <div class="space-y-3">
+            <img src="https://welldonehealth.in/Images/googlePlay.png" alt="Get it on Google Play" class="h-10 w-auto cursor-pointer">
+            <img src="https://welldonehealth.in/Images/appleButton.png" alt="Download on App Store" class="h-10 w-auto cursor-pointer">
+          </div>
+        </div>
+      </div>
+
+      <!-- Company Details -->
+      <div class="border-t pt-8">
+        <div class="text-sm text-gray-600 space-y-4">
+          <p class="font-medium">Welldone Healthcare Private Limited</p>
+          <p>CIN: U85100MH2021PTC354141</p>
+          <p>G.NO.9/1, PRASAD NAGAR, BHADANE TAL.SAKRI, Dhule, Maharashtra, India, 424304</p>
+          <div class="flex flex-wrap gap-4">
+            <a href="tel:7757080066" class="hover:text-primary-600">7757080066</a>
+            <a href="mailto:welldonehealth499@gmail.com" class="hover:text-primary-600">welldonehealth499@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="border-t mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center">
+        <p class="text-gray-600 text-sm">&copy; 2024 Welldone Health. All rights reserved.</p>
+        <div class="flex gap-4 mt-4 sm:mt-0">
+          <a href="#privacy" class="text-sm text-gray-600 hover:text-primary-600">Privacy</a>
+          <a href="#shipping" class="text-sm text-gray-600 hover:text-primary-600">Shipping & Return</a>
+          <a href="#refund" class="text-sm text-gray-600 hover:text-primary-600">Refund & Cancellation</a>
+          <a href="#product" class="text-sm text-gray-600 hover:text-primary-600">Product & Checkout</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+</htmlCode></element>
+            <div id="page_complete">
+            <script>
+                console.log('Page generation complete');
+                // Notify any listening systems
+                document.dispatchEvent(new CustomEvent('pageComplete', {
+                  detail: {
+                    projectId: 'ab426c35-8a8c-4446-9064-530e76dcc0dc',
+                    timestamp: new Date().toISOString()
+                  }
+                }));
+            </script>
+            </body>
+            </html>
+          

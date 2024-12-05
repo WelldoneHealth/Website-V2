@@ -10,7 +10,7 @@ export default function SelectPatientComp({patientData,isSelected,onChangeFunc,o
     <div
                           style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
                          
-                          className="w-full max-w-[900px] min-h-[100px] p-2 msm:p-4 flex justify-start patientDatas-start gap-x-2 sm:gap-4 border-[1px] border-primary rounded-[10px]"
+                          className="w-full max-w-[900px] max-h-max p-2 msm:p-4 flex justify-start patientDatas-start gap-x-2 sm:gap-4 border-[1px] border-primary rounded-[10px]"
                         >
                           {/* ------checkout------------ */}
                           <input
@@ -22,7 +22,7 @@ export default function SelectPatientComp({patientData,isSelected,onChangeFunc,o
                             checked={isSelected}
                           />
                           <div className="w-full space-y-2 ">
-                            <div className="w-full flex gap-x-2">
+                            <div className="w-full flex items-center gap-x-2">
                               <div className="bg-[#D9D9D9] size-[45px]  asm:size-[50px] flex justify-center items-center patientDatas-center rounded-full font-medium  ">
                                 {patientData?.first_name[0]?.toUpperCase()}{patientData?.last_name[0]?.toUpperCase()}
                               </div>
