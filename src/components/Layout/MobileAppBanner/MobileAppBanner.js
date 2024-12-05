@@ -1,86 +1,109 @@
-import {
-  APPLE_STORE,
-  GOOGLE_PLAY,
-  MOBILE_BANNER,
-} from "@/utils/ImageConstants";
-
 import React from "react";
 import mobileBanner2 from "@/asset/Images/mobileBanner2.png";
+import { APPLE_STORE, GOOGLE_PLAY } from "@/utils/ImageConstants";
 import Link from "next/link";
 
 export default function MobileAppBanner() {
-  const fetauresInfo = [
+  const featuresInfo = [
     {
-      boldText: "Instant Booking:",
-      text: "Find and book appointments in just a few taps.",
+      boldText: "Seamless Booking:",
+      text: "Schedule appointments with just a few clicks.",
     },
     {
-      boldText: "24/7 Access:",
-      text: "Manage appointments anytime, anywhere.",
+      boldText: "Personalized Dashboard:",
+      text: "Keep track of your health records and appointments.",
     },
     {
-      boldText: "Reminders & Alerts:",
-      text: "Get notified about upcoming appointments and health tips.",
+      boldText: "Exclusive Updates:",
+      text: "Be the first to know about special offers and new services.",
     },
   ];
 
   return (
-    <div className="w-full max-w-[1500px] my-7 p-2 sm:py-9 sm:px-6 lg:px-0 flex justify-center items-start xl:items-end  lg:flexBetween flex-col  lg:flex-row ">
-      <div className="w-full lg:w-[62%] order-2 lg:order-1">
-        <h3 className="text-[19px] ssm:text-[22px] asm:text-[25px]  sm:text-[34px] 2xl:text-[38px] font-medium leading-tight">
-          Your Health, One Tap Away!
-        </h3>
-        <p className=" my-5 md:my-5 text-sm ssm:text-base sm:text-xl w-[90%] lg:w-[85%] lg:text-[19px] font-medium  leading-tight">
-          Book doctor appointments faster and manage your health on the go with
-          our app.
-        </p>
-        <div className="my-6 md:my-10 lg:my-10 space-y-2 ">
-          <p className=" font-semibold asm:text-lg msm:text-xl md:text-[22px] 2xl:text-2xl ">
-            Download Now for Instant Access
+    <div className="bg-gray-50 py-10">
+      <div className="max-w-7xl mx-auto sm:px-2 lg:px-8 flex flex-col-reverse lg:flex-row items-center lg:items-end">
+        {/* Left Content */}
+        <div className="lg:w-1/2 text-center lg:text-left">
+          <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 leading-snug mb-4">
+            Download Our App for a Smarter Healthcare Experience!
+          </h3>
+          <p className="text-base sm:text-lg text-gray-600 leading-relaxed mb-6">
+            Join thousands of users who trust our app to manage their health
+            efficiently. Stay connected, stay healthy!
           </p>
 
-          {fetauresInfo.map((item, index) => (
-            <p key={index} className="max-ssm:text-sm sm:text-lg font-normal">
-              <span className="font-semibold">{item.boldText} </span>
-              {item.text}{" "}
+          <div className="mb-6">
+            <p className="text-base sm:text-lg font-semibold text-gray-900 mb-3">
+              Why Choose Our App?
             </p>
-          ))}
-        </div>
+            <ul className="space-y-1">
+              {featuresInfo.map((item, index) => (
+                <li key={index} className="text-gray-600 text-sm sm:text-base">
+                  <span className="font-semibold text-gray-900">
+                    {item.boldText}
+                  </span>{" "}
+                  {item.text}
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <div className=" flex gap-x-3 msm:gap-x-5 mt-2 ">
-          <button className="relative" type="button">
+          {/* Download Buttons */}
+          {/* <div className="flex justify-center lg:justify-start gap-4 mb-6">
             <Link
               href="https://play.google.com/store/apps/details?id=com.welldone.welldone_app&hl=en_IN"
               passHref
               target="_blank"
-              className="block w-[150px] sm:w-[180px] lg:h-[60px] "
             >
-              <img className="w-full h-full" src={GOOGLE_PLAY} />{" "}
+              <img
+                src={GOOGLE_PLAY}
+                alt="Download on Google Play"
+                className="w-36 sm:w-40 hover:scale-105 transition-transform"
+              />
             </Link>
-          </button>
-
-          <button className=" relative" type="button">
             <Link
               href="https://play.google.com/store/apps/details?id=com.welldone.welldone_app&hl=en_IN"
               passHref
               target="_blank"
-              className="block w-[150px] sm:w-[180px] lg:h-[60px]"
             >
-              <img className="w-full h-full" src={APPLE_STORE} />{" "}
+              <img
+                src={APPLE_STORE}
+                alt="Download on the App Store"
+                className="w-36 sm:w-40 hover:scale-105 transition-transform"
+              />
             </Link>
-          </button>
+          </div> */}
+
+          {/* Newsletter Subscription */}
+          <div className="bg-gray-100 p-4 rounded-lg shadow-sm">
+            <p className="text-base font-medium text-gray-900 mb-3">
+              Subscribe to Our Newsletter
+            </p>
+            <form className="flex flex-col sm:flex-row items-center gap-4">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-grow p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
+              />
+              <button
+                type="submit"
+                className="bg-[#005499] text-white px-4 py-2 rounded-md hover:bg-primary-700 transition-colors"
+              >
+                Subscribe
+              </button>
+            </form>
+          </div>
+        </div>
+
+        {/* Right Image */}
+        <div className="lg:w-1/2 max-w-lg mx-auto lg:ml-auto mb-6 lg:mb-0">
+          <img
+            src={mobileBanner2?.src}
+            alt="Mobile App Banner"
+            className="w-full object-contain"
+          />
         </div>
       </div>
-      <div className=" w-[90%]  mx-auto msm:w-[60%] lg:w-[40%] order-1 lg:order-2 max-w-[600px]   ">
-        <img
-          className="w-full -mb-3 msm:-mb-6 lg:-mb-32 xl:-mb-14"
-          src={mobileBanner2?.src}
-        />
-      </div>
-
-      {/* <div className=" w-[90%]  mx-auto msm:w-[60%] lg:w-[40%] order-1 lg:order-2 max-w-[600px]   ">
-        <img className="w-full -mb-3 msm:-mb-6 lg:-mb-32 xl:-mb-14" src={mobileBanner2?.src} />
-      </div> */}
     </div>
   );
 }

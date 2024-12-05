@@ -6,6 +6,7 @@ import insta from '@/asset/Icons/insta.svg';
 import linkedin from '@/asset/Icons/linkedin.svg';
 import twitter from '@/asset/Icons/twitter.svg';
 import Link from 'next/link';
+import { APPLE_STORE, GOOGLE_PLAY } from "@/utils/ImageConstants";
 
 const policyData = [
   { linkTo: '/privacy-policy', text: 'Privacy' },
@@ -23,7 +24,7 @@ const contactUsData = [
   { linkTo: '/', text: 'Welldone Healthcare Private Limited' },
   { linkTo: '/', text: 'CIN: U85100MH2021PTC354141' },
   { linkTo: '/', text: 'G.NO.9/1, PRASAD NAGAR, BHADANE TAL.SAKRI, Dhule, Dhule, Maharashtra, India, 424304 7757080066' },
-  { linkTo: '/', text: 'welldonehealth499@gmail.com' },
+  { linkTo: '/', text: 'info@welldonehealth.in' },
 ];
 
 const socialLinks = [
@@ -75,14 +76,14 @@ export default function Footer() {
               <a href="#" className="block pr-2">
                 <img
                   className="h-10"
-                  src="https://placehold.co/120x40/333333/FFFFFF.png?text=App+Store"
+                  src={APPLE_STORE}
                   alt="Download on App Store"
                 />
               </a>
               <a href="#" className="block">
                 <img
                   className="h-10"
-                  src="https://placehold.co/120x40/333333/FFFFFF.png?text=Google+Play"
+                  src={GOOGLE_PLAY}
                   alt="Get it on Google Play"
                 />
               </a>
