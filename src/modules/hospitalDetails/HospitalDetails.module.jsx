@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import dragon from "@/asset/Images/dragon.jpg";
+import defaultClinic from "@/asset/Images/defaultClinic.png";
+import hospitalDefaultBanner from "@/asset/Images/hospitalDefaultBanner.png";
 import hospitalLogo from "@/asset/Icons/eachHospitalLogo.svg";
 import OfficeSafetyPrecautions from "@/Utilities/smallComponents/OfficeSafetyPrecautions";
 import Banner from "./components/Banner";
@@ -50,8 +52,8 @@ const HospitalDetailsModule = ({ slug }) => {
   return (
     <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0 ">
       <Banner
-        bannerImage={hospitalInfo?.page_setup[0]?.banner_image ?? dragon?.src}
-        logoImage={hospitalInfo?.page_setup[0]?.page_logo ?? hospitalLogo?.src}
+        bannerImage={hospitalInfo?.page_setup[0]?.banner_image ?? hospitalDefaultBanner?.src}
+        logoImage={hospitalInfo?.page_setup[0]?.page_logo ?? defaultClinic?.src}
       />
       <div className="w-full flex flex-col lg:flex-row gap-x-7 px-2 lg:px-0">
         <div className={`w-full py-1 lg:w-[68%]`}>
@@ -70,19 +72,19 @@ const HospitalDetailsModule = ({ slug }) => {
           {hospitalInfo?.doctors?.length > 0 && (
             <DoctorsList doctors={hospitalInfo?.doctors ?? []} branch={slug} />
           )}
-          <TimingSection timings={hospitalInfo?.timing} />
-          <ServicesAvailable services={convenienceServices} />
-          <OtherServices
+        {hospitalInfo?.timing?.length > 0 &&  <TimingSection timings={hospitalInfo?.timing} />}
+       {convenienceServices?.length > 0 &&   <ServicesAvailable services={convenienceServices} /> }
+         {hospitalInfo?.type_of_establishment[0]?.others?.split(",")?.length > 0 && <OtherServices
             services={
               hospitalInfo?.type_of_establishment[0]
                 ? hospitalInfo?.type_of_establishment[0]?.others?.split(",")
                 : []
             }
-          />
+          />}
         </div>
         <div className="lg:my-7 flex-1 w-full lg:w-[90%]">
-          <OfficeSafetyPrecautions />
-          <StatementSection />
+          {/* <OfficeSafetyPrecautions />
+          <StatementSection /> */}
         </div>
       </div>
     </div>

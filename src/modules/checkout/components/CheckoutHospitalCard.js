@@ -44,7 +44,7 @@ export default function CheckoutHospitalCard({hospitalInfo}) {
             onClick={() => {
               router.back();
             }}
-            className="text-primary max-sm:hidden"
+            className="text-primary max-sm:hidden  text-base font-medium"
           >
             Change
           </button>

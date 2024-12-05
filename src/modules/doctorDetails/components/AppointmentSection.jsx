@@ -180,7 +180,7 @@ const AppointmentSection = ({
           <div className="mt-5 max-lg:fixed max-lg:left-1/2 transform max-lg:-translate-x-1/2 max-lg:bottom-0 py-3 flex max-lg:bg-gray-300 flex-col items-center  w-full border-t-[1px] lg:border-[#919196] space-y-2">
             <button
               type="button"
-              disabled={!selectedBranch && equeueDataList?.length < 1 }
+              disabled={!selectedBranch || equeueDataList?.length < 1 }
               className={`w-[95%] max-lg:hidden py-3 text-center text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A]  "}  font-semibold rounded-[10px]`}
               onClick={() => {
                 router.push(`/checkout`);

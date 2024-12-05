@@ -28,12 +28,11 @@ export default function CheckoutDoctorCard2({doctorData}) {
             .join(" / ")}
         </p>
         <p className="text-sm md:text-[13px] max-md:hidden leading-tight">
-          {" "}
-          Surgical Oncologist | Advanced Laparoscopic Surgeon |
-          Nodules{" "}
+        {doctorData?.specialty_treatment ?? ''}
+
         </p>
         <p className="text-xs sm:text-sm md:hidden">
-          Surgical Oncologist
+          {doctorData?.specialty_treatment ?? ''}
         </p>
       </div>
     </div>

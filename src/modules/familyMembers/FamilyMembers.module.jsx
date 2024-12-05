@@ -118,12 +118,12 @@ if(isLoading) return  <div>Loading...</div>
             setShowAddPatientDrawer(true);
           }} >Add Patient</button>
       </div> :  <div className="max-w-[1600px] mx-auto p-5">
-      <div className="flex justify-between items-center mb-6">
-        <p className="text-lg ">
+      <div className="flex flex-col md:flex-row gap-y-3 justify-between items-center mb-6 ">
+        <p className="text-lg xl:text-xl">
           Here you can see the list of all members and also add new member.
         </p>
         <button
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded shadow"
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-white rounded shadow rounded-md"
           onClick={() => {
             setShowAddPatientDrawer(true);
           }}
@@ -134,7 +134,7 @@ if(isLoading) return  <div>Loading...</div>
       {isLoading ? (
         <p>Loading family members...</p>
       ) : familyMemberList?.results?.length > 0 ? (
-        <div className="grid grid-cols-12 gap-6">
+        <div className="grid grid-cols-12 gap-x-5 gap-y-1">
           {familyMemberList?.results?.map((item, index) => (
             <MemberCard
               key={index}

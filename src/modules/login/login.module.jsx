@@ -138,6 +138,8 @@ const LoginModule = () => {
                       }
                       required
                     />
+                                        {/* <img src={eyeClose?.src} className="w-5" alt="load..."  /> */}
+
                   </div>
                   <Button
                     type="submit"

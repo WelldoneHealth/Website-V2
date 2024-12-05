@@ -10,7 +10,7 @@ import { useQuery } from "@tanstack/react-query";
 import HospitalCard from "./components/HospitalCard";
 import DoctorCard from "./components/DoctorCard";
 import { getSerachList } from "./apis"; 
-import { useRouter, useSearchParams } from "next/navigation";
+
 
 // Dynamically import Leaflet components
 const MapContainer = dynamic(
@@ -59,11 +59,15 @@ const MapResetButton = ({ currentLocation }) => {
 
 export default function SearchListingModule() {
   const [isHospital, setIsHospital] = useState(null);
+  const [doctorSpeciality,setDoctorSpeciality]=useState(null)
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const isHospitalParam = params.get("is_hospital");
+    const practiceSpecialityParam=params.get("practice-specialty")
+    console.log("trpe is hospital data is",isHospital)
     setIsHospital(isHospitalParam);
+    setDoctorSpeciality(practiceSpecialityParam)
   }, []);
 
   // console.log("the is hispitaal is",isHospital)
@@ -113,10 +117,13 @@ export default function SearchListingModule() {
         queryKey: ["searchList"],
         queryFn: async () => {
           const response = await getSerachList({
-           is_hospital:false
+           is_hospital:isHospital || false ,
+           specialty:doctorSpeciality
           });
           return response?.results; // Return doctor details directly
         },
+        enabled:  isHospital !== null,
+
       });
     
     
@@ -126,7 +133,7 @@ export default function SearchListingModule() {
     
 
   return (
-    <div className="w-full mt-[85px]  max-w-[1500px] mx-auto px-1  asm:px-3 lg:px-0   ">
+    <div className="w-full   max-w-[1500px] mx-auto px-1  asm:px-3 lg:px-0   ">
     {/* --------------navbars--------------- */}
 
 
@@ -204,7 +211,7 @@ export default function SearchListingModule() {
       {/* -----------lists sections-------------- */}
       <div
         className={`${
-          isMapExpanded ? "w-0" : "w-full  md:w-[90%] mx-auto lg:w-[65%] xl:max-w-[950px] "
+          isMapExpanded ? "w-0" : "w-full  md:w-[90%] mx-auto lg:w-[70%] xl:max-w-[950px] "
         } mt-12 min-h-screen space-y-3  transition-all duration-700 ease-linear`}
       >
        {searchList && searchList?.map((item,index)=>item?.is_hospital ? <HospitalCard key={index} listInfo={item} /> : <DoctorCard key={index} listInfo={item} /> ) 
@@ -217,7 +224,7 @@ export default function SearchListingModule() {
         style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
         className={`${
           isMapExpanded ? "w-full" : " lg:w-[33%] xl:w-[34%] "
-        } max-lg:hidden  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
+        } hidden  h-[650px] p-1  relative rounded-[20px]  border-[1px] border-gray-500 overflow-hidden transition-all duration-700 ease-linear`}
       >
         <MapContainer
           key={placeLocation.join(",")}
