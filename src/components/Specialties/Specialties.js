@@ -24,7 +24,7 @@ export default function Specialties() {
           <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
             <div className="mb-4">
               <div className="w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
-              <img src={calenderIcon.src} className="h-12 w-12" />
+              <img src={calenderIcon?.src} className="h-12 w-12" />
               </div>
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">Instant Booking</h3>

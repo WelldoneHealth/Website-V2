@@ -70,17 +70,17 @@ const ServicesSection = () => {
               <div className="text-center">
                 <div className="w-20 h-20 bg-[#d0eaff] rounded-full flex items-center justify-center mx-auto mb-4">
                   <img
-                    src={service.icon.src}
-                    alt={service.title}
+                    src={service?.icon?.src}
+                    alt={service?.title}
                     className="h-12 w-12"
                   />
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">
-                  {service.title}
+                  {service?.title}
                 </h3>
-                <p className="text-gray-600">{service.description}</p>
+                <p className="text-gray-600">{service?.description}</p>
                 <Link
-                  href={`/search-listing?is_hospital=false&practice-specialty=${service.itemId}`}
+                  href={`/search-listing?is_hospital=false&practice-specialty=${service?.itemId}`}
                   passHref
                   target="_blank"
                 >
@@ -95,22 +95,26 @@ const ServicesSection = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <button className="bg-[#005499] text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors inline-flex items-center">
-            View All Specialties
-            <svg
-              className="w-5 h-5 ml-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </button>
+          <Link
+            href={`/search-listing`}
+          >
+            <button className="bg-[#005499] text-white px-8 py-3 rounded-full hover:bg-primary-700 transition-colors inline-flex items-center">
+              View All Specialties
+              <svg
+                className="w-5 h-5 ml-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M9 5l7 7-7 7"
+                />
+              </svg>
+            </button>
+          </Link>
         </div>
       </div>
     </section>
