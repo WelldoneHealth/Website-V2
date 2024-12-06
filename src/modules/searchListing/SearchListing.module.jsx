@@ -127,49 +127,6 @@ export default function SearchListingPage() {
           <DoctorFilters onApplyFilters={applyFilters} onResetFilters={resetFilters} />
         </aside>
 
-        {/* Mobile Filter Toggle */}
-        <button
-          className="lg:hidden fixed bottom-4 right-4 bg-blue-500 text-white px-4 py-3 rounded-full z-50"
-          onClick={() => setMobileFilterOpen(true)}
-        >
-          Filters
-        </button>
-
-        {isMobileFilterOpen && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-50 z-50 flex justify-center items-end"
-            onClick={() => setMobileFilterOpen(false)} // Closes the overlay when clicking outside
-          >
-            <div
-              className="bg-white w-full rounded-t-lg p-4 relative"
-              onClick={(e) => e.stopPropagation()} // Prevents closing when interacting with the modal content
-            >
-              {/* Doctor Filters */}
-              <DoctorFilters
-                onApplyFilters={(newFilters) => {
-                  applyFilters(newFilters); // Apply filters
-                  setMobileFilterOpen(false); // Close modal after applying
-                }}
-                onResetFilters={() => {
-                  resetFilters(); // Reset filters
-                  setMobileFilterOpen(false); // Close modal after reset
-                }}
-              />
-
-              {/* Close Button */}
-              <button
-                className="absolute top-4 right-4 text-gray-500"
-                onClick={() => setMobileFilterOpen(false)} // Close modal when clicking close button
-              >
-                &times;
-              </button>
-            </div>
-          </div>
-        )}
-
-
-
-
         {/* Listing Section */}
         <main className="flex-1 space-y-4">
           {isLoading && <p>Loading...</p>}
