@@ -15,6 +15,7 @@ export const useRegister = () => {
       console.error(
         error?.response?.data?.message || "Registration failed! Try again later"
       );
+      return error?.message || "Registration failed! Try again later"
     },
     onSettled: () => {
       setLoading(false); // Set loading to false when mutation settles

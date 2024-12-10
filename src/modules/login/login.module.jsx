@@ -59,19 +59,21 @@ const LoginModule = () => {
           contact: "",
           password: "",
         });
-        toast({
-          message: "Registration successful! Please log in.",
-        });
+        // toast({
+        //   message: "Registration successful! Please log in.",
+        // });
+        toast("Registration successful! Please log in.");
       },
       onError: (error) => {
-        console.error(
-          error?.response?.data?.message || "Registration failed! Try again."
-        );
-        toast({
-          message:
-            error?.response?.data?.message ||
-            "Registration failed! Try again later",
-        });
+        // console.error(
+        //   error?.response?.data?.message || "Registration failed! Try again."
+        // );
+        // toast({
+        //   message:
+        //     error?.response?.data?.message ||
+        //     "Registration failed! Try again later",
+        // });
+        toast( error?.message || "Registration failed! Try again.")
       },
     });
   };
