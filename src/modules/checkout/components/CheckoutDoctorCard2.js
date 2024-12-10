@@ -32,7 +32,7 @@ export default function CheckoutDoctorCard2({doctorData}) {
 
         </p>
         <p className="text-xs sm:text-sm md:hidden">
-          {doctorData?.specialty_treatment ?? ''}
+          {doctorData?.practice_specialty ?? ''}
         </p>
       </div>
     </div>

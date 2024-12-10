@@ -167,8 +167,8 @@ export default function CompletedAppo_Cards({
 
         <div className=" w-full">
           <div className="w-full  mt-2 asm:mt-4 flex gap-x-3 sm:gap-x-7  ">
-            {/* -----------1st part------------- */}
-            <div className=" max-ssm:hidden w-[100px]  asm:w-[150px] sm:w-[180px] md:w-[205px] aspect-[1/1]  bg-[#EFF8FF] overflow-hidden  rounded-full">
+            {/* -----------1st part--------   size-[100px]  asm:size-[120px] max-sm:size-[120px]   ----- */}
+            <div className=" max-ssm:hidden  max-msm:size-[90px]   msm:w-[120px] sm:w-[180px] md:w-[205px] aspect-[1/1]  bg-[#EFF8FF] overflow-hidden  rounded-full">
               <img
                 src={appointmentCardData?.doctor_image ?? defaultDoctor?.src}
                 className=" w-full h-full object-cover object-center "

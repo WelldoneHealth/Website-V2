@@ -14,6 +14,7 @@ import eyeOpen from "@/asset/Icons/eyeOpen.svg";
 import eyeClose from "@/asset/Icons/eyeClose.svg";
 import { toast } from "sonner";
 import Link from "next/link";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 const LoginModule = () => {
   const [loginCredentials, setLoginCredentials] = useState({
@@ -59,19 +60,12 @@ const LoginModule = () => {
           contact: "",
           password: "",
         });
-        toast({
-          message: "Registration successful! Please log in.",
-        });
+       successToast("Registration successful! Please log in.")
+        // console.log("the toast is",toast)
       },
       onError: (error) => {
-        console.error(
-          error?.response?.data?.message || "Registration failed! Try again."
-        );
-        toast({
-          message:
-            error?.response?.data?.message ||
-            "Registration failed! Try again later",
-        });
+        errorToast(error?.message ||  "Registration failed! Try again later")
+        // console.log("the error during registration is - ",error?.message)       
       },
     });
   };
@@ -101,6 +95,7 @@ const LoginModule = () => {
             <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>
           <TabsContent value="login">
+            {/* -----------------login form----------- */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl text-[#01549A]">Login</CardTitle>
@@ -125,7 +120,7 @@ const LoginModule = () => {
                   </div>
                   <div className="grid gap-2">
                     <Label htmlFor="login-password">Password</Label>
-                    <Input
+                    {/* <Input
                       id="login-password"
                       type="password"
                       placeholder="Enter your password"
@@ -137,8 +132,28 @@ const LoginModule = () => {
                         }))
                       }
                       required
+                    /> */}
+
+
+{/* -----------------new password input------- */}
+<div className="flex gap-x-3 px-3 border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm  ">
+<Input
+                      id="login-password"
+                      type={!viewPassword?"password":"text"}
+                      placeholder="Enter your password"
+                      value={loginCredentials.password}
+                      onChange={(e) =>
+                        setLoginCredentials((prev) => ({
+                          ...prev,
+                          password: e.target.value,
+                        }))
+                      }
+                      className="bg-transparent border-none px-0"
+                      required
                     />
-                                        {/* <img src={eyeClose?.src} className="w-5" alt="load..."  /> */}
+{(loginCredentials.password.length > 0 && loginCredentials.password.trim() !== "")  && <img src={!viewPassword ? eyeOpen?.src : eyeClose?.src } onClick={()=>setViewPassword(!viewPassword)} className="w-5 cursor-pointer " alt="load..."     />  }             
+</div>
+ {/* ------------end------------------- */}
 
                   </div>
                   <Button
@@ -166,7 +181,8 @@ const LoginModule = () => {
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="register">
+          <TabsContent value="register" key={currentTab}>
+            {/* ------------------registerartion form------------------ */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl text-[#01549A]">

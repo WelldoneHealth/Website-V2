@@ -17,3 +17,19 @@ const Input = React.forwardRef(({ className, type, ...props }, ref) => {
 Input.displayName = "Input"
 
 export { Input }
+
+
+
+{/* <Input
+                      id="login-password"
+                      type="password"
+                      placeholder="Enter your password"
+                      value={loginCredentials.password}
+                      onChange={(e) =>
+                        setLoginCredentials((prev) => ({
+                          ...prev,
+                          password: e.target.value,
+                        }))
+                      }
+                      required
+                    /> */}

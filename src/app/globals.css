@@ -96,6 +96,21 @@
 
 
 
+/* ----------------custom scrollbar--------------- */
+/* .custom-scrollbar {
+  overflow: scroll;
+   scrollbar-width: none; 
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px; 
+  height: 10px; 
+} */
+
+
+
+
+
+
 /* -----------changing popup------- */
 .leaflet-popup-content-wrapper{
 background: transparent;

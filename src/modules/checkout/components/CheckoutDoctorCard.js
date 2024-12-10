@@ -2,6 +2,7 @@ import React from 'react'
 import { useRouter } from 'next/navigation'
 import defaultDoctor from "@/asset/Images/defaultDoctor.png"
 
+
 export default function CheckoutDoctorCard({doctorInfo}) {
     const router=useRouter()
 
@@ -48,7 +49,7 @@ export default function CheckoutDoctorCard({doctorInfo}) {
             .join(" / ")}{" "}
         </p>
         <p className=" text-[11px] asm:text-xs msm:text-[13px] sm:text-sm ">
-       {doctorInfo?.specialty_treatment ?? ''}
+       {doctorInfo?.practice_specialty ?? ''}
         </p>
       </div>
     </div>

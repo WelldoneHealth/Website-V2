@@ -13,6 +13,7 @@ export const registerUser = async (userData) => {
     });
     return response.data; // Expects the API to return the user data or success message
   } catch (error) {
+    console.log("the data returned in register functin---",error.response?.data)
     throw new Error(
       error.response?.data?.message || "Registration failed. Please try again."
     );
@@ -25,5 +26,5 @@ export const getCurrentUser = async (authToken) => {
       Authorization: `JWT ${authToken}`,
     },
   });
-  return response.data;
+  return response.data; 
 };

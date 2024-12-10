@@ -166,7 +166,7 @@ const AppointmentSection = ({
                 {equeueDataList.length > maxVisibleCards && (
                   <button
                     onClick={() => setShowAll(!showAll)}
-                    className="mt-1 px-4 underline"
+                    className="mt-1 px-4 underline mb-10"
                   >
                     {showAll ? "Show Less" : "Show More"}
                   </button>

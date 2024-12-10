@@ -37,11 +37,12 @@ import CheckoutEqueueCard from "@/modules/checkout/components/CheckoutEqueueCard
 import ButtonType2 from "@/modules/checkout/components/ButtonType2";
 import MobileViewButtons from "@/modules/checkout/components/MobileViewButtons";
 import { useMediaQuery } from "react-responsive";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 export default function page() {
   const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
-  console.log("the appointment data is---",appointmentData)
+  // console.log("the appointment data is---",appointmentData)
   const setAppointmentData = useAppointmentStore((state) => state.setAppointmentData);
   const userData = useAuthStore((state) => state.userDetails);
   const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
@@ -71,7 +72,7 @@ const [editPatientData,setEditPatientData]=useState(null)
     appointmentSelection: appointmentOptions[0],
   });
 
-  console.log("the doctor is", statusData.doctorSelection);
+  // console.log("the doctor is", statusData.doctorSelection);
 
   // --------------------- hide or view the
   const [dataVisibilityToggle, setDataVisibilityToggle] = useState({
@@ -126,15 +127,15 @@ const [editPatientData,setEditPatientData]=useState(null)
 // -------------if appointment booking is successful------------
     if(data?.id){
         router.push(`/checkout/appointmentConfirmation?id=${data?.id}`);
-        toast("Appointment booked successfully");
+        successToast("Appointment booked successfully");
         return  
       }
   // -------------------if unsuccessful od previously booked appointment---------------------
-      return   toast(data?.message);
+      return   errorToast(data?.message); 
     },
     onError: (error) => {
       // console.log("the error occured in react query is",error)
-      toast("Server Error!");
+      errorToast("Server Error!");
     },
   });
 

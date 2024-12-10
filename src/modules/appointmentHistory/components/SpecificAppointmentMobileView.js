@@ -7,6 +7,7 @@ import FollowUpDateComp from "./FollowUpDateComp";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useAppointmentInvoice from "@/hooks/useAppointmentInvoice";
+import moment from "moment";
 
 
 export default function SpecificAppointmentMobileView({ appointmentData }) {
@@ -16,6 +17,10 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
     appointmentData
   );
   const appo_data1 = [
+    {
+      boldText:"Date-",
+      text:moment(appointmentData?.appointment_date).format("DD/MM/YYYY")
+          },
     {
       boldText: "Appointment id-",
       text: appointmentData?.id ?? "",
@@ -29,7 +34,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
 
 // -------------------the data card component--------------------
   const DataCard = ({ image, mainText, subText, textSize,linkTo }) => (
-    <div  onClick={()=>router.push(linkTo)} className="w-full cursor-pointer px-3 sm:px-6 py-4 flex  gap-x-2 ssm:gap-x-4  mams:gap-x-6 border-b-[1px] ">
+    <div  onClick={()=>router.push(linkTo)} className="w-full cursor-pointer px-3 sm:px-6 py-4 flex  gap-x-2 ssm:gap-x-4  mams:gap-x-6 ">
       <div className=" flex items-center justify-center w-[40px]  ssm:size-[50px] asm:size-[70px] msm:size-[85px] aspect-[1/1] bg-[#EFF8FF]   rounded-full overflow-hidden">
         <img src={image} className="w-full  h-full object-cover object-center " alt="load..." />
       </div>
@@ -46,13 +51,26 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
 
 
   return (
-    <div className=" w-full px-2   msm:px-3 sm:px-6  pt-1 py-3  rounded-[15px] flex md:hidden  flex-col border-[1px]    border-[#DADADA]">
-      <div className=" w-full border-b-[1px] border-[#DADADA] pt-2 pb-4 px-1  asm:px-3  msm:px-6 flex max-ssm:flex-col  gap-y-2 max-asm:justify-between asm:gap-x-16 text-nowrap text-sm asm:text-base ">
+    <div className=" w-full px-2   msm:px-3 sm:px-6  pt-1 py-3  rounded-[15px] flex md:hidden  flex-col border-[1px]    border-[#007185]">
+      
+      {/* <div className=" max-sm:max-w-[400px]  w-full border-b-[1px] border-[#DADADA] pt-2 pb-4 px-1  asm:px-3  msm:px-6 flex flex-col sm:flex-row  gap-y-2 sm:justify-between sm:gap-x-14 text-nowrap text-sm asm:text-base ">
         {appo_data1.map((item, index) => (
-          <p key={index}>
+          <p key={index} className=" max-sm:flex justify-between items-center ">
             <span className="font-semibold">{item.boldText}</span> {item.text}
           </p>
         ))}
+      </div> */}
+      <div className="w-full pt-2 pb-4 px-1  asm:px-3  flex justify-between max-w-[400px] text-sm asm:text-base sm:text-lg">
+        <div className="">
+          <p className="font-semibold">{appo_data1[0].boldText}</p>
+          <p className="font-semibold">{appo_data1[1].boldText}</p>
+          <p className="font-semibold">{appo_data1[2].boldText}</p>
+        </div>
+        <div className="">
+<p  >{appo_data1[0].text}</p>
+<p  >{appo_data1[1].text}</p>
+<p  >{appo_data1[2].text}</p>
+        </div>
       </div>
 
       <div className="w-full msm:px-2 flex flex-col gap-y-2  ">
@@ -60,9 +78,9 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
   {/* ----------------------painet card-------------------- */}
         <DataCard
           image={appointmentData?.patient_logo ?? defaultPatient?.src}
-          mainText={`${appointmentData?.patient_first_name ?? ""} ${
+          mainText={`${appointmentData?.patient_first_name  ?? ""} ${
             appointmentData?.patient_middle_name ?? ""
-          } ${appointmentData?.patient_last_name ?? ""}`}
+          } ${appointmentData?.patient_last_name ?? ""}  ${appointmentData?.patient_relation ? ` (${appointmentData.patient_relation})` : ''}`}
           subText={appointmentData?.reason?.split("_").join(" ") ?? ""}
           textSize="text-sm asm:text-lg msm:text-xl capitalize"
         />
@@ -81,13 +99,13 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
             linkTo={`/doctor-details/${appointmentData?.doctor_slug}/${appointmentData?.branch_slug}`}
 
           />
-
+<div className="w-full border-b-[1px] border-[#DADADA]"></div>
         
-{/* -----------------------cliic card--------------------- */}
+{/* -----------------------clinic card--------------------- */}
           <DataCard
             image={appointmentData?.clinic_logo ?? defaultClinic?.src}
             mainText={appointmentData?.clinic_name?.split("-")[0] ?? ""}
-            subText={appointmentData?.clinic_name?.split("-")[1] ?? ""}
+            subText={appointmentData?.clinic_address ?? ""}
             textSize="text-sm asm:text-base msm:text-lg leading-tight"
             linkTo={`/hospital-details/${appointmentData?.branch_slug}`}
           />
@@ -109,13 +127,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
               </p>
             </button>
           </Link> }
-          <button
-            type="button"
-            className=" px-5 py-2 border-[1px] border-primary rounded-[5px] block w-[95%]  msm:w-[200px]"
-            onClick={downloadInvoice}
-          >
-            <p className="text-primary font-medium  ">Invoice</p>
-          </button>
+
           <button
             onClick={() =>
               router.push(
@@ -127,13 +139,22 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
           >
             <p className="text-primary font-medium">Book Follow-Up</p>  
           </button>
+
+          <button
+            type="button"
+            className=" px-5 py-2 border-[1px] border-primary rounded-[5px] block w-[95%]  msm:w-[200px]"
+            onClick={downloadInvoice}
+          >
+            <p className="text-primary font-medium  ">Invoice</p>
+          </button>
+        
         </div>
 
-       {appointmentData?.followup_date && <div className="w-full my-2 p-2 asm:p-3 space-y-3 border-[1px] border-[#DADADA] rounded-[15px]">
+       {appointmentData?.followup_date && <div className="w-full max-lsm:hidden my-2 p-2 asm:p-3 space-y-3 border-[1px] border-[#DADADA] rounded-[15px]">
           {/* --------------------------follow up dates---------------------- */}
-          <FollowUpDateComp followUpDate={appointmentData?.followup_date} />
+          {/* <FollowUpDateComp followUpDate={appointmentData?.followup_date} /> */}
           {appointmentData?.is_clinic_booking && (
-            <div className="w-full max-lsm:hidden">
+            <div className="w-full ">
               {" "}
               <Msg />
             </div>

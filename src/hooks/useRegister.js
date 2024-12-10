@@ -12,8 +12,12 @@ export const useRegister = () => {
     },
 
     onError: (error) => {
-      console.error(
-        error?.response?.data?.message || "Registration failed! Try again later"
+      console.log("the sceond paret error is",error?.message)
+      // console.error(
+      //   error?.response?.data?.message || "Registration failed! Try again later"
+      // );
+      throw new Error(
+        error?.message || "Registration failed! Try again later"
       );
     },
     onSettled: () => {

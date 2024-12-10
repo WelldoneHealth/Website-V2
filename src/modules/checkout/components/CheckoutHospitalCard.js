@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRouter } from 'next/navigation';
 import smallHospital3 from "@/asset/Images/smallHospital3.png";
-
+import { capitalCase } from 'change-case';
 
 
 export default function CheckoutHospitalCard({hospitalInfo}) {
@@ -37,7 +37,7 @@ export default function CheckoutHospitalCard({hospitalInfo}) {
               {hospitalInfo?.clinic_name}
             </p>
             <p className="text-[11px] asm:text-xs msm:text-[13px] sm:text-sm">
-              {hospitalInfo?.clinic_address}
+              {capitalCase(hospitalInfo?.clinic_address)}
             </p>
           </div>
           <button
