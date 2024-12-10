@@ -16,6 +16,7 @@ import header8 from "@/asset/Images/header8.png"
 import mobileHeader from "@/asset/Images/mobileHeader.png"
 
 import Banner2 from '@/components/Banner2';
+import Link from 'next/link';
 
 // import dashboard6Video from '@/asset/Video/dashboard6Video.mp4';
 // import video1 from "@/asset/VideoFiles/video1.mp4"
@@ -126,7 +127,14 @@ const SmallBox =({image,heading,subText})=>(
 
 
 <div className="max-msm:pt-8 w-full flexCenter">
+<Link
+            href="https://clinic.welldonehealth.in/"
+            passHref
+            target="_blank"
+               className="block"
+          >
 <button type="button"  className='text-[15px]  sm:text-lg px-6 md:px-10  py-2 rounded-[30px]  font-semibold  bg-primary text-white'  >Start getting patients</button>
+</Link>
 </div>
 </div>
 

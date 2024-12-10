@@ -5,10 +5,16 @@ import loginIcon from "@/asset/Icons/login_icon.svg";
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import hamburgerIcon from "@/asset/Icons/hamburger.svg";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import closeIcon from "@/asset/Icons/closeIcon.svg";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Navbar() {
   const router = useRouter();
+  const pathname = usePathname();
+  console.log("the pathname is",pathname)
+
+  // const isActive = (path) => pathname. == path;
+  const isActive = (path) => pathname && pathname.startsWith(path.trim());  
 
   const [navOpen, setNavOpen] = useState(false);
 
@@ -28,7 +34,7 @@ export default function Navbar() {
     },
     {
       title: " Fees and Commission",
-      toPage: " /fees-and-commisions",
+      toPage: "/fees-and-commisions",
     },
     {
       title: " How it works",
@@ -82,7 +88,7 @@ export default function Navbar() {
                 />
               )}
               {navOpen && (
-                <p className="text-4xl font-medium text-primary">X</p>
+            <img src={closeIcon?.src} className=""  alt="load..."  />
               )}
             </button>
             {/* -------------icon--------------- */}
@@ -96,41 +102,11 @@ export default function Navbar() {
           {/* ----------------flex------------------ */}
           <div className=" hidden lg:flex items-center text-base xl:text-lg font-medium text-primary gap-x-10   ">
             {navMenu?.map(({ title, toPage }) => (
-              <Link href={toPage}>{title}</Link>
+              <Link key={toPage} href={toPage}><p className={` ${isActive(toPage) ? "underline underline-offset-8  decoration-2 " : ""}`}>{title}</p></Link>
             ))}
           </div>
 
           <div className="flex gap-x-6  ">
-            {/* <button className="  text-[#01549A] hidden md:flex justify-center items-center font-medium text-lg">
-            {" "}
-            <img
-              src={hospitalIcon2?.src}
-              className="w-[30px]  mx-3"
-              alt="load..."
-            />{" "}
-            I have Clinic/ Hospital
-          </button>
-          <button className=" hidden md:flex justify-center items-center gap-x-2 px-3 py-[6px] rounded-3xl text-base bg-primary font-normal text-white">
-            Login{" "}
-            <div className="flexCenter rounded-full p-1 bg-white">
-              <img src={loginIcon?.src} width={16} height={11} alt="load..." />
-            </div>
-          </button> */}
-
-            {/* <Link href="https://clinic.welldonehealth.in/" passHref target="_blank" > <button  type="button"  className='px-4 asm:px-7  text-xs asm:text-base msm:text-base xl:text-xl  py-[6px] lsm:py-3 rounded-[30px]  font-semibold  bg-primary text-white  '  >Start get Patients</button> </Link> */}
-
-            {/* <button type="button" onClick={toggleNavBar} className="w-8 ">
-              {!navOpen && (
-                <img
-                  src={hamburgerIcon?.src}
-                  className="w-full"
-                  alt="load..."
-                />
-              )}
-              {navOpen && (
-                <p className="text-4xl font-medium text-primary">X</p>
-              )}
-            </button> */}
 
             <Link
               href="https://clinic.welldonehealth.in/"
@@ -188,7 +164,7 @@ export default function Navbar() {
           <div className="w-28 h-28 hidden rounded-lg   ">
             <img src={wellDoneLogo?.src} className="w-full mt-14" />
           </div>
-          <div className="my-16 w-full flex flex-col justify-center items-center text-primary  font-medium space-y-6">
+          <div className="my-16 w-full flex flex-col justify-center items-center   font-medium space-y-6">
             {navMenu.map((item) => (
               <div
                 key={item.title}
@@ -196,9 +172,9 @@ export default function Navbar() {
                 style={{ boxShadow: "0px 0px 4px 2px #01549A40" }}
                 className=" w-[90%] max-w-[400px] sm:max-w-[700px]   rounded-md py-2 text-center "
               >
-                <Link className="w-full" href={item.toPage}>
+                <Link key={item.toPage} className="w-full" href={item.toPage}>
                   {" "}
-                  {item.title}
+                  <p className={` ${isActive(item.toPage) ? "text-primary " : "text-gray-500"}`}>{item.title}</p>
                 </Link>
               </div>
             ))}

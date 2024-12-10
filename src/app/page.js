@@ -34,8 +34,8 @@ export default function Home() {
   const settings = {
     slidesToShow: 1,
     slidesToScroll: 1,
-    autoplay: false,
-    autoplaySpeed: 3000,
+    autoplay: true,
+    autoplaySpeed: 8000,
     dots: false,
     infinite: true,
     arrows: false,
@@ -259,7 +259,7 @@ export default function Home() {
                     <p className=" text-sm font-medium text-primary">
                       Learn more
                     </p>
-                    <button type="button" className="">
+                    <button type="button" className="" disabled>
                       <img
                         src={arrowIcon2?.src}
                         className="rotate-180"
@@ -309,7 +309,7 @@ export default function Home() {
                       />
                     </div>
                     <Link
-                      href="https://clinic.welldonehealth.in/login"
+                      href="/grow"
                       passHref
                     >
                       <button

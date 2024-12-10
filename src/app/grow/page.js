@@ -22,6 +22,7 @@ import {
 import SuccessStorySlider from "@/components/SuccessStorySlider";
 import InfoDetails from "@/components/InfoDetails";
 import Banner2 from "@/components/Banner2";
+import Link from "next/link";
 
 export default function Grow() {
   const FeaturesComponent = ({
@@ -99,13 +100,16 @@ export default function Grow() {
               )
             )}
           </div>
-
+<Link  href="https://clinic.welldonehealth.in/"
+              passHref
+              target="_blank" >
           <button
             type="button"
             className="mt-6 px-7 text-sm asm:text-base msm:text-lg xl:text-xl  py-2 lsm:py-3 rounded-[30px]  font-semibold  bg-primary text-white "
           >
             Start getting patients
           </button>
+          </Link>
         </div>
 
         {/* -----------image------------- */}

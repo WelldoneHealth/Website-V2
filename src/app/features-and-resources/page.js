@@ -27,6 +27,7 @@ import doctor7 from "@/asset/Images/doctor7.png"
 import body from "@/asset/Images/body.png"
 import Banner2 from '@/components/Banner2';
 import InfoDetails from '@/components/InfoDetails';
+import Link from 'next/link';
 
 
 
@@ -109,9 +110,9 @@ export default function page() {
   <p className='text-[32px] asm:text-[36px] sm:text-[38px] lsm:text-[42px] xl:text-[50px]  font-bold   leading-[30px] xl:max-w-[720px]  asm:leading-[38px] md:leading-[47px] max-md:text-center'>We take care of the most valuable</p>
   <p className=' max-w-[550px] xl:max-w-[560px] max-md:mx-auto md:max-w-[380px] leading-snug max-asm:text-sm xl:text-xl max-md:text-center'>Our medical professionals are dedicated to providing you with personalized attention</p>
 </div>
-<div className="mt-auto flex max-asm:text-sm  max-md:justify-start items-center gap-x-3 text-primary font-medium">
+{/* <div className="mt-auto flex max-asm:text-sm  max-md:justify-start items-center gap-x-3 text-primary font-medium">
   <img src={player?.src} className='max-asm:w-[25px]' alt="load..."  /> Watch Video About Us
-</div> 
+</div>  */}
 
 </div>
 
@@ -173,8 +174,14 @@ export default function page() {
 
 </div>
 
-
-<button type="button"  className='my-6 max-sm:text-sm md:text-lg px-6 sm:px-10 mx-auto py-2  flex items-center gap-x-3 rounded-[30px]  font-semibold  bg-primary text-white'  > See More  <img src={arrow4?.src} className=''  alt="load..."  />  </button>
+<Link
+            href="https://clinic.welldonehealth.in/"
+            passHref
+            target="_blank"
+               className="block my-6"
+          >
+<button type="button"  className=' max-sm:text-sm md:text-lg px-6 sm:px-10 mx-auto py-2  flex items-center gap-x-3 rounded-[30px]  font-semibold  bg-primary text-white'  > See More  <img src={arrow4?.src} className=''  alt="load..."  />  </button>
+</Link>
 
 </div> 
 
@@ -185,8 +192,15 @@ export default function page() {
 <div className="w-full xl:w-[90%]    mx-auto px-4  sm:px-6 xl:px-10  py-3  border-[1px] border-[#DADADA] rounded-3xl">
 
 <div className="w-full flex flex-col xl:flex-row items-center justify-between ">
-  <p className='text-primary  text-[21px] sm:text-[30px] md:text-[34px] xl:text-[36px] font-bold leading-tight '>3D Human Anatomy: Elevate Patient Care</p>
-  <button type="button"  className='  my-6 text-lg px-10  py-2 hidden   xl:flex items-center gap-x-3 rounded-[30px] border-[2px] border-primary font-semibold  bg-white text-primary'  > Anatomy Explorer <img src={frontArrow?.src} className='mt-[3px]'  alt="load..."  />  </button>
+  <p className='text-primary  text-[21px] sm:text-[30px] md:text-[34px] xl:text-[36px] font-bold leading-tight '> 3D Human Anatomy: Elevate Patient Care</p>
+  <Link
+            href="https://clinic.welldonehealth.in/"
+            passHref
+            target="_blank"
+               className="block"
+          >
+            <button type="button"  className='  my-6 text-lg px-10  py-2 hidden   xl:flex items-center gap-x-3 rounded-[30px] border-[2px] border-primary font-semibold  bg-white text-primary'  > Anatomy Explorer <img src={frontArrow?.src} className='mt-[3px]'  alt="load..."  />  </button>
+            </Link>
 </div>
 
 <p className='mt-2 mb-8 text-sm msm:text-base xl:text-[20px] leading-snug '>Our EMR software's 3D Human Anatomy feature provides an interactive, detailed view of the human body, allowing for more accurate diagnoses and improved patient understanding. Its user-friendly interface simplifies complex explanations, enhancing communication and trust.</p>
