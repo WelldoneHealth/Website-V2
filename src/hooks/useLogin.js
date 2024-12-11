@@ -3,6 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useUtilStore from "@/store/utiStore";
 import { getCurrentUser, getLoginOtp, loginUser } from "@/modules/login/apis";
 import Cookies from "js-cookie";
+import { toast } from "sonner";
 
 export const useLogin = () => {
   // console.log("tye login mutation")
@@ -18,15 +19,19 @@ export const useLogin = () => {
     },
     onSuccess: async (data) => {
       const authToken = data.access;
-      console.log("the auth token of login is",authToken)
-      setToken(authToken);
+      console.log("the auth token of login is", authToken);
 
-      // Fetch current user details with the authToken
-      const userData = await getCurrentUser(authToken);
-      if (authToken) {
-        Cookies.set("authToken", authToken, { expires: 7 }); // Store token in cookie for 7 days
+      try {
+        // Fetch current user details with the authToken
+        const userData = await getCurrentUser(authToken);
+        if (authToken && userData) {
+          setToken(authToken);
+          Cookies.set("authToken", authToken, { expires: 7 }); // Store token in cookie for 7 days
+        }
+        setUserDetails(userData);
+      } catch (error) {
+        toast("Something went wrong!");
       }
-      setUserDetails(userData);
 
       // Optionally invalidate or refetch queries if needed
       queryClient.invalidateQueries(["currentUser"]);
@@ -44,12 +49,9 @@ export const useLogin = () => {
   });
 };
 
-
-
-
-export const useRequestOtp=()=>{
+export const useRequestOtp = () => {
   const setLoading = useUtilStore((state) => state.setLoading);
-  console.log("entered in usemutaion of request otp")
+  console.log("entered in usemutaion of request otp");
   return useMutation({
     mutationFn: getLoginOtp,
     // mutationFn: ()=>console.log("the mutat func is ruing"),
@@ -57,16 +59,14 @@ export const useRequestOtp=()=>{
       setLoading(true); // Set loading to true when mutation starts
     },
     onSuccess: async (otpData) => {
-      console.log('OTP successfully sent', otpData);
+      console.log("OTP successfully sent", otpData);
       // Optionally invalidate queries or refetch OTP-related data
     },
     onError: (error) => {
-      console.error("error in use mutation",error);
+      console.error("error in use mutation", error);
     },
     onSettled: () => {
       setLoading(false); // Set loading to false when mutation settles
     },
   });
-}
-
-
+};
