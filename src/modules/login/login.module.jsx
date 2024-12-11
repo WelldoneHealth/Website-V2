@@ -200,7 +200,7 @@ console.log("gelo")
                           password: e.target.value,
                         }))
                       }
-                      className="bg-transparent border-none px-0"
+                      // className="bg-transparent  px-5"
                       required
                     />
 {(loginCredentials.password.length > 0 && loginCredentials.password.trim() !== "")  && <img src={!viewPassword ? eyeOpen?.src : eyeClose?.src } onClick={()=>setViewPassword(!viewPassword)} className="w-5 cursor-pointer " alt="load..."     />  }             
