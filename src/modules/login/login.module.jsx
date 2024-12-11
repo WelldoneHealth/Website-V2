@@ -265,7 +265,7 @@ console.log("gelo")
                       Signup
                     </button>
                   </p>
-                  <p onClick={()=>setIsLoginTypeOtp(!isLoginTypeOtp)} className="text-center cursor-pointer">Login with {isLoginTypeOtp?"Password" : "Otp"}</p>
+                  {/* <p onClick={()=>setIsLoginTypeOtp(!isLoginTypeOtp)} className="text-center cursor-pointer">Login with {isLoginTypeOtp?"Password" : "Otp"}</p> */}
                 </form> 
           
               </CardContent>
