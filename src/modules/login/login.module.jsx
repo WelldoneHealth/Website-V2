@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useLogin } from "@/hooks/useLogin";
+import { useLogin, useRequestOtp } from "@/hooks/useLogin";
 import UnauthenticatedLayout from "@/shared/layouts/UnauthenticatedLayout";
 import useUtilStore from "@/store/utiStore";
 import { useRegister } from "@/hooks/useRegister";
@@ -14,12 +14,21 @@ import eyeOpen from "@/asset/Icons/eyeOpen.svg";
 import eyeClose from "@/asset/Icons/eyeClose.svg";
 import { toast } from "sonner";
 import Link from "next/link";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
+import { useQuery } from "@tanstack/react-query";
 
 const LoginModule = () => {
   const [loginCredentials, setLoginCredentials] = useState({
     contact: "",
     password: "",
   });
+
+  const [otpLoginCredentials,setOtpLoginCredentials]=useState({
+    contact:" ",
+    otp:""
+  })
+
+  const [isOtpAvailable,setIsOtpAvailable]=useState(false)
 
   const [registerCredentials, setRegisterCredentials] = useState({
     name: "",
@@ -28,6 +37,8 @@ const LoginModule = () => {
     password: "",
   });
 
+  const [isLoginTypeOtp,setIsLoginTypeOtp]=useState(false)
+
   const [viewPassword,setViewPassword]=useState(false)
 
   const [currentTab, setCurrentTab] = useState("login"); // state for current tab
@@ -35,6 +46,7 @@ const LoginModule = () => {
   const loading = useUtilStore((state) => state.loading);
   const loginMutation = useLogin();
   const registerMutation = useRegister();
+  const requestOtpMutation=useRequestOtp()
 
   const handleTabChange = (tab) => {
     setCurrentTab(tab); // Update the current tab
@@ -46,6 +58,30 @@ const LoginModule = () => {
       loginMutation.mutate({ ...loginCredentials });
     }
   };
+
+
+
+
+const handleGetOtp=(e)=>{
+  console.log("the button is cliked",2+3)
+  console.log("Contact:",otpLoginCredentials.contact);
+  e.preventDefault(); 
+  if(otpLoginCredentials.contact){
+    requestOtpMutation.mutate({ contact: otpLoginCredentials.contact.trim() },{
+      onSuccess: () => {
+      console.log("otp sent")
+      },
+      onError: (error) => {
+        console.log("error in otp")
+    }
+  })
+  }
+
+}
+const handleOtpLogin=(e)=>{
+  e.preventDefault(); 
+console.log("gelo")
+}
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
@@ -59,28 +95,19 @@ const LoginModule = () => {
           contact: "",
           password: "",
         });
-        // toast({
-        //   message: "Registration successful! Please log in.",
-        // });
-        toast("Registration successful! Please log in.");
+       successToast("Registration successful! Please log in.")
+        // console.log("the toast is",toast)
       },
       onError: (error) => {
-        // console.error(
-        //   error?.response?.data?.message || "Registration failed! Try again."
-        // );
-        // toast({
-        //   message:
-        //     error?.response?.data?.message ||
-        //     "Registration failed! Try again later",
-        // });
-        toast( error?.message || "Registration failed! Try again.")
+        errorToast(error?.message ||  "Registration failed! Try again later")
+        // console.log("the error during registration is - ",error?.message)       
       },
     });
   };
 
   return (
     <UnauthenticatedLayout>
-     <div className="w-full h-screen flex flex-col items-center justify-center">
+     <div className="w-full min-h-screen py-8 flex flex-col items-center justify-center">
     <p className="text-[#01549A] font-medium text-sm  mb-7 "><Link
               href="https://practice.welldonehealth.in/"
               passHref
@@ -103,15 +130,18 @@ const LoginModule = () => {
             <TabsTrigger value="register">Register</TabsTrigger>
           </TabsList>
           <TabsContent value="login">
+            {/* -----------------login form----------- */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl text-[#01549A]">Login</CardTitle>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleLoginSubmit} className="grid gap-4">
+                 <form onSubmit={!isLoginTypeOtp ? handleLoginSubmit :  handleOtpLogin } className="grid gap-4">
                   <div className="grid gap-2">
+                
                     <Label htmlFor="login-contact">Contact</Label>
-                    <Input
+                        {/* ----------------------contact for password login------ */}
+                   {!isLoginTypeOtp && <Input
                       id="login-contact"
                       type="text"
                       placeholder="Enter your contact"
@@ -123,11 +153,26 @@ const LoginModule = () => {
                         }))
                       }
                       required
-                    />
+                    />}
+      {/* ----------------------contact for otp login------ */}
+                    { isLoginTypeOtp && <Input
+                      id="login-contact"
+                      type="tel"
+                      placeholder="Enter your contact"
+                      value={otpLoginCredentials.contact}
+                      onChange={(e) =>
+                        setOtpLoginCredentials((prev) => ({
+                          ...prev,
+                          contact: e.target.value,
+                        }))
+                      }
+                      required
+                    /> } 
                   </div>
-                  <div className="grid gap-2">
+                  {/* ------------------password for contact------ */}
+                 {!isLoginTypeOtp && <div className="grid gap-2">
                     <Label htmlFor="login-password">Password</Label>
-                    <Input
+                    {/* <Input
                       id="login-password"
                       type="password"
                       placeholder="Enter your password"
@@ -139,16 +184,72 @@ const LoginModule = () => {
                         }))
                       }
                       required
-                    />
-                                        {/* <img src={eyeClose?.src} className="w-5" alt="load..."  /> */}
+                    /> */}
 
-                  </div>
-                  <Button
+
+{/* -----------------new password input------- */}
+<div className="flex gap-x-3 px-3 border-input bg-background ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm  ">
+<Input
+                      id="login-password"
+                      type={!viewPassword?"password":"text"}
+                      placeholder="Enter your password"
+                      value={loginCredentials.password}
+                      onChange={(e) =>
+                        setLoginCredentials((prev) => ({
+                          ...prev,
+                          password: e.target.value,
+                        }))
+                      }
+                      className="bg-transparent border-none px-0"
+                      required
+                    />
+{(loginCredentials.password.length > 0 && loginCredentials.password.trim() !== "")  && <img src={!viewPassword ? eyeOpen?.src : eyeClose?.src } onClick={()=>setViewPassword(!viewPassword)} className="w-5 cursor-pointer " alt="load..."     />  }             
+</div>
+ {/* ------------end------------------- */}
+
+                  </div> }
+                  {/* -------------otp input----------- */}
+                  { (isLoginTypeOtp && isOtpAvailable) &&  <div className="grid gap-2">
+                    <Label htmlFor="login-password">Otp</Label>
+                    <Input
+                      id="login-password"
+                      type="password"
+                      placeholder="Enter your Otp"
+                      value={otpLoginCredentials.otp}
+                      onChange={(e) =>
+                        setOtpLoginCredentials((prev) => ({
+                          ...prev,
+                          otp: e.target.value,
+                        }))
+                      }
+                      required
+                    />
+
+
+
+
+                  </div>}
+                  {/* -------------password login button--------- */}
+                 { !isLoginTypeOtp && <Button
                     type="submit"
                     className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
                   >
                     {loading ? "Logging in..." : "Login"}
-                  </Button>
+                  </Button> }
+                  {/* -----------------------otp login button----------- */}
+                  { (isLoginTypeOtp && !isOtpAvailable) && <Button
+                    type="button"
+                    onClick={handleGetOtp}
+                    className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
+                  >
+                    Request Otp
+                  </Button>}
+                  { (isLoginTypeOtp && isOtpAvailable) &&  <Button
+                    type="submit"
+                    className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
+                  >
+                 Verify Otp & Login
+                  </Button>}
                   {loginMutation.isError && (
                     <p className="text-center mt-2 text-red-500">
                       Error: {loginMutation.error?.message || "Login failed"}
@@ -164,11 +265,14 @@ const LoginModule = () => {
                       Signup
                     </button>
                   </p>
-                </form>
+                  <p onClick={()=>setIsLoginTypeOtp(!isLoginTypeOtp)} className="text-center cursor-pointer">Login with {isLoginTypeOtp?"Password" : "Otp"}</p>
+                </form> 
+          
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="register">
+          <TabsContent value="register" key={currentTab}>
+            {/* ------------------registerartion form------------------ */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-2xl text-[#01549A]">

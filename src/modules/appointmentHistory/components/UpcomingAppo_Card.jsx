@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import doctorAppointmentImage from "@/asset/Images/doctorAppointmentImage.png";
 import moment from "moment/moment";
 import { Dot } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cancelAppointment } from "../apis";
-import { toast } from "sonner";
 import { PopConfirm } from "@/shared/components/Popconfirm";
 import defaultDoctor from "@/asset/Images/defaultDoctor.png";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
   const queryClient = useQueryClient();
@@ -20,11 +19,11 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
   const cancelAppointmentMutation = useMutation({
     mutationFn: cancelAppointment,
     onSuccess: () => {
-      toast("Appointment successfully canceled");
+      successToast("Appointment successfully canceled");
       queryClient.invalidateQueries(["appointmentHistoryList", currentPage]);
     },
     onError: () => {
-      toast("Something went wrong while canceling the appointment.");
+      errorToast("Something went wrong while canceling the appointment.");
     },
   });
 

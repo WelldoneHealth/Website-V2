@@ -5,7 +5,8 @@ import ratingIcon from "@/asset/Icons/rating.svg";
 import outlineClockIcon from "@/asset/Icons/outlineClock.svg";
 import lunchBoxIcon from "@/asset/Icons/lunchBox.svg";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
-
+import { toast } from "sonner";
+import { capitalCase } from 'change-case';
 import moment from "moment";
 
 import mapImage from "@/asset/Images/map.png";
@@ -13,6 +14,18 @@ import Link from "next/link";
 
 
 export default function SectionTabsWithMaps({ tab,tabDetails }) {
+
+  const handleCopy = async (contactToCopy) => {
+    try {
+      await navigator.clipboard.writeText("Copy ho gaya");
+      // Show alert only after copying is successful
+      toast.success("Contact copied to clipboard!");
+    } catch (error) {
+      console.error("Failed to copy!", error);
+      toast.error("Failed to copy contact. Please try again.");
+    }
+  };
+  
   return (
     <div className="w-full mt-7 mb-2 flex flex-col ">
       <div className=" w-full flex my-2">
@@ -28,7 +41,7 @@ export default function SectionTabsWithMaps({ tab,tabDetails }) {
               className="w-4 mr-3"
               alt="load..."
             />
-{tabDetails?.clinic_address}
+{capitalCase(tabDetails?.clinic_address)}
           </p></Link>
           {/* -------------------flex------------------ */}
           <div className="w-full   my-2 bg-[#F5F5F5] hidden max-w-max gap-x-2 text-xs font-medium px-4 py-1 rounded-[20px]">
@@ -50,10 +63,10 @@ export default function SectionTabsWithMaps({ tab,tabDetails }) {
             />
           </div>
         </div>
-        <div className="">
-          <div className="w-10 h-10 text-2xl flexCenter rounded-full bg-[#EFF8FF]  text-white font-medium">
-            <img src={phoneCallIcon?.src} className=""  alt="load..." />
-            {/* {tab} */}
+        <div className="hidden">
+          {/* ---------------------calling functionality-------- */}
+          <div onClick={handleCopy} className="w-10 h-10 text-2xl flexCenter rounded-full bg-[#EFF8FF]  text-white font-medium cursor-pointer" >
+            <img src={phoneCallIcon?.src} className=""  alt="load..." /> 
           </div>
           {/* <p>Voice Call</p> */}
         </div>

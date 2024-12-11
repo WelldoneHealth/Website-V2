@@ -11,6 +11,7 @@ export default function AuthenticatedLayout({ children }) {
 
   useEffect(() => {
     const token = Cookies.get("authToken");
+    console.log("the value of token is",token)
     if (!token) {
       // Redirect to login with redirectUrl query parameter
       router.push(`/login?redirectUrl=${encodeURIComponent(pathname)}`);

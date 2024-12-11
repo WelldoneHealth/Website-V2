@@ -5,6 +5,7 @@ import axiosInstance from "@/shared/apis/axiosInstance";
 import { useQuery } from "@tanstack/react-query";
 import generateInvoice from "@/shared/utils/generateInvoice";
 import generateQR from "@/shared/utils/generateQR";
+import { errorToast, infoToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 // Custom hook to fetch appointment data
 const useAppointmentInvoice = (appointmentId, appointmentData) => {
@@ -57,7 +58,7 @@ const useAppointmentInvoice = (appointmentId, appointmentData) => {
 
   const downloadInvoice = async () => {
     if (!servicesPaidData) {
-      toast("No payment history available.");
+      infoToast("No payment history available.");
       return;
     }
 
@@ -112,10 +113,10 @@ const useAppointmentInvoice = (appointmentId, appointmentData) => {
 
       // Release the blob URL
       URL.revokeObjectURL(blobUrl);
-      toast("Invoice will be downloaded!");
+      successToast("Invoice will be downloaded!");
     } catch (error) {
       console.log({ error });
-      toast("Failed to load payment history!");
+      errorToast("Failed to load payment history!");
     }
   };
 

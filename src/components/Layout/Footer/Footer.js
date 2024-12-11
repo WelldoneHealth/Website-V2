@@ -54,7 +54,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-12 mb-16">
           {/* Company Info */}
           <div className="lg:col-span-2">
-          <h3 class="text-2xl font-bold text-white mb-4">Welldone Health</h3>
+          <h3 className="text-2xl font-bold text-white mb-4">Welldone Health</h3>
             {/* <img src={logo?.src} alt="Welldone Health Logo" className="mb-4 w-36" /> */}
             <p className="mb-6">
               Your trusted partner in healthcare. Making quality healthcare accessible to everyone through innovative
@@ -69,7 +69,7 @@ export default function Footer() {
                     alt="Social Media Icon"
                   />
                 </Link>
-              ))}
+              ))}        
             </div>
             <div className="space-y-4 py-4">
               <div className='flex'>

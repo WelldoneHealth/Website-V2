@@ -62,12 +62,15 @@ export default function SpecificAppointmentHistoryModule({appointmentId}) {
 </div>
 
 {/* ----------------card---------below 720 px------ */}
+<div className="space-y-2  w-full">
+<p className='text-lg sm:text-base'>Appointment Details</p>
 <SpecificAppointmentMobileView  appointmentData={specificHistoryData}  />
-
+</div>
 
 
 {/* -------------------------payment details------------- */}
 <PaymentBoxDetails appointmentData={specificHistoryData} />
+
 
 {/* ---------------tracking status-------------- */}
 {/* <Tracking />  */}

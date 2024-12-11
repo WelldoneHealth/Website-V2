@@ -3,17 +3,22 @@ import useUtilStore from "@/store/utiStore";
 import { registerUser } from "@/modules/login/apis";
 
 export const useRegister = () => {
+  // console.log("register muataion")
   const setLoading = useUtilStore((state) => state.setLoading); // Only get setLoading
 
   return useMutation({
-    mutationFn: registerUser,
+    mutationFn: registerUser,              
     onMutate: () => {
       setLoading(true); // Set loading to true when mutation starts
     },
 
     onError: (error) => {
-      console.error(
-        error?.response?.data?.message || "Registration failed! Try again later"
+      console.log("the sceond paret error is",error?.message)
+      // console.error(
+      //   error?.response?.data?.message || "Registration failed! Try again later"
+      // );
+      throw new Error(
+        error?.message || "Registration failed! Try again later"
       );
       return error?.message || "Registration failed! Try again later"
     },

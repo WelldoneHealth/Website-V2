@@ -6,7 +6,6 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import MemberCard from "./components/MemberCard";
 import { PlusIcon } from "lucide-react";
 import { PopConfirm } from "@/shared/components/Popconfirm";
-import { toast } from "sonner";
 import AddPatientDrawer from "@/shared/atoms/addPatientDrawer";
 import {
   Pagination,
@@ -18,6 +17,7 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 const FamilyMembersModule = () => {
   const queryClient = useQueryClient();
@@ -53,7 +53,7 @@ const FamilyMembersModule = () => {
   const deleteMemberMutation = useMutation({
     mutationFn: () => deleteFamilyMember(popconfirm?.data?.id),
     onSuccess: () => {
-      toast("Member has been deleted", {
+      successToast("Member has been deleted", {
         description: `${popconfirm?.data?.first_name ?? ""} ${
           popconfirm?.data?.last_name ?? ""
         }`,
@@ -62,7 +62,7 @@ const FamilyMembersModule = () => {
       queryClient.invalidateQueries(["familyMemberList"]); // Refresh patient list
     },
     onError: () => {
-      toast("Something went wrong!");
+      errorToast("Something went wrong!");
     },
   });
 
@@ -224,7 +224,7 @@ const FamilyMembersModule = () => {
         }}
         successCallback={(item) => {
           setShowAddPatientDrawer(false);
-          toast("Member Added Successfully", {
+          successToast("Member Added Successfully", {
             description: `${item?.first_name ?? ""} ${item?.last_name ?? ""}`,
           });
           queryClient.invalidateQueries(["familyMemberList"]);

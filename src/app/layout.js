@@ -49,7 +49,7 @@ export default function RootLayout({ children }) {
           <Navbar />
           <NextTopLoader />
           <main className=" mx-auto lg:container mt-[60px]  md:mt-[68px] min-h-[calc(100vh-100px)] ">
-            <Toaster />
+            <Toaster richColors position="bottom-right" />
             {children}
           </main>
           <Footer />

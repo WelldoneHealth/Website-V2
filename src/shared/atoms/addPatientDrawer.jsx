@@ -24,7 +24,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { bloodGroups } from "../usefulData/addPatientDrawerData";
-import { toast } from "sonner";
+import { errorToast, successToast } from "./ToastMessageFunc";
 
 const AddPatientDrawer = ({
   isOpen,
@@ -87,7 +87,7 @@ const AddPatientDrawer = ({
     onSuccess: (data) => {
       console.log("Patient added successfully:", data);
       successCallback(data);
-      toast("Patient added successfully!");
+      successToast("Patient added successfully!");
       onClose();
       // updatePatientListFunc()
       setFormData({
@@ -108,7 +108,7 @@ const AddPatientDrawer = ({
     },
     onError: (error) => {
       console.error("Error adding patient:", error);
-      toast("Patient addition error");
+      errorToast("Patient addition error");
       // Optionally show an error notification
     },
   });
