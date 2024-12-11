@@ -1,10 +1,11 @@
 import useAuthStore from "@/store/authStore";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import useUtilStore from "@/store/utiStore";
-import { getCurrentUser, loginUser } from "@/modules/login/apis";
+import { getCurrentUser, getLoginOtp, loginUser } from "@/modules/login/apis";
 import Cookies from "js-cookie";
 
 export const useLogin = () => {
+  // console.log("tye login mutation")
   const setToken = useAuthStore((state) => state.setToken);
   const setUserDetails = useAuthStore((state) => state.setUserDetails);
   const setLoading = useUtilStore((state) => state.setLoading); // Only get setLoading
@@ -17,6 +18,7 @@ export const useLogin = () => {
     },
     onSuccess: async (data) => {
       const authToken = data.access;
+      console.log("the auth token of login is",authToken)
       setToken(authToken);
 
       // Fetch current user details with the authToken
@@ -41,3 +43,30 @@ export const useLogin = () => {
     },
   });
 };
+
+
+
+
+export const useRequestOtp=()=>{
+  const setLoading = useUtilStore((state) => state.setLoading);
+  console.log("entered in usemutaion of request otp")
+  return useMutation({
+    mutationFn: getLoginOtp,
+    // mutationFn: ()=>console.log("the mutat func is ruing"),
+    onMutate: () => {
+      setLoading(true); // Set loading to true when mutation starts
+    },
+    onSuccess: async (otpData) => {
+      console.log('OTP successfully sent', otpData);
+      // Optionally invalidate queries or refetch OTP-related data
+    },
+    onError: (error) => {
+      console.error("error in use mutation",error);
+    },
+    onSettled: () => {
+      setLoading(false); // Set loading to false when mutation settles
+    },
+  });
+}
+
+

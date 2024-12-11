@@ -3,10 +3,11 @@ import useUtilStore from "@/store/utiStore";
 import { registerUser } from "@/modules/login/apis";
 
 export const useRegister = () => {
+  // console.log("register muataion")
   const setLoading = useUtilStore((state) => state.setLoading); // Only get setLoading
 
   return useMutation({
-    mutationFn: registerUser,
+    mutationFn: registerUser,              
     onMutate: () => {
       setLoading(true); // Set loading to true when mutation starts
     },

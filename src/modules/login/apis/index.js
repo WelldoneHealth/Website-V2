@@ -1,4 +1,6 @@
 import axiosInstance from "@/shared/apis/axiosInstance";
+import axios from "axios";
+
 
 export const loginUser = async (credentials) => {
   const response = await axiosInstance.post(`token/`, credentials);
@@ -27,4 +29,16 @@ export const getCurrentUser = async (authToken) => {
     },
   });
   return response.data; 
+};
+
+
+export const getLoginOtp = async (userData) => {
+  console.log("thge request opt is running and the data is---",userData.contact)
+ try {
+  const response = await axiosInstance.post(`apiV1/generate-otp/`, { contact: userData.contact, method: "login" });
+  console.log( response.data)
+  return response.data;
+ } catch (error) {
+  console.log("the erro occuers in otp function is",error)
+ }  
 };

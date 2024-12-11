@@ -63,7 +63,7 @@ export default function SectionTabsWithMaps({ tab,tabDetails }) {
             />
           </div>
         </div>
-        <div className="">
+        <div className="hidden">
           {/* ---------------------calling functionality-------- */}
           <div onClick={handleCopy} className="w-10 h-10 text-2xl flexCenter rounded-full bg-[#EFF8FF]  text-white font-medium cursor-pointer" >
             <img src={phoneCallIcon?.src} className=""  alt="load..." /> 
