@@ -19,7 +19,6 @@ const NavbarHero = () => {
       setSearchResults([]);
       return;
     }
-
     try {
       setLoading(true);
       setError("");
@@ -60,7 +59,7 @@ const NavbarHero = () => {
       const slug = option?.value;
       const pathname = Routes.hospitalDetailsPage.replace(
         "/[slug]",
-        `/${slug}`
+        `/${slug}` 
       );
       router.push(pathname);
     } else {
