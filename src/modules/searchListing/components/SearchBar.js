@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 
-const HeaderSearch = React.memo(({ onSearch }) => {
+const HeaderSearch = ({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [title, setTitle] = useState("Find Hospitals/Doctors");
-
-
 
   const handleSearch = () => {
     if (onSearch) {
       onSearch(searchQuery);
     }
   };
-
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -23,9 +20,6 @@ const HeaderSearch = React.memo(({ onSearch }) => {
       setTitle("Find Doctor");
     }
   }, []);
-
-
-  
 
   return (
     <header
@@ -66,6 +60,6 @@ const HeaderSearch = React.memo(({ onSearch }) => {
       </div>
     </header>
   );
-});
+};
 
 export default HeaderSearch;

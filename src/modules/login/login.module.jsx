@@ -206,7 +206,7 @@ const handleGetOtp=(e)=>{
                           password: e.target.value,
                         }))
                       }
-                      className="bg-transparent border-none px-0"
+                      // className="bg-transparent  px-5"
                       required
                     />
 {(loginCredentials.password.length > 0 && loginCredentials.password.trim() !== "")  && <img src={!viewPassword ? eyeOpen?.src : eyeClose?.src } onClick={()=>setViewPassword(!viewPassword)} className="w-5 cursor-pointer " alt="load..."     />  }             
@@ -271,7 +271,7 @@ const handleGetOtp=(e)=>{
                       Signup
                     </button>
                   </p>
-                  <p onClick={()=>setIsLoginTypeOtp(!isLoginTypeOtp)} className="text-center cursor-pointer">Login with {isLoginTypeOtp?"Password" : "Otp"}</p>
+                  {/* <p onClick={()=>setIsLoginTypeOtp(!isLoginTypeOtp)} className="text-center cursor-pointer">Login with {isLoginTypeOtp?"Password" : "Otp"}</p> */}
                 </form> 
           
               </CardContent>
