@@ -97,12 +97,12 @@ export default function DoctorFilters({ onApplyFilters, onResetFilters }) {
       </div>
 
       {/* State Filter */}
-      <div className="space-y-2 hidden">
+      <div className="space-y-2">
         <label className="text-sm font-medium">State</label>
         <select
           name="state"
           value={filters.state}
-          onChange={handleChange}              
+          onChange={handleChange}
           className="w-full border border-gray-300 rounded-lg px-3 py-2"
         >
           <option value="">Select State</option>
@@ -127,7 +127,7 @@ export default function DoctorFilters({ onApplyFilters, onResetFilters }) {
       </div> */}
 
       {/* Experience Filter */}
-      <div className="space-y-2 hidden">
+      <div className="space-y-2">
         <label className="text-sm font-medium">Experience</label>
         <select
           name="experience"

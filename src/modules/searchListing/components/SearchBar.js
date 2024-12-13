@@ -1,20 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Input } from "@/components/ui/input";
-import { doctorHospitalSearch } from "@/modules/home/apis";
 
 const HeaderSearch = React.memo(({ onSearch }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [title, setTitle] = useState("Find Hospitals/Doctors");
-  const [searchResults, setSearchResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
 
 
-  // const handleSearch = () => {
-  //   if (onSearch) {
-  //     onSearch(searchQuery);
-  //   }
-  // };
+
+  const handleSearch = () => {
+    if (onSearch) {
+      onSearch(searchQuery);
+    }
+  };
 
 
   useEffect(() => {
@@ -27,32 +24,7 @@ const HeaderSearch = React.memo(({ onSearch }) => {
     }
   }, []);
 
-  // const handleSearch = async (term) => {
-  //   if (!term) {
-  //     setSearchResults([]);
-  //     return;
-  //   }
-  //   try {
-  //     setLoading(true);
-  //     setError("");
 
-  //     // Call the API with the search term
-  //     const results = await doctorHospitalSearch(term);
-  //     console.log("the doctors search results are",results)
-
-  //     if (results.length > 0) {
-  //       setSearchResults(results);
-  //     } else {
-  //       setSearchResults([]);
-  //       setError("No results found for your search.");
-  //     }
-  //   } catch (err) {
-  //     console.error("Search API error:", err);
-  //     setError("An error occurred while fetching the search results.");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
   
 
   return (
@@ -83,7 +55,7 @@ const HeaderSearch = React.memo(({ onSearch }) => {
               />
               <button
                 type="button"
-                onClick={()=>onSearch(searchQuery)}
+                onClick={handleSearch}
                 className="absolute inset-y-0 right-0 flex items-center justify-center bg-blue-500 text-white px-4 rounded-r-lg hover:bg-blue-600 focus:ring-2 focus:ring-primary-200 focus:outline-none"
               >
                 Search
