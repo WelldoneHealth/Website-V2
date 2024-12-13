@@ -5,7 +5,7 @@ export const getSerachList = async (
     is_hospital: false,
     specialty: undefined,
     page: 1,
-    search: undefined
+    search: undefined,
   }
 ) => {
   try {
@@ -14,17 +14,17 @@ export const getSerachList = async (
     if (params.is_hospital !== undefined) {
       queryParams.is_hospital = params.is_hospital;
     }
-    if (params.specialty !== undefined || (params.specialty !== "")) {
+    if (params.specialty !== undefined || params.specialty !== "") {
       queryParams.specialty = params.specialty;
     }
     if (params.page !== undefined) {
       queryParams.page = params.page;
     }
-    if (params.search!== undefined) {
+    if (params.search !== undefined) {
       queryParams.search = params.search;
     }
 
-    const response = await axiosInstance.get(`apiV1/home-search`, {
+    const response = await axiosInstance.get(`apiV1/home-search/`, {
       params: queryParams,
     });
     return response.data;
@@ -34,15 +34,13 @@ export const getSerachList = async (
   }
 };
 
-
-  export const getSpecialty = async () => {
-    try {
-      const response = await axiosInstance.get(`apiV1/practice-specialty/`);
-      console.log("Response:", response);
-      return response.data;
-    } catch (error) {
-      console.error("Error fetching specialties:", error);
-      throw error;
-    }
-  };
-  
+export const getSpecialty = async () => {
+  try {
+    const response = await axiosInstance.get(`apiV1/practice-specialty/`);
+    console.log("Response:", response);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching specialties:", error);
+    throw error;
+  }
+};
