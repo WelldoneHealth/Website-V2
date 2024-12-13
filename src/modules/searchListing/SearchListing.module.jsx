@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import HospitalCard from "./components/HospitalCard";
 import DoctorCard from "./components/DoctorCard";
@@ -17,8 +17,12 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import noData from "@/asset/Icons/no_data.svg";
+import { useRouter } from "next/navigation";
+import chalk from "chalk";
+import { filter } from "lodash";
 
 export default function SearchListingPage() {
+  const router=useRouter()
   const [filters, setFilters] = useState({});
   const [isMobileFilterOpen, setMobileFilterOpen] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -28,6 +32,7 @@ export default function SearchListingPage() {
   const limit = 10; // Items per page
 
   useEffect(() => {
+    console.log(chalk.bgGreen("this use effect is running"))
     const params = new URLSearchParams(window.location.search);
     const isHospitalParam = params.get("is_hospital");
     const practiceSpecialityParam = params.get("practice-specialty");
@@ -40,20 +45,57 @@ export default function SearchListingPage() {
     }
   }, []);
 
-  const combinedFilters = {
-    ...filters,
-    ...(isHospital !== null && { is_hospital: isHospital }),
-    ...(doctorSpeciality && { specialty: doctorSpeciality }),
-    page: currentPage,
-    limit,
-  };
 
+  useEffect(() => {
+    console.log(chalk.bgBlue("this use effect is running"))
+    if (doctorSpeciality) {
+      router.replace({
+        pathname: router.pathname,
+        query: {
+          ...router.query,
+          specialty:doctorSpeciality,
+        },
+      });
+    }
+  }, [doctorSpeciality,isHospital]);
+
+
+  // const combinedFilters = {
+  //   ...filters,
+  //   ...(isHospital !== null && { is_hospital: isHospital }),
+  //   ...(doctorSpeciality && { specialty: doctorSpeciality }),
+  //   page: currentPage,
+  //   limit,
+  // };
+  
+
+  const combinedFilters = useMemo(() => {
+    return {
+      ...filters,
+      ...(isHospital !== null && { is_hospital: isHospital }),
+      ...(doctorSpeciality && { specialty: doctorSpeciality }),
+      page: currentPage,
+      limit,
+    };
+  }, [filters, isHospital, doctorSpeciality, currentPage]);
+  
 
   const { data, isLoading, isError } = useQuery({
     queryKey: ["searchList", combinedFilters],
     queryFn: () => getSerachList(combinedFilters),
     keepPreviousData: true,
+    // enabled:combinedFilters,
+    onSuccess: (data) => {
+      console.log(chalk.blue.bold("Query fetched successfully:"), isHospital,doctorSpeciality);
+    },
+    onError:()=>{
+      console.log("the erorr occured");
+    }
   });
+
+
+  if(!isLoading)console.log("the loading is true",data)
+
 
   const totalPages = Math.ceil((data?.count || 0) / limit);
 

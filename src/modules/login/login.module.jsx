@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useLogin, useRequestOtp } from "@/hooks/useLogin";
+import { useLogin, useRequestOtp, useVerifyOtp } from "@/hooks/useLogin";
 import UnauthenticatedLayout from "@/shared/layouts/UnauthenticatedLayout";
 import useUtilStore from "@/store/utiStore";
 import { useRegister } from "@/hooks/useRegister";
@@ -24,8 +24,9 @@ const LoginModule = () => {
   });
 
   const [otpLoginCredentials,setOtpLoginCredentials]=useState({
-    contact:" ",
-    otp:""
+    contact:"",
+    otp:"",
+    method:"login"
   })
 
   const [isOtpAvailable,setIsOtpAvailable]=useState(false)
@@ -47,6 +48,7 @@ const LoginModule = () => {
   const loginMutation = useLogin();
   const registerMutation = useRegister();
   const requestOtpMutation=useRequestOtp()
+  const verifyOtpMutation=useVerifyOtp()
 
   const handleTabChange = (tab) => {
     setCurrentTab(tab); // Update the current tab
@@ -60,16 +62,23 @@ const LoginModule = () => {
   };
 
 
+  const handleOtpVerification=(e) => {
+    e.preventDefault();
+    if (otpLoginCredentials.otp && otpLoginCredentials.contact) {
+      verifyOtpMutation.mutate({ ...otpLoginCredentials });
+    }
+  };
 
 
 const handleGetOtp=(e)=>{
-  console.log("the button is cliked",2+3)
-  console.log("Contact:",otpLoginCredentials.contact);
+  // console.log("the button is cliked",2+3)
+  // console.log("Contact:",otpLoginCredentials.contact);
   e.preventDefault(); 
   if(otpLoginCredentials.contact){
-    requestOtpMutation.mutate({ contact: otpLoginCredentials.contact.trim() },{
+    requestOtpMutation.mutate({...otpLoginCredentials, contact: otpLoginCredentials.contact.trim() },{
       onSuccess: () => {
       console.log("otp sent")
+      setIsOtpAvailable(true)
       },
       onError: (error) => {
         console.log("error in otp")
@@ -78,10 +87,7 @@ const handleGetOtp=(e)=>{
   }
 
 }
-const handleOtpLogin=(e)=>{
-  e.preventDefault(); 
-console.log("gelo")
-}
+
 
   const handleRegisterSubmit = (e) => {
     e.preventDefault();
@@ -136,10 +142,10 @@ console.log("gelo")
                 <CardTitle className="text-2xl text-[#01549A]">Login</CardTitle>
               </CardHeader>
               <CardContent>
-                 <form onSubmit={!isLoginTypeOtp ? handleLoginSubmit :  handleOtpLogin } className="grid gap-4">
+                 <form onSubmit={!isLoginTypeOtp ? handleLoginSubmit :  handleOtpVerification } className="grid gap-4">
                   <div className="grid gap-2">
                 
-                    <Label htmlFor="login-contact">Contact</Label>
+                 {  !isOtpAvailable &&  <Label htmlFor="login-contact">Contact</Label> }
                         {/* ----------------------contact for password login------ */}
                    {!isLoginTypeOtp && <Input
                       id="login-contact"
@@ -155,7 +161,7 @@ console.log("gelo")
                       required
                     />}
       {/* ----------------------contact for otp login------ */}
-                    { isLoginTypeOtp && <Input
+                    { (isLoginTypeOtp && !isOtpAvailable) && <Input
                       id="login-contact"
                       type="tel"
                       placeholder="Enter your contact"
@@ -205,15 +211,15 @@ console.log("gelo")
                     />
 {(loginCredentials.password.length > 0 && loginCredentials.password.trim() !== "")  && <img src={!viewPassword ? eyeOpen?.src : eyeClose?.src } onClick={()=>setViewPassword(!viewPassword)} className="w-5 cursor-pointer " alt="load..."     />  }             
 </div>
- {/* ------------end------------------- */}
-
+ {/* ------------end------------------- */}                         
+ 
                   </div> }
                   {/* -------------otp input----------- */}
                   { (isLoginTypeOtp && isOtpAvailable) &&  <div className="grid gap-2">
                     <Label htmlFor="login-password">Otp</Label>
                     <Input
                       id="login-password"
-                      type="password"
+                      type="text"
                       placeholder="Enter your Otp"
                       value={otpLoginCredentials.otp}
                       onChange={(e) =>
@@ -248,7 +254,7 @@ console.log("gelo")
                     type="submit"
                     className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
                   >
-                 Verify Otp & Login
+                 { !loading ? "Verify Otp & Login" : "Verifying..."}
                   </Button>}
                   {loginMutation.isError && (
                     <p className="text-center mt-2 text-red-500">
