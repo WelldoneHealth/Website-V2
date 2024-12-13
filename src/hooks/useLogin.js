@@ -4,6 +4,7 @@ import useUtilStore from "@/store/utiStore";
 import { getCurrentUser, getLoginOtp, loginUser, verifyLoginOtp } from "@/modules/login/apis";
 import Cookies from "js-cookie";
 import { toast } from "sonner";
+import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 
 export const useLogin = () => {
   // console.log("tye login mutation")
@@ -32,7 +33,6 @@ export const useLogin = () => {
       } catch (error) {
         toast("Something went wrong!");
       }
-
       // Optionally invalidate or refetch queries if needed
       queryClient.invalidateQueries(["currentUser"]);
     },
@@ -59,11 +59,12 @@ export const useRequestOtp = () => {
       setLoading(true); // Set loading to true when mutation starts
     },
     onSuccess: async (otpData) => {
-      console.log("OTP successfully sent", otpData);
-      // Optionally invalidate queries or refetch OTP-related data
+      // console.log("OTP successfully sent", otpData);
+      successToast(otpData?.message || "Otp sent successfully")
     },
     onError: (error) => {
       console.error("error in use mutation", error);
+      errorToast(error?.message || "Something went wrong")
     },
     onSettled: () => {
       setLoading(false); // Set loading to false when mutation settles
@@ -93,7 +94,8 @@ export const useVerifyOtp = () => {
       queryClient.invalidateQueries(["currentUser"]);
     },
     onError: (error) => {
-      console.error("error in use mutation", error);
+      errorToast(error?.message || "Something went wrong")
+      // console.error("error in use mutation", error);
     },
     onSettled: () => {
       setLoading(false); // Set loading to false when mutation settles

@@ -77,7 +77,7 @@ const handleGetOtp=(e)=>{
   if(otpLoginCredentials.contact){
     requestOtpMutation.mutate({...otpLoginCredentials, contact: otpLoginCredentials.contact.trim() },{
       onSuccess: () => {
-      console.log("otp sent")
+      // console.log("otp sent")
       setIsOtpAvailable(true)
       },
       onError: (error) => {

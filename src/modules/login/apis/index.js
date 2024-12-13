@@ -36,22 +36,23 @@ export const getLoginOtp = async (userData) => {
   console.log("thge request opt is running and the data is---",userData.contact)
  try {
   const response = await axiosInstance.post(`apiV1/generate-otp/`, { contact: userData.contact, method: "login" });
-  console.log( response.data)
   return response.data;
  } catch (error) {
-  console.log("the erro occuers in otp function is",error)
+  throw new Error(response?.data?.message  || "Something went wrong.")
  }  
 };
 
 
 export const verifyLoginOtp = async (userData) => {
-  console.log("the verify otp is",typeof userData.otp)
   // console.log("thge request opt is running and the data is---",userData.contact)
  try {
   const response = await axiosInstance.post(`apiV1/verify-otp/`, userData );
-  console.log( response.data)
+  // console.log( response.data)
   return response.data;
  } catch (error) {
   console.log("the erro occuers in otp function is",error)
+  throw new Error(response?.data?.message  || "Something went wrong.")
  }  
 };
+
+
