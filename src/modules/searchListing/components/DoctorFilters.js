@@ -12,11 +12,11 @@ export default function DoctorFilters({ onApplyFilters, onResetFilters }) {
 
   const [specialties, setSpecialties] = useState([]);
   const [searchSpecialty, setSearchSpecialty] = useState("");
-  const [showDropdown, setShowDropdown] = useState(false); 
+  const [showDropdown, setShowDropdown] = useState(false);
 
   useEffect(() => {
     onApplyFilters(filters);
-  }, [filters, onApplyFilters]);
+  }, [filters]);
 
   // Fetch specialties from API
   useEffect(() => {

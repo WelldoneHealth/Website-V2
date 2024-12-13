@@ -33,7 +33,11 @@ export default function SearchListingPage() {
     const params = new URLSearchParams(window.location.search);
     setQueryParams((prev) => ({
       ...prev,
-      is_hospital: params.get("is_hospital") === "true" ? true : false,
+      is_hospital: params.get("is_hospital")
+        ? params.get("is_hospital") === "true"
+          ? true
+          : false
+        : null,
       specialty: params.get("practice-specialty") || null,
     }));
   }, []);
@@ -42,6 +46,7 @@ export default function SearchListingPage() {
   const { data, isLoading, isError } = useQuery({
     queryKey: ["searchList", queryParams],
     queryFn: () => getSerachList(queryParams),
+    keepPreviousData: true, // Keeps previous data until new data is fetched
   });
 
   // Update queryParams helper functions
