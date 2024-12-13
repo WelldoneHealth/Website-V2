@@ -11,7 +11,7 @@ import supportIcon from "@/asset/Icons/support.svg";
 
 import doctorImage4 from "@/asset/Images/doctor4.png";
 import doctorImage5 from "@/asset/Images/doctor5.png";
-import doctorBannerImage2 from "@/asset/Images/doctorBanner2.png";
+import doctorBannerImage2 from "@/asset/Images/homeBanner.png";
 import backgroundImage from "@/asset/Images/background.png";
 import times5Image from "@/asset/Images/times5.png";
 
@@ -75,27 +75,25 @@ export default function Home() {
   return (
     //todo ------- mt-20  ------initial margin top
 
-    <div className="w-full relative space-y-16 max-w-[1600px] mx-auto    pt-[1px]  lg:px-0     ">
+    <div className="w-full relative space-y-16 max-w-[1600px] mx-auto pt-[1px]  lg:px-0     ">
+
       {/* -------------flex------  520px  ------ */}
-      <div
-        // style={{ background: 'linear-gradient(270deg, rgba(150, 207, 255, 0.5) 36%, rgba(150, 207, 255, 0.1) 92%)' }}
-        className=" mb-8 lg:mb-20 xl:mb-40  2xl:mb-44 w-full max-h-max lsm:h-[550px]  relative flex flex-col lsm:flex-row  max-lsm:pb-10"
-      >
+      <div className="mb-8 lg:mb-20 xl:mb-40 2xl:mb-44 w-full max-h-max lsm:h-[550px] relative flex flex-col items-center lsm:flex-row max-lsm:pb-10 mt-36 py-4">
         <img
           src={doctorBannerImage2?.src}
-          className=" lsm:hidden  w-[98%] sm:w-[85%]  z-20  ml-auto block"
-          alt="load..."
+          className="lsm:hidden w-[98%] sm:w-[85%] z-20 ml-auto block"
+          alt="Doctor Banner"
         />
 
-        <div className="pl-3 sm:pl-6 lsm:pl-10  xl:pl-20 relative z-30 msm:-mt-[30px]  lsm:mt-16 flex flex-col items-start gap-y-0  text-primary">
-          <p className="text-[20px] sm:text-[28px] font-bold leading-0">
+        <div className="pl-4 sm:pl-8 lsm:pl-12 xl:pl-24 relative z-30 msm:-mt-[30px] lsm:mt-16 flex flex-col items-start gap-y-2 text-primary">
+          <p className="text-[22px] sm:text-[30px] font-bold leading-tight">
             Become a
           </p>
-          <p className=" text-[30px]  msm:text-[32px] sm:text-[40px] lsm:text-[38px] lg:text-[42px] xl:text-[48px] 2xl:text-[52px] font-bold max-asm:leading-tight">
-            Welldone Health practitioner
+          <p className="text-[32px] msm:text-[36px] sm:text-[44px] lsm:text-[42px] lg:text-[46px] xl:text-[50px] 2xl:text-[56px] font-bold max-asm:leading-tight">
+            Welldone Health Practitioner
           </p>
-          <p className="max-asm:mt-4  text-[26px] msm:text-[34px] sm:text-[36px] 2xl:text-[42px] ">
-            and treat 1+ lakh patients
+          <p className="max-asm:mt-4 text-[24px] msm:text-[32px] sm:text-[34px] 2xl:text-[40px]">
+            Empower lives and treat thousands of patients
           </p>
           <Link
             href="https://clinic.welldonehealth.in/login"
@@ -104,21 +102,18 @@ export default function Home() {
           >
             <button
               type="button"
-              className="mt-8 text-[15px]  sm:text-lg px-6 md:px-10  py-3 rounded-[30px]  font-semibold  bg-primary text-white"
+              className="mt-8 text-[16px] sm:text-lg px-6 md:px-12 py-3 rounded-[30px] font-semibold bg-primary text-white hover:bg-primary-dark transition duration-200"
             >
-              Get started for free
+              Start Your Journey Today
             </button>
           </Link>
         </div>
-        <img
-          src={backgroundImage?.src}
-          className="w-full  absolute   xl:-top-16  left-0  z-10   "
-          alt="load..."
-        />
+
+
         <img
           src={doctorBannerImage2?.src}
-          className="max-lsm:hidden w-[80%] lg:w-[75%] xl:w-[980px] 2xl:w-[1050px] absolute  right-0   z-20  "
-          alt="load..."
+          className="max-lsm:hidden w-[50%] sm:w-[30%] lg:w-[45%] xl:w-[600px] 2xl:w-[900px] absolute right-0 z-20"
+          alt="Doctor Banner"
         />
       </div>
 
@@ -308,10 +303,7 @@ export default function Home() {
                         alt="load..."
                       />
                     </div>
-                    <Link
-                      href="/grow"
-                      passHref
-                    >
+                    <Link href="/grow" passHref>
                       <button
                         type="button"
                         className="mt-6 lg:mt-12 px-5  py-2 rounded-[30px]  font-semibold text-xs  border-[1px] border-primary  text-primary"
