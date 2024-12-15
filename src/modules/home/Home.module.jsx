@@ -1,9 +1,7 @@
 import React from "react";
-import DoctorSpeciality from "@/components/DoctorSpeciality/DoctorSpeciality";
+
 import MobileAppBanner from "@/components/Layout/MobileAppBanner/MobileAppBanner";
-import PrimaryBanner from "@/components/Layout/PrimaryBanner/PrimaryBanner";
-import DoctoAssociateSlider from "@/components/DoctorAssociatedSlider/DoctorAssociatedSlider";
-import HospitalAssociatedSlider from "@/components/HospitalAssociatedSlider/HospitalAssociatedSlider";
+
 import NavbarHero from "@/components/Layout/PrimaryBanner/HeroSection";
 import ServicesSection from "@/components/DoctorSpeciality/ServicesSection";
 import DoctorsSection from "@/components/DoctorAssociatedSlider/DoctorSlider";

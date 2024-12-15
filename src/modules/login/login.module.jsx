@@ -12,13 +12,11 @@ import { useRegister, useRequestRegisterOtp, useVerifyRegisterOtp } from "@/hook
 import hospitalIcon2 from "@/asset/Icons/hospital2_icon.svg";
 import eyeOpen from "@/asset/Icons/eyeOpen.svg";
 import eyeClose from "@/asset/Icons/eyeClose.svg";
-import { toast } from "sonner";
 import Link from "next/link";
-import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
-import { useQuery } from "@tanstack/react-query";
+import { errorToast } from "@/shared/atoms/ToastMessageFunc";
 import OtpModal from "./components/OtpModal";
 import OtpInputComponent from "./components/OtpInputComponent";
-import { contactValidator, emailValidator, ErrorMessageComponent, loginValidator, otpContactValidator, otpLengthValidator, otpValidator, passwordValidator, registerValidator } from "./utils/validatorFunction";
+import { ErrorMessageComponent, loginValidator, otpContactValidator, otpLengthValidator,  registerValidator } from "./utils/validatorFunction";
 
 const LoginModule = () => {
   const [loginCredentials, setLoginCredentials] = useState({
