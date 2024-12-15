@@ -1,6 +1,5 @@
 import React from 'react'
 import smallHospital3 from "@/asset/Images/smallHospital3.png";
-import { capitalCase } from 'change-case';
 
 
 
@@ -27,8 +26,8 @@ export default function CheckoutHospitalCard2({hospitalData}) {
         <p className="text-base msm:text-lg md:text-base font-medium">
           {hospitalData?.clinic_name}
         </p>
-        <p className="text-sm md:text-[13px] max-md:hidden leading-tight">
-          {capitalCase(hospitalData?.clinic_address)}
+        <p className="text-sm md:text-[13px] max-md:hidden leading-tight capitalize ">
+        {hospitalData?.clinic_address.toLowerCase()}
         </p>
         <p className=" text-sm md:text-[13px]  md:hidden">
           Surgical Oncologist

@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -18,12 +18,12 @@ import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
 import { useQuery } from "@tanstack/react-query";
 import OtpModal from "./components/OtpModal";
 import OtpInputComponent from "./components/OtpInputComponent";
-import { contactValidator, emailValidator, otpValidator, passwordValidator } from "./utils/validatorFunction";
+import { contactValidator, emailValidator, ErrorMessageComponent, loginValidator, otpContactValidator, otpLengthValidator, otpValidator, passwordValidator, registerValidator } from "./utils/validatorFunction";
 
 const LoginModule = () => {
   const [loginCredentials, setLoginCredentials] = useState({
     contact: "",
-    password: "password1234",
+    password: "",
   });
 
   const [otpLoginCredentials, setOtpLoginCredentials] = useState({
@@ -35,10 +35,10 @@ const LoginModule = () => {
   const [isOtpAvailable, setIsOtpAvailable] = useState(false);
 
   const [registerCredentials, setRegisterCredentials] = useState({
-    name: "dfkb",
-    email: "unlnown@gmail.com",
+    name: "",
+    email: "",
     contact: "",
-    password: "password1234",
+    password: "",
   });
 
   const [isLoginTypeOtp, setIsLoginTypeOtp] = useState(false);
@@ -47,7 +47,13 @@ const LoginModule = () => {
 
   const [isRegisterOtpAvailable,setIsRegisterOtpAvailable]=useState(false)
 
+  const [errors,setErrors]=useState({})
+
   const [currentTab, setCurrentTab] = useState("login"); // state for current tab
+
+  const [resendOtpTimer,setResendOtpTimer]=useState(30)
+     const [isResendOtpActive,setIsResendOtpActive]=useState(false)
+      const [resetOtpKey, setResetOtpKey] = useState(0);
 
   const loading = useUtilStore((state) => state.loading);
   const loginMutation = useLogin();
@@ -62,29 +68,32 @@ const LoginModule = () => {
   const handleTabChange = (tab) => {
     setCurrentTab(tab); // Update the current tab
     setViewPassword(false)
+    setErrors({})
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (!contactValidator(loginCredentials.contact)) return;
-  if (!loginCredentials.password) return errorToast("All fields are Required")
-      loginMutation.mutate({ ...loginCredentials });
-  };
+    console.log("hello")
+    const errorData=loginValidator(loginCredentials.contact,loginCredentials.password)
+   if(errorData) return setErrors(errorData)
+        loginMutation.mutate({ ...loginCredentials });
+    }
 
   const handleOtpVerification = (e) => {
     e.preventDefault();
-    if (!contactValidator(otpLoginCredentials.contact)) return;
-  if (!otpValidator(otpLoginCredentials.otp)) return;
+   const errorData=otpLengthValidator(otpLoginCredentials.otp)
+   if(errorData) return setErrors(errorData)
       verifyOtpMutation.mutate({ ...otpLoginCredentials }); 
   };
 
   // -----getting the otp of login--------
-const getLoginOtpData=(otpData)=>setOtpLoginCredentials((pre)=>({...pre,otp:otpData}))
+const getLoginOtpData=(otpData)=>{setOtpLoginCredentials((pre)=>({...pre,otp:otpData}));setErrors({});}
   
 // ------------- making login  getOtp api call ----------
   const handleGetOtp = (e) => {
-    console.log("hello clicked")
-    if (!contactValidator(otpLoginCredentials.contact)) return; 
+    const errorData=otpContactValidator(otpLoginCredentials.contact)
+    if(errorData) return setErrors(errorData)
+    setIsResendOtpActive(!isResendOtpActive)
       requestOtpMutation.mutate(
         { ...otpLoginCredentials, contact: otpLoginCredentials.contact.trim() },
         {
@@ -100,13 +109,8 @@ const getLoginOtpData=(otpData)=>setOtpLoginCredentials((pre)=>({...pre,otp:otpD
 
   // --------------- making register otp call ------
   const handleRegisterOtp=()=>{
-    if ( !registerCredentials.name || !registerCredentials.email ||  !registerCredentials.contact || !registerCredentials.password  ) {
-      errorToast("Enter all fields")
-      return
-    }
-    if (!emailValidator(registerCredentials.email)) return; // Validate email
-    if (!contactValidator(registerCredentials.contact)) return; // Validate contact
-    if (!passwordValidator(registerCredentials.password)) return;
+    const errorData=registerValidator(registerCredentials.name,registerCredentials.email,registerCredentials.contact,registerCredentials.password) 
+    if(errorData) return setErrors(errorData)
     requestRegisterOtpMutation.mutate(
       { contact: registerCredentials.contact.trim() }, 
       {
@@ -145,8 +149,7 @@ const getLoginOtpData=(otpData)=>setOtpLoginCredentials((pre)=>({...pre,otp:otpD
 
   // ---------- verifying registration otp ----------
 const handleRegisterOtpVerification=(otpData)=>{
-  if (!contactValidator(registerCredentials.contact)) return;
-  if (!otpValidator(otpData)) return;
+  console.log("hgfh")
 verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpData},{
   onSuccess: () => {
     setIsModalOpen(false)
@@ -174,9 +177,29 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
 })
 }
 
+
+
+  useEffect(() => {
+      let interval;
+      setResendOtpTimer(30);
+        // setIsResendOtpActive(false);
+        interval = setInterval(() => {
+          setResendOtpTimer((prevTime) => {
+            const newTime = prevTime - 1;
+            if (newTime <= 0) {
+              // setIsResendOtpActive(true);
+              clearInterval(interval);
+            }
+            return newTime;
+          });
+        }, 1000);
+      
+      return () => clearInterval(interval);
+    }, [isResendOtpActive]);
+
   return (
     <UnauthenticatedLayout>
-      <div className="w-full min-h-screen py-8 flex flex-col items-center justify-center">
+      <div className="w-full min-h-screen py-8 flex flex-col items-center justify-start">
         <p className="text-[#01549A] font-medium text-sm  mb-7 ">
           <Link
             href="https://practice.welldonehealth.in/"
@@ -241,12 +264,14 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                               ...prev,
                               contact: e.target.value,
                             }));
+                            setErrors({...errors,contact:null})
                           } }
                           required
                         />
                       )}
+                      { errors?.contact && <ErrorMessageComponent message={errors?.contact} /> }
                     </div>
-                    {/* ------------------password for contact------ */}
+                    {/* ------------------password for login------ */}
                     {!isLoginTypeOtp && (
                       <div className="grid gap-2">
                         <Label htmlFor="login-password">Password</Label>
@@ -261,12 +286,13 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                             type={!viewPassword ? "password" : "text"}
                             placeholder="Enter your password"
                             value={loginCredentials.password}
-                            onChange={(e) =>
+                            onChange={(e) =>{
                               setLoginCredentials((prev) => ({
                                 ...prev,
                                 password: e.target.value,
                               }))
-                            }
+                              setErrors({...errors,password:null})
+                            }}
                             // className="bg-transparent  px-5"
                             required
                           />
@@ -283,6 +309,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                             )}
                         </div>
                         {/* ------------end------------------- */}
+                        {errors?.password && <ErrorMessageComponent message={errors?.password} />}
                       </div>
                     )}
                     {/* -------------otp input----------- */}
@@ -291,8 +318,9 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         <Label htmlFor="login-password">Otp</Label>
                        
                         <div className="w-full flex justify-center ">
-                        <OtpInputComponent userInput={getLoginOtpData}  />
+                        <OtpInputComponent key={resetOtpKey} userInput={getLoginOtpData}  />
                         </div>
+                        {errors?.otp && <ErrorMessageComponent message={errors?.otp} />}  
                       </div>
                     )}
                     {/* -------------password login button--------- */}
@@ -319,16 +347,49 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                     {isLoginTypeOtp && isOtpAvailable && (
                       <Button
                         type="submit"  
-                        className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
+                        className={` w-full mt-3 text-lg py-2  ${otpLoginCredentials.otp.length!==6 ?" bg-[#A8A8A8] pointer-events-none " : " bg-primary hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"}`}  
+                        disabled={otpLoginCredentials.otp.length !==6 }              
                       >
-                        {!loading ? "Verify Otp & Login" : "Verifying..."}
+                         {!loading ? "Verify Otp & Login" : "Verifying..."}  
                       </Button>
                     )}
+
+
+
+                   {  (isLoginTypeOtp && isOtpAvailable) &&  <> 
+                    {resendOtpTimer > 0 ? (
+            <p className="text-sm text-center my-3 " >
+              Resend OTP in{" "}
+              <span className="text-primary font-semibold">{resendOtpTimer} sec</span>
+            </p>
+          ) : (
+            <p
+              onClick={() => {
+               setOtpLoginCredentials({...otpLoginCredentials,otp:""})
+                setResendOtpTimer(30); // Reset timer after resending OTP
+                setIsResendOtpActive(!isResendOtpActive);
+                setResetOtpKey((prevKey) => prevKey + 1) 
+              }}
+              className="text-sm my-3 cursor-pointer font-semibold text-primary text-center"
+            >
+              Resend OTP
+            </p>
+          )} 
+                   <p onClick={()=>{setIsOtpAvailable(false);setOtpLoginCredentials({...otpLoginCredentials,otp:""})}} className="my-1 text-sm cursor-pointer hover:text-primary text-center" >Entered a wrong Number?</p> </> }
                     {loginMutation.isError && (
                       <p className="text-center mt-2 text-red-500">
                         Error: {loginMutation.error?.message || "Login failed"}
                       </p>
                     )}
+                   
+                    <button
+                    type="button"
+                      onClick={() => {setIsLoginTypeOtp(!isLoginTypeOtp);setIsOtpAvailable(false);setOtpLoginCredentials((pre) => ({ ...pre, otp: "" }));}}
+                      className=" mx-auto rounded-md text-center cursor-pointer py-1 w-[200px] border-2 border-gray-400 flex items-center  justify-center" 
+                    >
+                      Login with {isLoginTypeOtp ? "Password" : "Otp"}
+                    </button>
+
                     <p className="text-center mt-3">
                       Don't have an account?{" "}
                       <button
@@ -339,12 +400,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         Signup
                       </button>
                     </p>
-                    <p
-                      onClick={() => {setIsLoginTypeOtp(!isLoginTypeOtp);setIsOtpAvailable(false);setOtpLoginCredentials((pre) => ({ ...pre, otp: "" }));}}
-                      className="text-center cursor-pointer" 
-                    >
-                      Login with {isLoginTypeOtp ? "Password" : "Otp"}
-                    </p>
+
                   </form>
                 </CardContent>
               </Card>
@@ -366,14 +422,16 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         type="text"
                         placeholder="Enter your name"
                         value={registerCredentials.name}
-                        onChange={(e) =>
+                        onChange={(e) =>{
                           setRegisterCredentials((prev) => ({
                             ...prev,
                             name: e.target.value,
                           }))
-                        }
+                          setErrors({...errors,userName:null})
+                        } }
                         required
                       />
+                      {errors?.userName && <ErrorMessageComponent  message={errors?.userName} />}
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="register-email">Email</Label>
@@ -382,14 +440,16 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         type="email"
                         placeholder="Enter your email"
                         value={registerCredentials.email}
-                        onChange={(e) =>
+                        onChange={(e) =>{
                           setRegisterCredentials((prev) => ({
                             ...prev,
                             email: e.target.value,
                           }))
-                        }
+                          setErrors({...errors,email:null})
+                        } }
                         required
                       />
+                       {errors?.email && <ErrorMessageComponent  message={errors?.email} />}
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="register-contact">Contact</Label>
@@ -398,14 +458,16 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         type="text"
                         placeholder="Enter your contact"
                         value={registerCredentials.contact}
-                        onChange={(e) =>
+                        onChange={(e) =>{
                           setRegisterCredentials((prev) => ({
                             ...prev,
                             contact: e.target.value,
                           }))
-                        }
+                          setErrors({...errors,contact:null})
+                        } }
                         required
                       />
+                       {errors?.contact && <ErrorMessageComponent  message={errors?.contact} />}
                     </div>
                     <div className="grid gap-2">
                       <Label htmlFor="register-password">Password</Label>
@@ -416,12 +478,13 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         type={!viewPassword ? "password" : "text"}
                         placeholder="Enter your password"
                         value={registerCredentials.password}
-                        onChange={(e) =>
+                        onChange={(e) =>{
                           setRegisterCredentials((prev) => ({
                             ...prev,
                             password: e.target.value,
                           }))
-                        }
+                          setErrors({...errors,password:null})
+                        } }
                         required
                       />
 
@@ -438,7 +501,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                             )}
 
                       </div>
-                     
+                      {errors?.password && <ErrorMessageComponent  message={errors?.password} />}
                     </div>
 
                     <Button

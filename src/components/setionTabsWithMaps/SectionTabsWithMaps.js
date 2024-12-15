@@ -35,13 +35,13 @@ export default function SectionTabsWithMaps({ tab,tabDetails }) {
            {tabDetails?.clinic_name} </Link>
           </h3>
           <Link href={`/hospital-details/${tabDetails?.branch_slug}`} className="block">
-          <p className="w-full my-3 text-sm flex ">    
+          <p className="w-full my-3 text-sm flex capitalize">    
             <img
               src={hospitalOutlineIcon?.src}
               className="w-4 mr-3"
               alt="load..."
             />
-{capitalCase(tabDetails?.clinic_address)}
+{tabDetails?.clinic_address.toLowerCase()}
           </p></Link>
           {/* -------------------flex------------------ */}
           <div className="w-full   my-2 bg-[#F5F5F5] hidden max-w-max gap-x-2 text-xs font-medium px-4 py-1 rounded-[20px]">
