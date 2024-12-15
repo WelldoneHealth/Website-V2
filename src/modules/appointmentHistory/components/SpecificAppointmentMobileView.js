@@ -3,7 +3,6 @@ import defaultPatient from "@/asset/Images/defaultPatient.png";
 import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 import defaultClinic from "@/asset/Images/defaultClinic.png";
 import Msg from "./Msg";
-import FollowUpDateComp from "./FollowUpDateComp";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useAppointmentInvoice from "@/hooks/useAppointmentInvoice";
@@ -135,9 +134,9 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
               )
             }
             type="button"
-            className="w-[95%]  msm:w-[200px] px-5 py-2 border-[1px] border-primary rounded-[5px]"
+            className="w-[95%]  msm:w-[200px] px-5 py-2 border-[1px] border-primary bg-primary rounded-[5px]"
           >
-            <p className="text-primary font-medium">Book Follow-Up</p>  
+            <p className="text-white  font-medium">Book Follow-Up</p>  
           </button>
 
           <button

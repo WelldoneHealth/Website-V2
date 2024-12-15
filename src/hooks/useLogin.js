@@ -31,14 +31,15 @@ export const useLogin = () => {
         }
         setUserDetails(userData);
       } catch (error) {
-        toast("Something went wrong!");
+        errorToast("Something went wrong!");
       }
       // Optionally invalidate or refetch queries if needed
       queryClient.invalidateQueries(["currentUser"]);
     },
     onError: (error) => {
+      errorToast( error?.response?.data?.detail ||  "Something went wrong! Try again later")
       console.log(
-        error?.response?.data?.detail ||
+        error?.response?.data?.detail ||  "Something went wrong! Try again later",
           "Something went wrong! Try again later",
         "error"
       );
@@ -95,7 +96,6 @@ export const useVerifyOtp = () => {
     },
     onError: (error) => {
       errorToast(error?.message || "Something went wrong")
-      // console.error("error in use mutation", error);
     },
     onSettled: () => {
       setLoading(false); // Set loading to false when mutation settles

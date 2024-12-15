@@ -36,8 +36,10 @@ export default function CheckoutHospitalCard({hospitalInfo}) {
             <p className="text-[13px]  asm:text-sm msm:text-base">
               {hospitalInfo?.clinic_name}
             </p>
-            <p className="text-[11px] asm:text-xs msm:text-[13px] sm:text-sm">
-              {capitalCase(hospitalInfo?.clinic_address)}
+            <p className="text-[11px] asm:text-xs msm:text-[13px] sm:text-sm capitalize">
+              {/* {capitalCase(hospitalInfo?.clinic_address)} */}
+             {hospitalInfo?.clinic_address.toLowerCase()}
+             
             </p>
           </div>
           <button
