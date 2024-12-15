@@ -374,11 +374,11 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
             </p>
           )} 
                    <p onClick={()=>{setIsOtpAvailable(false);setOtpLoginCredentials({...otpLoginCredentials,otp:""})}} className="my-1 text-sm cursor-pointer hover:text-primary text-center" >Entered a wrong Number?</p> </> }
-                    {loginMutation.isError && (
+                    {/* {loginMutation.isError && (
                       <p className="text-center mt-2 text-red-500">
                         Error: {loginMutation.error?.message || "Login failed"}
                       </p>
-                    )}
+                    )} */}
                    
                     <button
                     type="button"
