@@ -68,7 +68,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
                 </Link>
               </div>
             )}
-            {appointmentData?.payment_history?.length > 0 && (
+            {/* {appointmentData?.payment_history?.length > 0 && (
               <div className="flex justify-between items-center">
                 {" "}
                 <p className="max-md:hidden tex-base"> Invoice :</p>{" "}
@@ -80,7 +80,7 @@ export default function PaymentBoxDetails({ appointmentData }) {
                   View
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>
