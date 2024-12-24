@@ -9,7 +9,7 @@ const BasicDetails = ({ basicInfo }) => {
       <div className=" max-msm:w-[75%] max-msm:h-[270px] msm:size-[300px] rounded-lg max-sm:mx-auto overflow-hidden  ">
         <img
           src={basicInfo?.profile_picture ?? defaultDoctor?.src}
-          className=" w-full h-full object-cover object-center"
+          className=" w-full h-full object-cover object-center bg-[#EFF8FF] "
           alt="Doctor"
         />
       </div>

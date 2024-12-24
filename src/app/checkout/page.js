@@ -159,13 +159,18 @@ const [editPatientData,setEditPatientData]=useState(null)
   })
 
   const mobileViewButtonsChange = (btnFor) =>{
+    if(btnFor==="paymentStatus" && !statusData.patientSelection) {
+      return errorToast("Add patient details ")
+    }
     setStatusChange({
       doctorStatus: false,
       patientStatus: false,
       paymentStatus: false,
       appointmentStatus: false,
       [btnFor]: true, 
-    })
+    }) 
+  
+ 
     // setDataVisibilityToggle({
     //   doctorsToggle: false,
     // patientToggle: false,
@@ -298,8 +303,8 @@ const [editPatientData,setEditPatientData]=useState(null)
                   <div className="mt-5 max-sm:hidden flex flex-col gap-5 items-start justify-start p-5  py-3 bg-[#EFEFEF]">
                     
                     {!statusChange.paymentStatus && (
-                      <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
-                        statusData.patientSelection &&
+                      <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() => { 
+                        statusData.patientSelection ?
                         (setDataVisibilityToggle({
                           ...dataVisibilityToggle,
                           patientToggle: true,
@@ -308,7 +313,7 @@ const [editPatientData,setEditPatientData]=useState(null)
                           ...statusChange,
                           paymentStatus: true,
                         }),
-                        handleScrollToBox(1))} />
+                        handleScrollToBox(1)):errorToast("Add patient details")   }    }  />
                     )}
                     {statusChange.paymentStatus && (
                    <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
@@ -477,7 +482,7 @@ const [editPatientData,setEditPatientData]=useState(null)
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus","paymentToggle")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus","patientToggle")}    />  }
   {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus","paymentToggle")}    />  } */}
           {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus")}     />  }
-  {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus")}     />  }
+  {statusChange.patientStatus && <MobileViewButtons   btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus")}     />  }
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus")}    />  }
   {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus")}    />  }
    
