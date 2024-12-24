@@ -1,24 +1,12 @@
 "use client"
 import React from "react";
-import pediatricsIcon from "@/asset/Icons/pediatrics.svg";
-import cardiologyIcon from "@/asset/Icons/cardiologyIcon.svg";
-import orthopaedicIcon from "@/asset/Icons/orthopaedicIcon.svg";
-import neurologistIcon from "@/asset/Icons/neurologistIcon.svg";
-import gynaecologistIcon from "@/asset/Icons/gynaecologistIcon.svg";
-import careIcon from "@/asset/Icons/careIcon.svg";
 import pediatric2 from "@/asset/Icons/pediatric2.svg";
-import gas from "@/asset/Icons/gas.svg";
 import uro from "@/asset/Icons/uro.svg";
 import dentist2 from "@/asset/Icons/dentist2.svg";
-import lungs2 from "@/asset/Icons/lungs2.svg";
 import neurology from "@/asset/Icons/neurology.svg";
-import generalMedicine from "@/asset/Icons/generalMedicine.svg";
-import otolary from "@/asset/Icons/otolary.svg";
-import hiv from "@/asset/Icons/hiv.svg";
+
 import allergy from "@/asset/Icons/allergy.svg";
-import infectious from "@/asset/Icons/infectious.svg";
 import dermatology2 from "@/asset/Icons/dermatology2.svg";
-import { Link } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function DoctorSpeciality() {

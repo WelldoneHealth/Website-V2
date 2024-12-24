@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import clockIcon from "@/asset/Icons/clock2.svg";
 import bellIcon from "@/asset/Icons/bell.svg";
 import calenderIcon from "@/asset/Icons/calander.svg";

@@ -1,20 +1,9 @@
 import React from 'react'
-import searchIcon from "@/asset/Icons/search.svg";
-import ratingIcon from "@/asset/Icons/rating.svg";
-import doctorImageBig from "@/asset/Images/doctorImageBig.png";
-import hospitalIcon from "@/asset/Icons/hospital_icon.svg";
-import doctorBagV2Icon from "@/asset/Icons/doctorBagV2.svg";
+
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
-import smallHatIcon from "@/asset/Icons/smallHat.svg";
-import hospitalOutlineIcon from "@/asset/Icons/hospitalOutline.svg";
-import doctorImage2 from "@/asset/Images/doctorImage2.png";
 import hospitalImageBig from "@/asset/Images/hospitalImageBig.png";
 import doctorIcon from "@/asset/Icons/doctor.svg";
-import mapImage from "@/asset/Icons/mapImage.svg";
-import filterDropdownButtonIcon from "@/asset/Icons/filterDropdownButton.svg";
-import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
-import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
-import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
+
 
 export default function HospitalCard() {
   return (

@@ -1,5 +1,4 @@
 import React from "react";
-import { HOSPITAL_IMAGE1 } from "../ImageConstants";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 import doctorIcon from "@/asset/Icons/doctor.svg";
 import defaultClinic from "@/asset/Images/defaultClinic.png";

@@ -6,7 +6,6 @@ import outlineClockIcon from "@/asset/Icons/outlineClock.svg";
 import lunchBoxIcon from "@/asset/Icons/lunchBox.svg";
 import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
 import { toast } from "sonner";
-import { capitalCase } from 'change-case';
 import moment from "moment";
 
 import mapImage from "@/asset/Images/map.png";

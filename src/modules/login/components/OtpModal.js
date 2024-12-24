@@ -74,7 +74,7 @@ const OtpModal = ({ isOpen, setIsOpen, otpVerificationFunc, resendOtpFunc, userC
             // console.log("clicked")
             }}
           >
-       VerifyOtp     
+       Verify OTP    
           </button>
 
           {resendTimer > 0 ? (

@@ -3,7 +3,6 @@ import languageIcon from "@/asset/Icons/language.svg";
 import doctorBagIcon from "@/asset/Icons/doctorBag.svg";
 import doctorBagIcon2 from "@/asset/Icons/doctorBag2.svg";
 import cashCounterIcon from "@/asset/Icons/cashCounter.svg";
-import ratingIcon from "@/asset/Icons/rating.svg";
 import femaleIcon from "@/asset/Icons/female.svg";
 
 const ExtraDetails = ({ extraDocInfo }) => {
