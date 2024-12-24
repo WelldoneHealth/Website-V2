@@ -145,13 +145,13 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
             <p className="text-white  font-medium">Book Follow-Up</p>
           </button>
 
-           <button
+           {/* <button
             type="button"
             className=" px-5 py-2 border-[1px] border-primary rounded-[5px] block w-[95%]  msm:w-[200px]"
             onClick={downloadInvoice}
           >
             <p className="text-primary font-medium  ">Invoice</p>
-          </button>
+          </button> */}
          
         </div>
 
