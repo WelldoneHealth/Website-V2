@@ -12,7 +12,6 @@ import supportIcon from "@/asset/Icons/support.svg";
 import doctorImage4 from "@/asset/Images/doctor4.png";
 import doctorImage5 from "@/asset/Images/doctor5.png";
 import doctorBannerImage2 from "@/asset/Images/homeBanner.png";
-import backgroundImage from "@/asset/Images/background.png";
 import times5Image from "@/asset/Images/times5.png";
 
 import {
@@ -78,7 +77,7 @@ export default function Home() {
     <div className="w-full relative space-y-16 max-w-[1600px] mx-auto pt-[1px]  lg:px-0     ">
 
       {/* -------------flex------  520px  ------ */}
-      <div className="mb-8 lg:mb-20 xl:mb-40 2xl:mb-44 w-full max-h-max lsm:h-[550px] relative flex flex-col items-center lsm:flex-row max-lsm:pb-10 mt-36 py-4">
+      <div className="lg:mt-[100px] xl:mt-28  mb-12 lg:mb-32 xl:mb-40 2xl:mb-44  w-full max-h-max lsm:h-[550px] relative flex flex-col items-center lsm:flex-row max-lsm:pb-10  py-4">
         <img
           src={doctorBannerImage2?.src}
           className="lsm:hidden w-[98%] sm:w-[85%] z-20 ml-auto block"
@@ -112,7 +111,7 @@ export default function Home() {
 
         <img
           src={doctorBannerImage2?.src}
-          className="max-lsm:hidden w-[50%] sm:w-[30%] lg:w-[45%] xl:w-[600px] 2xl:w-[900px] absolute right-0 z-20"
+          className="max-lsm:hidden w-[50%] sm:w-[30%] lg:w-[42%] xl:w-[550px] 2xl:w-[600px] absolute right-0 z-20"
           alt="Doctor Banner"
         />
       </div>
