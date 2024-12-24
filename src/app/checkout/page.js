@@ -1,10 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import smallHospital3 from "@/asset/Images/smallHospital3.png";
 
-import outlineGeoLocationIcon from "@/asset/Icons/outlineGeoLocation.svg";
-import aroowIcon2 from "@/asset/Icons/arrow2.svg";
 // import toast from "react-hot-toast";
 import {
   appointmentOptions,
@@ -18,12 +15,10 @@ import { addAppointment } from "@/modules/checkout/apis";
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
-import { toast } from "sonner";
 import useAuthStore from "@/store/authStore";
 
 import StepsToShow from "@/modules/checkout/components/StepsToShow";
 import RightSideBox from "@/modules/checkout/components/RightSideBox";
-import ButtonType1 from "@/modules/checkout/components/ButtonType1";
 import CheckoutDoctorCard from "@/modules/checkout/components/CheckoutDoctorCard";
 import CheckoutHospitalCard from "@/modules/checkout/components/CheckoutHospitalCard";
 import CheckoutDoctorCard2 from "@/modules/checkout/components/CheckoutDoctorCard2";

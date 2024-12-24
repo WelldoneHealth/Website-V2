@@ -13,10 +13,10 @@ export const contactValidator = (contact) => {
   
   // Email Validator
   export const emailValidator = (email) => {
-    if (!email) {
-      return "Email is required!";
-    }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    // if (!email) {
+    //   return "Email is required!";
+    // }
+    if ( email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return "Invalid email format!";
     }
     return false; // No validation error

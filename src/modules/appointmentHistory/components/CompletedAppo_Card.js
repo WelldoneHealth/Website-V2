@@ -244,7 +244,7 @@ export default function CompletedAppo_Cards({
                 {appointmentCardData?.is_clinic_booking && (
                   <div className="w-full max-lsm:hidden">
                     {" "}
-                    <Msg />
+                    <Msg />             
                   </div>
                 )}
               </div>

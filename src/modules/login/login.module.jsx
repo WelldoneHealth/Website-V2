@@ -313,7 +313,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                     {/* -------------otp input----------- */}
                     {isLoginTypeOtp && isOtpAvailable && (
                       <div className="grid gap-2">
-                        <Label htmlFor="login-password">Otp</Label>
+                        <Label htmlFor="login-password">OTP</Label>
                        
                         <div className="w-full flex justify-center ">
                         <OtpInputComponent key={resetOtpKey} userInput={getLoginOtpData}  />
@@ -338,7 +338,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         onClick={handleGetOtp}  
                         className="w-full mt-3 text-lg py-2 bg-[#01549A] hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"
                       >
-                        {requestOtpMutation.isPending ? "Sending Otp..." : "Request Otp" } 
+                        {requestOtpMutation.isPending ? "Sending OTP..." : "Request OTP" } 
                       </Button>
                     )}
                     {/* ---------------------for verifying otp and login ------------- */}
@@ -348,7 +348,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                         className={` w-full mt-3 text-lg py-2  ${otpLoginCredentials.otp.length!==6 ?" bg-[#A8A8A8] pointer-events-none " : " bg-primary hover:text-[#01549A] hover:bg-white border-[1px] hover:border-[#01549A]"}`}  
                         disabled={otpLoginCredentials.otp.length !==6 }              
                       >
-                         {!loading ? "Verify Otp & Login" : "Verifying..."}  
+                         {!loading ? "Verify OTP & Login" : "Verifying..."}  
                       </Button>
                     )}
 
@@ -385,7 +385,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                       onClick={() => {setIsLoginTypeOtp(!isLoginTypeOtp);setIsOtpAvailable(false);setOtpLoginCredentials((pre) => ({ ...pre, otp: "" }));}}
                       className=" mx-auto rounded-md text-center cursor-pointer py-1 w-[200px] border-2 border-gray-400 flex items-center  justify-center" 
                     >
-                      Login with {isLoginTypeOtp ? "Password" : "Otp"}
+                      Login with {isLoginTypeOtp ? "Password" : "OTP"}
                     </button>
 
                     <p className="text-center mt-3">

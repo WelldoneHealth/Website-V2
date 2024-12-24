@@ -2,7 +2,6 @@ import React from "react";
 import ratingIcon from "@/asset/Icons/rating.svg";
 import hospitalIcon from "@/asset/Icons/hospital_icon.svg";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
-import doctorImage2 from "@/asset/Images/doctorImage2.png";
 import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 
 import Link from "next/link";

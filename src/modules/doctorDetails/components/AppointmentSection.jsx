@@ -1,8 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import sliderArrowIcon from "@/asset/Icons/sliderArrow.svg";
-import calendarIcon from "@/asset/Icons/calendar.svg";
-import rotatingArrowIcon from "@/asset/Icons/rotatingArrow.svg";
 import { useQuery } from "@tanstack/react-query";
 import { Loader } from "lucide-react";
 

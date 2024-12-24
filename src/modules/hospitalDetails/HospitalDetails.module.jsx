@@ -1,16 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
-import dragon from "@/asset/Images/dragon.jpg";
+import React from "react";
 import defaultClinic from "@/asset/Images/defaultClinic.png";
 import hospitalDefaultBanner from "@/asset/Images/hospitalDefaultBanner.png";
-import hospitalLogo from "@/asset/Icons/eachHospitalLogo.svg";
-import OfficeSafetyPrecautions from "@/Utilities/smallComponents/OfficeSafetyPrecautions";
+
 import Banner from "./components/Banner";
 import DoctorsList from "./components/DoctorsList";
 import TimingSection from "./components/TimingSection";
 import ServicesAvailable from "./components/ServicesAvailable";
-import StatementSection from "./components/StatementSection";
 import OtherServices from "./components/OtherServices";
 import { getHospitalDetails } from "./apis";
 import { useQuery } from "@tanstack/react-query";

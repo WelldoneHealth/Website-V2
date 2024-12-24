@@ -1,7 +1,6 @@
 import React from "react";
 import mobileBanner2 from "@/asset/Images/mobileBanner2.png";
-import { APPLE_STORE, GOOGLE_PLAY } from "@/utils/ImageConstants";
-import Link from "next/link";
+
 
 export default function MobileAppBanner() {
   const featuresInfo = [

@@ -1,5 +1,4 @@
 import React from "react";
-import doctorDetailsImage from "@/asset/Images/doctorDetailsImage.png";
 import defaultDoctor from "@/asset/Images/defaultDoctor.png";
 import redGeoLocationIcon from "@/asset/Icons/redGeoLocation_icon.svg";
 
