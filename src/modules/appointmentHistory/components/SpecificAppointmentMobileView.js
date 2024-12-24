@@ -145,7 +145,7 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
             <p className="text-white  font-medium">Book Follow-Up</p>
           </button>
 
-          {/* <button
+           <button
             type="button"
             className=" px-5 py-2 border-[1px] border-primary rounded-[5px] block w-[95%]  msm:w-[200px]"
             onClick={downloadInvoice}
@@ -159,13 +159,14 @@ export default function SpecificAppointmentMobileView({ appointmentData }) {
           {/* --------------------------follow up dates---------------------- */}
           {/* <FollowUpDateComp followUpDate={appointmentData?.followup_date} /> */}
           {appointmentData?.is_clinic_booking && (
-            <div className="w-full flex justify-center pb-3 mt-2">
+            <div className="w-full flex justify-center pb-3 ">
               {" "}
               <Msg />
             </div>
           )}
-        {/* </div>} */}
+        </div>
       </div>
-    </div>
+   
+   
   );
 }

@@ -242,7 +242,7 @@ export default function CompletedAppo_Cards({
 
                 {/* --------------message---------------- */}
                 {appointmentCardData?.is_clinic_booking && (
-                  <div className="w-full max-lsm:hidden">
+                  <div className="w-full max-lsm:hidden ">
                     {" "}
                     <Msg />             
                   </div>
@@ -262,7 +262,7 @@ export default function CompletedAppo_Cards({
       </div>
       {/* --------------------message in smallerscreen---------------- */}
       {appointmentCardData?.is_clinic_booking && (
-        <div className="w-full pt-2  max-md:hidden block lsm:hidden">
+        <div className="w-full pt-2  max-md:hidden flex justify-center lsm:hidden">
           {" "}
           <Msg />
         </div>

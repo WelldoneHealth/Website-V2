@@ -171,7 +171,7 @@ export default function CanceledAppo_Card({ appointmentCardData, status }) {
         </div>
       </div>
       {appointmentCardData?.is_clinic_booking && (
-        <div className="w-full pt-2  max-md:hidden block lsm:hidden">
+        <div className="w-full pt-2  max-md:hidden flex justify-center lsm:hidden">
           {" "}
           <Msg />
         </div>
