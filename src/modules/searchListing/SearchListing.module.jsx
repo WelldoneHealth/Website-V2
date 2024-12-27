@@ -17,6 +17,8 @@ import {
   PaginationPrevious,
 } from "@/components/ui/pagination";
 import noData from "@/asset/Icons/no_data.svg";
+import DoctorCardSkeleton from "./skeleton/DoctorCardSkeleton";
+import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 export default function SearchListingPage() {
   // State for query parameters
@@ -111,6 +113,9 @@ export default function SearchListingPage() {
     return pageNumbers;
   }, [queryParams.page, totalPages]);
 
+
+if ( !isLoading && isError) return <DataFetchingError /> ;
+
   return (
     <div className="max-w-7xl mx-auto p-4">
       {/* Header Search */}
@@ -127,9 +132,11 @@ export default function SearchListingPage() {
 
         {/* Listings */}
         <main className="flex-1 space-y-4">
-          {isLoading && <p>Loading...</p>}
-          {isError && <p>Failed to fetch data.</p>}
-          {data?.results?.length > 0 ? (
+          {isLoading && <div className="space-y-4 px-4 " >
+          {Array.from({length:10}).map((_,index)=><DoctorCardSkeleton key={index} />)}
+            </div>}
+          { !isLoading && isError && <p>Failed to fetch data.</p>}
+          {  !isLoading && data?.results  &&  data?.results?.length > 0 ? (
             <div className="space-y-4">
               {data.results.map((item, index) =>
                 item?.is_hospital ? (
@@ -140,6 +147,8 @@ export default function SearchListingPage() {
               )}
             </div>
           ) : (
+            !isLoading &&
+  !isError && (
             <div className="flex flex-col items-center justify-center py-16">
               <img
                 src={noData.src}
@@ -147,11 +156,11 @@ export default function SearchListingPage() {
                 className="h-40 w-40 mb-4"
               />
               <p className="text-gray-500">No results found for your search.</p>
-            </div>
-          )}
+            </div> )
+          )} 
 
           {/* Pagination */}
-          <Pagination>
+        {!isLoading &&  !isError && ( <Pagination>
             <PaginationContent>
               <PaginationItem>
                 <PaginationPrevious
@@ -182,8 +191,8 @@ export default function SearchListingPage() {
                 />
               </PaginationItem>
             </PaginationContent>
-          </Pagination>
-        </main>
+          </Pagination>)}
+        </main> 
       </div>
     </div>
   );

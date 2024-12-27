@@ -12,6 +12,8 @@ import OtherServices from "./components/OtherServices";
 import { getHospitalDetails } from "./apis";
 import { useQuery } from "@tanstack/react-query";
 import Branches from "./components/Branches";
+import HospitalPageSkeleton from "./skeleton/HospitalPageSkeleton";
+import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 const HospitalDetailsModule = ({ slug }) => {
   const {
@@ -28,8 +30,8 @@ const HospitalDetailsModule = ({ slug }) => {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  // if (isLoading) return <div>Loading...</div>;
+  if ( !isLoading && error) return <DataFetchingError /> ;
 
   const convenienceServices = [];
 
@@ -47,8 +49,9 @@ const HospitalDetailsModule = ({ slug }) => {
   }
 
   return (
-    <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-0 ">
-      <Banner
+    <div className="w-full max-w-[1600px] mx-auto px-1  asm:px-3 lg:px-[2rem] ">
+    { isLoading ? <HospitalPageSkeleton /> : <> 
+      <Banner 
         bannerImage={hospitalInfo?.page_setup[0]?.banner_image ?? hospitalDefaultBanner?.src}
         logoImage={hospitalInfo?.page_setup[0]?.page_logo ?? defaultClinic?.src}
       />
@@ -83,7 +86,8 @@ const HospitalDetailsModule = ({ slug }) => {
           {/* <OfficeSafetyPrecautions />
           <StatementSection /> */}
         </div>
-      </div>
+      </div> 
+    </>}
     </div>
   );
 };

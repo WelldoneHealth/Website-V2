@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import Link from "next/link";
+import HospitalCardSliderSkeleton from "@/modules/home/skeleton/HospitalCardSliderSkeleton";
 
 const FacilitiesSection = () => {
   const { data: clinicList, isLoading } = useQuery({
@@ -99,9 +100,10 @@ const FacilitiesSection = () => {
 
         {/* Facilities Slider */}
         {isLoading ? (
-          <div className="text-center text-gray-600">Loading...</div>
-        ) : (
-          <div className="relative">
+          <div className="text-center text-gray-600">
+            <HospitalCardSliderSkeleton />
+          </div>
+        ) : ( <>          <div className="relative">
             <Slider {...sliderSettings}>
               {clinicList?.map((clinic, index) => (
                 <div key={index} className="p-4">
@@ -162,7 +164,7 @@ const FacilitiesSection = () => {
               ))}
             </Slider>
           </div>
-        )}
+        
 
         {/* View All Button */}
         <div className="text-center mt-12">
@@ -185,6 +187,8 @@ const FacilitiesSection = () => {
           </button>
           </Link>
         </div>
+        </>
+ )}
       </div>
     </section>
   );

@@ -5,7 +5,7 @@ import outlineMobilePhone from "@/asset/Icons/outlineMobilePhone.svg";
 
 
 export default function SelectPatientComp({patientData,isSelected,onChangeFunc,onOpen,patientEditFunc}) {
-  console.log("the patientdata is",patientData)
+  console.log("the patientdata is",patientData?.last_name)
   return (
     <div
                           style={{ boxShadow: "0px 0px 4px 0px #00000040" }}

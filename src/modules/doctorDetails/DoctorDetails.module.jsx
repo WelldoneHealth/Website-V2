@@ -18,9 +18,11 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from "@/components/ui/drawer";
+import DoctorPageSkeleton from "./skeleton/DoctorPageSkeleton";
+import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
-  const [showAppointmentDrawer, setShowAppointmentDrawer] = useState(false);
+  const [showAppointmentDrawer, setShowAppointmentDrawer] = useState(false); 
 
   const closeDrawer = () => {
     setShowAppointmentDrawer(false);
@@ -41,12 +43,14 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error.message}</div>;
+  
+  // if ( !isLoading && error) return <div>Error: {error.message}</div>;
+  if ( !isLoading && error) return <DataFetchingError /> ;
 
   return (
     <div className="w-full relative max-w-[1600px]  md:mx-auto px-1 asm:px-3 lg:px-[2rem] mt-[88px] flex flex-col lg:flex-row lg:justify-between justify-center lg:items-start gap-x-7">
-      <div className="w-full lg:w-[68%] max-h-max">
+   
+ { isLoading ? <DoctorPageSkeleton />  : <> <div className="w-full lg:w-[68%] max-h-max">
         <BasicDetails basicInfo={doctorInfo} />
         <ExtraDetails extraDocInfo={doctorInfo} />
         <TabsWithMaps officeInfo={doctorInfo?.establishment} />
@@ -100,6 +104,8 @@ const DoctorDetailsModule = ({ doctorSlug = "", branchSlug = "" }) => {
       
         </div>
       </div>
+
+      </>}
       <Drawer
         open={showAppointmentDrawer}
         onClose={closeDrawer} className="bg-white w-full"
