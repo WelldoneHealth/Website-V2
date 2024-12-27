@@ -18,6 +18,8 @@ import {
 } from "@/components/ui/pagination";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 import { errorToast, successToast } from "@/shared/atoms/ToastMessageFunc";
+import FamilyPageSkeleton from "./skeleton/FamilyPageSkeleton";
+import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 const FamilyMembersModule = () => {
   const queryClient = useQueryClient();
@@ -31,7 +33,7 @@ const FamilyMembersModule = () => {
 
   const limit = 10; // Number of items per page
 
-  const { data: familyMemberList = { results: [], count: 0 }, isLoading } =
+  const { data: familyMemberList = { results: [], count: 0 }, isLoading, error } =
     useQuery({
       queryKey: ["familyMemberList", currentPage],
       queryFn: () => fetchFamilyMemberList(currentPage), // Updated to return a function
@@ -107,7 +109,9 @@ const FamilyMembersModule = () => {
 
   const handleEditPatient = (patientData) => setEditPatientData(patientData);
 
-  if (isLoading) return <div>Loading...</div>;
+if ( !isLoading && error) return <DataFetchingError /> ;
+
+  if (isLoading) return <FamilyPageSkeleton />;
 
   return (
     <AuthenticatedLayout>

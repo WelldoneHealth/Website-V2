@@ -6,6 +6,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { getDoctorList } from "@/shared/apis/doctorCard";
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
+import DoctorCardSliderSkeleton from "@/modules/home/skeleton/DoctorCardSliderSkeleton";
 
 const DoctorsSection = () => {
   const { data: doctorList, isLoading } = useQuery({
@@ -65,7 +66,7 @@ const DoctorsSection = () => {
     speed: 500,
     slidesToShow: 3,
     slidesToScroll: 1,
-    autoplay: true,
+    // autoplay: true,
     autoplaySpeed: 3000,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
@@ -100,10 +101,11 @@ const DoctorsSection = () => {
 
         {/* Doctor Cards Slider */}
         {isLoading ? (
-          <div className="text-center mt-8 text-gray-600">
-            <span>Loading...</span>
+          <div className="text-center mt-8 mb-12 text-gray-600">
+            {/* <span>Loading...</span> */}
+            <DoctorCardSliderSkeleton />
           </div>
-        ) : (
+        ) : ( <>
           <div className="relative">
             <Slider {...sliderSettings} className="mb-12">
               {(doctorList || []).map((doctor, index) => (
@@ -157,7 +159,7 @@ const DoctorsSection = () => {
               ))}
             </Slider>
           </div>
-        )}
+        {/* )} */}
 
         {/* View All Button */}
         <div className="text-center">
@@ -180,6 +182,8 @@ const DoctorsSection = () => {
           </button>
          </Link>
         </div>
+        </> )}
+
       </div>
     </section>
   );

@@ -17,13 +17,15 @@ import {
 } from "@/components/ui/pagination";
 import AuthenticatedLayout from "@/shared/layouts/AuthenticatedLayout";
 import { useRouter } from "next/navigation";
+import AppointmentCardSkeleton from "./skeleton/AppointmentCardSkeleton";
+import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 export default function AppointmentHistoryModule() {
   const router=useRouter()
   const [currentPage, setCurrentPage] = useState(1);
   
 
-  const { data: appointmentHistoryList, isLoading } = useQuery({
+  const { data: appointmentHistoryList, isLoading, error } = useQuery({
     queryKey: ["appointmentHistoryList", currentPage],
     queryFn: () => getAppointmentHistory(currentPage),
   });
@@ -68,7 +70,7 @@ export default function AppointmentHistoryModule() {
     );
   };
 
-  if (isLoading) return <div>Loading...</div>;
+
 
   const { upcoming, past } = categorizeAppointments(
     appointmentHistoryList?.results || []
@@ -102,12 +104,24 @@ export default function AppointmentHistoryModule() {
   };
 
 
-  if(isLoading) return <div> Loading... </div> 
+  if ( !isLoading && error) return <DataFetchingError /> ;
+
+  // px-16 py-[1px]
+  if(isLoading) return <div className="mx-auto w-full max-w-[1600px] pt-[1px] px-0 md:px-5  lg:px-[2rem]   " > 
+
+   <div class=" my-6  ml-[20px]  h-4 w-[170px] asm:w-[200px] sm:w-1/3 bg-gray-200 rounded "></div>         
+        
+            <div className="space-y-4 w-full md:px-4 ">
+{  Array.from({length:10}).map((_,index)=> <AppointmentCardSkeleton  key={index} /> )}
+</div>
+  </div>
+
+
 
 
   return (
     <AuthenticatedLayout>
-    <div className="max-lg:mt-[85px] w-full max-w-[1600px] mx-auto px-1 pt-[1px] asm:px-3 gap-x-2 lg:px-[2rem]">
+    <div className="max-lg:mt-[85px] w-full max-w-[1600px] mx-auto gap-x-2 lg:px-[2rem]">
     { ( upcoming.length === 0 && past.length === 0 )  ?   <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
       <p>No Appointments Yet!</p>
       <p>Book Your First Appointment</p>
