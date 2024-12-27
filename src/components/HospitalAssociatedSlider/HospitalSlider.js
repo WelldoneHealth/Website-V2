@@ -66,7 +66,7 @@ const FacilitiesSection = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     prevArrow: <CustomPrevArrow />,
     nextArrow: <CustomNextArrow />,
     responsive: [
@@ -86,8 +86,8 @@ const FacilitiesSection = () => {
   };
 
   return (
-    <section id="facilities" className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="facilities" className="py-24 ">
+      <div className="max-w-7xl mx-auto  sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
@@ -108,15 +108,16 @@ const FacilitiesSection = () => {
               {clinicList?.map((clinic, index) => (
                 <div key={index} className="p-4">
                   <div className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-                    <div className="aspect-video w-full bg-gray-200">
+                    <div className="aspect-video w-full bg-gray-200 ">
                       <img
                         src={clinic?.page_setup__page_logo}
                         className="w-full h-full object-contain"
                         alt="Clinic Logo"
                       />
+                      
                     </div>
 
-                    <div className="p-6 text-center">
+                    <div className="p-1 msm:px-4 text-center ">
                       <h4 className="text-xl font-bold text-gray-900 mb-2">
                         {clinic?.establishment_name}
                       </h4>
@@ -129,7 +130,7 @@ const FacilitiesSection = () => {
                       <div className="flex items-center mb-4">
                         <span className="text-gray-600">{clinic.location}</span>
                       </div>
-                      <div className="flex items-center justify-between">
+                      <div className="w-full ssm:px-2 pb-4 asm:px-4 msm:px-2 md:px-0  flex items-center justify-between gap-x-3">
                         <div className="flex items-center bg-[#d0eaff] text-gray-600 text-sm font-semibold py-1 px-3 rounded-full">
                           {clinic?.total_doctor > 0
                             ? `${clinic?.total_doctor} Doctor associated`
@@ -140,9 +141,9 @@ const FacilitiesSection = () => {
                           href={`/hospital-details/${clinic?.slug}`}
                           passHref
                         >
-                          <button className="bg-[#005499] text-white py-1 px-2 rounded-full hover:bg-primary-600 transition-colors inline-flex items-center">
+                          <button className="bg-[#005499] text-white py-1 px-3 rounded-full hover:bg-primary-600 transition-colors inline-flex items-center">
                             View Details
-                            <svg
+                            {/* <svg
                               className="w-5 h-5 ml-2"
                               fill="none"
                               stroke="currentColor"
@@ -154,7 +155,7 @@ const FacilitiesSection = () => {
                                 strokeWidth="2"
                                 d="M9 5l7 7-7 7"
                               />
-                            </svg>
+                            </svg> */}
                           </button>
                         </Link>
                       </div>

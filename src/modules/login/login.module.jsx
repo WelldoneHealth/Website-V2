@@ -298,7 +298,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                             loginCredentials.password.trim() !== "" && (
                               <img
                                 src={
-                                  !viewPassword ? eyeOpen?.src : eyeClose?.src
+                                  viewPassword ? eyeOpen?.src : eyeClose?.src
                                 }
                                 onClick={() => setViewPassword(!viewPassword)}
                                 className="w-5 cursor-pointer "
@@ -490,7 +490,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                             registerCredentials.password.trim() !== "" && (
                               <img
                                 src={
-                                  !viewPassword ? eyeOpen?.src : eyeClose?.src
+                                  viewPassword ? eyeOpen?.src : eyeClose?.src
                                 }
                                 onClick={() => setViewPassword(!viewPassword)}
                                 className="w-5 cursor-pointer "

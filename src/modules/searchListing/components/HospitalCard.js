@@ -12,11 +12,11 @@ const router=useRouter()
     <div
             onClick={() =>
 router.push(`/hospital-details/${listInfo?.slug}`)            }
-            style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
-            className="w-full min-h-[120px]  sm:min-h-[170px] lg:min-h-[180px] max-h-[190px] mx-auto xl:w-[96%] max-w-[800px]  xl:max-w-[900px] px-2 msm:px-4 lg:px-6  py-3 asm:py-4 lg:py-5    border-[1px] border-gray-500 rounded-[20px] flex flex-col sm:flex-row  md:items-start justify-between gap-y-4 "
+            // style={{ boxShadow: "0px 0px 4px 1px #00000040" }}
+            className=" min-h-[120px]  sm:min-h-[170px] lg:min-h-[180px] max-h-[190px] mx-auto w-full xl:w-[96%] max-w-[800px]  xl:max-w-[900px] px-2 msm:px-4 lg:px-6  py-3 asm:py-4 lg:py-5    border-[1px] border-gray-500 rounded-[20px] flex flex-col sm:flex-row  md:items-start justify-between gap-y-4 "
           >
             {/* -----------left part------ */}
-            <div className=" flex items-start gap-x-4 sm:gap-x-8 lg:gap-x-4 esm:gap-x-8">
+            <div className="  flex items-start gap-x-4 sm:gap-x-8 lg:gap-x-4 esm:gap-x-8">
               {/* ----------image----------- */}
               {/* <div className="rounded-full w-[180px] aspect-[1/1]   flexCenter overflow-hidden bg-[#EFF8FF] "> */}
               <div className="rounded-full size-20 ssm:size-24  asm:size-28 msm:size-32 sm:size-40 aspect-[1/1]   flexCenter overflow-hidden bg-[#EFF8FF] ">
