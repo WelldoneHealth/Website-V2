@@ -109,9 +109,9 @@ export default function AppointmentHistoryModule() {
   // px-16 py-[1px]
   if(isLoading) return <div className="mx-auto w-full max-w-[1600px] pt-[1px] px-0 md:px-5  lg:px-[2rem]   " > 
 
-   <div class=" my-6  ml-[20px]  h-4 w-[170px] asm:w-[200px] sm:w-1/3 bg-gray-200 rounded "></div>         
+   <div class=" my-6 px-1  lg:ml-[10px]  h-4 w-[170px] asm:w-full max-w-[220px] bg-gray-200 rounded "></div>         
         
-            <div className="space-y-4 w-full md:px-4 ">
+            <div className="space-y-4 w-full md:px-2 ">
 {  Array.from({length:10}).map((_,index)=> <AppointmentCardSkeleton  key={index} /> )}
 </div>
   </div>
