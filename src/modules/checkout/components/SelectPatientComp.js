@@ -24,7 +24,7 @@ export default function SelectPatientComp({patientData,isSelected,onChangeFunc,o
                           <div className="w-full space-y-2 ">
                             <div className="w-full flex items-center gap-x-2">
                               <div className="bg-[#D9D9D9] size-[45px]  asm:size-[50px] flex justify-center items-center patientDatas-center rounded-full font-medium  ">
-                                { patientData?.first_name && patientData?.first_name[0]?.toUpperCase()}{ patientData?.last_name &&  patientData?.last_name[0]?.toUpperCase()}
+                              { patientData?.first_name && patientData?.first_name[0]?.toUpperCase()}{ patientData?.last_name &&  patientData?.last_name[0]?.toUpperCase()}
                               </div>
                               <div className="w-full flex-1  space-y-[2px] ">
                                 <div className="w-full my-auto space-y-1 flex patientDatas-center justify-between">
