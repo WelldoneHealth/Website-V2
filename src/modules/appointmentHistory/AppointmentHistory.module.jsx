@@ -104,7 +104,7 @@ export default function AppointmentHistoryModule() {
   };
 
 
-  if ( !isLoading && error) return <DataFetchingError /> ;
+  // if ( !isLoading && error) return <DataFetchingError /> ;
 
   // px-16 py-[1px]
   if(isLoading) return <div className="mx-auto w-full max-w-[1600px] pt-[1px] px-0 md:px-5  lg:px-[2rem]   " > 
@@ -115,6 +115,7 @@ export default function AppointmentHistoryModule() {
 {  Array.from({length:10}).map((_,index)=> <AppointmentCardSkeleton  key={index} /> )}
 </div>
   </div>
+
 
 
 

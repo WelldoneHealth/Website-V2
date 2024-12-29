@@ -117,11 +117,11 @@ export default function SearchListingPage() {
 if ( !isLoading && isError) return <DataFetchingError /> ;
 
   return (
-    <div className="max-w-7xl mx-auto p-4">
+    <div className="w-full max-w-7xl mx-auto px-[2px] asm:p-4 ">
       {/* Header Search */}
       <HeaderSearch onSearch={handleSearch} />
 
-      <div className="flex space-x-6 py-4">
+      <div className="flex lg:space-x-6 py-4 ">
         {/* Filters */}
         <aside className="hidden lg:block w-1/4">
           <DoctorFilters
@@ -131,13 +131,13 @@ if ( !isLoading && isError) return <DataFetchingError /> ;
         </aside>
 
         {/* Listings */}
-        <main className="flex-1 space-y-4">
-          {isLoading && <div className="space-y-4 px-4 " >
+        <main className="flex-1 space-y-4 ">
+          {isLoading && <div className="space-y-5 px-1 " >
           {Array.from({length:10}).map((_,index)=><DoctorCardSkeleton key={index} />)}
             </div>}
           { !isLoading && isError && <p>Failed to fetch data.</p>}
           {  !isLoading && data?.results  &&  data?.results?.length > 0 ? (
-            <div className="space-y-4">
+            <div className=" space-y-4 px-1"> 
               {data.results.map((item, index) =>
                 item?.is_hospital ? (
                   <HospitalCard key={index} listInfo={item} />

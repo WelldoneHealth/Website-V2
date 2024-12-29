@@ -56,7 +56,7 @@ export default function DoctorFilters({ onApplyFilters, onResetFilters }) {
   );
 
   return (
-    <div className="space-y-6 border p-5 rounded shadow-sm">
+    <div className="hidden lg:block  space-y-6 border p-5 rounded shadow-sm">
       {/* Specialty Filter with Search */}
       <div className="space-y-2 relative">
         <label className="text-sm font-medium">Specialty</label>

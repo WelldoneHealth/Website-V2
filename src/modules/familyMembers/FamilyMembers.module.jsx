@@ -109,13 +109,13 @@ const FamilyMembersModule = () => {
 
   const handleEditPatient = (patientData) => setEditPatientData(patientData);
 
-if ( !isLoading && error) return <DataFetchingError /> ;
+// if ( !isLoading && error) return <DataFetchingError /> ;
 
-  if (isLoading) return <FamilyPageSkeleton />;
+  // if (isLoading) return <FamilyPageSkeleton />;
 
   return (
     <AuthenticatedLayout>
-      {familyMemberList?.results?.length === 0 ? (
+    {isLoading ? <FamilyPageSkeleton /> : familyMemberList?.results?.length === 0 ? (
         <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
           <p>No Members Yet!</p>
           <button
@@ -219,7 +219,7 @@ if ( !isLoading && error) return <DataFetchingError /> ;
             loading={deleteMemberMutation.isPending}
           />
         </div>
-      )}
+      )} 
       <AddPatientDrawer
         isOpen={showAddPatientDrawer}
         patientDataToEdit={editPatientData}

@@ -210,7 +210,7 @@ const AppointmentSection = ({
               className={`w-[95%]  lg:hidden py-3 text-center  text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A] "}  font-semibold rounded-[10px]`}
            disabled={ equeueDataList?.length <  1 }
            >
-              Appointment Booking
+              Checkout
             </button>
             <p className="text-xs text-center font-normal">
               No charges for appointment booking.
