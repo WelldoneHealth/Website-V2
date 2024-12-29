@@ -256,7 +256,7 @@ verifyRegisterOtpMutation.mutate({contact:registerCredentials.contact,otp:otpDat
                           onChange={(e) =>{
                             setLoginCredentials((prev) => ({
                               ...prev,
-                              contact: e.target.value,
+                              contact: e.target.value.trim(),
                             }));
                             setOtpLoginCredentials((prev) => ({
                               ...prev,
