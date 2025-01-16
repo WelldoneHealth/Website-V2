@@ -116,10 +116,14 @@ export default function UpcomingAppo_Card({ appointmentData, currentPage }) {
       className="w-full md:w-1/2 flex-1 max-md:mx-auto p-4 msm:p-5 rounded-[20px] space-y-3 msm:space-y-4"
     >
       <div className="w-full flex items-center gap-x-3">
-        <div className="size-10 flexCenter text-lg rounded-full text-white font-medium bg-[#01A400]">
+        {/* <div className=" text-white font-medium bg-[#01A400]">
           {appointmentData?.patient_first_name[0]?.toUpperCase()}
           {appointmentData?.patient_last_name[0]?.toUpperCase()}
-        </div>
+        </div> */}
+        <img
+          src={appointmentData?.patient_logo}
+          className="size-10 flexCenter text-lg rounded-full"
+        />
         <p className="text-sm msm:text-base font-medium">
           {appointmentData?.patient_first_name ?? ""}{" "}
           {appointmentData?.patient_middle_name ?? ""}{" "}

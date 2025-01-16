@@ -21,11 +21,14 @@ import AppointmentCardSkeleton from "./skeleton/AppointmentCardSkeleton";
 import DataFetchingError from "@/shared/errorDataComponent/DataFetchingError";
 
 export default function AppointmentHistoryModule() {
-  const router=useRouter()
+  const router = useRouter();
   const [currentPage, setCurrentPage] = useState(1);
-  
 
-  const { data: appointmentHistoryList, isLoading, error } = useQuery({
+  const {
+    data: appointmentHistoryList,
+    isLoading,
+    error,
+  } = useQuery({
     queryKey: ["appointmentHistoryList", currentPage],
     queryFn: () => getAppointmentHistory(currentPage),
   });
@@ -44,9 +47,9 @@ export default function AppointmentHistoryModule() {
 
     return appointments.reduce(
       (acc, appointment) => {
-        const appointmentDate = moment(appointment.appointment_date); // Parse appointment date
+        const appointmentDate = moment(appointment?.appointment_date); // Parse appointment date
         const expectedTime = moment(
-          appointment.doctor_expected_visiting_time,
+          appointment?.doctor_expected_visiting_time,
           "HH:mm:ss"
         ); // Parse expected visiting time
 
@@ -69,8 +72,6 @@ export default function AppointmentHistoryModule() {
       { upcoming: [], past: [] }
     );
   };
-
-
 
   const { upcoming, past } = categorizeAppointments(
     appointmentHistoryList?.results || []
@@ -103,114 +104,125 @@ export default function AppointmentHistoryModule() {
     return pageNumbers;
   };
 
-
   // if ( !isLoading && error) return <DataFetchingError /> ;
 
   // px-16 py-[1px]
-  if(isLoading) return <div className="mx-auto w-full max-w-[1600px] pt-[1px] px-0 md:px-5  lg:px-[2rem]   " > 
+  if (isLoading)
+    return (
+      <div className="mx-auto w-full max-w-[1600px] pt-[1px] px-0 md:px-5  lg:px-[2rem]   ">
+        <div class=" my-6 px-1  lg:ml-[10px]  h-4 w-[170px] asm:w-full max-w-[220px] bg-gray-200 rounded "></div>
 
-   <div class=" my-6 px-1  lg:ml-[10px]  h-4 w-[170px] asm:w-full max-w-[220px] bg-gray-200 rounded "></div>         
-        
-            <div className="space-y-4 w-full md:px-2 ">
-{  Array.from({length:10}).map((_,index)=> <AppointmentCardSkeleton  key={index} /> )}
-</div>
-  </div>
-
-
-
-
+        <div className="space-y-4 w-full md:px-2 ">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <AppointmentCardSkeleton key={index} />
+          ))}
+        </div>
+      </div>
+    );
 
   return (
     <AuthenticatedLayout>
-    <div className="max-lg:mt-[85px] w-full max-w-[1600px] mx-auto gap-x-2 lg:px-[2rem]">
-    { ( upcoming.length === 0 && past.length === 0 )  ?   <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
-      <p>No Appointments Yet!</p>
-      <p>Book Your First Appointment</p>
-      <button type="button"  className="w-[200px] text-sm font-semibold bg-primary rounded-[10px] text-white py-3 text-center cursor-pointer" onClick={()=>router.push('/')} >Create Appointment</button>
-      </div>  : ( <> <div
-        className="overflow-hidden px-1 overflow-y-scroll custom-scrollbar"
-        style={{ height: "calc(100vh - 170px)" }}
-      >
-        {/* Upcoming Appointments */}
-        {upcoming?.length > 0 && (
-          <div className="w-full md:px-5 py-2 pb-7 space-y-5">
-            <p className="text-lg my-3 text-[#01549A] font-medium">
-              Upcoming Appointments
-            </p>
-            {upcoming.map((item, index) => (
-              <UpcomingAppo_Card
-                key={item?.id || index}
-                appointmentData={item}
-                currentPage={currentPage}
-              />
-            ))}
+      <div className="max-lg:mt-[85px] w-full max-w-[1600px] mx-auto gap-x-2 lg:px-[2rem]">
+        {upcoming?.length === 0 && past?.length === 0 ? (
+          <div className="w-full h-[80vh]  text-lg   flex flex-col items-center justify-center  gap-y-3 ">
+            <p>No Appointments Yet!</p>
+            <p>Book Your First Appointment</p>
+            <button
+              type="button"
+              className="w-[200px] text-sm font-semibold bg-primary rounded-[10px] text-white py-3 text-center cursor-pointer"
+              onClick={() => router.push("/")}
+            >
+              Create Appointment
+            </button>
           </div>
-        )}
-
-        {/* All Appointments */}
-        {past?.length > 0 && (
+        ) : (
           <>
-            <p className="text-lg md:px-5 my-3 text-[#01549A] font-medium">
-              All Appointments
-            </p>
-            <div className="w-full md:px-5 py-2 pb-7 space-y-5 border-b-[1px] border-[#545454]">
-              {past.map((item, index) =>
-                !item?.is_cancelled ? (
-                  <CompletedAppo_Card
-                    key={index}
-                    appointmentCardData={item}
-                    status={true}
-                  />
-                ) : (
-                  <CanceledAppo_Card
-                    key={index}
-                    appointmentCardData={item}
-                    status={false}
-                  />
-                )
+            {" "}
+            <div
+              className="overflow-hidden px-1 overflow-y-scroll custom-scrollbar"
+              style={{ height: "calc(100vh - 170px)" }}
+            >
+              {/* Upcoming Appointments */}
+              {upcoming?.length > 0 && (
+                <div className="w-full md:px-5 py-2 pb-7 space-y-5">
+                  <p className="text-lg my-3 text-[#01549A] font-medium">
+                    Upcoming Appointments
+                  </p>
+                  {upcoming.map((item, index) => (
+                    <UpcomingAppo_Card
+                      key={item?.id || index}
+                      appointmentData={item}
+                      currentPage={currentPage}
+                    />
+                  ))}
+                </div>
+              )}
+
+              {/* All Appointments */}
+              {past?.length > 0 && (
+                <>
+                  <p className="text-lg md:px-5 my-3 text-[#01549A] font-medium">
+                    All Appointments
+                  </p>
+                  <div className="w-full md:px-5 py-2 pb-7 space-y-5 border-b-[1px] border-[#545454]">
+                    {past.map((item, index) =>
+                      !item?.is_cancelled ? (
+                        <CompletedAppo_Card
+                          key={index}
+                          appointmentCardData={item}
+                          status={true}
+                        />
+                      ) : (
+                        <CanceledAppo_Card
+                          key={index}
+                          appointmentCardData={item}
+                          status={false}
+                        />
+                      )
+                    )}
+                  </div>
+                </>
               )}
             </div>
+            {/* Pagination */}
+            <Pagination>
+              <PaginationContent>
+                <PaginationItem className="my-8">
+                  <PaginationPrevious
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="hover:cursor-pointer"
+                  />
+                </PaginationItem>
+
+                {renderPageNumbers().map((page, index) =>
+                  typeof page === "number" ? (
+                    <PaginationItem key={index}>
+                      <PaginationLink
+                        isActive={currentPage === page}
+                        onClick={() => handlePageChange(page)}
+                        className="hover:cursor-pointer"
+                      >
+                        {page}
+                      </PaginationLink>
+                    </PaginationItem>
+                  ) : (
+                    <PaginationEllipsis key={index} />
+                  )
+                )}
+
+                <PaginationItem>
+                  <PaginationNext
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="hover:cursor-pointer"
+                  />
+                </PaginationItem>
+              </PaginationContent>
+            </Pagination>{" "}
           </>
         )}
       </div>
-
-      {/* Pagination */}
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem className="my-8">
-            <PaginationPrevious
-              onClick={() => handlePageChange(currentPage - 1)}
-              disabled={currentPage === 1}
-              className="hover:cursor-pointer"
-            />
-          </PaginationItem>
-
-          {renderPageNumbers().map((page, index) =>
-            typeof page === "number" ? (
-              <PaginationItem key={index}>
-                <PaginationLink
-                  isActive={currentPage === page}
-                  onClick={() => handlePageChange(page)}
-                  className="hover:cursor-pointer"
-                >
-                  {page}
-                </PaginationLink>
-              </PaginationItem>
-            ) : (
-              <PaginationEllipsis key={index} />
-            )
-          )}
-
-          <PaginationItem>
-            <PaginationNext
-              onClick={() => handlePageChange(currentPage + 1)}
-              disabled={currentPage === totalPages}
-              className="hover:cursor-pointer"
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination> </>   )  }  
-    </div>
     </AuthenticatedLayout>
   );
 }

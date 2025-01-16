@@ -58,7 +58,9 @@ export default function CompletedAppo_Cards({
   const appo_data2 = [
     {
       boldText: "Reason-",
-      text: appointmentCardData?.reason?.split("_").join(" ") ?? "General Consulant",
+      text:
+        appointmentCardData?.reason?.split("_").join(" ") ??
+        "General Consulant",
     },
     {
       boldText: "Payment Method-",
@@ -86,8 +88,8 @@ export default function CompletedAppo_Cards({
           <div className="font-normal text-nowrap  space-y-0 esm:space-y-1">
             {appo_data1.map((item, index) => (
               <p key={index}>
-                <span className="font-semibold">{item.boldText}</span>{" "}
-                {item.text}
+                <span className="font-semibold">{item?.boldText}</span>{" "}
+                {item?.text}
               </p>
             ))}
           </div>
@@ -95,8 +97,8 @@ export default function CompletedAppo_Cards({
           <div className="font-normal text-nowrap space-y-0  esm:space-y-1">
             {appo_data2.map((item, index) => (
               <p key={index}>
-                <span className="font-semibold">{item.boldText}</span>{" "}
-                {item.text}
+                <span className="font-semibold">{item?.boldText}</span>{" "}
+                {item?.text}
               </p>
             ))}
           </div>
@@ -196,8 +198,10 @@ export default function CompletedAppo_Cards({
                     {appointmentCardData?.clinic_name ?? ""}
                   </p>
                   <p className="pt-1 text-xs asm:text-sm msm:text-base md:hidden">
-                    Book for {appointmentCardData?.patient_first_name ?? ''} {appointmentCardData?.patient_middle_name ?? ''} {appointmentCardData?.patient_last_name ?? ''} (
-                     {appointmentCardData?.patient_relation ?? " "})
+                    Book for {appointmentCardData?.patient_first_name ?? ""}{" "}
+                    {appointmentCardData?.patient_middle_name ?? ""}{" "}
+                    {appointmentCardData?.patient_last_name ?? ""} (
+                    {appointmentCardData?.patient_relation ?? " "})
                   </p>
                 </div>
                 {/* ------------------2 prescription buttons--------- */}
@@ -227,36 +231,40 @@ export default function CompletedAppo_Cards({
                 >
                   Book Follow-Up
                 </button>
-                {appointmentCardData?.followup_date && <p className="flex items-center text-sm">
-                  <img src={infoIcon?.src} className="mr-2 " alt="load..." />{" "}
-                  {appointmentCardData?.followup_date
-                    ? remainingDays !== 0
-                      ? ` Follow before – ${
-                          moment(appointmentCardData?.followup_date).format(
-                            "DD/MM/YYYY"
-                          ) ?? "N?A"
-                        }, ${remainingDays} days remaining​  `
-                      : "FollowUp Today"
-                    : "FollowUp Date - N/A "}
-                </p> }
+                {appointmentCardData?.followup_date && (
+                  <p className="flex items-center text-sm">
+                    <img src={infoIcon?.src} className="mr-2 " alt="load..." />{" "}
+                    {appointmentCardData?.followup_date
+                      ? remainingDays !== 0
+                        ? ` Follow before – ${
+                            moment(appointmentCardData?.followup_date).format(
+                              "DD/MM/YYYY"
+                            ) ?? "N?A"
+                          }, ${remainingDays} days remaining​  `
+                        : "FollowUp Today"
+                      : "FollowUp Date - N/A "}
+                  </p>
+                )}
 
                 {/* --------------message---------------- */}
                 {appointmentCardData?.is_clinic_booking && (
                   <div className="w-full max-lsm:hidden ">
                     {" "}
-                    <Msg />             
+                    <Msg />
                   </div>
                 )}
               </div>
             </div>
             {/* ------------------3rd part------------- */}
-          {!isSpecific &&  <div className=" flex items-center lsm:hidden msm:pr-1 sm:pr-4  ">
-              <img
-                src={cardArrow?.src}
-                className="block h-5 sm:h-10  cursor-pointer"
-                alt="load..."
-              />
-            </div> }
+            {!isSpecific && (
+              <div className=" flex items-center lsm:hidden msm:pr-1 sm:pr-4  ">
+                <img
+                  src={cardArrow?.src}
+                  className="block h-5 sm:h-10  cursor-pointer"
+                  alt="load..."
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
