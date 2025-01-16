@@ -60,8 +60,8 @@ const AppointmentSection = ({
         <p className=" text-lg font-medium  text-center hidden lg:block">
           Book Your Appointment{" "}
         </p>
-        
-        <hr className="my-3 hidden lg:block" /> 
+
+        <hr className="my-3 hidden lg:block" />
 
         <div className="px-2 sm:px-4 w-full">
           <p className="mb-2 font-medium ">Select office</p>
@@ -77,13 +77,18 @@ const AppointmentSection = ({
               <SelectGroup>
                 <SelectLabel>Branches</SelectLabel>
                 {doctorInfo?.establishment?.map((branch) => (
-                  <SelectItem key={branch?.id} value={branch?.branch_slug}
-              //  className="[&[aria-selected=true]]:text-green-600 [&[aria-selected=true] svg]:text-green-600"
-              //  className="[&[aria-selected=true] svg]:text-red-900"
+                  <SelectItem
+                    key={branch?.id}
+                    value={branch?.branch_slug}
+                    //  className="[&[aria-selected=true]]:text-green-600 [&[aria-selected=true] svg]:text-green-600"
+                    //  className="[&[aria-selected=true] svg]:text-red-900"
                   >
-                    {branch?.clinic_name} <br/>
-               { branch?.clinic_name && <p className="mt-1 text-[11px] w-full text-wrap">{branch?.clinic_address}</p>  }
-                 
+                    {branch?.clinic_name} <br />
+                    {branch?.clinic_name && (
+                      <p className="mt-1 text-[11px] w-full text-wrap">
+                        {branch?.clinic_address}
+                      </p>
+                    )}
                   </SelectItem>
                 ))}
               </SelectGroup>
@@ -111,13 +116,21 @@ const AppointmentSection = ({
                         setSelectedEqueue(item);
                         console.log("the item is", item);
                       }}
-                      className={` w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ${item?.is_active ?  
-                       ( focusableIndex !== index
-                          ? "bg-[#F7FFF6] border-[#919196] cursor-pointer"
-                          : "bg-[#F7FFF6] border-[#01A400] cursor-pointer" )
-                        : "  pointer-events-none border-red-700 " } `}
+                      className={` w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ${
+                        item?.is_active
+                          ? focusableIndex !== index
+                            ? "bg-[#F7FFF6] border-[#919196] cursor-pointer"
+                            : "bg-[#F7FFF6] border-[#01A400] cursor-pointer"
+                          : "  pointer-events-none border-red-700 "
+                      } `}
                     >
-                      <p className={`py-1 px-3 text-sm font-normal border-b-[1px] ${item?.is_active ? "border-[#919196] "  : "border-red-700"  }  font-medium`}>
+                      <p
+                        className={`py-1 px-3 text-sm font-normal border-b-[1px] ${
+                          item?.is_active
+                            ? "border-[#919196] "
+                            : "border-red-700"
+                        }  font-medium`}
+                      >
                         {moment().format("YYYY-MM-DD") === item?.date
                           ? "Today"
                           : moment(item?.date).format("DD MMM")}
@@ -128,7 +141,7 @@ const AppointmentSection = ({
                           style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
                           className="text-red-700 rounded-[10px] px-4 py-[6px] text-[22px] font-bold"
                         >
-                          {item?.current_equeue + 1}
+                          {item?.waiting_no}
                         </div>
                         <div className="space-y-1">
                           <p className="text-xs text-[#5A5D62]">
@@ -151,11 +164,19 @@ const AppointmentSection = ({
                           </p>
                         </div>
                       </div>
-                    {item?.is_active &&  <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
-                        Given Time is approximate can vary by +/-60 Min
-                      </p>}
+                      {item?.is_active && (
+                        <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                          Given Time is approximate can vary by +/-60 Min
+                        </p>
+                      )}
 
-                    { !item?.is_active  &&  <div className="w-full py-2 px-3  text-sm border-t-[2px] border-red-700 text-red-700 font-medium flex justify-center items-center gap-x-2" > <p className="pulse-ball size-[5px]  bg-red-700 rounded-full"></p>{ item?.reason || "Out for Lunch"  }</div>   }
+                      {!item?.is_active && (
+                        <div className="w-full py-2 px-3  text-sm border-t-[2px] border-red-700 text-red-700 font-medium flex justify-center items-center gap-x-2">
+                          {" "}
+                          <p className="pulse-ball size-[5px]  bg-red-700 rounded-full"></p>
+                          {item?.reason || "Out for Lunch"}
+                        </div>
+                      )}
                     </div>
                   ))}
 
@@ -177,8 +198,12 @@ const AppointmentSection = ({
           <div className="mt-5 max-lg:fixed max-lg:left-1/2 transform max-lg:-translate-x-1/2 max-lg:bottom-0 py-3 flex max-lg:bg-gray-300 flex-col items-center  w-full border-t-[1px] lg:border-[#919196] space-y-2">
             <button
               type="button"
-              disabled={!selectedBranch || equeueDataList?.length < 1 }
-              className={`w-[95%] max-lg:hidden py-3 text-center text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A]  "}  font-semibold rounded-[10px]`}
+              disabled={!selectedBranch || equeueDataList?.length < 1}
+              className={`w-[95%] max-lg:hidden py-3 text-center text-white ${
+                equeueDataList?.length < 1
+                  ? " bg-[#A8A8A8] "
+                  : " bg-[#01549A]  "
+              }  font-semibold rounded-[10px]`}
               onClick={() => {
                 router.push(`/checkout`);
                 setAppointmentData({
@@ -190,7 +215,6 @@ const AppointmentSection = ({
                     )[0] ?? null,
                 });
               }}
-              
             >
               Appointment Booking
             </button>
@@ -207,9 +231,11 @@ const AppointmentSection = ({
                     )[0] ?? null,
                 });
               }}
-              className={`w-[95%]  lg:hidden py-3 text-center  text-white ${ equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A] "}  font-semibold rounded-[10px]`}
-           disabled={ equeueDataList?.length <  1 }
-           >
+              className={`w-[95%]  lg:hidden py-3 text-center  text-white ${
+                equeueDataList?.length < 1 ? " bg-[#A8A8A8] " : " bg-[#01549A] "
+              }  font-semibold rounded-[10px]`}
+              disabled={equeueDataList?.length < 1}
+            >
               Checkout
             </button>
             <p className="text-xs text-center font-normal">
