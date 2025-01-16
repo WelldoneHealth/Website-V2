@@ -38,9 +38,11 @@ export default function page() {
   const router = useRouter();
   const appointmentData = useAppointmentStore((state) => state.appointmentData);
   // console.log("the appointment data is---",appointmentData)
-  const setAppointmentData = useAppointmentStore((state) => state.setAppointmentData);
+  const setAppointmentData = useAppointmentStore(
+    (state) => state.setAppointmentData
+  );
   const userData = useAuthStore((state) => state.userDetails);
-  const isSmallScreen = useMediaQuery({ query: '(max-width: 640px)' })
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 640px)" });
 
   // console.log( "the value of fata in checkkout is ",appointmentData);
 
@@ -50,7 +52,7 @@ export default function page() {
   //   };
   // }, []);
 
-const [editPatientData,setEditPatientData]=useState(null)
+  const [editPatientData, setEditPatientData] = useState(null);
 
   const [statusChange, setStatusChange] = useState({
     doctorStatus: true,
@@ -113,20 +115,19 @@ const [editPatientData,setEditPatientData]=useState(null)
     getPatients();
   }, []);
 
-
-  const updatePatient=()=>getPatients()
+  const updatePatient = () => getPatients();
 
   const appointmentMutation = useMutation({
     mutationFn: addAppointment,
     onSuccess: (data) => {
-// -------------if appointment booking is successful------------
-    if(data?.id){
+      // -------------if appointment booking is successful------------
+      if (data?.id) {
         router.push(`/checkout/appointmentConfirmation?id=${data?.id}`);
         successToast("Appointment booked successfully");
-        return  
+        return;
       }
-  // -------------------if unsuccessful od previously booked appointment---------------------
-      return   errorToast(data?.message); 
+      // -------------------if unsuccessful od previously booked appointment---------------------
+      return errorToast(data?.message);
     },
     onError: (error) => {
       // console.log("the error occured in react query is",error)
@@ -153,39 +154,36 @@ const [editPatientData,setEditPatientData]=useState(null)
     appointmentMutation.mutate(formData);
   };
 
-  const handleChangeNewUi=(togglingData)=>setDataVisibilityToggle({
-    ...dataVisibilityToggle,
-    [togglingData]: false,
-  })
+  const handleChangeNewUi = (togglingData) =>
+    setDataVisibilityToggle({
+      ...dataVisibilityToggle,
+      [togglingData]: false,
+    });
 
-  const mobileViewButtonsChange = (btnFor) =>{
-    if(btnFor==="paymentStatus" && !statusData.patientSelection) {
-      return errorToast("Add patient details ")
+  const mobileViewButtonsChange = (btnFor) => {
+    if (btnFor === "paymentStatus" && !statusData.patientSelection) {
+      return errorToast("Add patient details ");
     }
     setStatusChange({
       doctorStatus: false,
       patientStatus: false,
       paymentStatus: false,
       appointmentStatus: false,
-      [btnFor]: true, 
-    }) 
-  
- 
+      [btnFor]: true,
+    });
+
     // setDataVisibilityToggle({
     //   doctorsToggle: false,
     // patientToggle: false,
     // paymentToggle: false,
     // appointmentToggle: false,
-    // [toggleBox]: true, 
+    // [toggleBox]: true,
     // })
-  }
-  
+  };
 
-
-  const handleEditPatient=(patientData)=>setEditPatientData(patientData)
+  const handleEditPatient = (patientData) => setEditPatientData(patientData);
 
   // if(!appointmentData?.doctorData)  return router.push('/')
-    
 
   return (
     <AuthenticatedLayout>
@@ -199,208 +197,266 @@ const [editPatientData,setEditPatientData]=useState(null)
         {/* ---------------appointment process-------------- */}
         <div className=" w-full  lg:w-[68%] space-y-5  ">
           {/* -----------first card ( doctor selection)---------------- */}
-        { statusChange.doctorStatus && <div
-            style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
-            className="w-[98%] max-sm:mx-auto  sm:w-full rounded-[10px]  border-[1px] border-[#EFEFEF]"
-          >
-                     <SectionHeader showChangeTextBtn={!dataVisibilityToggle.doctorsToggle}  headingText="1. Office details" btnFunc={handleChangeNewUi} toggle="doctorsToggle" />
+          {statusChange.doctorStatus && (
+            <div
+              style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
+              className="w-[98%] max-sm:mx-auto  sm:w-full rounded-[10px]  border-[1px] border-[#EFEFEF]"
+            >
+              <SectionHeader
+                showChangeTextBtn={!dataVisibilityToggle.doctorsToggle}
+                headingText="1. Office details"
+                btnFunc={handleChangeNewUi}
+                toggle="doctorsToggle"
+              />
 
-            {/* ----------------2 cards portion----------- */}
-            {!dataVisibilityToggle.doctorsToggle && (
-              <>
-                {" "}
-                <div className="w-full   space-y-4 px-2 py-3 sm:p-5 ">
-                  {/* -------------------doctor card------------- */}
-                  <CheckoutDoctorCard doctorInfo={appointmentData?.doctorData}  />
-                  {/* <CheckoutDoctorCard doctorInfo={appointmentData?.doctorData}  /> */}
-                  {/* ----------------hospital card------------- */}              
-                  <CheckoutHospitalCard  hospitalInfo={appointmentData?.branchData} />
+              {/* ----------------2 cards portion----------- */}
+              {!dataVisibilityToggle.doctorsToggle && (
+                <>
+                  {" "}
+                  <div className="w-full   space-y-4 px-2 py-3 sm:p-5 ">
+                    {/* -------------------doctor card------------- */}
+                    <CheckoutDoctorCard
+                      doctorInfo={appointmentData?.doctorData}
+                    />
+                    {/* <CheckoutDoctorCard doctorInfo={appointmentData?.doctorData}  /> */}
+                    {/* ----------------hospital card------------- */}
+                    <CheckoutHospitalCard
+                      hospitalInfo={appointmentData?.branchData}
+                    />
+                  </div>
+                  <div className=" max-sm:hidden p-5 py-3 bg-[#EFEFEF]">
+                    {!statusChange.patientStatus && (
+                      <ButtonType2
+                        btnFor="Continue Appointment"
+                        btnOnClickFunc={() => {
+                          setStatusChange({
+                            ...statusChange,
+                            patientStatus: true,
+                          }),
+                            setDataVisibilityToggle({
+                              ...dataVisibilityToggle,
+                              doctorsToggle: true,
+                            }),
+                            handleScrollToBox(0);
+                        }}
+                      />
+                    )}
+                    {statusChange.patientStatus && (
+                      <ButtonType2
+                        btnFor="Continue Appointment"
+                        btnOnClickFunc={() =>
+                          statusData.doctorSelection &&
+                          (setDataVisibilityToggle({
+                            ...dataVisibilityToggle,
+                            doctorsToggle: true,
+                            patientToggle: false,
+                          }),
+                          handleScrollToBox(0))
+                        }
+                      />
+                    )}
+                  </div>{" "}
+                </>
+              )}
+
+              {/* ----------------------on button click new updated card ui------------------------ */}
+              {dataVisibilityToggle.doctorsToggle && (
+                <div className="w-full  flex flex-col md:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
+                  {/*------------------new doctor card---------------- */}
+                  <CheckoutDoctorCard2
+                    doctorData={appointmentData.doctorData}
+                  />
+                  {/* ------------------------new hospital card-------------------- */}
+                  <CheckoutHospitalCard2
+                    hospitalData={appointmentData?.branchData}
+                  />
                 </div>
-                <div className=" max-sm:hidden p-5 py-3 bg-[#EFEFEF]">
-                  {!statusChange.patientStatus && (
-                    <ButtonType2 btnFor="Continue Appointment"  btnOnClickFunc={() => {
-                      setStatusChange({
-                        ...statusChange,
-                        patientStatus: true,
-                      }),
-                        setDataVisibilityToggle({
-                          ...dataVisibilityToggle,
-                          doctorsToggle: true,
-                        }),
-                        handleScrollToBox(0);
-                    }}  />
-                  )}
-                  {statusChange.patientStatus && (
-                    <ButtonType2 btnFor="Continue Appointment"  btnOnClickFunc={() =>
-                      statusData.doctorSelection &&
-                      (setDataVisibilityToggle({
-                        ...dataVisibilityToggle,
-                        doctorsToggle: true,
-                        patientToggle: false,
-                      }),
-                      handleScrollToBox(0))
-                    }  />
-                  )}
-                </div>{" "}
-              </>
-            )}
-
-            {/* ----------------------on button click new updated card ui------------------------ */}
-            {dataVisibilityToggle.doctorsToggle && (
-              <div className="w-full  flex flex-col md:flex-row justify-center items-center gap-y-4  gap-x-5 p-5">
-                {/*------------------new doctor card---------------- */}
-                <CheckoutDoctorCard2 doctorData={appointmentData.doctorData}  />
-                {/* ------------------------new hospital card-------------------- */}
-                <CheckoutHospitalCard2 hospitalData={appointmentData?.branchData}  />
-              </div>
-            )}
-          </div> }
+              )}
+            </div>
+          )}
 
           {/* -----------second card ( patient selection) -------------- */}
-          { statusChange.patientStatus && (
+          {statusChange.patientStatus && (
             <div
               ref={stepRef[0]}
               style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
               className="w-[98%] max-sm:mx-auto  sm:w-full   rounded-[10px]  border-[1px] border-[#EFEFEF]"
             >
-                          <SectionHeader showChangeTextBtn={!dataVisibilityToggle.patientToggle}  headingText="2. Select a patient" btnFunc={handleChangeNewUi} toggle="patientToggle" />
-
+              <SectionHeader
+                showChangeTextBtn={!dataVisibilityToggle.patientToggle}
+                headingText="2. Select a patient"
+                btnFunc={handleChangeNewUi}
+                toggle="patientToggle"
+              />
 
               {/* 2 cards portion----------- */}
               {!dataVisibilityToggle.patientToggle && (
                 <>
                   {" "}
                   <div
-                    className={`w-full space-y-5 px-2 py-3 sm:p-5 ${isSmallScreen ? " max-h-[60vh]   " : " max-h-[500px] " } overflow-y-scroll`}
+                    className={`w-full space-y-5 px-2 py-3 sm:p-5 ${
+                      isSmallScreen ? " max-h-[60vh]   " : " max-h-[500px] "
+                    } overflow-y-scroll`}
                   >
                     {patientList.length > 0 &&
                       patientList.map((item, index) => (
-                        <SelectPatientComp onOpen={()=>setView(true)}  patientEditFunc={()=>handleEditPatient(item)}  patientData={item} key={index}  isSelected={statusData.patientSelection.id == item.id} 
-                        onChangeFunc={()=>setStatusData((prev) => ({
-                                  ...prev,
-                                  patientSelection: item,
-                                }))}
+                        <SelectPatientComp
+                          onOpen={() => setView(true)}
+                          patientEditFunc={() => handleEditPatient(item)}
+                          patientData={item}
+                          key={index}
+                          isSelected={statusData.patientSelection.id == item.id}
+                          onChangeFunc={() =>
+                            setStatusData((prev) => ({
+                              ...prev,
+                              patientSelection: item,
+                            }))
+                          }
                         />
                       ))}
-
-                   
                   </div>
-                   {/* --------------------add patient button---------------------- */}
-                   <button
-                      type="button"
-                      onClick={() => {
-                        setView(true);
-                        setEditPatientData(null);
-                        setViewSliderType({
-                          ...viewSliderType,
-                          appointment: true,
-                        });
-                      }}
-                      className="rounded-[20px] m-2 px-7 py-2 text-sm border-[1px] border-primary  text-primary font-medium  "
-                    >
-                      + Add a New Patient
-                    </button>
+                  {/* --------------------add patient button---------------------- */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setView(true);
+                      setEditPatientData(null);
+                      setViewSliderType({
+                        ...viewSliderType,
+                        appointment: true,
+                      });
+                    }}
+                    className="rounded-[20px] m-2 px-7 py-2 text-sm border-[1px] border-primary  text-primary font-medium  "
+                  >
+                    + Add a New Patient
+                  </button>
                   <div className="mt-5 max-sm:hidden flex flex-col gap-5 items-start justify-start p-5  py-3 bg-[#EFEFEF]">
-                    
                     {!statusChange.paymentStatus && (
-                      <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() => { 
-                        statusData.patientSelection ?
-                        (setDataVisibilityToggle({
-                          ...dataVisibilityToggle,
-                          patientToggle: true,
-                        }),
-                        setStatusChange({
-                          ...statusChange,
-                          paymentStatus: true,
-                        }),
-                        handleScrollToBox(1)):errorToast("Add patient details")   }    }  />
+                      <ButtonType2
+                        btnFor=" Appointment for this Patient"
+                        btnOnClickFunc={() => {
+                          statusData.patientSelection
+                            ? (setDataVisibilityToggle({
+                                ...dataVisibilityToggle,
+                                patientToggle: true,
+                              }),
+                              setStatusChange({
+                                ...statusChange,
+                                paymentStatus: true,
+                              }),
+                              handleScrollToBox(1))
+                            : errorToast("Add patient details");
+                        }}
+                      />
                     )}
                     {statusChange.paymentStatus && (
-                   <ButtonType2 btnFor=" Appointment for this Patient" btnOnClickFunc={() =>
-                    statusData.patientSelection &&
-                    (setDataVisibilityToggle({
-                      ...dataVisibilityToggle,
-                      patientToggle: true,
-                      paymentToggle: false,
-                    }),
-                    handleScrollToBox(1))} />
+                      <ButtonType2
+                        btnFor=" Appointment for this Patient"
+                        btnOnClickFunc={() =>
+                          statusData.patientSelection &&
+                          (setDataVisibilityToggle({
+                            ...dataVisibilityToggle,
+                            patientToggle: true,
+                            paymentToggle: false,
+                          }),
+                          handleScrollToBox(1))
+                        }
+                      />
                     )}
                   </div>
                 </>
               )}
 
-              {dataVisibilityToggle.patientToggle && <SelectPatientComp2  patientInfo={statusData.patientSelection} />
-            }
+              {dataVisibilityToggle.patientToggle && (
+                <SelectPatientComp2 patientInfo={statusData.patientSelection} />
+              )}
             </div>
           )}
 
           {/* -----------third card (payment option)------------------- */}
-          { statusChange.paymentStatus && (
+          {statusChange.paymentStatus && (
             <div
               ref={stepRef[1]}
               style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
               className="w-[98%] max-sm:mx-auto sm:w-full rounded-[10px]  border-[1px] border-[#EFEFEF]"
             >
-             
-             <SectionHeader showChangeTextBtn={!dataVisibilityToggle.paymentToggle}  headingText="3. Payment options"  btnFunc={handleChangeNewUi} toggle="paymentToggle" />
-
+              <SectionHeader
+                showChangeTextBtn={!dataVisibilityToggle.paymentToggle}
+                headingText="3. Payment options"
+                btnFunc={handleChangeNewUi}
+                toggle="paymentToggle"
+              />
 
               {/*----------- 2 checkbox portion-----------  */}
               {!dataVisibilityToggle.paymentToggle && (
                 <>
                   <div className="space-y-5  px-2 py-3 sm:p-5 ">
-                  <CheckoutPaymentCard paymentData={paymentOptions[0]}   />
+                    <CheckoutPaymentCard paymentData={paymentOptions[0]} />
                   </div>
 
                   <div className=" max-sm:hidden p-5  py-3 bg-[#EFEFEF]">
                     {!statusChange.appointmentStatus && (
-                    
-                      <ButtonType2 btnFor="Continue"  btnOnClickFunc={() =>
-                        statusData.paymentSelection &&
-                        (setDataVisibilityToggle({
-                          ...dataVisibilityToggle,
-                          paymentToggle: true,
-                        }),
-                        setStatusChange({
-                          ...statusChange,
-                          appointmentStatus: true,
-                        }))} />
+                      <ButtonType2
+                        btnFor="Continue"
+                        btnOnClickFunc={() =>
+                          statusData.paymentSelection &&
+                          (setDataVisibilityToggle({
+                            ...dataVisibilityToggle,
+                            paymentToggle: true,
+                          }),
+                          setStatusChange({
+                            ...statusChange,
+                            appointmentStatus: true,
+                          }))
+                        }
+                      />
                     )}
                     {statusChange.appointmentStatus && (
-                    
-                      <ButtonType2 btnFor="Continue"  btnOnClickFunc={() =>
-                        statusData.paymentSelection &&
-                        setDataVisibilityToggle({
-                          ...dataVisibilityToggle,
-                          paymentToggle: true,
-                          appointmentToggle: false,
-                        })} />
+                      <ButtonType2
+                        btnFor="Continue"
+                        btnOnClickFunc={() =>
+                          statusData.paymentSelection &&
+                          setDataVisibilityToggle({
+                            ...dataVisibilityToggle,
+                            paymentToggle: true,
+                            appointmentToggle: false,
+                          })
+                        }
+                      />
                     )}
                   </div>
                 </>
               )}
 
-              {dataVisibilityToggle.paymentToggle && <CheckoutPaymentCard2 text={statusData.paymentSelection.primaryText}  />
-            }
+              {dataVisibilityToggle.paymentToggle && (
+                <CheckoutPaymentCard2
+                  text={statusData.paymentSelection.primaryText}
+                />
+              )}
             </div>
           )}
 
           {/* ----------fourth card( appointment summary)------------------- */}
-          { statusChange.appointmentStatus && (
+          {statusChange.appointmentStatus && (
             <div
               ref={stepRef[2]}
               style={{ boxShadow: "0px 0px 4px 0px #00000040" }}
               className="w-[98%] max-sm:mx-auto sm:w-full  rounded-[10px]   border-[1px] border-[#EFEFEF]"
             >
-                           <SectionHeader showChangeTextBtn={!dataVisibilityToggle.appointmentToggle}  headingText="4. Appointment summary" btnFunc={handleChangeNewUi} toggle="appointmentToggle" />
+              <SectionHeader
+                showChangeTextBtn={!dataVisibilityToggle.appointmentToggle}
+                headingText="4. Appointment summary"
+                btnFunc={handleChangeNewUi}
+                toggle="appointmentToggle"
+              />
 
               {/* 2 checkbox portion----------- */}
               <div className="space-y-5 py-5 ">
                 {/* ------------appointment----------------- */}
-                <CheckoutEqueueCard  equeueInfo={appointmentData?.equeueData} />
+                <CheckoutEqueueCard equeueInfo={appointmentData?.equeueData} />
 
                 {/* ----------------checkout input----------- */}
-                {!dataVisibilityToggle.appointmentToggle && (
+                {/* {!dataVisibilityToggle.appointmentToggle && (
                   <div className="space-y-5 px-5">
                     <div className="space-y-3 text-sm">
                       <p>What’s The Reson for Your Visit</p>
@@ -416,7 +472,6 @@ const [editPatientData,setEditPatientData]=useState(null)
                           key={index}
                           className="w-full max-w-[900px] p-4 flex justify-start items-center gap-4 border-[1px] border-primary rounded-[10px]"
                         >
-                          {/* ------checkout------------ */}
                           <input
                             type="radio"
                             onChange={() =>
@@ -449,7 +504,7 @@ const [editPatientData,setEditPatientData]=useState(null)
                       ))}
                     </div>
                   </div>
-                )}
+                )} */}
               </div>
 
               {!dataVisibilityToggle.appointmentToggle && (
@@ -477,26 +532,50 @@ const [editPatientData,setEditPatientData]=useState(null)
 
           {/* ----------mobile view button for moving to next processes - based on the statusChange of the processes------------- */}
           <div className="w-full sm:hidden z-[50] fixed left-0 -bottom-[10px] flex flex-col space-y-3 justify-center items-center border-[#DADADA] bg-white pt-5 pb-8">
-  {/* {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
+            {/* {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus","doctorsToggle")}     />  }
   {statusChange.patientStatus && <MobileViewButtons  btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus","patientToggle")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus","doctorsToggle")}     />  }
   {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus","paymentToggle")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus","patientToggle")}    />  }
   {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus","paymentToggle")}    />  } */}
-          {statusChange.doctorStatus && <MobileViewButtons  btnText="Continue" btnClickFunc={()=>mobileViewButtonsChange("patientStatus")}     />  }
-  {statusChange.patientStatus && <MobileViewButtons   btnText="Continue Appointment" btnClickFunc={()=>mobileViewButtonsChange("paymentStatus")}       btnBackFunc={()=>mobileViewButtonsChange("doctorStatus")}     />  }
-  {statusChange.paymentStatus && <MobileViewButtons  btnText="Confirm" btnClickFunc={()=>mobileViewButtonsChange("appointmentStatus")}  btnBackFunc={()=>mobileViewButtonsChange("patientStatus")}    />  }
-  {statusChange.appointmentStatus && <MobileViewButtons  btnText="Book Appointment"  btnClickFunc={handleBookAppointment}  btnBackFunc={()=>mobileViewButtonsChange("paymentStatus")}    />  }
-   
+            {statusChange.doctorStatus && (
+              <MobileViewButtons
+                btnText="Continue"
+                btnClickFunc={() => mobileViewButtonsChange("patientStatus")}
+              />
+            )}
+            {statusChange.patientStatus && (
+              <MobileViewButtons
+                btnText="Continue Appointment"
+                btnClickFunc={() => mobileViewButtonsChange("paymentStatus")}
+                btnBackFunc={() => mobileViewButtonsChange("doctorStatus")}
+              />
+            )}
+            {statusChange.paymentStatus && (
+              <MobileViewButtons
+                btnText="Confirm"
+                btnClickFunc={() =>
+                  mobileViewButtonsChange("appointmentStatus")
+                }
+                btnBackFunc={() => mobileViewButtonsChange("patientStatus")}
+              />
+            )}
+            {statusChange.appointmentStatus && (
+              <MobileViewButtons
+                btnText="Book Appointment"
+                btnClickFunc={handleBookAppointment}
+                btnBackFunc={() => mobileViewButtonsChange("paymentStatus")}
+              />
+            )}
           </div>
 
           {/* ---------------------steps to show in each process----------------- */}
           {!statusChange.patientStatus && (
-            <StepsToShow  stepNumber="2"  stepName="Select a patient" />
+            <StepsToShow stepNumber="2" stepName="Select a patient" />
           )}
           {!statusChange.paymentStatus && (
-             <StepsToShow  stepNumber="3"  stepName="Payment options" />
+            <StepsToShow stepNumber="3" stepName="Payment options" />
           )}
           {!statusChange.appointmentStatus && (
-             <StepsToShow  stepNumber="4"  stepName="Appointment summary" />
+            <StepsToShow stepNumber="4" stepName="Appointment summary" />
           )}
 
           {/* -------------confirmation buton for final appointment subission----------------------- */}
@@ -515,35 +594,36 @@ const [editPatientData,setEditPatientData]=useState(null)
         </div>
 
         {/* -----------------appointment details-------------------- */}
-        <RightSideBox appointmentInfo={appointmentData?.equeueData}  />
-
+        <RightSideBox appointmentInfo={appointmentData?.equeueData} />
       </div>
 
       <AddPatientDrawer
         isOpen={view}
-patientDataToEdit={editPatientData}
+        patientDataToEdit={editPatientData}
         // updatePatientListFunc={()=>getPatients()}
-     
+
         onClose={() => {
           setView(false);
         }}
         // updatePatientListFunc=()=>setPatientList((pre)=>[pre,item])
         successCallback={(item) => {
-          setPatientList((pre)=>[...pre,item])  
+          setPatientList((pre) => [...pre, item]);
           setStatusData((prev) => ({
             ...prev,
             patientSelection: item,
           }));
-        if(!isSmallScreen){setDataVisibilityToggle((prev) => ({ 
-            ...prev,
-            patientToggle: true,
-          }));
-          setStatusChange({
-            ...statusChange,
-            paymentStatus: true, 
-          }),
-            handleScrollToBox(1);
-        }}}
+          if (!isSmallScreen) {
+            setDataVisibilityToggle((prev) => ({
+              ...prev,
+              patientToggle: true,
+            }));
+            setStatusChange({
+              ...statusChange,
+              paymentStatus: true,
+            }),
+              handleScrollToBox(1);
+          }
+        }}
       />
     </AuthenticatedLayout>
   );
