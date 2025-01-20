@@ -26,7 +26,7 @@ const AppointmentSection = ({
     (state) => state.setAppointmentData
   );
   const [selectedEqueue, setSelectedEqueue] = useState(null);
-  const [focusableIndex, setFocusableIndex] = useState(0);
+  const [focusableIndex, setFocusableIndex] = useState();
   const [selectedBranch, setSelectedBranch] = useState(
     doctorInfo?.establishment[0]?.branch_slug ?? null
   );
@@ -43,6 +43,31 @@ const AppointmentSection = ({
     enabled: true,
     staleTime: 3000,
   });
+
+  const isEqueueActive = (details) => {
+    if (details?.current_equeue + 1 >= details?.limit) {
+      return false;
+    }
+    const closingTime = details?.doctor_closing_time;
+    const date = details?.date;
+    const now = new Date();
+    const today = now.toLocaleDateString("en-CA");
+    const isToday = date === today;
+    if (isToday) {
+      // Parse closingTime to a Date object
+      const [hours, minutes] = closingTime.split(":").map(Number);
+      const closingDateTime = new Date();
+      closingDateTime.setHours(hours, minutes, 0, 0); // Set hours and minutes for closing time
+
+      // Check if the current time exceeds the closing time
+      const currentTimeExceeds = now > closingDateTime;
+
+      if (currentTimeExceeds) {
+        return false;
+      }
+    }
+    return true;
+  };
 
   useEffect(() => {
     if (equeueDataList?.length > 0) {
@@ -108,77 +133,88 @@ const AppointmentSection = ({
               <>
                 {equeueDataList
                   ?.slice(0, showAll ? equeueDataList.length : maxVisibleCards) // Show limited or all cards
-                  .map((item, index) => (
-                    <div
-                      key={index}
-                      onClick={() => {
-                        setFocusableIndex(index);
-                        setSelectedEqueue(item);
-                        console.log("the item is", item);
-                      }}
-                      className={` w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ${
-                        item?.is_active
-                          ? focusableIndex !== index
-                            ? "bg-[#F7FFF6] border-[#919196] cursor-pointer"
-                            : "bg-[#F7FFF6] border-[#01A400] cursor-pointer"
-                          : "  pointer-events-none border-red-700 "
-                      } `}
-                    >
-                      <p
-                        className={`py-1 px-3 text-sm font-normal border-b-[1px] ${
+                  .map((item, index) => {
+                    const active = isEqueueActive(item);
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => {
+                          if (active) {
+                            setFocusableIndex(index);
+                            setSelectedEqueue(item);
+                          }
+                        }}
+                        className={` w-[95%]  rounded-[10px] border-[1px] border-l-[5px]  ${
                           item?.is_active
-                            ? "border-[#919196] "
-                            : "border-red-700"
-                        }  font-medium`}
+                            ? focusableIndex !== index
+                              ? "bg-[#F7FFF6] border-[#919196] cursor-pointer"
+                              : "bg-[#F7FFF6] border-[#01A400] cursor-pointer"
+                            : "  pointer-events-none border-red-700 "
+                        } `}
+                        style={{ cursor: active ? "pointer" : "not-allowed" }}
                       >
-                        {moment().format("YYYY-MM-DD") === item?.date
-                          ? "Today"
-                          : moment(item?.date).format("DD MMM")}
-                      </p>
-                      <hr />
-                      <div className="w-full flexCenter gap-x-5 py-4">
-                        <div
-                          style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
-                          className="text-red-700 rounded-[10px] px-4 py-[6px] text-[22px] font-bold"
+                        <p
+                          className={`py-1 px-3 text-sm font-normal border-b-[1px] ${
+                            item?.is_active
+                              ? "border-[#919196] "
+                              : "border-red-700"
+                          }  font-medium`}
                         >
-                          {item?.waiting_no}
-                        </div>
-                        <div className="space-y-1">
-                          <p className="text-xs text-[#5A5D62]">
-                            Waiting Number
-                          </p>
-                          <p className="text-[#01549A] font-semibold text-lg">
-                            {moment().format("YYYY-MM-DD") === item?.date
-                              ? moment().isBefore(
-                                  moment(item?.expected_time, "HH:mm:ss")
-                                )
-                                ? moment(item?.expected_time, "HH:mm:ss")
-                                    .add(item?.average_time, "minutes")
-                                    .format("hh:mm A")
-                                : moment()
-                                    .add(item?.average_time, "minutes")
-                                    .format("hh:mm A")
-                              : moment(item?.expected_time, "HH:mm:ss")
-                                  .add(item?.average_time, "minutes")
-                                  .format("hh:mm A")}
-                          </p>
-                        </div>
-                      </div>
-                      {item?.is_active && (
-                        <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
-                          Given Time is approximate can vary by +/-60 Min
+                          {moment().format("YYYY-MM-DD") === item?.date
+                            ? "Today"
+                            : moment(item?.date).format("DD MMM")}
                         </p>
-                      )}
+                        <hr />
+                        {active ? (
+                          <div className="w-full flexCenter gap-x-5 py-4">
+                            <div
+                              style={{ boxShadow: "0px 0px 4px 2px #00000040" }}
+                              className="text-red-700 rounded-[10px] px-4 py-[6px] text-[22px] font-bold"
+                            >
+                              {item?.waiting_no}
+                            </div>
+                            <div className="space-y-1">
+                              <p className="text-xs text-[#5A5D62]">
+                                Waiting Number
+                              </p>
+                              <p className="text-[#01549A] font-semibold text-lg">
+                                {moment().format("YYYY-MM-DD") === item?.date
+                                  ? moment().isBefore(
+                                      moment(item?.expected_time, "HH:mm:ss")
+                                    )
+                                    ? moment(item?.expected_time, "HH:mm:ss")
+                                        .add(item?.average_time, "minutes")
+                                        .format("hh:mm A")
+                                    : moment()
+                                        .add(item?.average_time, "minutes")
+                                        .format("hh:mm A")
+                                  : moment(item?.expected_time, "HH:mm:ss")
+                                      .add(item?.average_time, "minutes")
+                                      .format("hh:mm A")}
+                              </p>
+                            </div>
+                          </div>
+                        ) : (
+                          <div className="w-full flexCenter gap-x-5 py-4">
+                            Clinic Closed for today
+                          </div>
+                        )}
+                        {item?.is_active && (
+                          <p className="text-[11px] w-full text-center text-[#5A5D62] mb-[8px]">
+                            Given Time is approximate can vary by +/-60 Min
+                          </p>
+                        )}
 
-                      {!item?.is_active && (
-                        <div className="w-full py-2 px-3  text-sm border-t-[2px] border-red-700 text-red-700 font-medium flex justify-center items-center gap-x-2">
-                          {" "}
-                          <p className="pulse-ball size-[5px]  bg-red-700 rounded-full"></p>
-                          {item?.reason || "Out for Lunch"}
-                        </div>
-                      )}
-                    </div>
-                  ))}
+                        {!item?.is_active && (
+                          <div className="w-full py-2 px-3  text-sm border-t-[2px] border-red-700 text-red-700 font-medium flex justify-center items-center gap-x-2">
+                            {" "}
+                            <p className="pulse-ball size-[5px]  bg-red-700 rounded-full"></p>
+                            {item?.reason || "Out for Lunch"}
+                          </div>
+                        )}
+                      </div>
+                    );
+                  })}
 
                 {/* Expand/Collapse Button */}
                 {equeueDataList.length > maxVisibleCards && (
